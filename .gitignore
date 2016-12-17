@@ -1,0 +1,13 @@
+archive/*
+*_test
+tmp
+rf
+doc/html
+mkdoc
+*~
+.*~
+.*swp
+**/build-*
+**/*.pyc
+**/*.o
+**/__pycache__
