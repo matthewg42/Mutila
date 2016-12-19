@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "MutilaDebug.h"
 #include "BufferedSampler.h"
 
 BufferedSampler::BufferedSampler(const uint8_t pin, const uint16_t periodMs, const uint8_t samples) :
@@ -26,9 +27,7 @@ BufferedSampler::~BufferedSampler()
 
 void BufferedSampler::begin()
 {
-#ifdef DEBUG
-    Serial.println(F("BufferedSampler::begin"));
-#endif
+    DBLN(F("BufferedSampler::begin"));
     // Note: no need to set pinMode for analog inputs
     _count = 0;
     _min = 0;
@@ -42,10 +41,8 @@ void BufferedSampler::update()
 {
     if (_periodMs == 0 || millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
         _sampleData[_idx] = analogRead(_pin);
-#ifdef DEBUG
-        Serial.print(F("BufferedSampler::update sample="));
-        Serial.println(_sampleData[_idx]);
-#endif
+        DB(F("BufferedSampler::update sample="));
+        DBLN(_sampleData[_idx]);
         _count = _count >= _samples ? _samples : _count+1;
         _idx = (_idx + 1) % _samples;
         _lastUpdated = millis();

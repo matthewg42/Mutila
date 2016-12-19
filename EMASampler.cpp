@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "MutilaDebug.h"
 #include "EMASampler.h"
 
 EMASampler::EMASampler(const uint8_t pin, const uint16_t periodMs, const float alpha) :
@@ -12,9 +13,7 @@ EMASampler::EMASampler(const uint8_t pin, const uint16_t periodMs, const float a
 
 void EMASampler::begin()
 {
-#ifdef DEBUG
-    Serial.println(F("EMASampler::begin"));
-#endif
+    DBLN(F("EMASampler::begin"));
     // Note: no need to set pinMode for analog inputs
     _lastUpdated = millis();
     _movingAverage = analogRead(_pin);
@@ -25,10 +24,8 @@ void EMASampler::update()
 {
     if (_periodMs == 0 || millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
         _lastSample = analogRead(_pin);
-#ifdef DEBUG
-        Serial.print(F("EMASampler::update sample="));
-        Serial.println(_lastSample);
-#endif
+        DB(F("EMASampler::update sample="));
+        DBLN(_lastSample);
         _movingAverage = (_alpha*_lastSample) + ((1-_alpha)*_movingAverage);
         _lastUpdated = millis();
     }
