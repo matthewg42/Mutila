@@ -1,6 +1,6 @@
-#include <BufferedSampler.h>
+#include <EMASampler.h>
 
-BufferedSampler sampler(A0, 50, 10);
+EMASampler sampler(A0, 50, 0.2);
 
 void setup()
 {
@@ -14,14 +14,8 @@ void setup()
 void loop()
 {
     sampler.update();
-    Serial.print("count=");
-    Serial.print(sampler.count());
     Serial.print(" last=");
     Serial.print(sampler.last());
-    Serial.print(" minimum=");
-    Serial.print(sampler.minimum());
-    Serial.print(" maximum=");
-    Serial.print(sampler.maximum());
     Serial.print(" average=");
     Serial.println(sampler.average());
     delay(20);
