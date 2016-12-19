@@ -7,7 +7,7 @@ BufferedVDivSampler::BufferedVDivSampler(const uint8_t pin,
                                          const float vRef, 
                                          const uint16_t periodMs, 
                                          const uint8_t samples) :
-    BufferedSampler(_pin, _periodMs, samples),
+    BufferedSampler(pin, periodMs, samples),
     _r1KOhm(r1KOhm),
     _r2KOhm(r2KOhm),
     _vRef(vRef)
