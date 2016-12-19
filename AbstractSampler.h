@@ -16,7 +16,7 @@ public:
      * \param pin the analog reading pin to read data from
      * \param periodMs time between samples (set to 0 to sample ever time update() is called)
      */
-    AbstractSampler(const uint8_t pin, const uint16_t periodMs=0) : 
+    AbstractSampler(const uint8_t pin, const uint16_t periodMs) : 
         _pin(pin), 
         _periodMs(periodMs) {;}
 

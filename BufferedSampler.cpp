@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "BufferedSampler.h"
 
-BufferedSampler::BufferedSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs) :
+BufferedSampler::BufferedSampler(const uint8_t pin, const uint16_t periodMs, const uint8_t samples) :
     AbstractSampler(pin, periodMs),
     _samples(samples),
     _idx(0),
@@ -9,7 +9,8 @@ BufferedSampler::BufferedSampler(const uint8_t pin, const uint8_t samples, const
     _lastUpdated(0),
     _updated(false),
     _min(0),
-    _max(0)
+    _max(0),
+    _mean(0)
 {
     // Allocate ring buffer for sample data
     _sampleData = new int [samples];
@@ -29,6 +30,12 @@ void BufferedSampler::begin()
     Serial.println(F("BufferedSampler::begin"));
 #endif
     // Note: no need to set pinMode for analog inputs
+    _count = 0;
+    _min = 0;
+    _max = 0;
+    _mean = 0;
+    _lastUpdated = 0;
+    _updated = false;
 }
 
 void BufferedSampler::update() 
@@ -62,7 +69,7 @@ void BufferedSampler::calculate()
             if (_sampleData[i] < _min) _min = _sampleData[i];
             if (_sampleData[i] > _max) _max = _sampleData[i];
         }
-        _average = (float)sum/_count;
+        _mean = (float)sum/_count;
         _updated = false;
     }
 }
