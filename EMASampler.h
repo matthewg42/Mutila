@@ -16,10 +16,12 @@
  *
  * Advantages:
  *   - smoothing over long periods with low memory usage (low alpha values)
- *   - effificient, constant time calcuulation of moving average
+ *   - effificient, constant time calculation of moving average
+ *   - responds faster to change than BufferedSampler
  *
  * Disadvantages:
  *   - not mean or median average (see link below)
+ *   - longer "tail" effect than BufferedSampler
  *
  * See also: https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average
  */
