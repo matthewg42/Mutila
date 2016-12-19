@@ -10,15 +10,15 @@
  * buffer.  This becomes memory-inefficient when large numbers of
  * samples are required.
  */
-class AnalogSampler : public AbstractSampler {
+class BufferedSampler : public AbstractSampler {
 public:
     /*! Constructor
      * Note: This class dynamically allocates memory for the sample buffer
      */
-    AnalogSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs);
+    BufferedSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs);
 
     //! Destructor
-    ~AnalogSampler();
+    ~BufferedSampler();
 
     //! Initialization
     virtual void begin();
@@ -38,7 +38,7 @@ public:
     //! Sample count
     //! The number of samples currently held in the sample buffer which are
     //! being used to calculate the average, minimum, maximum values. This
-    //! will be 0 after the AnalogSampler has been constructed, and will rise
+    //! will be 0 after the BufferedSampler has been constructed, and will rise
     //! by 1 each time a sample is taken until the maximum number of samples
     //! is reached, where it will stay.
     virtual uint8_t count() { return _count; }

@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "AnalogSampler.h"
+#include "BufferedSampler.h"
 
-AnalogSampler::AnalogSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs) :
+BufferedSampler::BufferedSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs) :
     AbstractSampler(pin, periodMs),
     _samples(samples),
     _idx(0),
@@ -15,7 +15,7 @@ AnalogSampler::AnalogSampler(const uint8_t pin, const uint8_t samples, const uin
     _sampleData = new int [samples];
 }
 
-AnalogSampler::~AnalogSampler()
+BufferedSampler::~BufferedSampler()
 {
     if (_sampleData != NULL) {
         delete _sampleData;
@@ -23,20 +23,20 @@ AnalogSampler::~AnalogSampler()
     }
 }
 
-void AnalogSampler::begin()
+void BufferedSampler::begin()
 {
 #ifdef DEBUG
-    Serial.println(F("AnalogSampler::begin"));
+    Serial.println(F("BufferedSampler::begin"));
 #endif
     // Note: no need to set pinMode for analog inputs
 }
 
-void AnalogSampler::update() 
+void BufferedSampler::update() 
 {
     if (_periodMs == 0 || millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
         _sampleData[_idx] = analogRead(_pin);
 #ifdef DEBUG
-        Serial.print(F("AnalogSampler::update sample="));
+        Serial.print(F("BufferedSampler::update sample="));
         Serial.println(_sampleData[_idx]);
 #endif
         _count = _count >= _samples ? _samples : _count+1;
@@ -46,12 +46,12 @@ void AnalogSampler::update()
     }
 }
 
-int AnalogSampler::last()
+int BufferedSampler::last()
 {
     return _count == 0 ? 0 : _sampleData[_idx == 0 ? _samples-1 : _idx-1];
 }
 
-void AnalogSampler::calculate() 
+void BufferedSampler::calculate() 
 {
     if (_updated) {
         long sum = _sampleData[0];

@@ -1,6 +1,6 @@
-#include <AnalogSampler.h>
+#include <BufferedSampler.h>
 
-AnalogSampler sampler(A0, 5, 500);
+BufferedSampler sampler(A0, 5, 500);
 
 void setup()
 {
