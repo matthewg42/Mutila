@@ -2,16 +2,10 @@
 #include "AnalogSampler.h"
 
 AnalogSampler::AnalogSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs) :
-    _pin(pin),
-    _samples(samples),
-    _periodMs(periodMs),
-    _lastUpdated(0),
-    _count(0),
+    AbstractSampler(pin, samples, periodMs),
     _idx(0),
-    _updated(false),
-    _min(0),
-    _max(0),
-    _mean(0)
+    _lastUpdated(0),
+    _updated(false)
 {
     // Allocate ring buffer for sample data
     _sampleData = new int [samples];
@@ -35,7 +29,7 @@ void AnalogSampler::begin()
 
 void AnalogSampler::update() 
 {
-    if (_periodMs && millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
+    if (_periodMs == 0 || millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
         _sampleData[_idx] = analogRead(_pin);
 #ifdef DEBUG
         Serial.print(F("AnalogSampler::update sample="));
