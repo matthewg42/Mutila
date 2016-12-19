@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <EMASampler.h>
 
-/*! Exponential Moving Average Voltage Divider based voltage sampler
+/*! \brief Exponential Moving Average Voltage Divider based voltage sampler
  *
  * Sampler a voltage using a voltage divider, EMA method.
  */

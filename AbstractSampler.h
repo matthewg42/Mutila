@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 
-/*! Base class for other sampling classes
+/*! \brief Base class for analog pin sampling classes
  *
  * All samplers can calulate an averge value. The exact method of calculation
  * and type of average may vary depending on the derived class - see derived

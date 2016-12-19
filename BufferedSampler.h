@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <AbstractSampler.h>
 
-/*! Ringbuffer-based sampler for analog values
+/*! \brief Ringbuffer-based sampler for analog values
  *
  * This class keeps a fixed number of samples in a ring buffer, enabling 
  * calculation of minimum(), maximum(), average() (mean) values. 

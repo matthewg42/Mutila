@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <EMASampler.h>
 
-/*! Exponential Moving Average current sampler
+/*! \brief Exponential Moving Average current sampler
  *
  * Sampler a current, EMA method.
  */

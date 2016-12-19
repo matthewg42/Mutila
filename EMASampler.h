@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <AbstractSampler.h>
 
-/*! Exponential Moving Average (EMA) Sampler class
+/*! \brief Exponential Moving Average (EMA) analog pin sampler
  *
  * This sampler is used to calculate the exponential moving average for the
  * analog values read from a pin. This method can be used to smooth a value over

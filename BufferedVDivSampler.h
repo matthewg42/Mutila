@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <BufferedSampler.h>
 
-/*! Buffered voltage divider based voltage sampler
+/*! \brief Buffered voltage divider based voltage sampler
  *
  * Sampler a voltage using a voltage divider, buffering values.
  */
