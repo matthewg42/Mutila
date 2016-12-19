@@ -40,9 +40,6 @@ public:
     virtual int last() = 0;
 
 protected:
-    //! Must implement this
-    virtual void calculate() = 0;
-
     uint8_t _pin;               //!< pin to read data from
     uint16_t _periodMs;         //!< minimum ms
 
