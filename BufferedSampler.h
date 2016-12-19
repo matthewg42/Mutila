@@ -7,8 +7,14 @@
  *
  * This class keeps a fixed number of samples in a ring buffer, enabling 
  * calculation of minimum(), maximum(), average() (mean) values. 
- * Note that if a large number of samples  are used, this class can take
- * a lot of memory. 
+ *
+ * Advantages:
+ *   - calculates actual mean value for samples in buffer
+ *   - provides minimum() and maximum() values for values in buffer
+ *
+ * Disadvantages:
+ *   - memory usage increases with number of samples
+ *   - takes longer to calculate than exponential moving average
  */
 class BufferedSampler : public AbstractSampler {
 public:
