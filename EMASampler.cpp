@@ -16,9 +16,9 @@ void EMASampler::begin()
     Serial.println(F("EMASampler::begin"));
 #endif
     // Note: no need to set pinMode for analog inputs
-    _lastUpdated = 0;
-    _movingAverage = 0.;
-    _lastSample = 0;
+    _lastUpdated = millis();
+    _movingAverage = analogRead(_pin);
+    _lastSample = _movingAverage;
 }
 
 void EMASampler::update() 
