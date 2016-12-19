@@ -2,10 +2,14 @@
 #include "AnalogSampler.h"
 
 AnalogSampler::AnalogSampler(const uint8_t pin, const uint8_t samples, const uint16_t periodMs) :
-    AbstractSampler(pin, samples, periodMs),
+    AbstractSampler(pin, periodMs),
+    _samples(samples),
     _idx(0),
+    _count(0),
     _lastUpdated(0),
-    _updated(false)
+    _updated(false),
+    _min(0),
+    _max(0)
 {
     // Allocate ring buffer for sample data
     _sampleData = new int [samples];
@@ -44,7 +48,7 @@ void AnalogSampler::update()
 
 int AnalogSampler::last()
 {
-    return _count == 0 ? 0 :_sampleData[_idx == 0 ? _samples-1 : _idx-1];
+    return _count == 0 ? 0 : _sampleData[_idx == 0 ? _samples-1 : _idx-1];
 }
 
 void AnalogSampler::calculate() 
@@ -58,7 +62,7 @@ void AnalogSampler::calculate()
             if (_sampleData[i] < _min) _min = _sampleData[i];
             if (_sampleData[i] > _max) _max = _sampleData[i];
         }
-        _mean = (float)sum/_count;
+        _average = (float)sum/_count;
         _updated = false;
     }
 }

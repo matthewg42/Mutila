@@ -22,7 +22,7 @@ void loop()
     Serial.print(sampler.minimum());
     Serial.print(" maximum=");
     Serial.print(sampler.maximum());
-    Serial.print(" mean=");
-    Serial.println(sampler.mean());
+    Serial.print(" average=");
+    Serial.println(sampler.average());
 }
 
