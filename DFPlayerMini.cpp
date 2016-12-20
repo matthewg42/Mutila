@@ -24,6 +24,12 @@ void DFPlayerMini::setVolume(uint8_t v)
     DBLN(v);
 }
 
+void DFPlayerMini::next()
+{
+    DBLN(F("DFPlayerMini::next "));
+    sendCmd(DFP_CMD_NEXT);
+}
+
 void DFPlayerMini::play(uint16_t n)
 {
     DB(F("DFPlayerMini::play "));

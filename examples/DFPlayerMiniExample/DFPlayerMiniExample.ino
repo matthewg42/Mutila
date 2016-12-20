@@ -11,9 +11,12 @@ void setup()
     delay(300);
     mp3.setVolume(15);
     delay(500);
-    mp3.play(10);
+    mp3.play(3);
 }
 
 void loop()
 {
+    delay(2000);
+    mp3.next();
 }
+    
