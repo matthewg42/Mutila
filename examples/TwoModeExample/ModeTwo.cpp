@@ -10,27 +10,22 @@ ModeTwo_::ModeTwo_()
     // Do not put debug here as Mode objects are typically constructed before
     // setup() is run, and so the Serial interface is not ready - if you use it
     // the Arduino may hang.
+    setUpdatePeriod(500);
 }
 
-void ModeTwo_::start()
+void ModeTwo_::modeStart()
 {
-    Serial.println(F("ModeTwo::start()"));
-    _last = millis();
-    _start = _last;
+    Serial.println(F("ModeTwo::modeStart()"));
 }
 
-void ModeTwo_::stop()
+void ModeTwo_::modeStop()
 {
-    Serial.println(F("ModeTwo::stop()"));
+    Serial.println(F("ModeTwo::modeStop()"));
 }
 
-void ModeTwo_::update()
+void ModeTwo_::modeUpdate()
 {
-    // Only do a thing is we haven't for 50 ms
-    if (millis() - _last > 500) {
-        _last = millis();
-        Serial.println(F("ModeTwo::update() doing a thing..."));
-    }
+    Serial.println(F("ModeTwo::modeUpdate() doing a thing..."));
 }
 
 bool ModeTwo_::isFinished()

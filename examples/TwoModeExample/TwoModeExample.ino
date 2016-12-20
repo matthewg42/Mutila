@@ -28,9 +28,6 @@ void setup()
     // start the selected mode
     CurrentMode->start();
 
-    // Settle down
-    delay(300);
-
     Serial.println("setup end");
 }
 
@@ -41,8 +38,10 @@ void loop()
 
     // update current mode
     CurrentMode->update();
+
+    // if mode is finished, switch to the other mode...
     if (CurrentMode->isFinished()) {
-        Serial.println("CurrentMode said it was done...");
+        Serial.println("Mode says it is done...");
         if (CurrentMode == &ModeOne) {
             switchMode(&ModeTwo);
         } else {

@@ -7,14 +7,10 @@
 class ModeTwo_ : public Mode {
 public:
     ModeTwo_();
-    void start();
-    void stop();
-    void update();
+    void modeStart();
+    void modeStop();
+    void modeUpdate();
     bool isFinished();
-
-private:
-    unsigned long _last;
-    unsigned long _start;
 
 };
 

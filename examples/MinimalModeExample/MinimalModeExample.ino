@@ -6,8 +6,8 @@ ModeOne mode;
 void setup()
 {
     Serial.begin(115200);
-    // Settle down
-    delay(300);
+    mode.begin();
+    mode.start();
     Serial.println("setup end");
 }
 
