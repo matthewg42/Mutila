@@ -1,0 +1,19 @@
+#include <DFPlayer_Mini_Mp3.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial SerialMP3(9, 8);
+
+void setup()
+{
+    SerialMP3.begin(9600);
+    mp3_set_serial(SerialMP3);
+    mp3_set_volume(15);
+    delay(500);
+    mp3_play(10);
+}
+
+
+void loop()
+{
+}
+
