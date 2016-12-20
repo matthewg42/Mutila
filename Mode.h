@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Arduino.h>
+#include <stdint.h>
 #include "MutilaDebug.h"
 
 /*! \brief Mode base class
@@ -62,8 +64,12 @@ public:
      * call modeUpdate(), which must be implemented in all derived classes, and
      * should contain user-code to be executed frequently.
      *
+     * It is not generally implemeneted in normal derived classes - modeUpdate() 
+     * should be used instead for class secific updates. If it is, it should call 
+     * Mode::update().
+     *
      */
-    void update() { 
+    virtual void update() { 
         unsigned long now = millis();
         if (now >= _lastUpdateMs + _updatePeriodMs || _lastUpdateMs==0) {
             modeUpdate();
