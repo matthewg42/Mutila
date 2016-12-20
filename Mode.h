@@ -9,9 +9,9 @@
  * interface...
  *
  * To implement a mode:
- *    -# Create a class derived from Mode or BrownoutMode
- *    -# Implement modeStart(), modeStop(), and modeUpdate() in your class
- *    -# Optionally over-ride begin() if you have stuff to do in setup()
+ *    -# Create a class derived from Mode
+ *    -# Implement modeUpdate() in your class to do mode-specific things
+ *    -# Optionally over-ride begin(), modeStart() and modeStop()
  *    -# If you want periodic calls to modeUpdate(), call setUpdatePeriod()
  *       from your class constructor
  *
@@ -20,6 +20,18 @@
  *    -# call start() when starting a mode (this will in turn call modeStart())
  *    -# call stop() when stopping a mode (this will in turn call modeStop())
  *    -# call update() frequently (this will in turn call modeUpdate())
+ *
+ * A typical sketch will switch modes by calling a function like this:
+ * \code{.cpp}
+ *   Mode* CurrentMode;
+ *   ...
+ *   void switchMode(Mode* newMode)
+ *   {
+ *       CurrentMode->stop();
+ *       CurrentMode = newMode;
+ *       CurrentMode->start();
+ *   }
+ * \endcode
  */
 class Mode {
 public:
