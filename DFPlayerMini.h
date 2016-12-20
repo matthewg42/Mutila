@@ -1,6 +1,12 @@
 #pragma once
 
-#define DFPLAYERMINI_BUFLEN 10
+#define DFP_BUFLEN                  10
+#define DFP_CMD_PLAY_N              0x12
+
+// Structure of the command packet
+#define DFP_OFFSET_CMD              3
+#define DFP_OFFSET_ARG              5
+#define DFP_OFFSET_CKSUM            7
 
 #include <Arduino.h>
 #include <stdint.h>
@@ -24,7 +30,16 @@ public:
     void play(uint16_t n);
 
 private:
+    void resetSendBuf();
+    // void sendCmd(uint8_t cmd);
+    void sendCmd(uint8_t cmd, uint16_t arg);
+    void copyBigend(uint8_t *thebuf, uint16_t data);
+    void fillChecksum();
+    uint16_t calculateChecksum(uint8_t *thebuf);
+    void serialCmd();
+
     Stream& _serial;
+    uint8_t _sendBuf[DFP_BUFLEN];
 
 };
 
