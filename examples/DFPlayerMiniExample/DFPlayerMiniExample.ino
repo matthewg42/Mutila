@@ -7,12 +7,12 @@ DFPlayerMini mp3(SerialMP3);
 void doQuery(uint8_t cmd)
 {
     DFPResponse r = mp3.query(cmd);
-    Serial.print("doQuery=");
-    Serial.print(cmd);
-    if (!r.ok) {
-        Serial.println(": bad response");
+    Serial.print("doQuery(0x");
+    Serial.print(cmd, HEX);
+    if (r.status != DFPResponse::Ok) {
+        Serial.println("): bad response");
     } else { 
-        Serial.print(": msg=0x");
+        Serial.print("): msg=0x");
         Serial.print(r.messageType, HEX);
         Serial.print(" arg=");
         Serial.println(r.arg);

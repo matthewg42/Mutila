@@ -27,42 +27,50 @@ void DFPlayerMini::sendCmd(uint8_t cmd, uint16_t arg)
     serialCmd();
 }
 
-dumpBuf(uint8_t* buf, uint8_t ptr)
+// This function is for debugging the content of the
+// receive buffer, and is only used when DEBUG is set
+dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
 {
-    DB(F("ptr="));
-    DB(ptr);
-    DB(F(" buf:"));
     for (uint8_t i=0; i<DFP_BUFLEN; i++) {
         DB(F(" 0x"));
         DB(buf[i], HEX);
     }
-    DBLN(' ');
+    DB(F(" ptr="));
+    DB(ptr);
+    if (ln)
+        DBLN(' ');
 }
 
-DFPResponse DFPlayerMini::query(uint8_t cmd, uint16_t arg)
+DFPResponse DFPlayerMini::query(uint8_t cmd, uint8_t tries)
 {
+    // This will hold our result. Note: response.status is Incomplete
+    // after the response object has been constructed.
     DFPResponse response;
 
-    // wait for response...
+    // A buffer for the reply data
     uint8_t buf[DFP_BUFLEN];
     memset(buf, 0, DFP_BUFLEN*sizeof(uint8_t));
+
+    // A pointer into the buffer where we will write incoming bytes
     uint8_t ptr = 0;
-    unsigned long start = millis();
-    sendCmd(cmd, arg);
+
+    unsigned long startSend = millis();
+    sendCmd(cmd); 
+    unsigned long startRecv = millis();
+    // Populate buffer with response.
     while(true) {
-        if (millis() > start + DFP_RESP_TIMEOUT_MS) {
-            DB(F("WARN: timeout at start+"));
-            DB(millis() - start);
-            DB(' ');
-            dumpBuf(buf, ptr);
-            return response;
+        // Handle timeouts
+        if (millis() > startRecv + DFP_RESP_TIMEOUT_MS) {
+            response.status = DFPResponse::Timeout;
+            break;
         }
+
+        // Add bytes to buffer
         while (_serial.available() > 0 && ptr < DFP_BUFLEN) {
             int c = _serial.read();
             if (c<0) {
-                DB(F("WARN: serial err "));
-                dumpBuf(buf, ptr);
-                return response;
+                response.status = DFPResponse::SerialError;
+                break;
             }
 
             if (ptr == 0 && c != 0x7E) {
@@ -76,28 +84,38 @@ DFPResponse DFPlayerMini::query(uint8_t cmd, uint16_t arg)
                 buf[ptr++] = (uint8_t)c;
             }
         }
+
+        // We have a full buffer with the proper header - continue
+        // to the next step: validation of the message
         if (ptr == DFP_BUFLEN) {
             break;
         }
     }
-    uint16_t duration = millis() - start;
-
-    DB(F("DF RX took "));
-    DB(duration);
+    // calculate how long comms took
+    unsigned long durationRecv = millis() - startRecv;
+    DB(F("DF RX "));
+    dumpBuf(buf, ptr, false);
+    DB(F(" send="));
+    DB(startRecv - startSend);
+    DB(F("ms, recv="));
+    DB(durationRecv);
     DB(F("ms "));
-    dumpBuf(buf, ptr);
-    // check the terminator looks OK
-    if (buf[9] != 0xEF) {
-        DBLN(F("DFPlayerMini WARN: bad resp"));
-        return response;
-    }
+
+    // Validate the packet
     uint16_t cksum = calculateChecksum(buf);
-    if (   *((uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM+1] 
-        || *(1+(uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM]) {
-        DBLN(F("WARN: cksum mismatch"));
+    // check the terminator looks OK
+    if (buf[0] != 0x7E || buf[1] != 0xFF || buf[9] != 0xEF) {
+        DBLN(F("ERR: head/term"));
+        response.status = DFPResponse::Invalid;
+        return response;
+    } else if (*((uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM+1] || *(1+(uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM]) {
+        response.status = DFPResponse::Invalid;
+        DBLN(F("ERR: cksum"));
+        return response;
     } else {
         // OK, we have a valid response
-        response.ok = true;
+        response.status = DFPResponse::Ok;
+        DBLN(F("VALID"));
     }
     response.messageType = buf[DFP_OFFSET_CMD];
     uint8_t* aptr = (uint8_t*)(&(response.arg));

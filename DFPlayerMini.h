@@ -2,7 +2,7 @@
 
 #define DFP_BUFLEN                  10
 #define DFP_MIN_TIME_MS             10
-#define DFP_RESP_TIMEOUT_MS         50
+#define DFP_RESP_TIMEOUT_MS         45
 
 // Structure of the command packet
 #define DFP_OFFSET_CMD              3
@@ -12,25 +12,58 @@
 #include <Arduino.h>
 #include <stdint.h>
 
+/*! \brief A response to a query set to a DFPlayerMini object
+ *
+ * This object is returned when a query is sent to a DFPlayerMini object
+ * It indicates the success of the query using the .status member, and
+ * also contains the message type (which presumably should the same as
+ * the command used in the query), and the argument (result) value, which
+ * is always a uint16_t.
+ */
 struct DFPResponse {
-    DFPResponse() : ok(false), messageType(0), arg(0) {;}
-    bool ok;
+    enum Status {
+        Incomplete=0,     //!< Set when we start receiving, should not remain at end
+        Ok=1,             //!< Messaged received and is valid
+        Timeout=2,        //!< Message timed out (DFP_RESP_TIMEOUT_MS ms passed)
+        SerialError=3,    //!< Indicates broken serial comms
+        Invalid=4         //!< Response was not validated (bad cksum, header etc)
+    };
+
+    //! Default constructor - packet starts in Incomplete state
+    DFPResponse() : status(Incomplete), messageType(0), arg(0) {;}
+
+    // Data members
+    Status status;
     uint8_t messageType;
     uint16_t arg;
 };
 
 /*! \brief Easy-to-use controller class for DFPlayer Mini devices
+ *
  * This class implements some of the functionality of the 
  * DFPlayer_Mini_MP3 library, to control a DFPlayer Mini device.
- * The device is expected to be connected using serial, which must
- * be at 9600 baud.  SoftSerial works just fine.
+ * It includes features which were not yet implemented in the 
+ * DFPlayer_Mini_MP3 at time of writing, namely a mechanism to 
+ * receive results of query calls to the device.
+ *
+ * The device is expected to be connected using serial and optionally
+ * the BUSY line.  Serial comms are at 9600 baud.  The BUSY line is
+ * pulled to ground when the DFPlayerMini device is playing an mp3
+ * file.
  */
 class DFPlayerMini {
 public:
+
+    /*! Command codes
+     *
+     * The DFPlayerMini's serial interface uses this set of command
+     * codes to instruct the device to perform some action or reply
+     * with some information. 
+     */
     enum Cmd {                  
         Undefined       = 0x00, 
         Next            = 0x01, //!< Play next track
-        Prev            = 0x02, //!< Play previous track
+        Prev            = 0x02, //!< Play previous track 
         PlayPhysical    = 0x03, //!< Play track arg
         SetVolume       = 0x06, //!< Set volume to arg (0-30)
         SetEqalizer     = 0x07, //!< Set EQ, arg 0-5 (normal=0, pop, rock, jazz, classical, bass) 
@@ -58,9 +91,14 @@ public:
     //! Send a command no response is expected
     void sendCmd(uint8_t cmd, uint16_t arg=0);
 
-    //! Send a command and wait for a response
-    //! Note: test DFPResponse.ok to check if it worked!
-    DFPResponse query(uint8_t cmd, uint16_t arg=0);
+    /*! Send a command and wait for a response
+     * \param cmd The ID of the command to send
+     * \param tries how many attempts will be made to get a valid result
+     * \return a DFPResponse object with the results of the query. The .ok
+     *         member will be false if the query failed to get a valid
+     *         result (possible resons: timeout, bad serial comms etc.)
+     */
+    DFPResponse query(uint8_t cmd, uint8_t tries=3);
 
 private:
     void resetSendBuf();
