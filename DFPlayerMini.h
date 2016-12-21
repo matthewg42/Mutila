@@ -41,12 +41,12 @@ public:
         PlayNtfMp3      = 0x12,
         Stop            = 0x16,
         SingleLoop      = 0x19,
-        GetState        = 0x42,
+        GetStatus       = 0x42,
         GetVolume       = 0x43,
-        GetUsum         = 0x47,
+        GetUSum         = 0x47,
         GetTfSum        = 0x48,
         GetFlashSum     = 0x49,
-        GetUcurrent     = 0x4B,
+        GetUCurrent     = 0x4B,
         GetTfCurrent    = 0x4C,
         GetFlashCurrent = 0x4D
     };

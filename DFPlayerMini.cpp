@@ -80,18 +80,25 @@ DFPResponse DFPlayerMini::fetch(uint8_t cmd, uint16_t arg)
             break;
         }
     }
+    uint16_t duration = millis() - start;
 
-    DB(F("DF RX: "));
+    DB(F("DF RX took "));
+    DB(duration);
+    DB(F("ms "));
     dumpBuf(buf, ptr);
     // check the terminator looks OK
     if (buf[9] != 0xEF) {
         DBLN(F("DFPlayerMini WARN: bad resp"));
         return response;
     }
-    // TODO: checksum validation
-    
-    // OK, we have a valid response
-    response.ok = true;
+    uint16_t cksum = calculateChecksum(buf);
+    if (   *((uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM+1] 
+        || *(1+(uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM]) {
+        DBLN(F("WARN: cksum mismatch"));
+    } else {
+        // OK, we have a valid response
+        response.ok = true;
+    }
     response.messageType = buf[DFP_OFFSET_CMD];
     uint8_t* aptr = (uint8_t*)(&(response.arg));
     aptr[0] = buf[DFP_OFFSET_ARG+1];
