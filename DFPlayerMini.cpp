@@ -143,10 +143,12 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     return response;
 }
 
-void DFPlayerMini::copyBigend(uint8_t *buf, uint16_t i)
+void DFPlayerMini::copyBigend(uint8_t *dst, uint16_t value)
 {
-    *buf = (uint8_t)(i>>8);
-    *(buf+1) = (uint8_t)i;
+    uint8_t* dp = (uint8_t*)dst;
+    uint8_t* vp = (uint8_t*)&value;
+    dp[0] = vp[1];
+    dp[1] = vp[0];
 }
 
 void DFPlayerMini::fillChecksum()
