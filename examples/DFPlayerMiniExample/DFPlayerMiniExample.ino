@@ -57,5 +57,6 @@ void loop() {
         mp3.sendCmd(DFPlayerMini::PlayTf, i);
         delay(1500);
     }
+    query();
 }
 
