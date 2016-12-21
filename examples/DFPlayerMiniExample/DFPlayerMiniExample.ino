@@ -3,6 +3,7 @@
 
 SoftwareSerial SerialMP3(9, 8);
 DFPlayerMini mp3(SerialMP3);
+int count = 0;
 
 void query() {
     DFPResponse r;
@@ -23,7 +24,7 @@ void query() {
 
     r = mp3.query(DFPlayerMini::GetTfSum);
     Serial.print(" GetTfSum=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); count = r.arg; }
     else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
@@ -46,29 +47,19 @@ void setup()
     SerialMP3.begin(9600);
     delay(300);  // settle serial
     mp3.sendCmd(DFPlayerMini::SetVolume, 15); // don't shout
-
+    query();
 }
 
 void loop() {
+
+    for (int i=0; i<1; i++) {
+        int t = random(count);
+        Serial.print("Playing track: ");
+        Serial.println(t);
+        mp3.sendCmd(DFPlayerMini::Play, t);
+        delay(1200);
+    }
     query();
-
-    delay(100);
-    // Play the first few samples on the card
-    mp3.query(DFPlayerMini::Play, 4);
-    delay(1000);
-    mp3.sendCmd(DFPlayerMini::Next);
-    delay(1000);
-    mp3.sendCmd(DFPlayerMini::Next);
-    delay(2000);
-
-    // Test Prev cmd wrapping...
-    mp3.sendCmd(DFPlayerMini::Prev);
-    delay(1000);
-    mp3.sendCmd(DFPlayerMini::Prev);
-    delay(1000);
-    mp3.sendCmd(DFPlayerMini::Prev);
-    delay(1000);
-    mp3.sendCmd(DFPlayerMini::Prev);
     delay(4000);
 }
 
