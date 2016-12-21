@@ -52,6 +52,8 @@ DFPResponse DFPlayerMini::query(uint8_t cmd, uint8_t tries)
         if (r.status == DFPResponse::Ok) {
             return r;
         }
+        // Add a random delay in case of sync problems
+        delay(random(5));
     }
     DB(F("DFPlayerMini::query FAILED all "));
     DB(tries);

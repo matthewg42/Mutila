@@ -59,3 +59,9 @@ Doxygen-generated documentation can be found on the Orthogonal Systems website a
 * state=0 --> state=1 ... --> state=n-1 --> state=0.
 * This makes ToggleButton just an n-state where n=2.
 
+### DFPlayerMini
+
+* add busy detection / wait function
+* doc ops which create reply
+* asynchronous commands (i.e. do not wait for serial, use update() to send bytes one at a time)
+

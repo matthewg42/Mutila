@@ -6,7 +6,8 @@ DFPlayerMini mp3(SerialMP3);
 
 void doQuery(uint8_t cmd)
 {
-    DFPResponse r = mp3.query(cmd);
+    // Try to query - with up to 20 (!) retries
+    DFPResponse r = mp3.query(cmd, 20);
     Serial.print("doQuery(0x");
     Serial.print(cmd, HEX);
     if (r.status != DFPResponse::Ok) {
