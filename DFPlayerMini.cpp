@@ -19,9 +19,9 @@ void DFPlayerMini::resetSendBuf()
     _sendBuf[9] = 0xEF;  // send mark?
 }
 
-void DFPlayerMini::sendCmd(uint8_t cmd, uint16_t arg)
+void DFPlayerMini::sendCmd(DFPlayerMini::Cmd cmd, uint16_t arg)
 {
-    _sendBuf[DFP_OFFSET_CMD] = cmd;
+    _sendBuf[DFP_OFFSET_CMD] = (uint8_t)cmd;
     copyBigend(_sendBuf+DFP_OFFSET_ARG, arg);
     fillChecksum();
     serialCmd();
@@ -41,7 +41,7 @@ dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
         DBLN(' ');
 }
 
-DFPResponse DFPlayerMini::query(uint8_t cmd, uint8_t tries)
+DFPResponse DFPlayerMini::query(DFPlayerMini::Cmd cmd, uint8_t tries)
 {
     for (uint8_t i=1; i<=tries; i++) {
         DB(F("DFPlayerMini::query try "));
@@ -60,7 +60,7 @@ DFPResponse DFPlayerMini::query(uint8_t cmd, uint8_t tries)
     DBLN(F(" tries"));
 }
 
-DFPResponse DFPlayerMini::_query(uint8_t cmd)
+DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
 {
     // This will hold our result. Note: response.status is Incomplete
     // after the response object has been constructed.
@@ -112,7 +112,7 @@ DFPResponse DFPlayerMini::_query(uint8_t cmd)
     }
     // calculate how long comms took
     unsigned long durationRecv = millis() - startRecv;
-    DB(F("DF RX "));
+    DB(F("DF RX:"));
     dumpBuf(buf, ptr, false);
     DB(F(" send="));
     DB(startRecv - startSend);

@@ -4,21 +4,31 @@
 SoftwareSerial SerialMP3(9, 8);
 DFPlayerMini mp3(SerialMP3);
 
-void doQuery(uint8_t cmd)
-{
-    // Try to query - with up to 20 (!) retries
-    DFPResponse r = mp3.query(cmd, 20);
-    Serial.print("doQuery(0x");
-    Serial.print(cmd, HEX);
-    if (r.status != DFPResponse::Ok) {
-        Serial.println("): bad response");
-    } else { 
-        Serial.print("): msg=0x");
-        Serial.print(r.messageType, HEX);
-        Serial.print(" arg=");
-        Serial.println(r.arg);
-    }
-    delay(500);
+void query() {
+    DFPResponse r;
+    r = mp3.query(DFPlayerMini::GetVolume);
+    Serial.print("Volume=");
+    Serial.print(r.arg);
+
+    r = mp3.query(DFPlayerMini::GetStatus);
+    Serial.print(" Status=");
+    Serial.print(r.arg);
+
+    r = mp3.query(DFPlayerMini::GetUSum);
+    Serial.print(" GetUSum=");
+    Serial.print(r.arg);
+
+    r = mp3.query(DFPlayerMini::GetTfSum);
+    Serial.print(" GetTfSum=");
+    Serial.print(r.arg);
+
+    r = mp3.query(DFPlayerMini::GetUCurrent);
+    Serial.print(" GetUCurrent=");
+    Serial.print(r.arg);
+
+    r = mp3.query(DFPlayerMini::GetUCurrent);
+    Serial.print(" GetTfCurrent=");
+    Serial.println(r.arg);
 
 }
 
@@ -26,27 +36,31 @@ void setup()
 {
     Serial.begin(115200);
     SerialMP3.begin(9600);
-    delay(300);
-    doQuery(DFPlayerMini::GetStatus);
-    delay(1000);
-    doQuery(DFPlayerMini::GetVolume);
-    delay(1000);
-    doQuery(DFPlayerMini::GetUSum);
-    delay(1000);
-    doQuery(DFPlayerMini::GetTfSum);
-    delay(1000);
-    doQuery(DFPlayerMini::GetFlashSum);
-    delay(1000);
-    doQuery(DFPlayerMini::GetUCurrent);
-    delay(1000);
-    doQuery(DFPlayerMini::GetTfCurrent);
-    delay(1000);
-    doQuery(DFPlayerMini::GetFlashCurrent);
+    delay(300);  // settle serial
+    mp3.sendCmd(DFPlayerMini::SetVolume, 15); // don't shout
+
 }
 
-void loop()
-{
+void loop() {
+    query();
+
+    delay(100);
+    // Play the first few samples on the card
+    mp3.query(DFPlayerMini::Play, 4);
     delay(1000);
-    doQuery(DFPlayerMini::Next);
+    mp3.sendCmd(DFPlayerMini::Next);
+    delay(1000);
+    mp3.sendCmd(DFPlayerMini::Next);
+    delay(2000);
+
+    // Test Prev cmd wrapping...
+    mp3.sendCmd(DFPlayerMini::Prev);
+    delay(1000);
+    mp3.sendCmd(DFPlayerMini::Prev);
+    delay(1000);
+    mp3.sendCmd(DFPlayerMini::Prev);
+    delay(1000);
+    mp3.sendCmd(DFPlayerMini::Prev);
+    delay(4000);
 }
-    
+

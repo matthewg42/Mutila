@@ -1,7 +1,7 @@
 #pragma once
 
 #define DFP_BUFLEN                  10
-#define DFP_MIN_TIME_MS             10
+#define DFP_MIN_TIME_MS             20
 #define DFP_RESP_TIMEOUT_MS         20
 
 // Structure of the command packet
@@ -82,26 +82,26 @@ public:
         GetFlashSum     = 0x49, //!< Get file count Flash
         GetUCurrent     = 0x4B, //!< Get file current U
         GetTfCurrent    = 0x4C, //!< Get file current Tf
-        GetFlashCurrent = 0x4D  //!< Get file current Flash
+        GetFlashCurrent = 0x4D  //!< Get file current Flash [No response]
     };
 
     //! Constructor
     DFPlayerMini(Stream& serial);
 
     //! Send a command no response is expected
-    void sendCmd(uint8_t cmd, uint16_t arg=0);
+    void sendCmd(Cmd cmd, uint16_t arg=0);
 
     /*! Send a command and wait for a response
-     * \param cmd The ID of the command to send
+     * \param cmd The command to send
      * \param tries how many attempts will be made to get a valid result
      * \return a DFPResponse object with the results of the query. The .ok
      *         member will be false if the query failed to get a valid
      *         result (possible resons: timeout, bad serial comms etc.)
      */
-    DFPResponse query(uint8_t cmd, uint8_t tries=3);
+    DFPResponse query(Cmd cmd, uint8_t tries=3);
 
 private:
-    DFPResponse _query(uint8_t cmd);
+    DFPResponse _query(Cmd cmd);
 
     void resetSendBuf();
     void copyBigend(uint8_t *thebuf, uint16_t data);
