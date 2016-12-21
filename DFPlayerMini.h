@@ -59,7 +59,7 @@ public:
 
     //! Send a command and wait for a response
     //! Note: test DFPResponse.ok to check if it worked!
-    DFPResponse fetch(uint8_t cmd, uint16_t arg=0);
+    DFPResponse query(uint8_t cmd, uint16_t arg=0);
 
 private:
     void resetSendBuf();

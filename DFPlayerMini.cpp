@@ -39,7 +39,7 @@ dumpBuf(uint8_t* buf, uint8_t ptr)
     DBLN(' ');
 }
 
-DFPResponse DFPlayerMini::fetch(uint8_t cmd, uint16_t arg)
+DFPResponse DFPlayerMini::query(uint8_t cmd, uint16_t arg)
 {
     DFPResponse response;
 

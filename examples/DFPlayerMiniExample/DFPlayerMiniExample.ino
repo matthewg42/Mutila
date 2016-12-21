@@ -4,10 +4,10 @@
 SoftwareSerial SerialMP3(9, 8);
 DFPlayerMini mp3(SerialMP3);
 
-void query(uint8_t cmd)
+void doQuery(uint8_t cmd)
 {
-    DFPResponse r = mp3.fetch(cmd);
-    Serial.print("query=");
+    DFPResponse r = mp3.query(cmd);
+    Serial.print("doQuery=");
     Serial.print(cmd);
     if (!r.ok) {
         Serial.println(": bad response");
@@ -26,26 +26,26 @@ void setup()
     Serial.begin(115200);
     SerialMP3.begin(9600);
     delay(300);
-    query(DFPlayerMini::GetStatus);
+    doQuery(DFPlayerMini::GetStatus);
     delay(1000);
-    query(DFPlayerMini::GetVolume);
+    doQuery(DFPlayerMini::GetVolume);
     delay(1000);
-    query(DFPlayerMini::GetUSum);
+    doQuery(DFPlayerMini::GetUSum);
     delay(1000);
-    query(DFPlayerMini::GetTfSum);
+    doQuery(DFPlayerMini::GetTfSum);
     delay(1000);
-    query(DFPlayerMini::GetFlashSum);
+    doQuery(DFPlayerMini::GetFlashSum);
     delay(1000);
-    query(DFPlayerMini::GetUCurrent);
+    doQuery(DFPlayerMini::GetUCurrent);
     delay(1000);
-    query(DFPlayerMini::GetTfCurrent);
+    doQuery(DFPlayerMini::GetTfCurrent);
     delay(1000);
-    query(DFPlayerMini::GetFlashCurrent);
+    doQuery(DFPlayerMini::GetFlashCurrent);
 }
 
 void loop()
 {
     delay(1000);
-    query(DFPlayerMini::Next);
+    doQuery(DFPlayerMini::Next);
 }
     
