@@ -24,6 +24,7 @@ void DFPlayerMini::sendCmd(DFPlayerMini::Cmd cmd, uint16_t arg)
     _sendBuf[DFP_OFFSET_CMD] = (uint8_t)cmd;
     copyBigend(_sendBuf+DFP_OFFSET_ARG, arg);
     fillChecksum();
+    _serial.flush();
     serialCmd();
 }
 
@@ -112,6 +113,7 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     }
     // calculate how long comms took
     unsigned long durationRecv = millis() - startRecv;
+
     DB(F("DF RX:"));
     dumpBuf(buf, ptr, false);
     DB(F(" send="));
@@ -120,26 +122,29 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     DB(durationRecv);
     DB(F("ms "));
 
+    // flush the serial buffers just in case of junk
+    _serial.flush();
+
+    // put results into response object
+    response.messageType = buf[DFP_OFFSET_CMD];
+    uint8_t* aptr = (uint8_t*)(&(response.arg));
+    aptr[0] = buf[DFP_OFFSET_ARG+1];
+    aptr[1] = buf[DFP_OFFSET_ARG];
+
     // Validate the packet
     uint16_t cksum = calculateChecksum(buf);
     // check the terminator looks OK
     if (buf[0] != 0x7E || buf[1] != 0xFF || buf[9] != 0xEF) {
         DBLN(F("ERR: head/term"));
         response.status = DFPResponse::Invalid;
-        return response;
     } else if (*((uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM+1] || *(1+(uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM]) {
         response.status = DFPResponse::Invalid;
         DBLN(F("ERR: cksum"));
-        return response;
     } else {
         // OK, we have a valid response
         response.status = DFPResponse::Ok;
         DBLN(F("VALID"));
     }
-    response.messageType = buf[DFP_OFFSET_CMD];
-    uint8_t* aptr = (uint8_t*)(&(response.arg));
-    aptr[0] = buf[DFP_OFFSET_ARG+1];
-    aptr[1] = buf[DFP_OFFSET_ARG];
     return response;
 }
 

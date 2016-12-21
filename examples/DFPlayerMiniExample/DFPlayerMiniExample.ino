@@ -51,15 +51,11 @@ void setup()
 }
 
 void loop() {
-
-    for (int i=0; i<1; i++) {
-        int t = random(count);
+    for (int i=0; i<count; i++) {
         Serial.print("Playing track: ");
-        Serial.println(t);
-        mp3.sendCmd(DFPlayerMini::Play, t);
-        delay(1200);
+        Serial.println(i);
+        mp3.sendCmd(DFPlayerMini::PlayTf, i);
+        delay(1500);
     }
-    query();
-    delay(4000);
 }
 

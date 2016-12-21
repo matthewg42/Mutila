@@ -72,7 +72,7 @@ public:
         Reset           = 0x0C, //!< Exit sleep mode
         Play            = 0x0D, //!< Play track arg
         Pause           = 0x0E, //!< Pause playback
-        PlayTfMp3       = 0x12, //!< Play track arg from Tf
+        PlayTf          = 0x12, //!< Play track arg from Tf
         Stop            = 0x16, //!< Stop playback
         SingleLoop      = 0x19, //!< Loop track arg = boolean !state
         GetStatus       = 0x42, //!< Get some meaningless status code
