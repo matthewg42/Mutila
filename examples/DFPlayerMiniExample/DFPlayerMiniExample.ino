@@ -8,27 +8,35 @@ void query() {
     DFPResponse r;
     r = mp3.query(DFPlayerMini::GetVolume);
     Serial.print("Volume=");
-    Serial.print(r.arg);
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetStatus);
     Serial.print(" Status=");
-    Serial.print(r.arg);
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUSum);
     Serial.print(" GetUSum=");
-    Serial.print(r.arg);
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetTfSum);
     Serial.print(" GetTfSum=");
-    Serial.print(r.arg);
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
     Serial.print(" GetUCurrent=");
-    Serial.print(r.arg);
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
     Serial.print(" GetTfCurrent=");
-    Serial.println(r.arg);
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg);  }
+    else { Serial.print("ERR"); }
+
+    Serial.println(' ');
 
 }
 
