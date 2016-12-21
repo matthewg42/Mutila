@@ -2,7 +2,7 @@
 
 #define DFP_BUFLEN                  10
 #define DFP_MIN_TIME_MS             10
-#define DFP_RESP_TIMEOUT_MS         45
+#define DFP_RESP_TIMEOUT_MS         20
 
 // Structure of the command packet
 #define DFP_OFFSET_CMD              3
@@ -101,6 +101,8 @@ public:
     DFPResponse query(uint8_t cmd, uint8_t tries=3);
 
 private:
+    DFPResponse _query(uint8_t cmd);
+
     void resetSendBuf();
     void copyBigend(uint8_t *thebuf, uint16_t data);
     void fillChecksum();

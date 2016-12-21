@@ -43,6 +43,23 @@ dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
 
 DFPResponse DFPlayerMini::query(uint8_t cmd, uint8_t tries)
 {
+    for (uint8_t i=1; i<=tries; i++) {
+        DB(F("DFPlayerMini::query try "));
+        DB(i);
+        DB(F(" of "));
+        DBLN(tries);
+        DFPResponse r = _query(cmd);
+        if (r.status == DFPResponse::Ok) {
+            return r;
+        }
+    }
+    DB(F("DFPlayerMini::query FAILED all "));
+    DB(tries);
+    DBLN(F(" tries"));
+}
+
+DFPResponse DFPlayerMini::_query(uint8_t cmd)
+{
     // This will hold our result. Note: response.status is Incomplete
     // after the response object has been constructed.
     DFPResponse response;
