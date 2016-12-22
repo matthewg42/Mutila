@@ -30,6 +30,18 @@ Samplers read from analog input pins and allow some operations to be performed o
 * *BufferedSampler* - keeps a buffer of recent samples, providing ability to get average, minimum and maximum for values in the buffer
 * *EMASampler* - provides calculation of exponential moving average value for an analog input
 
+Sampling voltage and current values may be performed using the following classes, which are good examples of how to derive custom samplers from BufferedSampler and EMASampler:
+
+* *BufferedVDivSampler* - measure voltage over a voltage divider using BufferedSampler.
+* *EMAVDivSampler* - measure voltage over a voltage divider using EMASampler.
+* *EMACurrentSampler* - measure current using an Allegro ACS756SCB-050B-PFF-T Bi-directional 50A hall effect sensor and EMASampler.
+
+Current measuement may be achieved using an Allegro ACS756SCB-050B-PFF-T Bi-directional 50A hall effect sensor and the class
+
+### DFPlayer Mini MP3 audio module
+
+DFPlayer Mini is a neat and affordable audio module which can play MP3 files from an SD card, with a serial interface for control. It can also drive a small speaker. Mutila provides the class *DFPlayerMini* for controlling such a device.
+
 ## Author & License
 
 All code written by Mouse <mouse@orthogonal-systems.co.uk>, and licensed under the GNU GPL v3. See the LICENSE file for details.
