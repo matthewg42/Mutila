@@ -7,13 +7,10 @@
 class ModeOne_ : public Mode {
 public:
     ModeOne_();
-    void start();
-    void stop();
-    void update();
+    void modeStart();
+    void modeStop();
+    void modeUpdate();
     bool isFinished();
-
-private:
-    unsigned long _last;
 
 };
 
