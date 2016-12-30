@@ -27,7 +27,7 @@ BufferedSampler::~BufferedSampler()
 
 void BufferedSampler::begin()
 {
-    DBLN(F("BufferedSampler::begin"));
+    _DBLN(F("BufferedSampler::begin"));
     // Note: no need to set pinMode for analog inputs
     _count = 0;
     _min = 0;
@@ -41,8 +41,8 @@ void BufferedSampler::update()
 {
     if (_periodMs == 0 || millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
         _sampleData[_idx] = analogRead(_pin);
-        DB(F("BufferedSampler::update sample="));
-        DBLN(_sampleData[_idx]);
+        _DB(F("BufferedSampler::update sample="));
+        _DBLN(_sampleData[_idx]);
         _count = _count >= _samples ? _samples : _count+1;
         _idx = (_idx + 1) % _samples;
         _lastUpdated = millis();

@@ -11,8 +11,8 @@ BrownoutMode::BrownoutMode(EMAVDivSampler& vSampler, const float vThreshLow, con
 void BrownoutMode::update()
 {
     _vSampler.update();
-    DB(F("Mode::update, volts="));
-    DBLN(_vSampler.averageVolts());
+    _DB(F("Mode::update, volts="));
+    _DBLN(_vSampler.averageVolts());
     if (_brownedOut && _vSampler.averageVolts() > _vThreshHigh) {
         exitBrownout();
         _brownedOut = false;

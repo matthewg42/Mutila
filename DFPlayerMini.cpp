@@ -33,22 +33,23 @@ void DFPlayerMini::sendCmd(DFPlayerMini::Cmd cmd, uint16_t arg)
 dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
 {
     for (uint8_t i=0; i<DFP_BUFLEN; i++) {
-        DB(F(" 0x"));
-        DB(buf[i], HEX);
+        _DB(F(" 0x"));
+        _DB(buf[i], HEX);
     }
-    DB(F(" ptr="));
-    DB(ptr);
-    if (ln)
-        DBLN(' ');
+    _DB(F(" ptr="));
+    _DB(ptr);
+    if (ln) {
+        _DBLN(' ');
+    }
 }
 
 DFPResponse DFPlayerMini::query(DFPlayerMini::Cmd cmd, uint8_t tries)
 {
     for (uint8_t i=1; i<=tries; i++) {
-        DB(F("DFPlayerMini::query try "));
-        DB(i);
-        DB(F(" of "));
-        DBLN(tries);
+        _DB(F("DFPlayerMini::query try "));
+        _DB(i);
+        _DB(F(" of "));
+        _DBLN(tries);
         DFPResponse r = _query(cmd);
         if (r.status == DFPResponse::Ok) {
             return r;
@@ -56,9 +57,9 @@ DFPResponse DFPlayerMini::query(DFPlayerMini::Cmd cmd, uint8_t tries)
         // Add a random delay in case of sync problems
         delay(random(5));
     }
-    DB(F("DFPlayerMini::query FAILED all "));
-    DB(tries);
-    DBLN(F(" tries"));
+    _DB(F("DFPlayerMini::query FAILED all "));
+    _DB(tries);
+    _DBLN(F(" tries"));
 }
 
 DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
@@ -114,13 +115,13 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     // calculate how long comms took
     unsigned long durationRecv = millis() - startRecv;
 
-    DB(F("DF RX:"));
+    _DB(F("DF RX:"));
     dumpBuf(buf, ptr, false);
-    DB(F(" send="));
-    DB(startRecv - startSend);
-    DB(F("ms, recv="));
-    DB(durationRecv);
-    DB(F("ms "));
+    _DB(F(" send="));
+    _DB(startRecv - startSend);
+    _DB(F("ms, recv="));
+    _DB(durationRecv);
+    _DB(F("ms "));
 
     // flush the serial buffers just in case of junk
     _serial.flush();
@@ -135,15 +136,15 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     uint16_t cksum = calculateChecksum(buf);
     // check the terminator looks OK
     if (buf[0] != 0x7E || buf[1] != 0xFF || buf[9] != 0xEF) {
-        DBLN(F("ERR: head/term"));
+        _DBLN(F("ERR: head/term"));
         response.status = DFPResponse::Invalid;
     } else if (*((uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM+1] || *(1+(uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM]) {
         response.status = DFPResponse::Invalid;
-        DBLN(F("ERR: cksum"));
+        _DBLN(F("ERR: cksum"));
     } else {
         // OK, we have a valid response
         response.status = DFPResponse::Ok;
-        DBLN(F("VALID"));
+        _DBLN(F("VALID"));
     }
     return response;
 }
@@ -177,12 +178,12 @@ void DFPlayerMini::serialCmd()
     while (millis() < _lastCmdSent + DFP_MIN_TIME_MS) {
         delay(1);
     }
-    DB(F("DF TX:"));
+    _DB(F("DF TX:"));
     for (uint8_t i=0; i<DFP_BUFLEN; i++) {
-        DB(F(" 0x"));
-        DB(_sendBuf[i],HEX);
+        _DB(F(" 0x"));
+        _DB(_sendBuf[i],HEX);
     }
-    DBLN(' ');
+    _DBLN(' ');
     _lastCmdSent = millis();
     for (uint8_t i=0; i<DFP_BUFLEN; i++) {
         _serial.write(_sendBuf[i]);
