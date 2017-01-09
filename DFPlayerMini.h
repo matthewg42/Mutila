@@ -72,7 +72,7 @@ public:
         Reset           = 0x0C, //!< Exit sleep mode
         Play            = 0x0D, //!< Play track arg
         Pause           = 0x0E, //!< Pause playback
-        PlayTf          = 0x12, //!< Play track arg from Tf
+        PlayTf          = 0x12, //!< Play track arg from (SD card)
         Stop            = 0x16, //!< Stop playback
         SingleLoop      = 0x19, //!< Loop track arg = boolean !state
         GetStatus       = 0x42, //!< Get some meaningless status code
@@ -85,10 +85,19 @@ public:
         GetFlashCurrent = 0x4D  //!< Get file current Flash [No response]
     };
 
-    //! Constructor
-    DFPlayerMini(Stream& serial);
+    /*! Constructor
+     * \param serial a software serial object set at 9600 baud connected 
+     *        to the DFPlayerMini device
+     * \param busyPin the pin on the arduino connected to the BUSY pin of 
+     *        the DFPlayerMini. See the busy() documentation for more 
+     *        details.
+     */
+    DFPlayerMini(Stream& serial, uint8_t busyPin=0);
 
-    //! Send a command no response is expected
+    /*! Send a command no response is expected
+     * \param cmd The command to send
+     * \param arg The argument to the command, if one is expected
+     */
     void sendCmd(Cmd cmd, uint16_t arg=0);
 
     /*! Send a command and wait for a response
@@ -100,6 +109,23 @@ public:
      */
     DFPResponse query(Cmd cmd, uint8_t tries=3);
 
+    /*! Find out if a sound is playing
+     * If the BUSY pin has been connected to the arduino and properly
+     * set with the busyPin parameter to the DFPlayerMini constructor,
+     * the value will be determined by analysing this pin state.
+     *
+     * If the busy pin was not passed when the DFPlayerMini was constructed,
+     * a GetStatus query will be sent to the player and the result
+     * analysed to determine the result. Note that the query method will
+     * cause jitter in the audio playback, and takes longer to execute, 
+     * so the BUSY pin method is recommended if there is a digital input
+     * available.
+     *
+     * \return true if audio is currently playing, else false
+     */
+    bool busy();
+
+
 private:
     DFPResponse _query(Cmd cmd);
 
@@ -110,6 +136,7 @@ private:
     void serialCmd();
 
     Stream& _serial;
+    uint8_t _busyPin;
     uint8_t _sendBuf[DFP_BUFLEN];
     unsigned long _lastCmdSent;
 

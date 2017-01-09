@@ -1,9 +1,18 @@
 #include <DFPlayerMini.h>
 #include <SoftwareSerial.h>
+#include <MutilaDebug.h>
 
-SoftwareSerial SerialMP3(9, 8);
-DFPlayerMini mp3(SerialMP3);
+#define BUSY_PIN        10
+#define DFRX_PIN        6 
+#define DFTX_PIN        5 
+#define BETWEEN_MS      200
+
+SoftwareSerial SerialMP3(DFTX_PIN, DFRX_PIN);
+DFPlayerMini mp3(SerialMP3, BUSY_PIN);
+unsigned long lastStop = 0;
+bool playing = false;
 int count = 0;
+int track = 0;
 
 void query() {
     DFPResponse r;
@@ -28,8 +37,7 @@ void query() {
     else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
-    Serial.print(" GetUCurrent=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    Serial.print(" GetUCurrent="); if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
     else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
@@ -47,16 +55,36 @@ void setup()
     SerialMP3.begin(9600);
     delay(300);  // settle serial
     mp3.sendCmd(DFPlayerMini::SetVolume, 15); // don't shout
-    query();
+    query();  // gets the number of tracks and outputs a bunch of other stuff...
+}
+
+void playNext()
+{
+    DB("Playing track ");
+    DBLN(track);
+    playing = true;
+    mp3.sendCmd(DFPlayerMini::PlayTf, track++);
+    if (track > count) {
+        track = 0;
+    }
 }
 
 void loop() {
-    for (int i=0; i<count; i++) {
-        Serial.print("Playing track: ");
-        Serial.println(i);
-        mp3.sendCmd(DFPlayerMini::PlayTf, i);
-        delay(1500);
-    }
-    query();
+    unsigned long now = millis();
+    bool busy = mp3.busy();
+    DB("busy: ");
+    DBLN(busy);
+    if (!busy) {
+        if (playing) {
+            DBLN("stopped");
+            lastStop = now;
+            playing = false;
+        } 
+        if (now > lastStop + BETWEEN_MS) {
+            playNext();
+        }
+    } 
+    // This is to reduce the jitter we have if we don't use the BUSY pin
+    delay(50);
 }
 

@@ -2,8 +2,9 @@
 #include <DFPlayerMini.h>
 #include <MutilaDebug.h>
 
-DFPlayerMini::DFPlayerMini(Stream& serial) :
+DFPlayerMini::DFPlayerMini(Stream& serial, uint8_t busyPin) :
     _serial(serial),
+    _busyPin(busyPin),
     _lastCmdSent(0)
 {
     resetSendBuf();
@@ -147,6 +148,16 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
         _DBLN(F("VALID"));
     }
     return response;
+}
+
+bool DFPlayerMini::busy()
+{
+    if (_busyPin != 0) {
+        return !digitalRead(_busyPin);
+    } else {
+        DFPResponse r = query(DFPlayerMini::GetStatus);
+        return r.arg != 512; // Not certain about this, but it seems to work...
+    }
 }
 
 void DFPlayerMini::copyBigend(uint8_t *dst, uint16_t value)
