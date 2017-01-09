@@ -56,17 +56,13 @@ public:
 
     /*! Test if the button has been pushed and released.
      *
-     * This call is dependeent on state changed of the input pin, and
-     * on whether or not this function has been called since pin state
-     * changes. It will only return true once, no mater how many times
-     * it is called until the pin changes state (and back again) another
-     * time.  This way we can test tapped() in a tight loop, and only
-     * get one true result per press and release of the button.
+     * After returning a non-zero value (i.e. a tap was refistered), the
+     * state will be reset. Only the last tap duration will be returned.
      *
-     * \return true if the button has been tapped, else false.
+     * \return length of last tap in ms if the button has been tapped, else 0.
      *
      */
-    bool tapped();
+    unsigned long tapped();
 
     /*! Test if held on for extended period
      *
@@ -93,11 +89,10 @@ private:
     uint8_t _counter;
     bool _state;
     unsigned long _lastStateChange;
-    bool _released;
     bool _pushed;
     uint16_t _repeatCount;
     unsigned long _nextRepeatTime;
-    
+    unsigned long _lastOnDuration;
 
     void setState(bool newState);
 

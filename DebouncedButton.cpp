@@ -13,7 +13,7 @@ void DebouncedButton::begin(uint8_t threshold, uint8_t delay)
     _delay = delay;
     _lastUpdate = 0;
     setState(false);
-    _released = false; // prevent false positive on startup
+    _lastOnDuration = 0;
 }
 
 void DebouncedButton::update()
@@ -44,10 +44,10 @@ bool DebouncedButton::pushed()
     return r;
 }
 
-bool DebouncedButton::tapped()
+unsigned long DebouncedButton::tapped()
 {
-    bool r = _released;
-    _released = false;
+    unsigned long r = _lastOnDuration;
+    _lastOnDuration = 0;
     return r;
 }
 
@@ -71,15 +71,16 @@ bool DebouncedButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 
 void DebouncedButton::setState(bool newState)
 {
+    unsigned long now = millis();
     if (newState) { 
         _pushed = true;
         _repeatCount = 0;
-        _nextRepeatTime = millis();
+        _nextRepeatTime = now;
     } else {
-        _released = true;
+        _lastOnDuration = now - _lastStateChange;
     }
     if (_state!=newState) {
-        _lastStateChange = millis();
+        _lastStateChange = now;
         _state = newState;
         _counter = 0;
     }
