@@ -13,7 +13,9 @@ public:
 		Normal=0, //!< blinks briefly about once a second
 		Quick,    //!< blinks rapidly
 		Slow,     //!< blinks slowly
-		Slower    //!< blinks very slowly
+		Slower,   //!< blinks very slowly
+        Off,      //!< LED constant off
+        On        //!< LED constant on
 	};
 
     /*! Constructor

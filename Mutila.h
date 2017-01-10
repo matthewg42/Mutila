@@ -23,7 +23,7 @@
 #define HEARTBEAT_QUICK_OFF_MS          25
 #define HEARTBEAT_SLOW_ON_MS            1000
 #define HEARTBEAT_SLOW_OFF_MS           150
-#define HEARTBEAT_SLOW_ON_MSER          1000
-#define HEARTBEAT_SLOW_OFF_MSER         1000
+#define HEARTBEAT_SLOWER_ON_MS          1000
+#define HEARTBEAT_SLOWER_OFF_MS         1000
 
 

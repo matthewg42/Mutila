@@ -1,11 +1,11 @@
 #include <Arduino.h>
-#include <ToggleButton.h>
+#include <DebouncedButton.h>
 #include <Heartbeat.h>
 
-#define BUT_PIN 2
+#define BUT_PIN 7
 #define LED_PIN 13
 
-ToggleButton button(BUT_PIN);
+DebouncedButton button(BUT_PIN);
 Heartbeat heartbeat(LED_PIN);
 
 void setup()
@@ -22,6 +22,27 @@ void loop()
     heartbeat.update();
     button.update();
 
-    heartbeat.setMode(button.on() ? Heartbeat::Quick : Heartbeat::Normal);
+    if (button.tapped()) {
+        switch (heartbeat.mode()) {
+        case Heartbeat::Normal:
+            heartbeat.setMode(Heartbeat::Quick);
+            break;
+        case Heartbeat::Quick:
+            heartbeat.setMode(Heartbeat::Slow);
+            break;
+        case Heartbeat::Slow:
+            heartbeat.setMode(Heartbeat::Slower);
+            break;
+        case Heartbeat::Slower:
+            heartbeat.setMode(Heartbeat::Off);
+            break;
+        case Heartbeat::Off:
+            heartbeat.setMode(Heartbeat::On);
+            break;
+        case Heartbeat::On:
+            heartbeat.setMode(Heartbeat::Normal);
+            break;
+        }
+    }
 }
 

@@ -44,8 +44,16 @@ void Heartbeat::setMode(Mode mode)
         _offTime = HEARTBEAT_SLOW_OFF_MS;
 		break;
 	case Slower:
-        _onTime = HEARTBEAT_SLOW_ON_MSER;
-        _offTime = HEARTBEAT_SLOW_OFF_MSER;
+        _onTime = HEARTBEAT_SLOWER_ON_MS;
+        _offTime = HEARTBEAT_SLOWER_OFF_MS;
+		break;
+    case Off:
+        _onTime = 0;
+        _offTime = 1;
+		break;
+    case On:
+        _onTime = 1;
+        _offTime = 0;
 		break;
 	}
 }
@@ -53,7 +61,11 @@ void Heartbeat::setMode(Mode mode)
 void Heartbeat::update()
 {
     unsigned long wait = _pinState ? _onTime : _offTime;
-    if (millis() - _lastStateFlip >= wait) {
+    if (_onTime == 0 && _pinState) {
+        updatePin(0);
+    } else if (_offTime == 0 && !_pinState) {
+        updatePin(1);
+    } else if (millis() - _lastStateFlip >= wait) {
         updatePin(!_pinState);
     }
 }
