@@ -94,6 +94,11 @@ public:
      */
     DFPlayerMini(Stream& serial, uint8_t busyPin=0);
 
+    /*! Initialization
+     * Sets up pin modes and resets state - typically called from begin()
+     */
+    void begin();
+
     /*! Send a command no response is expected
      * \param cmd The command to send
      * \param arg The argument to the command, if one is expected

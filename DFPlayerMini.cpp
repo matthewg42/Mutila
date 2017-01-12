@@ -7,6 +7,11 @@ DFPlayerMini::DFPlayerMini(Stream& serial, uint8_t busyPin) :
     _busyPin(busyPin),
     _lastCmdSent(0)
 {
+}
+
+void DFPlayerMini::begin()
+{
+    pinMode(_busyPin, INPUT_PULLUP);
     resetSendBuf();
 }
 

@@ -3,8 +3,8 @@
 #include <MutilaDebug.h>
 
 #define BUSY_PIN        10
-#define DFRX_PIN        6 
 #define DFTX_PIN        5 
+#define DFRX_PIN        6 
 #define BETWEEN_MS      200
 
 SoftwareSerial SerialMP3(DFTX_PIN, DFRX_PIN);
@@ -53,9 +53,17 @@ void setup()
 {
     Serial.begin(115200);
     SerialMP3.begin(9600);
-    delay(300);  // settle serial
-    mp3.sendCmd(DFPlayerMini::SetVolume, 15); // don't shout
-    query();  // gets the number of tracks and outputs a bunch of other stuff...
+    mp3.begin();
+
+    // Let IO pins settle
+    delay(200);  
+
+    // Don't shout
+    mp3.sendCmd(DFPlayerMini::SetVolume, 15);
+
+    // Talk to the DFPlayer Mini device.  
+    // Also sets the number of tracks.
+    query();  
 }
 
 void playNext()
@@ -80,11 +88,12 @@ void loop() {
             lastStop = now;
             playing = false;
         } 
+
         if (now > lastStop + BETWEEN_MS) {
             playNext();
         }
     } 
     // This is to reduce the jitter we have if we don't use the BUSY pin
-    delay(50);
+    delay(100);
 }
 
