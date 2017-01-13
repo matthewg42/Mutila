@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <DFPlayerMini.h>
 
-#define DFPR_SAY_BUF_SIZE           5
 #define DFPR_PLAYBACK_START_MS      100
 
 #define MP3_TRACK_ZERO              200
@@ -59,7 +58,12 @@ public:
      *        the DFPlayerMini. See the busy() documentation for more 
      *        details.
      */
-    DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd=DFPlayerMini::PlayTf, uint8_t busyPin=0);
+    DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd=DFPlayerMini::PlayTf, uint8_t busyPin=0, uint8_t readerBufferSize=30);
+
+    /*! Destructor
+     */  
+    ~DFPReader();
+
     DFPlayerMini::Cmd _playCmd;
 
     /* Initialize
@@ -95,7 +99,8 @@ private:
     static const uint8_t TENS[];
 
     // Ring buffer
-    uint8_t readerBuf[DFPR_SAY_BUF_SIZE];
+    const uint8_t readerBufSize;
+    uint8_t *readerBuf;
     uint8_t tailPtr;
     uint8_t unplayedElements;
 

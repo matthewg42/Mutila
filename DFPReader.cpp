@@ -15,10 +15,17 @@ const uint8_t DFPReader::TENS[] = {
         MP3_TRACK_EIGHTY, MP3_TRACK_NINETY
 };
 
-DFPReader::DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd, uint8_t busyPin) :
+DFPReader::DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd, uint8_t busyPin, uint8_t readerBufferSize) :
     DFPlayerMini(serial, busyPin),
-    _playCmd(playCmd)
+    _playCmd(playCmd),
+    readerBufSize(readerBufferSize)
 {
+    readerBuf = new uint8_t[readerBufSize];
+}
+
+DFPReader::~DFPReader()
+{
+    delete readerBuf;
 }
 
 void DFPReader::begin()
@@ -112,7 +119,7 @@ uint8_t DFPReader::popElement()
         return 0;
     } else {
         uint8_t e = readerBuf[tailPtr];
-        tailPtr = (tailPtr+1) % DFPR_SAY_BUF_SIZE;
+        tailPtr = (tailPtr+1) % readerBufSize;
         unplayedElements--;
         return e;
     }   
@@ -122,11 +129,11 @@ bool DFPReader::appendElement(uint8_t value)
 {
     DB(F("DFPReader::appendElement "));
     DBLN(value);
-    if (unplayedElements >= DFPR_SAY_BUF_SIZE) {   
+    if (unplayedElements >= readerBufSize) {   
         DBLN(F("DFPReader::appendElement ERROR: buffer full"));
         return false;
     } else {
-        readerBuf[(tailPtr+unplayedElements)%DFPR_SAY_BUF_SIZE] = value;
+        readerBuf[(tailPtr+unplayedElements)%readerBufSize] = value;
         unplayedElements++;
         return true;
     }
