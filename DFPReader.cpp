@@ -15,8 +15,9 @@ const uint8_t DFPReader::TENS[] = {
         MP3_TRACK_EIGHTY, MP3_TRACK_NINETY
 };
 
-DFPReader::DFPReader(Stream& serial, uint8_t busyPin) :
-    DFPlayerMini(serial, busyPin)
+DFPReader::DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd, uint8_t busyPin) :
+    DFPlayerMini(serial, busyPin),
+    _playCmd(playCmd)
 {
 }
 
@@ -24,11 +25,38 @@ void DFPReader::begin()
 {
     DFPlayerMini::begin();
     resetReaderBuf();
+    lastPlayStart = 0;
+    playbackState = Playing; // we will let it reset itself, in case there is a track already playing...
 }
 
 void DFPReader::update()
 {
-    DBLN(F("DFPReader::update"));
+    if (playbackState == Pending) {
+        if (millis() - lastPlayStart >= DFPR_PLAYBACK_START_MS) {
+            _DBLN(F("playbackState Pending -> Playing"));
+            playbackState = Playing;
+        }
+    } else if (playbackState == Playing) {
+        if (!busy()) {
+            _DBLN(F("playbackState Playing -> Idle"));
+            playbackState = Idle;
+        }
+    }
+
+    if (unplayedElements > 0) {
+        if (playbackState == Idle) {
+            startPlayback(popElement());
+        }
+    }
+}
+
+void DFPReader::startPlayback(uint16_t track)
+{
+    _DB(F("DFPReader::startPlayback "));
+    _DBLN(track);
+    lastPlayStart = millis();
+    playbackState = Pending;
+    sendCmd(_playCmd, track);
 }
 
 float mymodf(float number, float* ip)
@@ -70,29 +98,37 @@ void DFPReader::readNumber(float number, uint8_t dp)
         fp = round(fp);
         appendElement(MP3_TRACK_ZERO+((int)fp)%10);
     }
-
-    DB(F("Values for "));
-    DB(number, dp);
-    DB(F(" to "));
-    DB(dp);
-    DBLN(F(" d.p."));
-    for (uint8_t i=0; i<headPtr; i++) {
-        DBLN(readerBuf[i]);
-    }
 }
 
 void DFPReader::resetReaderBuf()
 {
-    memset(readerBuf, 0, sizeof(uint8_t) * DFPR_SAY_BUF_SIZE);
-    headPtr = 0;
     tailPtr = 0;
+    unplayedElements = 0;
 }
 
-void DFPReader::appendElement(uint8_t value)
+uint8_t DFPReader::popElement()
 {
-    // Remember, we're dealing with a ring buffer...
-    if (headPtr < DFPR_SAY_BUF_SIZE) {
-        readerBuf[headPtr++] = value;
+    if (unplayedElements==0) {
+        return 0;
+    } else {
+        uint8_t e = readerBuf[tailPtr];
+        tailPtr = (tailPtr+1) % DFPR_SAY_BUF_SIZE;
+        unplayedElements--;
+        return e;
+    }   
+}
+
+bool DFPReader::appendElement(uint8_t value)
+{
+    DB(F("DFPReader::appendElement "));
+    DBLN(value);
+    if (unplayedElements >= DFPR_SAY_BUF_SIZE) {   
+        DBLN(F("DFPReader::appendElement ERROR: buffer full"));
+        return false;
+    } else {
+        readerBuf[(tailPtr+unplayedElements)%DFPR_SAY_BUF_SIZE] = value;
+        unplayedElements++;
+        return true;
     }
 }
 
@@ -107,14 +143,16 @@ void DFPReader::appendSubThousand(int num)
         appendElement(TENS[num / 10]);
         num %= 10;
     }
-    if (num != 0)
+    if (num != 0) {
         appendElement(SMALL_NUMBERS[num]);
+    }
 }
 
 void DFPReader::appendMagnitude(float* number, float magnitude, uint8_t magnitudeElement)
 {
-    if (*number < magnitude)
+    if (*number < magnitude) {
         return;
+    }
 
     appendSubThousand((int)(*number / magnitude));
     appendElement(magnitudeElement);

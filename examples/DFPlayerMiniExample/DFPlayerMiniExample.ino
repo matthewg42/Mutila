@@ -59,7 +59,7 @@ void setup()
     delay(200);  
 
     // Don't shout
-    mp3.sendCmd(DFPlayerMini::SetVolume, 15);
+    mp3.sendCmd(DFPlayerMini::SetVolume, 7);
 
     // Talk to the DFPlayer Mini device.  
     // Also sets the number of tracks.
