@@ -66,44 +66,39 @@ void DFPReader::startPlayback(uint16_t track)
     sendCmd(_playCmd, track);
 }
 
-float mymodf(float number, float* ip)
+void DFPReader::readNumber(double number, uint8_t dp)
 {
-   *ip = (long)number;
-    return number - *ip;
-}
-
-void DFPReader::readNumber(float number, uint8_t dp)
-{
-    float ip, fp;
-
-    if (dp == 0) {
-        ip = round(number);
-    } else {
-        fp = mymodf(number, &ip);
-    }
+    _DB(F("DFPReader::readNumber n="));
+    _DB(number, 10);
+    _DB(F(" dp="));
+    _DB(dp);
+    double integerPart, fractionalPart;
+    double exp = pow(10, dp);
+    number = round(number*exp) / exp;
+    _DB(F(" rounded="));
+    _DB(number, 10);
+    fractionalPart = modf(number, &integerPart);
+    _DB(F(" ip="));
+    _DB(integerPart, 10);
+    _DB(F(" fp="));
+    _DBLN(fractionalPart, 10);
     
-    readerBuf[0] = 0;
-
-    if (ip == 0) {
+    if (fabs(integerPart) < 0.1) {
         appendElement(MP3_TRACK_ZERO);
     } else {
-        appendMagnitude(&ip, 1000000000000.0, MP3_TRACK_TRILLION);
-        appendMagnitude(&ip, 1000000000.0, MP3_TRACK_BILLION);
-        appendMagnitude(&ip, 1000000, MP3_TRACK_MILLION);
-        appendMagnitude(&ip, 1000, MP3_TRACK_THOUSAND);
-        appendSubThousand((int)ip);
+        appendMagnitude(&integerPart, 1000000000000.0, MP3_TRACK_TRILLION);
+        appendMagnitude(&integerPart, 1000000000.0, MP3_TRACK_BILLION);
+        appendMagnitude(&integerPart, 1000000, MP3_TRACK_MILLION);
+        appendMagnitude(&integerPart, 1000, MP3_TRACK_THOUSAND);
+        appendSubThousand((long)integerPart);
     }
 
     if (dp > 0) {
         appendElement(MP3_TRACK_POINT);
-        for (uint8_t i=0; i<dp; i++) {
-            fp *= 10;
-            if (i<dp-1) {
-                appendElement(MP3_TRACK_ZERO+((int)fp)%10);
-            }
+        for (uint8_t i=1; i<dp+1; i++) {
+            uint8_t digit = (unsigned long)(fractionalPart*pow(10, i))%10;
+            appendElement(MP3_TRACK_ZERO+digit);
         }
-        fp = round(fp);
-        appendElement(MP3_TRACK_ZERO+((int)fp)%10);
     }
 }
 
@@ -155,7 +150,7 @@ void DFPReader::appendSubThousand(int num)
     }
 }
 
-void DFPReader::appendMagnitude(float* number, float magnitude, uint8_t magnitudeElement)
+void DFPReader::appendMagnitude(double* number, double magnitude, uint8_t magnitudeElement)
 {
     if (*number < magnitude) {
         return;

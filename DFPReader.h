@@ -79,7 +79,7 @@ public:
     /*! Queue up digits of a number to read
      * 
      */
-    void readNumber(float number, uint8_t dp=0);
+    void readNumber(double number, uint8_t dp=0);
 
 private:
     void resetReaderBuf();
@@ -92,7 +92,7 @@ private:
 
     bool appendElement(uint8_t value);
     void appendSubThousand(int num);
-    void appendMagnitude(float* number, float magnitude, uint8_t magnitudeElement);
+    void appendMagnitude(double* number, double magnitude, uint8_t magnitudeElement);
 
     // Some data for figuring out this pesky human speech stuff
     static const uint8_t SMALL_NUMBERS[];

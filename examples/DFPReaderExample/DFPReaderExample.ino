@@ -24,7 +24,7 @@ void setup()
 
     // don't shout
     reader.sendCmd(DFPlayerMini::SetVolume, 15); 
-    reader.readNumber(123456789012345., 4);
+    reader.readNumber(1234.5678901234, 4);
 }
 
 void loop() {
