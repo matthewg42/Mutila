@@ -42,6 +42,9 @@
 
 /*! \brief DFPlayerMini controller with numeric readout functions
  *
+ * This class is intended for use with the samples in the audio/ directory of
+ * the main Mutila repository.  Copy these files to an SD card in a directory 
+ * called "mp3". 
  */
 class DFPReader : public DFPlayerMini {
 public:
@@ -64,8 +67,6 @@ public:
      */  
     ~DFPReader();
 
-    DFPlayerMini::Cmd _playCmd;
-
     /* Initialize
      * Typically called from setup()
      */
@@ -78,11 +79,23 @@ public:
 
     /*! Queue up digits of a number to read
      * 
+     * When called, the ring buffer is populated with the IDs of
+     * samples which are required to read the number.  For example
+     * if number=3.14159, and dp=2, the samples for "three", "point"
+     * "one", and "four" would be appened to the ring buffer.
+     *
+     * During update(), samples are played in order such that they
+     * do not overlap.
      */
     void readNumber(double number, uint8_t dp=0);
 
-private:
+    /*! Stop playback and reset the run buffer to an empty state
+     */
     void resetReaderBuf();
+
+private:
+    DFPlayerMini::Cmd _playCmd;
+
     void startPlayback(uint16_t track);
 
     //! Get next playable element from buffer

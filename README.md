@@ -40,7 +40,7 @@ Current measuement may be achieved using an Allegro ACS756SCB-050B-PFF-T Bi-dire
 
 ### DFPlayer Mini MP3 audio module
 
-DFPlayer Mini is a neat and affordable audio module which can play MP3 files from an SD card, with a serial interface for control. It can also drive a small speaker. Mutila provides the class *DFPlayerMini* for controlling such a device.
+DFPlayer Mini is a neat and affordable audio module which can play MP3 files from an SD card, with a serial interface for control. It can also drive a small speaker. Mutila provides the class *DFPlayerMini* for controlling such a device. *DFPReader* is a class which can be used to read out numbers and durations, using the samples in the *audio/* directory.
 
 ## Author & License
 

@@ -82,8 +82,13 @@ void DFPReader::readNumber(double number, uint8_t dp)
     _DB(integerPart, 10);
     _DB(F(" fp="));
     _DBLN(fractionalPart, 10);
-    
-    if (fabs(integerPart) < 0.1) {
+
+    if (integerPart < 0.0) {
+        appendElement(MP3_TRACK_MINUS);
+        integerPart = fabs(integerPart);
+    }
+
+    if (integerPart < 0.1) {
         appendElement(MP3_TRACK_ZERO);
     } else {
         appendMagnitude(&integerPart, 1000000000000.0, MP3_TRACK_TRILLION);
@@ -106,6 +111,9 @@ void DFPReader::resetReaderBuf()
 {
     tailPtr = 0;
     unplayedElements = 0;
+    if (busy()) {
+        sendCmd(DFPlayerMini::Stop);
+    }
 }
 
 uint8_t DFPReader::popElement()
