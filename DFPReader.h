@@ -89,6 +89,13 @@ public:
      */
     void readNumber(double number, uint8_t dp=0);
 
+    /*! Find out if still reading
+     * \return true if a sound is being played, or if there are still
+     *         samples to play after the current sample (i.e. if we're
+     *         still reading out a number), else return false
+     */
+    bool reading();
+
     /*! Stop playback and reset the run buffer to an empty state
      */
     void resetReaderBuf();

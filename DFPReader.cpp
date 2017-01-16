@@ -107,6 +107,17 @@ void DFPReader::readNumber(double number, uint8_t dp)
     }
 }
 
+bool DFPReader::reading()
+{
+    if (busy()) {
+        return true;
+    } else if (unplayedElements > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void DFPReader::resetReaderBuf()
 {
     tailPtr = 0;
