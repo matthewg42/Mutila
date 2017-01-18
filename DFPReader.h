@@ -100,6 +100,12 @@ public:
      */
     void resetReaderBuf();
 
+    /*! Append a sample to play
+     * Add a sample to the end of the run buffer to play
+     * as soon as other elements in the buffer have been played
+     */
+    bool appendElement(uint8_t value);
+
 private:
     DFPlayerMini::Cmd _playCmd;
 
@@ -110,7 +116,6 @@ private:
     //!         0 if the buffer is empty.
     uint8_t popElement();
 
-    bool appendElement(uint8_t value);
     void appendSubThousand(int num);
     void appendMagnitude(double* number, double magnitude, uint8_t magnitudeElement);
 
