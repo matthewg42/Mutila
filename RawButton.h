@@ -43,7 +43,7 @@ public:
      */
     bool on();
 
-private:
+protected:
     uint8_t _pin;
     bool _pullup;
 
