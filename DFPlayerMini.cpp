@@ -36,7 +36,7 @@ void DFPlayerMini::sendCmd(DFPlayerMini::Cmd cmd, uint16_t arg)
 
 // This function is for debugging the content of the
 // receive buffer, and is only used when DEBUG is set
-dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
+void dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
 {
     for (uint8_t i=0; i<DFP_BUFLEN; i++) {
         _DB(F(" 0x"));
