@@ -130,6 +130,10 @@ public:
      */
     bool busy();
 
+    /*! Find out if we can communicate with the device
+     * \return true if comms works, else false
+     */
+    bool check();
 
 private:
     DFPResponse _query(Cmd cmd);

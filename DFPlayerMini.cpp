@@ -206,5 +206,10 @@ void DFPlayerMini::serialCmd()
     }
 }
 
+bool DFPlayerMini::check()
+{
+    DFPResponse r = query(DFPlayerMini::GetStatus);
+    return r.status == DFPResponse::Ok;
+}
 
 
