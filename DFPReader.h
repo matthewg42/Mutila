@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <DFPlayerMini.h>
 
-#define DFPR_PLAYBACK_START_MS      100
+#define DFPR_PLAYBACK_START_MS      120
 
 #define MP3_TRACK_ZERO              200
 #define MP3_TRACK_TEN               210
