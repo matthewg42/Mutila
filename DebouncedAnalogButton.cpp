@@ -9,7 +9,8 @@ DebouncedAnalogButton::DebouncedAnalogButton(uint8_t pin, bool pullup, uint16_t 
 
 void DebouncedAnalogButton::begin(uint8_t threshold, uint8_t delay)
 {
-    RawButton::begin();
+    // we don't need to call RawButton::begin() because analogRead 
+    // deoesn't require that pinMode be called...
     _threshold = threshold;
     _delay = delay;
     _lastUpdate = 0;
