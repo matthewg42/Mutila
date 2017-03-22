@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <stdint.h>
 #include "MutilaDebug.h"
+#include "Millis.h"
 
 /*! \brief Mode base class
  *

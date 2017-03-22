@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "Mutila.h"
 #include "Heartbeat.h"
+#include "Millis.h"
 
 Heartbeat::Heartbeat(int pin) :
     _mode(Heartbeat::Normal),

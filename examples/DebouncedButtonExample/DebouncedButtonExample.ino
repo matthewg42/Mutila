@@ -1,5 +1,7 @@
 #include <Arduino.h>
-#include "DebouncedButton.h"
+#include <MutilaDebug.h>
+#include <DebouncedButton.h>
+#include <Millis.h>
 
 #define BUT_PIN 2
 #define OUTPUT_MS 50
@@ -11,7 +13,6 @@ void setup()
 {
     Serial.begin(115200);
     MyButton.begin();
-
     delay(300);
     Serial.println("setup end");
 }
@@ -19,16 +20,18 @@ void setup()
 void loop()
 {
     MyButton.update();
-    if (millis() > next) {
+    if (Millis() > next) {
         next = millis() + OUTPUT_MS;
-        Serial.print("DebouncedButton: pushed=");
+        Serial.print("DebouncedButton: on=");
+        Serial.print(MyButton.on());
+        Serial.print(" pushed=");
         Serial.print(MyButton.pushed());
-        Serial.print(" tapped=");
-        Serial.print(MyButton.tapped());
         Serial.print(" held=");
         Serial.print(MyButton.held());
         Serial.print(" repeat=");
-        Serial.println(MyButton.repeat());
+        Serial.print(MyButton.repeat());
+        Serial.print(" tapped=");
+        Serial.println(MyButton.tapped());
     }
 }
 

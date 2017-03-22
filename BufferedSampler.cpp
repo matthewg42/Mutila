@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "MutilaDebug.h"
+#include "Millis.h"
 #include "BufferedSampler.h"
 
 BufferedSampler::BufferedSampler(const uint8_t pin, const uint16_t periodMs, const uint8_t samples) :

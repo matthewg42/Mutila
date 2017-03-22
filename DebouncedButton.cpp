@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "DebouncedButton.h"
+#include "Millis.h"
 
 DebouncedButton::DebouncedButton(uint8_t pin, bool pullup) :
     RawButton(pin, pullup)

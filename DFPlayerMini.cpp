@@ -1,6 +1,7 @@
 #include <string.h>
 #include <DFPlayerMini.h>
 #include <MutilaDebug.h>
+#include "Millis.h"
 
 DFPlayerMini::DFPlayerMini(Stream& serial, uint8_t busyPin) :
     _serial(serial),

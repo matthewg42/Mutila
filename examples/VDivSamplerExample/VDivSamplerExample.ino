@@ -1,5 +1,6 @@
 #include <BufferedVDivSampler.h>
 #include <EMAVDivSampler.h>
+#include <Millis.h>
 
 // Compare two methods for smoothing VDIV readings.
 

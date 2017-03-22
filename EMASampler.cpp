@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "MutilaDebug.h"
 #include "EMASampler.h"
+#include "Millis.h"
 
 EMASampler::EMASampler(const uint8_t pin, const uint16_t periodMs, const float alpha) :
     AbstractSampler(pin, periodMs),

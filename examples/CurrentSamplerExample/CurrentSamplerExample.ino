@@ -1,4 +1,5 @@
 #include <EMACurrentSampler.h>
+#include <Millis.h>
 
 // Compare two methods for smoothing VDIV readings.
 

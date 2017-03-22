@@ -1,5 +1,6 @@
 #include <Arduino.h>
-#include "DiscretePot.h"
+#include <DiscretePot.h>
+#include <Millis.h>
 
 #define ANALOG_PIN  A0
 #define OUTPUT_MS   50
