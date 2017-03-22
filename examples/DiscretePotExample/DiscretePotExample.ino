@@ -20,8 +20,8 @@ void setup()
 void loop()
 {
     dPot.update();
-    if (millis() > next) {
-        next = millis() + OUTPUT_MS;
+    if (Millis() > next) {
+        next = Millis() + OUTPUT_MS;
         Serial.print("dPot.value()=");
         Serial.println(dPot.value());
     }

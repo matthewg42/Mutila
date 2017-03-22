@@ -79,7 +79,7 @@ void playNext()
 }
 
 void loop() {
-    unsigned long now = millis();
+    unsigned long now = Millis();
     bool busy = mp3.busy();
     DB("busy: ");
     DBLN(busy);

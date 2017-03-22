@@ -17,7 +17,7 @@ void setup()
 void loop()
 {
     sampler.update();
-    Serial.print(millis());
+    Serial.print(Millis());
     Serial.print(',');
     Serial.print(sampler.lastAmps());
     Serial.print(',');

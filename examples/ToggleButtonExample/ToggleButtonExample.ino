@@ -21,8 +21,8 @@ void setup()
 void loop()
 {
     MyButton.update();
-    if (millis() > next) {
-        next = millis() + OUTPUT_MS;
+    if (Millis() > next) {
+        next = Millis() + OUTPUT_MS;
         bool o = MyButton.on();
         Serial.print("ToggleButton.on()=");
         Serial.println(o);

@@ -20,7 +20,7 @@ void DiscretePot::begin(int8_t min, int8_t max, bool reversed, uint8_t threshold
 
 void DiscretePot::update()
 {
-    if (millis() > _lastUpdate + _delay) {
+    if (Millis() > _lastUpdate + _delay) {
         int8_t valueNow = _value();
         if (valueNow != _state) {
             _counter++;
@@ -30,7 +30,7 @@ void DiscretePot::update()
         } else if (_counter > 0) {
             _counter = 0;
         }
-        _lastUpdate = millis();
+        _lastUpdate = Millis();
     }
 }
 
@@ -53,7 +53,7 @@ int8_t DiscretePot::_value()
 
 void DiscretePot::setState(int8_t newState)
 {
-    _lastStateChange = millis();
+    _lastStateChange = Millis();
     _state = newState;
     _counter = 0;
 }

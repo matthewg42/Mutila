@@ -3,8 +3,8 @@
 
 float _MillisOffsetMs = 0.;
 
-tMillis Millis() {
-    return millis() + (tMillis)_MillisOffsetMs;
+unsigned long Millis() {
+    return millis() + (unsigned long)_MillisOffsetMs;
 }
 
 void addMillisOffset(float ms)

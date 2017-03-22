@@ -10,10 +10,13 @@ void setup()
 
 void loop()
 {
-    delay(3000);
     Serial.print("millis()=");
     Serial.print(millis());
+    Serial.print(" offset=");
+    Serial.print(_MillisOffsetMs);
     Serial.print(" Millis()=");
     Serial.println(Millis());
+    delay(1000);
+    addMillisOffset(0.3);
 }
 

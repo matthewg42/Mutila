@@ -71,7 +71,7 @@ public:
      *
      */
     virtual void update() { 
-        unsigned long now = millis();
+        unsigned long now = Millis();
         if (now >= _lastUpdateMs + _updatePeriodMs || _lastUpdateMs==0) {
             modeUpdate();
             _lastUpdateMs = now;

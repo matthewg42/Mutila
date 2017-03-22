@@ -66,7 +66,7 @@ void Heartbeat::update()
         updatePin(0);
     } else if (_offTime == 0 && !_pinState) {
         updatePin(1);
-    } else if (millis() - _lastStateFlip >= wait) {
+    } else if (Millis() - _lastStateFlip >= wait) {
         updatePin(!_pinState);
     }
 }
@@ -75,7 +75,7 @@ void Heartbeat::updatePin(bool state)
 {
     _pinState = state;
     digitalWrite(_pin, _pinState);
-    _lastStateFlip = millis();
+    _lastStateFlip = Millis();
 }
 
 

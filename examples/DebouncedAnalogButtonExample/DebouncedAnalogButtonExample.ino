@@ -18,7 +18,7 @@ void loop()
 {
     b1.update();
     b2.update();
-    if (millis() > last + 50) {
+    if (Millis() > last + 50) {
         Serial.print("b1 on=");
         Serial.print(b1.on());
         Serial.print(" tapped=");

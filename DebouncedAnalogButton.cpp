@@ -21,7 +21,7 @@ void DebouncedAnalogButton::begin(uint8_t threshold, uint8_t delay)
 
 void DebouncedAnalogButton::update()
 {
-    if (millis() > _lastUpdate + _delay) {
+    if (Millis() > _lastUpdate + _delay) {
         if (_on() != _state) {
             _counter++;
             if (_counter > _threshold) {
@@ -30,7 +30,7 @@ void DebouncedAnalogButton::update()
         } else if (_counter > 0) {
             _counter = 0;
         }
-        _lastUpdate = millis();
+        _lastUpdate = Millis();
     }
 }
 
@@ -56,12 +56,12 @@ unsigned long DebouncedAnalogButton::tapped()
 
 bool DebouncedAnalogButton::held(uint16_t ms)
 {
-    return (on() && millis() > _lastStateChange + ms);
+    return (on() && Millis() > _lastStateChange + ms);
 }
 
 bool DebouncedAnalogButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 {
-    bool r = on() && millis() > _nextRepeatTime;
+    bool r = on() && Millis() > _nextRepeatTime;
     if (r) {
         if (_repeatCount++ == 0) {
             _nextRepeatTime += initialMs;
@@ -74,7 +74,7 @@ bool DebouncedAnalogButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 
 void DebouncedAnalogButton::setState(bool newState)
 {
-    unsigned long now = millis();
+    unsigned long now = Millis();
     if (newState) { 
         _pushed = true;
         _repeatCount = 0;

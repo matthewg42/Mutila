@@ -15,8 +15,8 @@ void checkButton()
     if (newValue != previousValue) {
         Serial.print("Button changed to: ");
         Serial.print(newValue);
-        Serial.print(" at millis()=");
-        Serial.println(millis());
+        Serial.print(" at Millis()=");
+        Serial.println(Millis());
         previousValue = newValue;
         digitalWrite(LED_PIN, newValue);
     }

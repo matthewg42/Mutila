@@ -40,7 +40,7 @@ void DFPReader::begin()
 void DFPReader::update()
 {
     if (playbackState == Pending) {
-        if (millis() - lastPlayStart >= DFPR_PLAYBACK_START_MS) {
+        if (Millis() - lastPlayStart >= DFPR_PLAYBACK_START_MS) {
             _DBLN(F("playbackState Pending -> Playing"));
             playbackState = Playing;
         }
@@ -62,7 +62,7 @@ void DFPReader::startPlayback(uint16_t track)
 {
     _DB(F("DFPReader::startPlayback "));
     _DBLN(track);
-    lastPlayStart = millis();
+    lastPlayStart = Millis();
     playbackState = Pending;
     sendCmd(_playCmd, track);
 }

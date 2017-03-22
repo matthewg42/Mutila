@@ -21,7 +21,7 @@ void loop()
 {
     bufSampler.update();
     emaSampler.update();
-    Serial.print(millis());
+    Serial.print(Millis());
     Serial.print(',');
     Serial.print(emaSampler.lastVolts());
     Serial.print(',');

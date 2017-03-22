@@ -21,7 +21,7 @@ void loop()
 {
     MyButton.update();
     if (Millis() > next) {
-        next = millis() + OUTPUT_MS;
+        next = Millis() + OUTPUT_MS;
         Serial.print("DebouncedButton: on=");
         Serial.print(MyButton.on());
         Serial.print(" pushed=");
