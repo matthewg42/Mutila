@@ -20,7 +20,7 @@ void setup()
     Serial.begin(115200);
     leds.begin();
     delay(200);
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

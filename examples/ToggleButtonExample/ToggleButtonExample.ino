@@ -16,7 +16,7 @@ void setup()
     MyButton.begin();
     pinMode(LED_PIN, OUTPUT);
     delay(300);
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

@@ -29,7 +29,7 @@ void setup()
     // start the selected mode
     CurrentMode->start();
 
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

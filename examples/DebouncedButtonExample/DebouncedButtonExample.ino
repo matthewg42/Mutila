@@ -14,7 +14,7 @@ void setup()
     Serial.begin(115200);
     MyButton.begin();
     delay(300);
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

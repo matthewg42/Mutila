@@ -9,7 +9,7 @@ void setup()
     sampler.begin();
     // Settle down
     delay(300);
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

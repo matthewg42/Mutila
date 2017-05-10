@@ -15,7 +15,7 @@ void setup()
     button.begin();
     heartbeat.begin();
     delay(300);
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

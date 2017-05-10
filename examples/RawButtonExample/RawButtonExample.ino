@@ -32,7 +32,7 @@ void setup()
     // Settle down
     delay(300);
     checkButton();
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()

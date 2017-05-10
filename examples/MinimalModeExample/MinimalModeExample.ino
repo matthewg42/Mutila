@@ -9,7 +9,7 @@ void setup()
     Serial.begin(115200);
     mode.begin();
     mode.start();
-    DBLN("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()
