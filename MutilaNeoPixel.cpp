@@ -1,7 +1,7 @@
 #include "MutilaNeoPixel.h"
 #include "Millis.h"
 
-MutilaNeoPixel::MutilaNeoPixel(uint16_t n, uint8_t p, neoPixelType t=NEO_GRB + NEO_KHZ800) :
+MutilaNeoPixel::MutilaNeoPixel(uint16_t n, uint8_t p, neoPixelType t) :
     Adafruit_NeoPixel(n, p, t)
 {
 }
