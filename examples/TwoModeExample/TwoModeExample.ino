@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <MutilaDebug.h>
 #include "Mode.h"
 #include "ModeOne.h"
 #include "ModeTwo.h"
@@ -28,7 +29,7 @@ void setup()
     // start the selected mode
     CurrentMode->start();
 
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()
@@ -41,7 +42,7 @@ void loop()
 
     // if mode is finished, switch to the other mode...
     if (CurrentMode->isFinished()) {
-        Serial.println("Mode says it is done...");
+        DBLN("Mode says it is done...");
         if (CurrentMode == &ModeOne) {
             switchMode(&ModeTwo);
         } else {

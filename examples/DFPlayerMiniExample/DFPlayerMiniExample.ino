@@ -1,7 +1,7 @@
 #include <DFPlayerMini.h>
 #include <SoftwareSerial.h>
-#include <MutilaDebug.h>
 #include <Millis.h>
+#include <MutilaDebug.h>
 
 #define BUSY_PIN        10
 #define DFTX_PIN        5 
@@ -18,35 +18,35 @@ int track = 0;
 void query() {
     DFPResponse r;
     r = mp3.query(DFPlayerMini::GetVolume);
-    Serial.print("Volume=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
-    else { Serial.print("ERR"); }
+    DB("Volume=");
+    if (r.status == DFPResponse::Ok) { DB(r.arg); }
+    else { DB("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetStatus);
-    Serial.print(" Status=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
-    else { Serial.print("ERR"); }
+    DB(" Status=");
+    if (r.status == DFPResponse::Ok) { DB(r.arg); }
+    else { DB("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUSum);
-    Serial.print(" GetUSum=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
-    else { Serial.print("ERR"); }
+    DB(" GetUSum=");
+    if (r.status == DFPResponse::Ok) { DB(r.arg); }
+    else { DB("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetTfSum);
-    Serial.print(" GetTfSum=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); count = r.arg; }
-    else { Serial.print("ERR"); }
+    DB(" GetTfSum=");
+    if (r.status == DFPResponse::Ok) { DB(r.arg); count = r.arg; }
+    else { DB("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
-    Serial.print(" GetUCurrent="); if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
-    else { Serial.print("ERR"); }
+    DB(" GetUCurrent="); if (r.status == DFPResponse::Ok) { DB(r.arg); }
+    else { DB("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
-    Serial.print(" GetTfCurrent=");
-    if (r.status == DFPResponse::Ok) { Serial.print(r.arg);  }
-    else { Serial.print("ERR"); }
+    DB(" GetTfCurrent=");
+    if (r.status == DFPResponse::Ok) { DB(r.arg);  }
+    else { DB("ERR"); }
 
-    Serial.println(' ');
+    DBLN(' ');
 
 }
 

@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <DualButton.h>
 #include <Millis.h>
+#include <MutilaDebug.h>
 
 #define BUT1_PIN 2
 #define BUT2_PIN 3
@@ -22,7 +23,7 @@ void setup()
     Serial.begin(115200);
     MyButton.begin();
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup() complete");
 }
 
 void loop()
@@ -30,14 +31,14 @@ void loop()
     MyButton.update();
     if (Millis() > next) {
         next = Millis() + OUTPUT_MS;
-        Serial.print("DualButton: pushed=");
-        Serial.print(MyButton.pushed());
-        Serial.print(" tapped=");
-        Serial.print(MyButton.tapped());
-        Serial.print(" held=");
-        Serial.print(MyButton.held());
-        Serial.print(" repeat=");
-        Serial.println(MyButton.repeat());
+        DB("DualButton: pushed=");
+        DB(MyButton.pushed());
+        DB(" tapped=");
+        DB(MyButton.tapped());
+        DB(" held=");
+        DB(MyButton.held());
+        DB(" repeat=");
+        DBLN(MyButton.repeat());
     }
 }
 

@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <DebouncedButton.h>
 #include <Heartbeat.h>
+#include <MutilaDebug.h>
 
 #define BUT_PIN 7
 #define LED_PIN 13
@@ -14,7 +15,7 @@ void setup()
     button.begin();
     heartbeat.begin();
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()

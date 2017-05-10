@@ -1,4 +1,5 @@
 #include <EMASampler.h>
+#include <MutilaDebug.h>
 
 EMASampler sampler(A0, 50, 0.2);
 
@@ -8,16 +9,16 @@ void setup()
     sampler.begin();
     // Settle down
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()
 {
     sampler.update();
-    Serial.print(" last=");
-    Serial.print(sampler.last());
-    Serial.print(" average=");
-    Serial.println(sampler.average());
+    DB(" last=");
+    DB(sampler.last());
+    DB(" average=");
+    DBLN(sampler.average());
     delay(20);
 }
 

@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <MutilaDebug.h>
 #include "MyBrownoutMode.h"
 
 MyBrownoutMode::MyBrownoutMode(EMAVDivSampler& vSampler, const float vThreshLow, const float vThreshHigh) : 
@@ -14,18 +15,18 @@ MyBrownoutMode::MyBrownoutMode(EMAVDivSampler& vSampler, const float vThreshLow,
 void MyBrownoutMode::enterBrownout()
 {
     // Typical use: save state to EEPROM etc...
-    Serial.println(F("MyBrownoutMode::enterBrownout()"));
+    DBLN(F("MyBrownoutMode::enterBrownout()"));
 }
 
 void MyBrownoutMode::exitBrownout()
 {
     // Typical use: restore state from EEPROM
-    Serial.println(F("MyBrownoutMode::exitBrownout()"));
+    DBLN(F("MyBrownoutMode::exitBrownout()"));
 }
 
 void MyBrownoutMode::modeUpdate()
 {
-    Serial.print(F("MyBrownoutMode::modeUpdate() volts="));
-    Serial.println(_vSampler.averageVolts());
+    DB(F("MyBrownoutMode::modeUpdate() volts="));
+    DBLN(_vSampler.averageVolts());
 }
 

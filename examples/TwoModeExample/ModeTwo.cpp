@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <MutilaDebug.h>
 #include "ModeTwo.h"
 #include "ButtonA.h"
 
@@ -15,17 +16,17 @@ ModeTwo_::ModeTwo_()
 
 void ModeTwo_::modeStart()
 {
-    Serial.println(F("ModeTwo::modeStart()"));
+    DBLN(F("ModeTwo::modeStart()"));
 }
 
 void ModeTwo_::modeStop()
 {
-    Serial.println(F("ModeTwo::modeStop()"));
+    DBLN(F("ModeTwo::modeStop()"));
 }
 
 void ModeTwo_::modeUpdate()
 {
-    Serial.println(F("ModeTwo::modeUpdate() doing a thing..."));
+    DBLN(F("ModeTwo::modeUpdate() doing a thing..."));
 }
 
 bool ModeTwo_::isFinished()

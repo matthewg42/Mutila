@@ -1,4 +1,5 @@
 #include <BufferedSampler.h>
+#include <MutilaDebug.h>
 
 BufferedSampler sampler(A0, 50, 10);
 
@@ -8,22 +9,22 @@ void setup()
     sampler.begin();
     // Settle down
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()
 {
     sampler.update();
-    Serial.print("count=");
-    Serial.print(sampler.count());
-    Serial.print(" last=");
-    Serial.print(sampler.last());
-    Serial.print(" minimum=");
-    Serial.print(sampler.minimum());
-    Serial.print(" maximum=");
-    Serial.print(sampler.maximum());
-    Serial.print(" average=");
-    Serial.println(sampler.average());
+    DB("count=");
+    DB(sampler.count());
+    DB(" last=");
+    DB(sampler.last());
+    DB(" minimum=");
+    DB(sampler.minimum());
+    DB(" maximum=");
+    DB(sampler.maximum());
+    DB(" average=");
+    DBLN(sampler.average());
     delay(20);
 }
 

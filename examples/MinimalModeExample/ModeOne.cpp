@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <MutilaDebug.h>
 #include "ModeOne.h"
 
 ModeOne::ModeOne() 
@@ -13,6 +14,6 @@ ModeOne::ModeOne()
 
 void ModeOne::modeUpdate()
 {
-    Serial.println(F("ModeOne::modeUpdate() doing a thing..."));
+    DBLN(F("ModeOne::modeUpdate() doing a thing..."));
 }
 

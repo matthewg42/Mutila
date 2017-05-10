@@ -14,7 +14,7 @@ void setup()
     Serial.begin(115200);
     MyButton.begin();
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()
@@ -22,16 +22,16 @@ void loop()
     MyButton.update();
     if (Millis() > next) {
         next = Millis() + OUTPUT_MS;
-        Serial.print("DebouncedButton: on=");
-        Serial.print(MyButton.on());
-        Serial.print(" pushed=");
-        Serial.print(MyButton.pushed());
-        Serial.print(" held=");
-        Serial.print(MyButton.held());
-        Serial.print(" repeat=");
-        Serial.print(MyButton.repeat());
-        Serial.print(" tapped=");
-        Serial.println(MyButton.tapped());
+        DB("DebouncedButton: on=");
+        DB(MyButton.on());
+        DB(" pushed=");
+        DB(MyButton.pushed());
+        DB(" held=");
+        DB(MyButton.held());
+        DB(" repeat=");
+        DB(MyButton.repeat());
+        DB(" tapped=");
+        DBLN(MyButton.tapped());
     }
 }
 

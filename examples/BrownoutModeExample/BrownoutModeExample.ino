@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <EMAVDivSampler.h>
+#include <MutilaDebug.h>
 #include "MyBrownoutMode.h"
 
 EMAVDivSampler vIn(A0, 10, 100, 5, 5, 0.5);
@@ -10,7 +11,7 @@ void setup()
     Serial.begin(115200);
     mode.begin();
     mode.start();
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()

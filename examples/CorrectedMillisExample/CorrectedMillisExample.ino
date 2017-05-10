@@ -1,21 +1,22 @@
 #include <Arduino.h>
 #include <Millis.h>
+#include <MutilaDebug.h>
 
 void setup()
 {
     Serial.begin(115200);
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()
 {
-    Serial.print("millis()=");
-    Serial.print(millis());
-    Serial.print(" offset=");
-    Serial.print(_MillisOffsetMs);
-    Serial.print(" Millis()=");
-    Serial.println(Millis());
+    DB("millis()=");
+    DB(millis());
+    DB(" offset=");
+    DB(_MillisOffsetMs);
+    DB(" Millis()=");
+    DBLN(Millis());
     delay(1000);
     addMillisOffset(0.3);
 }

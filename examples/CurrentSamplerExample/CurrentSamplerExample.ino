@@ -1,5 +1,6 @@
 #include <EMACurrentSampler.h>
 #include <Millis.h>
+#include <MutilaDebug.h>
 
 // Compare two methods for smoothing VDIV readings.
 
@@ -11,17 +12,17 @@ void setup()
     sampler.begin();
     // Settle down
     delay(300);
-    Serial.println("millis,raw,average");
+    DBLN("millis,raw,average");
 }
 
 void loop()
 {
     sampler.update();
-    Serial.print(Millis());
-    Serial.print(',');
-    Serial.print(sampler.lastAmps());
-    Serial.print(',');
-    Serial.println(sampler.averageAmps());
+    DB(Millis());
+    DB(',');
+    DB(sampler.lastAmps());
+    DB(',');
+    DBLN(sampler.averageAmps());
     delay(20);
 }
 

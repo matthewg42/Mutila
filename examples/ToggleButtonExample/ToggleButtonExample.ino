@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <ToggleButton.h>
 #include <Millis.h>
+#include <MutilaDebug.h>
 
 #define BUT_PIN 2
 #define LED_PIN 13
@@ -15,7 +16,7 @@ void setup()
     MyButton.begin();
     pinMode(LED_PIN, OUTPUT);
     delay(300);
-    Serial.println("setup end");
+    DBLN("setup end");
 }
 
 void loop()
@@ -24,8 +25,8 @@ void loop()
     if (Millis() > next) {
         next = Millis() + OUTPUT_MS;
         bool o = MyButton.on();
-        Serial.print("ToggleButton.on()=");
-        Serial.println(o);
+        DB("ToggleButton.on()=");
+        DBLN(o);
         digitalWrite(LED_PIN, o);
     }
 }

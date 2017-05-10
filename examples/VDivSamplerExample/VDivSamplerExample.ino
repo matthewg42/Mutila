@@ -1,6 +1,7 @@
 #include <BufferedVDivSampler.h>
 #include <EMAVDivSampler.h>
 #include <Millis.h>
+#include <MutilaDebug.h>
 
 // Compare two methods for smoothing VDIV readings.
 
@@ -14,20 +15,20 @@ void setup()
     emaSampler.begin();
     // Settle down
     delay(300);
-    Serial.println("millis,raw,buffer,ema");
+    DBLN("millis,raw,buffer,ema");
 }
 
 void loop()
 {
     bufSampler.update();
     emaSampler.update();
-    Serial.print(Millis());
-    Serial.print(',');
-    Serial.print(emaSampler.lastVolts());
-    Serial.print(',');
-    Serial.print(bufSampler.averageVolts());
-    Serial.print(',');
-    Serial.println(emaSampler.averageVolts());
+    DB(Millis());
+    DB(',');
+    DB(emaSampler.lastVolts());
+    DB(',');
+    DB(bufSampler.averageVolts());
+    DB(',');
+    DBLN(emaSampler.averageVolts());
     delay(20);
 }
 

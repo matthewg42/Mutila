@@ -27,6 +27,8 @@ void setup()
     reader.readNumber(-1, 0);
     reader.readNumber(3.1415926, 2);
     reader.readNumber(999.999, 2);
+
+    DBLN("setup() complete");
 }
 
 void loop() {
