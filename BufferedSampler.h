@@ -51,10 +51,10 @@ public:
     virtual void update();
 
     //! The minimum value in the sample set
-    virtual int minimum() { calculate() ; return _min; }
+    virtual int minimum() { calculate() ; return _minimum; }
 
     //! The maximum value in the sample set
-    virtual int maximum() { calculate() ; return _max; }
+    virtual int maximum() { calculate() ; return _maximum; }
 
     //! Get the mean value in the sample set
     virtual float average() { calculate() ; return _mean; }
@@ -80,8 +80,8 @@ protected:
     unsigned long _lastUpdated; //!< when last sample taken
     bool _updated;              //!< flag to re-calulate avg or not
     int * _sampleData;          //!< ring buffer for data
-    int _min;                   //!< most recently calculated minimum value
-    int _max;                   //!< most recently calculated maximum value
+    int _minimum;                   //!< most recently calculated minimum value
+    int _maximum;                   //!< most recently calculated maximum value
     float _mean;                //!< most recently calculated mean value
 
 };

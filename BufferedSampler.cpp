@@ -10,8 +10,8 @@ BufferedSampler::BufferedSampler(const uint8_t pin, const uint16_t periodMs, con
     _count(0),
     _lastUpdated(0),
     _updated(false),
-    _min(0),
-    _max(0),
+    _minimum(0),
+    _maximum(0),
     _mean(0)
 {
     // Allocate ring buffer for sample data
@@ -31,8 +31,8 @@ void BufferedSampler::begin()
     _DBLN(F("BufferedSampler::begin"));
     // Note: no need to set pinMode for analog inputs
     _count = 0;
-    _min = 0;
-    _max = 0;
+    _minimum = 0;
+    _maximum = 0;
     _mean = 0;
     _lastUpdated = 0;
     _updated = false;
@@ -60,12 +60,12 @@ void BufferedSampler::calculate()
 {
     if (_updated) {
         long sum = _sampleData[0];
-        _min = _sampleData[0];
-        _max = _sampleData[0];
+        _minimum = _sampleData[0];
+        _maximum = _sampleData[0];
         for (uint8_t i=1; i<_count; i++) {
             sum += _sampleData[i];
-            if (_sampleData[i] < _min) _min = _sampleData[i];
-            if (_sampleData[i] > _max) _max = _sampleData[i];
+            if (_sampleData[i] < _minimum) _minimum = _sampleData[i];
+            if (_sampleData[i] > _maximum) _maximum = _sampleData[i];
         }
         _mean = (float)sum/_count;
         _updated = false;
