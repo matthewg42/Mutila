@@ -82,6 +82,12 @@ public:
      */
     bool repeat(uint16_t initialMs=DEBOUNCED_BUTTON_RPT_INITIAL_MS, uint16_t repeatMs=DEBOUNCED_BUTTON_RPT_MS);
 
+    /*! Explicitly set the state of the button.
+     *
+     * \param newState the new state to have
+     */
+    void setState(bool newState);
+
 private:
     uint8_t _threshold;
     uint8_t _delay;
@@ -93,8 +99,6 @@ private:
     uint16_t _repeatCount;
     unsigned long _nextRepeatTime;
     unsigned long _lastOnDuration;
-
-    void setState(bool newState);
 
 };
 
