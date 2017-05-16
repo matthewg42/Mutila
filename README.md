@@ -42,6 +42,13 @@ Current measuement may be achieved using an Allegro ACS756SCB-050B-PFF-T Bi-dire
 
 DFPlayer Mini is a neat and affordable audio module which can play MP3 files from an SD card, with a serial interface for control. It can also drive a small speaker. Mutila provides the class *DFPlayerMini* for controlling such a device. *DFPReader* is a class which can be used to read out numbers and durations, using the samples in the *audio/* directory.
 
+### HC-SR04 Ultrasonic Ranger
+
+HC-SR04 ultrasonic range finding modules are inexpensive and popular modules used in Arduino projects. While using them is simple (it only takes a few lines of code to fetch and calculate the range), Mutila provides the following classes for clean usage of these modules, and enhanced functionality:
+
+* *SonicRanger* - a basic wrapper around the code necessary to calculate the range of an object, done in the same style as other Mutila classes (with pins passes in a constructor and initialized in a begin() member).
+* *EMASonicRanger* - periodic sampling of the range value, smoothed using the exponential moving average method.
+
 ## Author & License
 
 All code written by Mouse <mouse@orthogonal-systems.co.uk>, and licensed under the GNU GPL v3. See the LICENSE file for details.
