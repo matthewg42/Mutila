@@ -3,17 +3,41 @@
 #include <stdint.h>
 #include "SonicRanger.h"
 
-/*! \brief Sonic ranger which does some averaging using the EMA method
+/*! \brief SonicRanger with EMA-smoothed values
+ *
+ * The update() function should be called frequently to sample
+ * the value from the ranger. The getRange() function is then
+ * used to fetch the moving average of values from the ranger.
+ *
  */
 class EMASonicRanger : public SonicRanger {
 public:
-    /*! Constructor */
+    /*! Constructor 
+     *
+     * \param trigPin the arduino pin conneced to the TRIG pin of the HC-SR04 device
+     * \param echoPin the arduino pin conneced to the ECHO pin of the HC-SR04 device
+     * \param periodMs the minimum delay between sampling (provided update() is called)
+     * \param alpha the alpha value used in EMA calculation
+     */
     EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const uint16_t periodMs=10, const float alpha=0.5);
-    /*! Initialization */
+
+    /*! Initialization 
+     * 
+     * Typically called from setup() to intialize pins and so on.
+     */
     void begin();
-    /* Update the ranger (get range from hardware) */
+
+    /*! Update the ranger (get range from hardware) 
+     *
+     * NOTE: this function calls SonicRanger::getRange(), which may
+     * take significant time to execute - see SonicRanger::getRange
+     * documentation for details.
+     */
     void update();
-    /* Get the averaged range in cm */
+    
+    /*! Fetch exponential moving average
+     *
+     */
     uint16_t getRange();
 
 private:
