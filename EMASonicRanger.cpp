@@ -2,7 +2,7 @@
 #include <Millis.h>
 #include "EMASonicRanger.h"
 
-EMASonicRanger::EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const uint16_t periodMs=10, const float alpha=0.5) :
+EMASonicRanger::EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const uint16_t periodMs, const float alpha) :
     SonicRanger(trigPin, echoPin),
     _periodMs(periodMs),
     _alpha(alpha)
