@@ -67,6 +67,7 @@ DFPResponse DFPlayerMini::query(DFPlayerMini::Cmd cmd, uint8_t tries)
     _DB(F("DFPlayerMini::query FAILED all "));
     _DB(tries);
     _DBLN(F(" tries"));
+    return DFPResponse();
 }
 
 DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
