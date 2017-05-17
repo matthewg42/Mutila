@@ -92,9 +92,9 @@ void DebouncedAnalogButton::setState(bool newState)
 bool DebouncedAnalogButton::_on()
 {
     if (_pullup) {
-        return analogRead(_pin) <= _analogThreshold;
+        return (uint16_t)analogRead(_pin) <= _analogThreshold;
     } else {
-        return analogRead(_pin) > _analogThreshold;
+        return (uint16_t)analogRead(_pin) > _analogThreshold;
     }
 }
 
