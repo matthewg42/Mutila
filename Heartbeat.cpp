@@ -63,6 +63,13 @@ void Heartbeat::setMode(Mode mode)
 	}
 }
 
+void Heartbeat::setCustomMode(uint16_t onTime, uint16_t offTime)
+{
+    _onTime = onTime;
+    _offTime = offTime;
+    _mode = Custom;
+}
+
 void Heartbeat::update()
 {
     unsigned long wait = _pinState ? _onTime : _offTime;

@@ -10,13 +10,14 @@ class Heartbeat {
 public:
     /*! Flashing mode */
 	enum Mode {
-		Normal=0, //!< blinks briefly about once a second
-		Quick,    //!< blinks rapidly
-		Quicker,  //!< blinks very rapidly
-		Slow,     //!< blinks slowly
-		Slower,   //!< blinks very slowly
+		Normal=0, //!< blinks every 500ms
+		Quick,    //!< blinks every 150ms
+		Quicker,  //!< blinks every 50ms
+		Slow,     //!< blinks every 1000ms
+		Slower,   //!< blinks every 2000ms
         Off,      //!< LED constant off
-        On        //!< LED constant on
+        On,       //!< LED constant on
+        Custom    //!< Indicates custom on/off times (set with setCustomMode)
 	};
 
     /*! Constructor
@@ -39,6 +40,12 @@ public:
      * \param mode the new mode to use
      */
 	void setMode(Mode mode);
+
+    /*! Set custom flashing timing
+     * \param onTime how long the LED stays on in ms
+     * \param offTime how long the LED stays off in ms
+     */
+    void setCustomMode(uint16_t onTime, uint16_t offTime);
 
     /* Timeslice allocation
      * should be called frequently - usually from the loop() function in your sketch.
