@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 /*! \brief LED flashing status indicator
  * The Heartbeat class flashes an LED periodically to indicate
  * the state of the system.  A Heartbeat can be set to one of several
