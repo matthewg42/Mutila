@@ -19,11 +19,13 @@
 // Heartbeat class
 #define HEARTBEAT_NORMAL_ON_MS          50
 #define HEARTBEAT_NORMAL_OFF_MS         500
-#define HEARTBEAT_QUICK_ON_MS           25
-#define HEARTBEAT_QUICK_OFF_MS          25
-#define HEARTBEAT_SLOW_ON_MS            1000
-#define HEARTBEAT_SLOW_OFF_MS           150
-#define HEARTBEAT_SLOWER_ON_MS          1000
-#define HEARTBEAT_SLOWER_OFF_MS         1000
+#define HEARTBEAT_QUICK_ON_MS           50
+#define HEARTBEAT_QUICK_OFF_MS          100
+#define HEARTBEAT_QUICKER_ON_MS         25
+#define HEARTBEAT_QUICKER_OFF_MS        25
+#define HEARTBEAT_SLOW_ON_MS            50
+#define HEARTBEAT_SLOW_OFF_MS           1000
+#define HEARTBEAT_SLOWER_ON_MS          100
+#define HEARTBEAT_SLOWER_OFF_MS         1500
 
 

@@ -40,6 +40,10 @@ void Heartbeat::setMode(Mode mode)
         _onTime = HEARTBEAT_QUICK_ON_MS;
         _offTime = HEARTBEAT_QUICK_OFF_MS;
 		break;
+	case Quicker:
+        _onTime = HEARTBEAT_QUICKER_ON_MS;
+        _offTime = HEARTBEAT_QUICKER_OFF_MS;
+		break;
 	case Slow:
         _onTime = HEARTBEAT_SLOW_ON_MS;
         _offTime = HEARTBEAT_SLOW_OFF_MS;

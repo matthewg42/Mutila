@@ -12,6 +12,7 @@ public:
 	enum Mode {
 		Normal=0, //!< blinks briefly about once a second
 		Quick,    //!< blinks rapidly
+		Quicker,  //!< blinks very rapidly
 		Slow,     //!< blinks slowly
 		Slower,   //!< blinks very slowly
         Off,      //!< LED constant off
