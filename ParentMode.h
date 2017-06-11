@@ -28,15 +28,6 @@ public:
      */
     void switchMode(Mode* newMode);
 
-    /*! Allocate timeslice
-     *
-     * This is called whenever the ParentMode's update() function is called.
-     * The default implementation just calls the update() function for the
-     * currently active child Mode, but may be over-ridden to do other things
-     * too, such as update DebouncedButtons "owned" by the Mode.
-     */
-    void modeUpdate();
-
 protected:
     Mode* pMode;
 

@@ -14,10 +14,3 @@ void ParentMode::switchMode(Mode* newMode)
     pMode->start();
 }
 
-void ParentMode::modeUpdate()
-{
-    if (pMode != NULL) {
-        pMode->update();
-    }
-}
-
