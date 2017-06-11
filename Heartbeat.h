@@ -22,6 +22,12 @@ public:
         Custom    //!< Indicates custom on/off times (set with setCustomMode)
 	};
 
+    typedef struct {
+        Mode mode;
+        uint16_t onTime;
+        uint16_t offTime;
+    } Times;
+
     /*! Constructor
      * \param pin the pin connected to the indicator LED (13 is a good
      *        value on many boards as the build-in LED is usually attached
@@ -43,6 +49,14 @@ public:
      */
 	void setMode(Mode mode);
 
+    /*! Set flashing mode
+     * \param times retrieved from the times() call.
+     * The if times.mode is not Custom, setMode(Mode) will be used to set the
+     * on and off times, else setCustomMode() will be called with the values
+     * from times.
+     */
+    void setMode(Times times);
+
     /*! Set custom flashing timing
      * \param onTime how long the LED stays on in ms
      * \param offTime how long the LED stays off in ms
@@ -53,6 +67,10 @@ public:
      * should be called frequently - usually from the loop() function in your sketch.
      */
 	void update();
+
+    /* Get current on and off times. This can theb 
+     */
+    Times times();
 
 private:
     void updatePin(bool state);

@@ -63,6 +63,14 @@ void Heartbeat::setMode(Mode mode)
 	}
 }
 
+void Heartbeat::setMode(Heartbeat::Times times) {
+    if (times.mode == Custom) {
+        setCustomMode(times.onTime, times.offTime);
+    } else {
+        setMode(times.mode);
+    }
+}
+
 void Heartbeat::setCustomMode(uint16_t onTime, uint16_t offTime)
 {
     _onTime = onTime;
@@ -89,4 +97,12 @@ void Heartbeat::updatePin(bool state)
     _lastStateFlip = Millis();
 }
 
+Heartbeat::Times Heartbeat::times()
+{
+    Times t;
+    t.mode = _mode;
+    t.onTime = _onTime;
+    t.offTime = _offTime;
+    return t;
+}
 
