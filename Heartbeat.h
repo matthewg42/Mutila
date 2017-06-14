@@ -32,8 +32,10 @@ public:
      * \param pin the pin connected to the indicator LED (13 is a good
      *        value on many boards as the build-in LED is usually attached
      *        to this pin
+     * \param invertedLogic invert the logic of the pin (useful for using D0
+     *        on the ESP8266, which has inverted logic)
      */
-	Heartbeat(int pin);
+	Heartbeat(int pin, bool invertedLogic=false);
 	~Heartbeat();
 
     /*! Initialization
@@ -81,6 +83,7 @@ private:
 	unsigned long _lastStateFlip;
 	unsigned int _onTime;
 	unsigned int _offTime;
+    bool _invertedLogic;
 
 };
 

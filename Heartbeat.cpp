@@ -3,13 +3,14 @@
 #include "Heartbeat.h"
 #include "Millis.h"
 
-Heartbeat::Heartbeat(int pin) :
+Heartbeat::Heartbeat(int pin, bool invertedLogic) :
     _mode(Heartbeat::Normal),
 	_pin(pin),
     _pinState(true),
     _lastStateFlip(0),
     _onTime(0),
-    _offTime(0)
+    _offTime(0),
+    _invertedLogic(invertedLogic)
 {
 	setMode(_mode);
 }
@@ -93,7 +94,7 @@ void Heartbeat::update()
 void Heartbeat::updatePin(bool state)
 {
     _pinState = state;
-    digitalWrite(_pin, _pinState);
+    digitalWrite(_pin, _invertedLogic ? !_pinState : _pinState);
     _lastStateFlip = Millis();
 }
 
