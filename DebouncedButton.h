@@ -48,7 +48,7 @@ public:
 
     /*! Test if the button has been pushed since the last time it was off
      *
-     * The idea is that you can called pushed lots of times ina tight loop
+     * The idea is that you can call pushed() lots of times in a tight loop
      * and only get one true return pre press of the button regardless of
      * how many times you test.
      */
@@ -56,7 +56,7 @@ public:
 
     /*! Test if the button has been pushed and released.
      *
-     * After returning a non-zero value (i.e. a tap was refistered), the
+     * After returning a non-zero value (i.e. a tap was registered), the
      * state will be reset. Only the last tap duration will be returned.
      *
      * \return length of last tap in ms if the button has been tapped, else 0.
