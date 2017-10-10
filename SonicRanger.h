@@ -13,6 +13,10 @@
 #define SONIC_RANGE_DEFAULT_MAX_CM      200
 #define SONIC_RANGE_DEFAULT_TIMEOUT_MS  15UL
 
+#ifdef ARDUINO_AVR_DIGISPARK
+unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
+#endif // ARDUINO_AVR_DIGISPARK
+
 class SonicRanger {
 public:
     /*! Constructor 
