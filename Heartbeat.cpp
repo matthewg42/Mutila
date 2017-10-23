@@ -10,7 +10,8 @@ Heartbeat::Heartbeat(int pin, bool invertedLogic) :
     _lastStateFlip(0),
     _onTime(0),
     _offTime(0),
-    _invertedLogic(invertedLogic)
+    _invertedLogic(invertedLogic),
+    _enabled(true)
 {
 	setMode(_mode);
 }
@@ -81,6 +82,9 @@ void Heartbeat::setCustomMode(uint16_t onTime, uint16_t offTime)
 
 void Heartbeat::update()
 {
+    if (!_enabled) {
+        return;
+    }
     unsigned long wait = _pinState ? _onTime : _offTime;
     if (_onTime == 0 && _pinState) {
         updatePin(0);
@@ -106,4 +110,14 @@ Heartbeat::Times Heartbeat::times()
     t.offTime = _offTime;
     return t;
 }
+
+void Heartbeat::setEnabled(bool on)
+{
+    _enabled = on;
+    if (!_enabled) {
+        updatePin(false);
+    }
+}
+
+
 

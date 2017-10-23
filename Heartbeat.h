@@ -70,6 +70,10 @@ public:
      */
 	void update();
 
+    /*! Turn on/off the heartbeat. Over-rides setMode()
+     */
+    void setEnabled(bool on=true);
+
     /* Get current on and off times. This can theb 
      */
     Times times();
@@ -84,6 +88,7 @@ private:
 	unsigned int _onTime;
 	unsigned int _offTime;
     bool _invertedLogic;
+    bool _enabled;
 
 };
 
