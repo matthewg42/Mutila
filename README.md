@@ -51,7 +51,7 @@ HC-SR04 ultrasonic range finding modules are inexpensive and popular modules use
 
 ## Author & License
 
-All code written by Mouse <mouse@orthogonal-systems.co.uk>, and licensed under the GNU GPL v3. See the LICENSE file for details.
+All code written by Matthew Gates (Mouse), and licensed under the GNU GPL v3. See the LICENSE file for details.
 
 ## API Documentation
 
