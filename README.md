@@ -55,7 +55,7 @@ All code written by Mouse <mouse@orthogonal-systems.co.uk>, and licensed under t
 
 ## API Documentation
 
-Doxygen-generated documentation can be found on the Orthogonal Systems website at http://orthogonal-systems.co.uk/doc/mutila/
+Doxygen-generated documentation can be found here: https://matthewg42.github.io/Mutila/
 
 ### Generating documentation
 
