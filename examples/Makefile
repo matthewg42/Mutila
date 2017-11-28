@@ -1,4 +1,4 @@
-EXAMPLES = $(wildcard *Example)
+EXAMPLES = $(wildcard */)
 SUBDIRSCLEAN = $(addsuffix clean,$(EXAMPLES))
 SUBDIRSBUILD = $(addsuffix build,$(EXAMPLES))
 
