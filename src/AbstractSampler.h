@@ -31,7 +31,7 @@ public:
     virtual void update() = 0;
 
     //! Accessor for the pin which is geting read from
-    virtual const uint8_t pin() { return _pin; }
+    uint8_t pin() { return _pin; }
 
     //! Implement (and document!) in derived classes
     virtual float average() = 0;
@@ -40,8 +40,8 @@ public:
     virtual int last() = 0;
 
 protected:
-    uint8_t _pin;               //!< pin to read data from
-    uint16_t _periodMs;         //!< minimum ms
+    const uint8_t _pin;             //!< pin to read data from
+    const uint16_t _periodMs;       //!< minimum ms
 
 };
 

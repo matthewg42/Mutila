@@ -39,7 +39,7 @@ public:
     /*! Test Brownout Status
      * \return true if device is currently browned out
      */
-    const bool brownedOut() { return _brownedOut; }
+    bool brownedOut() { return _brownedOut; }
 
 protected:
     EMAVDivSampler& _vSampler;

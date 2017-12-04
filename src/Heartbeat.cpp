@@ -62,7 +62,10 @@ void Heartbeat::setMode(Mode mode)
         _onTime = 1;
         _offTime = 0;
 		break;
+    default:
+        break;
 	}
+
 }
 
 void Heartbeat::setMode(Heartbeat::Times times) {
