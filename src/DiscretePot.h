@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include "Mutila.h"
+#include "AbstractDebouncedButton.h"
 
 /*! Discrete values from a potential divider.
  *
@@ -25,7 +26,7 @@ public:
      *  \param threshold debouncing threshold (see DebouncedButton for details)
      *  \param delay debouncing delay (see DebouncedButton for details)
      */
-    void begin(int8_t min=0, int8_t max=11, bool reversed=false, uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(int8_t min=0, int8_t max=11, bool reversed=false, uint8_t threshold=AbstractDebouncedButton::DefaultThreshold, uint8_t delay=AbstractDebouncedButton::DefaultButtonDelay);
 
     /*! Allocate Timeslice.
      *

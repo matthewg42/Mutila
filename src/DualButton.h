@@ -29,7 +29,7 @@ public:
      * other members are called. This will call the begin() method
      * in both of the linked DebouncedButtons.
      */
-    void begin(uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(uint8_t threshold=AbstractDebouncedButton::DefaultThreshold, uint8_t delay=AbstractDebouncedButton::DefaultButtonDelay);
 
     /*! Allocate Timeslice
      *
@@ -67,7 +67,7 @@ public:
      *         than specified time.
      *
      */
-    bool held(uint16_t ms=DEBOUNCED_BUTTON_HELD_MS);
+    bool held(uint16_t ms=AbstractDebouncedButton::DefaultHeldMs);
 
     /*! Get periodic press results when either button is held.
      *
@@ -75,7 +75,7 @@ public:
      * \param repeatMs time between subsequent releats
      * \return true when either button is pushed, but only every so often...
      */
-    bool repeat(uint16_t initialMs=DEBOUNCED_BUTTON_RPT_INITIAL_MS, uint16_t repeatMs=DEBOUNCED_BUTTON_RPT_MS);
+    bool repeat(uint16_t initialMs=AbstractDebouncedButton::DefaultButtonRepeatInitialMs, uint16_t repeatMs=AbstractDebouncedButton::DefaultButtonRepeatMs);
 
 private:
     DebouncedButton* _b1;

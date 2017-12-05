@@ -1,9 +1,9 @@
 #pragma once
 
 #include <stdint.h>
+#include "AbstractButton.h"
 
-
-/*! Basic instantaneous button.
+/*! Basic instantaneous button from a digital input.
  *
  *  RawButton models a digital push button or switch attached 
  *  to a digital input. The API gives the user a logical pushed
@@ -11,7 +11,7 @@
  *  logic from the user of the class (choose logic type in 
  *  constructor).
  */
-class RawButton {
+class RawButton : public AbstractButton {
 public:
     /*! Constructor.
      *

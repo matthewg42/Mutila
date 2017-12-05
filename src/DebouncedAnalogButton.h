@@ -2,7 +2,8 @@
 
 #include <stdint.h>
 #include "Mutila.h"
-#include "RawButton.h"
+#include "AbstractDebouncedButton.h"
+#include "AnalogButton.h"
 
 /*! \brief Timeslice-based button with debouncing using analogRead
  *
@@ -12,19 +13,16 @@
  * This class reads from the pin using analogRead. This is occasionally
  * useful when special analog-only pins need to be used for button inputs
  * (e.g. pins A6 and A7 on the nano).
- *
- * The update() method must be called frequently (usually from 
- * loop()) to work properly.
  */
-class DebouncedAnalogButton : public RawButton {
+class DebouncedAnalogButton : public AbstractDebouncedButton, public AnalogButton {
 public:
-    /*! Constructor
+    /*! Constructor.
      *
-     * \param pin the pin used for this button
-     * \param pullup if true pin==LOW means on, else pin==HIGH is on
-     * \param analogThreshold the value mid way between the on and off states as reported by analogRead
+     * \param pin the pin used for this button.
+     * \param analogThreshold the value mid way between the on and off states as reported by analogRead.
+     * \param invert if true, the logic of he button in inverted
      */
-    DebouncedAnalogButton(uint8_t pin, bool pullup=true, uint16_t analogThreshold=512);
+    DebouncedAnalogButton(const uint8_t pin, const uint16_t analogThreshold=512, const bool invert=false);
 
     /*! Initialization
      *
@@ -36,7 +34,7 @@ public:
      * minimum time it takes for button presses / released to register
      * is threshold * delay.
      */
-    void begin(uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(uint8_t threshold=AbstractDebouncedButton::DefaultThreshold, uint8_t delay=AbstractDebouncedButton::DefaultButtonDelay);
 
     /*! Allocate Timeslice
      *
@@ -50,58 +48,6 @@ public:
      *
      */
     bool on();
-
-    /*! Test if the button has been pushed since the last time it was off
-     *
-     * The idea is that you can called pushed lots of times ina tight loop
-     * and only get one true return pre press of the button regardless of
-     * how many times you test.
-     */
-    bool pushed();
-
-    /*! Test if the button has been pushed and released.
-     *
-     * After returning a non-zero value (i.e. a tap was refistered), the
-     * state will be reset. Only the last tap duration will be returned.
-     *
-     * \return length of last tap in ms if the button has been tapped, else 0.
-     *
-     */
-    uint32_t tapped();
-
-    /*! Test if held on for extended period
-     *
-     * \param ms time in ms the button has to have been on for to be considered held
-     *
-     * \return true if the button is pushed and has been for longer 
-     *         than specified time.
-     *
-     */
-    bool held(uint16_t ms=DEBOUNCED_BUTTON_HELD_MS);
-
-    /*! Get periodic press results when button is held.
-     *
-     * \param initialMs time between first press and first repeat in ms
-     * \param repeatMs time between subsequent releats
-     * \return true when pushed every so often...
-     */
-    bool repeat(uint16_t initialMs=DEBOUNCED_BUTTON_RPT_INITIAL_MS, uint16_t repeatMs=DEBOUNCED_BUTTON_RPT_MS);
-
-private:
-    uint8_t _threshold;
-    uint16_t _analogThreshold;
-    uint8_t _delay;
-    uint32_t _lastUpdate;
-    uint8_t _counter;
-    bool _state;
-    uint32_t _lastStateChange;
-    bool _pushed;
-    uint16_t _repeatCount;
-    uint32_t _lastRepeat;
-    uint32_t _lastOnDuration;
-
-    void setState(bool newState);
-    bool _on();
 
 };
 

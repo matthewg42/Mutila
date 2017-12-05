@@ -34,7 +34,7 @@ public:
      * minimum time it takes for button presses / released to register
      * is threshold * delay.
      */
-    void begin(bool startState=false, uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(bool startState=false, uint8_t threshold=AbstractDebouncedButton::DefaultThreshold, uint8_t delay=AbstractDebouncedButton::DefaultButtonDelay);
 
     /*! Allocate Timeslice.
      *
