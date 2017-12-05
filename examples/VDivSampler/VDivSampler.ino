@@ -13,6 +13,8 @@ void setup()
     Serial.begin(115200);
     bufSampler.begin();
     emaSampler.begin();
+    // Show we can handle Millis wrap
+    addMillisOffset(0xFFFFF000);
     // Settle down
     delay(300);
     DBLN("millis,raw,buffer,ema");
@@ -22,7 +24,8 @@ void loop()
 {
     bufSampler.update();
     emaSampler.update();
-    DB(Millis());
+    DB("0x");
+    DB(Millis(), HEX);
     DB(',');
     DB(emaSampler.lastVolts());
     DB(',');
