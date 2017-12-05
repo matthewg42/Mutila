@@ -10,16 +10,16 @@
 #include <DebouncedButton.h>
 #include <Millis.h>
 
-#define BUT_PIN 3
-#define OUTPUT_MS 100
+const uint8_t   ButPin =            3;
+const uint16_t  OutputPeriodMs =    100;
 
-DebouncedButton MyButton(BUT_PIN);
-uint32_t prev = 0;
+DebouncedButton Button(ButPin);
+uint32_t PreviousOutput = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    MyButton.begin();
+    Button.begin();
     addMillisOffset(0xFFFFF000);
     delay(100);
     DBLN("setup() complete");
@@ -27,21 +27,21 @@ void setup()
 
 void loop()
 {
-    MyButton.update();
-    if (MillisSince(prev) > OUTPUT_MS) {
-        prev = Millis();
+    Button.update();
+    if (MillisSince(PreviousOutput) > OutputPeriodMs) {
+        PreviousOutput = Millis();
         DB("Millis=0x");
-        DB(prev, HEX);
+        DB(PreviousOutput, HEX);
         DB(" on=");
-        DB(MyButton.on());
+        DB(Button.on());
         DB(" pushed=");
-        DB(MyButton.pushed());
+        DB(Button.pushed());
         DB(" held=");
-        DB(MyButton.held());
+        DB(Button.held());
         DB(" repeat=");
-        DB(MyButton.repeat());
+        DB(Button.repeat());
         DB(" tapped=");
-        DBLN(MyButton.tapped());
+        DBLN(Button.tapped());
     }
 }
 

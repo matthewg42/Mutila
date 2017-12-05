@@ -74,23 +74,22 @@ bool DebouncedButton::repeat(uint16_t initialMs, uint16_t repeatMs)
     //        _nextRepeatTime += repeatMs;
     //    }
     //}
+
     uint32_t now = Millis();
-    //uint32_t since = MillisSince(_lastRepeat, now);
-    //DB("now=");
-    //DB(now);
-    //DB(" since=");
-    //DB(since);
-    //DB(" initialMs=");
-    //DB(initialMs);
-    //DB(" repeatMs=");
-    //DBLN(repeatMs);
-    if (on() && MillisSince(_lastRepeat, now) > (_repeatCount == 0 ? initialMs : repeatMs)) {
+    bool out = false;
+
+    if (on() && _repeatCount == 0) {
+        out = true;
+    } else if (on() && MillisSince(_lastRepeat, now) > (_repeatCount == 1 ? initialMs : repeatMs)) {
+        out = true;
+    }
+
+    if (out) {
         _lastRepeat = now;
         _repeatCount++;
-        return true;
-    } else {
-        return false;
     }
+
+    return out;
 }
 
 void DebouncedButton::setState(bool newState)
