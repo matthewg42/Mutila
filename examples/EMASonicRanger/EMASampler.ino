@@ -25,8 +25,7 @@ void loop()
 {
     Ranger.update();
 
-    if (MillisSince(LastDb) > 50) {
-        LastDb = Millis();
+    if (DoEvery(50, LastDb)) {
         DB("Millis=0x");
         DB(Millis(), HEX);
         DB(" range=");
