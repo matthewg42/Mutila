@@ -3,14 +3,14 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
+#define DFTX_PIN        8 
+#define DFRX_PIN        9 
 #define BUSY_PIN        10
-#define DFTX_PIN        5 
-#define DFRX_PIN        6 
 #define BETWEEN_MS      200
 
 SoftwareSerial SerialMP3(DFTX_PIN, DFRX_PIN);
 DFPlayerMini mp3(SerialMP3, BUSY_PIN);
-unsigned long lastStop = 0;
+uint32_t lastStop = 0;
 bool playing = false;
 int count = 0;
 int track = 0;
@@ -60,7 +60,7 @@ void setup()
     delay(200);  
 
     // Don't shout
-    mp3.sendCmd(DFPlayerMini::SetVolume, 7);
+    mp3.sendCmd(DFPlayerMini::SetVolume, 20);
 
     // Talk to the DFPlayer Mini device.  
     // Also sets the number of tracks.
@@ -90,7 +90,7 @@ void loop() {
             playing = false;
         } 
 
-        if (now > lastStop + BETWEEN_MS) {
+        if (MillisSince(lastStop, now) > BETWEEN_MS) {
             playNext();
         }
     } 

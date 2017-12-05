@@ -4,8 +4,8 @@
 
 // DFP_TX_PIN describes the pin on the Arduino which has a connection
 // to the TX pin on the DFPlayer Mini, and so on.
-#define DFP_TX_PIN          5
-#define DFP_RX_PIN          6
+#define DFP_TX_PIN          8
+#define DFP_RX_PIN          9
 #define DFP_BUSY_PIN        10
 
 SoftwareSerial SerialMP3(DFP_TX_PIN, DFP_RX_PIN);
@@ -24,9 +24,9 @@ void setup()
 
     // don't shout
     reader.sendCmd(DFPlayerMini::SetVolume, 15); 
-    reader.readNumber(-1, 0);
-    reader.readNumber(3.1415926, 2);
-    reader.readNumber(999.999, 2);
+    reader.readNumber(-1, 0);           // expect "minus one"
+    reader.readNumber(3.1415926, 2);    // expect "three point one four"
+    reader.readNumber(999.999, 2);      // expect "one thousand point zero zero"
 
     DBLN("setup() complete");
 }
