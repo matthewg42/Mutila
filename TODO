@@ -6,7 +6,9 @@ Fix millis wrap issues:
 - Test SonicRanger with Millis wrap and hardware
 - Test EMASonicRanger with Millis wrap and hardware
 - Test Mode - that updates happen at correct time over Millis wrap
-- Test DFPlayer mini with hardware
+- Test DFPlayerMini with hardware
+- Test DFPReader mini with hardware
+
 
 General cleanup / consistency making:
 - make sure all pins are const in member and constructor params

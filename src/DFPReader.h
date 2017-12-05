@@ -116,7 +116,7 @@ private:
     //!         0 if the buffer is empty.
     uint8_t popElement();
 
-    void appendSubThousand(int num);
+    void appendSubThousand(int16_t num);
     void appendMagnitude(double* number, double magnitude, uint8_t magnitudeElement);
 
     // Some data for figuring out this pesky human speech stuff
@@ -129,7 +129,7 @@ private:
     uint8_t tailPtr;
     uint8_t unplayedElements;
 
-    unsigned long lastPlayStart;
+    uint32_t lastPlayStart;
     PlaybackState playbackState;
 
 };

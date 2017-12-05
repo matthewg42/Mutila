@@ -40,7 +40,9 @@ void DFPReader::begin()
 void DFPReader::update()
 {
     if (playbackState == Pending) {
-        if (Millis() - lastPlayStart >= DFPR_PLAYBACK_START_MS) {
+        //TODO remove
+        //if (Millis() - lastPlayStart >= DFPR_PLAYBACK_START_MS) {
+        if (MillisSince(lastPlayStart) >= DFPR_PLAYBACK_START_MS) {
             _DBLN(F("playbackState Pending -> Playing"));
             playbackState = Playing;
         }
@@ -102,7 +104,7 @@ void DFPReader::readNumber(double number, uint8_t dp)
     if (dp > 0) {
         appendElement(MP3_TRACK_POINT);
         for (uint8_t i=1; i<dp+1; i++) {
-            uint8_t digit = (unsigned long)(fractionalPart*pow(10, i))%10;
+            uint8_t digit = (uint32_t)(fractionalPart*pow(10, i))%10;
             appendElement(MP3_TRACK_ZERO+digit);
         }
     }
