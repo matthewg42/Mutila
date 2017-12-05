@@ -41,8 +41,8 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout)
 SonicRanger::SonicRanger(const uint8_t trigPin, const uint8_t echoPin) :
     _trigPin(trigPin),
     _echoPin(echoPin),
-    _maxCm(SONIC_RANGE_DEFAULT_MAX_CM),
-    _timeoutMs(SONIC_RANGE_DEFAULT_TIMEOUT_MS)
+    _maxCm(DefaultMaxRangeCm),
+    _timeoutMs(DefaultTimeoutMs)
 {
 }
 
