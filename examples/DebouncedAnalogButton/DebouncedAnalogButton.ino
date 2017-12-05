@@ -3,10 +3,10 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-DebouncedAnalogButton b1(A6);
-DebouncedAnalogButton b2(A7);
+DebouncedAnalogButton b1(A0);
+DebouncedAnalogButton b2(A1);
 
-unsigned long last = 0;
+uint32_t LastDb = 0;
 
 void setup()
 {
@@ -21,10 +21,9 @@ void loop()
 {
     b1.update();
     b2.update();
-    if (MillisSince(last) > 100) {
-        last = Millis();
+    if (DoEvery(100, LastDb)) {
         DB("Millis=0x");
-        DB(last, HEX);
+        DB(Millis(), HEX);
         DB(" b1 on=");
         DB(b1.on());
         DB(" tapped=");
@@ -43,3 +42,4 @@ void loop()
         DBLN(b2.held());
     }
 }
+
