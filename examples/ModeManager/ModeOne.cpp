@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <MutilaDebug.h>
+#include <Millis.h>
 #include "ModeOne.h"
 #include "ButtonA.h"
 
@@ -26,7 +27,8 @@ void ModeOne_::modeStop()
 
 void ModeOne_::modeUpdate()
 {
-    DBLN(F("ModeOne::modeUpdate() doing a thing..."));
+    DB(F("ModeOne::modeUpdate() Millis=0x"));
+    DBLN(Millis(), HEX);
 }
 
 bool ModeOne_::isFinished()

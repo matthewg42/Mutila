@@ -1,8 +1,5 @@
 Work to do in deal-with-millis-wrap branch b4 merge
 
-Fix millis wrap issues:
-- Test Mode - that updates happen at correct time over Millis wrap
-
 General cleanup / consistency making:
 - make sure all pins are const in member and constructor params
 - convert all int to int16_t and similar

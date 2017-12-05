@@ -21,6 +21,9 @@ void setup()
     // start the selected mode
     ModeManager.begin(&ModeOne);
 
+    // test that everything works OK over Millis wrap
+    addMillisOffset(0xFFFFF000);
+
     DBLN("setup() complete");
 }
 
