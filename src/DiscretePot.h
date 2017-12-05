@@ -44,10 +44,10 @@ private:
     bool _reversed;
     uint8_t _threshold;
     uint8_t _delay;
-    unsigned long _lastUpdate;
+    uint32_t _lastUpdate;
     uint8_t _counter;
     int8_t _state;
-    unsigned long _lastStateChange;
+    uint32_t _lastStateChange;
 
     /*! Instantaneous value.
      *
