@@ -83,13 +83,16 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     // A pointer into the buffer where we will write incoming bytes
     uint8_t ptr = 0;
 
-    unsigned long startSend = Millis();
+    uint32_t startSend = Millis();
     sendCmd(cmd); 
-    unsigned long startRecv = Millis();
+    uint32_t startRecv = Millis();
+
     // Populate buffer with response.
     while(true) {
         // Handle timeouts
-        if (Millis() > startRecv + DFP_RESP_TIMEOUT_MS) {
+        //TODO remove
+        //if (Millis() > startRecv + DFP_RESP_TIMEOUT_MS) {
+        if (MillisSince(startRecv) > DFP_RESP_TIMEOUT_MS) {
             response.status = DFPResponse::Timeout;
             break;
         }
@@ -121,12 +124,14 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
         }
     }
     // calculate how long comms took
-    unsigned long durationRecv = Millis() - startRecv;
+    // TODO remove
+    // uint32_t durationRecv = Millis() - startRecv;
+    uint32_t durationRecv = MillisSince(startRecv);
 
     _DB(F("DF RX:"));
     dumpBuf(buf, ptr, false);
     _DB(F(" send="));
-    _DB(startRecv - startSend);
+    _DB(MillisSince(startRecv, startSend));
     _DB(F("ms, recv="));
     _DB(durationRecv);
     _DB(F("ms "));
@@ -193,7 +198,9 @@ void DFPlayerMini::serialCmd()
 {
     // wait until some short time has passed since the last command
     // so the DFPlayer Mini has had a chance to process it...
-    while (Millis() < _lastCmdSent + DFP_MIN_TIME_MS) {
+    //TODO remove
+    //while (Millis() < _lastCmdSent + DFP_MIN_TIME_MS) {
+    while (MillisSince(_lastCmdSent) < DFP_MIN_TIME_MS) {
         delay(1);
     }
     _DB(F("DF TX:"));

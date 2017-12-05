@@ -12,13 +12,13 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-/*! \brief A response to a query set to a DFPlayerMini object
+/*! A response to a query set to a DFPlayerMini object.
  *
- * This object is returned when a query is sent to a DFPlayerMini object
- * It indicates the success of the query using the .status member, and
- * also contains the message type (which presumably should the same as
- * the command used in the query), and the argument (result) value, which
- * is always a uint16_t.
+ *  This object is returned when a query is sent to a DFPlayerMini object
+ *  It indicates the success of the query using the .status member, and
+ *  also contains the message type (which presumably should the same as
+ *  the command used in the query), and the argument (result) value, which
+ *  is always a uint16_t.
  */
 struct DFPResponse {
     enum Status {
@@ -29,32 +29,33 @@ struct DFPResponse {
         Invalid=4         //!< Response was not validated (bad cksum, header etc)
     };
 
-    //! Default constructor - packet starts in Incomplete state
+    /*! Default constructor - packet starts in Incomplete state.
+     */  
     DFPResponse() : status(Incomplete), messageType(0), arg(0) {;}
 
-    // Data members
+    // Data members.
     Status status;
     uint8_t messageType;
     uint16_t arg;
 };
 
-/*! \brief Easy-to-use controller class for DFPlayer Mini devices
+/*! Easy-to-use controller class for DFPlayer Mini devices.
  *
- * This class implements some of the functionality of the 
- * DFPlayer_Mini_MP3 library, to control a DFPlayer Mini device.
- * It includes features which were not yet implemented in the 
- * DFPlayer_Mini_MP3 at time of writing, namely a mechanism to 
- * receive results of query calls to the device.
+ *  This class implements some of the functionality of the 
+ *  DFPlayer_Mini_MP3 library, to control a DFPlayer Mini device.
+ *  It includes features which were not yet implemented in the 
+ *  DFPlayer_Mini_MP3 at time of writing, namely a mechanism to 
+ *  receive results of query calls to the device.
  *
- * The device is expected to be connected using serial and optionally
- * the BUSY line.  Serial comms are at 9600 baud.  The BUSY line is
- * pulled to ground when the DFPlayerMini device is playing an mp3
- * file.
+ *  The device is expected to be connected using serial and optionally
+ *  the BUSY line.  Serial comms are at 9600 baud.  The BUSY line is
+ *  pulled to ground when the DFPlayerMini device is playing an mp3
+ *  file.
  */
 class DFPlayerMini {
 public:
 
-    /*! Command codes
+    /*! Command codes.
      *
      * The DFPlayerMini's serial interface uses this set of command
      * codes to instruct the device to perform some action or reply
@@ -105,16 +106,18 @@ public:
      */
     void sendCmd(Cmd cmd, uint16_t arg=0);
 
-    /*! Send a command and wait for a response
-     * \param cmd The command to send
-     * \param tries how many attempts will be made to get a valid result
+    /*! Send a command and wait for a response.
+     *
+     * \param cmd The command to send.
+     * \param tries how many attempts will be made to get a valid result.
      * \return a DFPResponse object with the results of the query. The .ok
      *         member will be false if the query failed to get a valid
      *         result (possible resons: timeout, bad serial comms etc.)
      */
     DFPResponse query(Cmd cmd, uint8_t tries=3);
 
-    /*! Find out if a sound is playing
+    /*! Find out if a sound is playing.
+     *
      * If the BUSY pin has been connected to the arduino and properly
      * set with the busyPin parameter to the DFPlayerMini constructor,
      * the value will be determined by analysing this pin state.
@@ -126,11 +129,12 @@ public:
      * so the BUSY pin method is recommended if there is a digital input
      * available.
      *
-     * \return true if audio is currently playing, else false
+     * \return true if audio is currently playing, else false.
      */
     bool busy();
 
-    /*! Find out if we can communicate with the device
+    /*! Find out if we can communicate with the device.
+     *
      * \return true if comms works, else false
      */
     bool check();
@@ -144,11 +148,11 @@ private:
     uint16_t calculateChecksum(uint8_t *thebuf);
     void serialCmd();
 
+private:
     Stream& _serial;
     uint8_t _busyPin;
     uint8_t _sendBuf[DFP_BUFLEN];
-    unsigned long _lastCmdSent;
+    uint32_t _lastCmdSent;
 
 };
-
 
