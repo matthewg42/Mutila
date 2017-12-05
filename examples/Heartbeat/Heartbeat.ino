@@ -1,27 +1,39 @@
 #include <Arduino.h>
+#include <MutilaDebug.h>
 #include <DebouncedButton.h>
 #include <Heartbeat.h>
-#include <MutilaDebug.h>
+#include <Millis.h>
 
-#define BUT_PIN 7
-#define LED_PIN 13
+const uint8_t ButPin = 3;
+const uint8_t LedPin = 13;
+uint32_t LastMessage = 0;
 
-DebouncedButton button(BUT_PIN);
-Heartbeat heartbeat(LED_PIN);
+DebouncedButton button(ButPin);
+Heartbeat heartbeat(LedPin);
 
 void setup()
 {
     Serial.begin(115200);
     button.begin();
     heartbeat.begin();
-    delay(300);
-    DBLN("setup() complete");
+
+    // Show that we're working over Millis() wrap around
+    addMillisOffset(0xFFFFF000);
+
+    delay(100);
+    DBLN("E:setup");
 }
 
 void loop()
 {
     heartbeat.update();
     button.update();
+
+    // Show that we're working over Millis() wrap around
+    if (MillisSince(LastMessage) >= 100) {
+        DB("Millis=0x");
+        DBLN(Millis(), HEX);
+    }
 
     if (button.tapped()) {
         switch (heartbeat.mode()) {

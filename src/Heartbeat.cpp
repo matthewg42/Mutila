@@ -3,7 +3,7 @@
 #include "Heartbeat.h"
 #include "Millis.h"
 
-Heartbeat::Heartbeat(int pin, bool invertedLogic) :
+Heartbeat::Heartbeat(uint8_t pin, bool invertedLogic) :
     _mode(Heartbeat::Normal),
 	_pin(pin),
     _pinState(true),
@@ -88,12 +88,14 @@ void Heartbeat::update()
     if (!_enabled) {
         return;
     }
-    unsigned long wait = _pinState ? _onTime : _offTime;
+    uint32_t wait = _pinState ? _onTime : _offTime;
     if (_onTime == 0 && _pinState) {
         updatePin(0);
     } else if (_offTime == 0 && !_pinState) {
         updatePin(1);
-    } else if (Millis() - _lastStateFlip >= wait) {
+    //TODO remove
+    //} else if (Millis() - _lastStateFlip >= wait) {
+    } else if (MillisSince(_lastStateFlip) >= wait) {
         updatePin(!_pinState);
     }
 }
@@ -121,6 +123,4 @@ void Heartbeat::setEnabled(bool on)
         updatePin(false);
     }
 }
-
-
 
