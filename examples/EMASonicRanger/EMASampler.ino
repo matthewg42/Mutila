@@ -2,11 +2,11 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-const uint8_t TrigPin = 2;
-const uint8_t EchoPin = 3;
+const uint8_t TriggerPin = 3;
+const uint8_t EchoPin = 4;
 
-EMASonicRanger Ranger(TrigPin, EchoPin);
-uint32_t LastMessage = 0;
+EMASonicRanger Ranger(TriggerPin, EchoPin);
+uint32_t LastDb = 0;
 
 void setup()
 {
@@ -25,8 +25,8 @@ void loop()
 {
     Ranger.update();
 
-    if (MillisSince(LastMessage) > 50) {
-        LastMessage = Millis();
+    if (MillisSince(LastDb) > 50) {
+        LastDb = Millis();
         DB("Millis=0x");
         DB(Millis(), HEX);
         DB(" range=");

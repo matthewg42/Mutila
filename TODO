@@ -1,7 +1,6 @@
 Work to do in deal-with-millis-wrap branch b4 merge
 
 Fix millis wrap issues:
-- Test EMASonicRanger with Millis wrap and hardware
 - Test Mode - that updates happen at correct time over Millis wrap
 
 General cleanup / consistency making:

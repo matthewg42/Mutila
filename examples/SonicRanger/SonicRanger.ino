@@ -5,14 +5,14 @@
 
 const uint8_t TriggerPin = 3;
 const uint8_t EchoPin = 4;
-uint32_t LastDb = 0;
 
-SonicRanger ranger(TriggerPin, EchoPin);
+SonicRanger Ranger(TriggerPin, EchoPin);
+uint32_t LastDb = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    ranger.begin();
+    Ranger.begin();
     delay(300);
     DBLN("setup() complete");
 }
@@ -20,13 +20,13 @@ void setup()
 void loop()
 {
     unsigned long before = Millis();
-    uint16_t cm = ranger.getRange();
+    uint16_t cm = Ranger.getRange();
     unsigned long after = Millis();
     DB("range = ");
     DB(cm);
     DB(" cm, took ");
     DB(MillisSince(before, after));
     DBLN("ms");
-    delay(500);
+    delay(50);
 }
 
