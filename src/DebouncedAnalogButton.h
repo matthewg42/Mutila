@@ -67,7 +67,7 @@ public:
      * \return length of last tap in ms if the button has been tapped, else 0.
      *
      */
-    unsigned long tapped();
+    uint32_t tapped();
 
     /*! Test if held on for extended period
      *
@@ -91,14 +91,14 @@ private:
     uint8_t _threshold;
     uint16_t _analogThreshold;
     uint8_t _delay;
-    unsigned long _lastUpdate;
+    uint32_t _lastUpdate;
     uint8_t _counter;
     bool _state;
-    unsigned long _lastStateChange;
+    uint32_t _lastStateChange;
     bool _pushed;
     uint16_t _repeatCount;
-    unsigned long _nextRepeatTime;
-    unsigned long _lastOnDuration;
+    uint32_t _lastRepeat;
+    uint32_t _lastOnDuration;
 
     void setState(bool newState);
     bool _on();
