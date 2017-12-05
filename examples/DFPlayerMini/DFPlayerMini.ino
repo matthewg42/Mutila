@@ -7,13 +7,15 @@ const uint8_t TxPin =       8;
 const uint8_t RxPin =       9;
 const uint8_t BusyPin =     10;
 const uint16_t BetweenMs =  200;
+const uint16_t Volume =     10;
+
 
 SoftwareSerial SerialMP3(TxPin, RxPin);
 DFPlayerMini mp3(SerialMP3, BusyPin);
-uint32_t lastStop = 0;
-bool playing = false;
-int16_t count = 0;
-int16_t track = 0;
+uint32_t LastStop = 0;
+bool Playing = false;
+int16_t Count = 0;
+int16_t Track = 0;
 
 void query() {
     DFPResponse r;
@@ -34,7 +36,7 @@ void query() {
 
     r = mp3.query(DFPlayerMini::GetTfSum);
     DB(" GetTfSum=");
-    if (r.status == DFPResponse::Ok) { DB(r.arg); count = r.arg; }
+    if (r.status == DFPResponse::Ok) { DB(r.arg); Count = r.arg; }
     else { DB("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
@@ -60,7 +62,7 @@ void setup()
     delay(200);  
 
     // Don't shout
-    mp3.sendCmd(DFPlayerMini::SetVolume, 20);
+    mp3.sendCmd(DFPlayerMini::SetVolume, Volume);
 
     // Talk to the DFPlayer Mini device.  
     // Also sets the number of tracks.
@@ -70,11 +72,11 @@ void setup()
 void playNext()
 {
     DB("Playing track ");
-    DBLN(track);
-    playing = true;
-    mp3.sendCmd(DFPlayerMini::PlayTf, track++);
-    if (track > count) {
-        track = 0;
+    DBLN(Track);
+    Playing = true;
+    mp3.sendCmd(DFPlayerMini::PlayTf, Track++);
+    if (Track > Count) {
+        Track = 0;
     }
 }
 
@@ -84,13 +86,13 @@ void loop() {
     DB("busy: ");
     DBLN(busy);
     if (!busy) {
-        if (playing) {
+        if (Playing) {
             DBLN("stopped");
-            lastStop = now;
-            playing = false;
+            LastStop = now;
+            Playing = false;
         } 
 
-        if (MillisSince(lastStop, now) > BetweenMs) {
+        if (MillisSince(LastStop, now) > BetweenMs) {
             playNext();
         }
     } 
