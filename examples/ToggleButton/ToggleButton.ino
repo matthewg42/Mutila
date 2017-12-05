@@ -6,9 +6,9 @@
 const uint8_t ButtonPin = 6;
 const uint8_t LedPin = 13;
 const uint8_t OutputMs = 50;
+uint32_t LastDb = 0;
 
 ToggleButton MyButton(ButtonPin);
-uint32_t LastDb = 0;
 
 void setup()
 {
