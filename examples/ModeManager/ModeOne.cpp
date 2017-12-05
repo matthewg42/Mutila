@@ -29,10 +29,8 @@ void ModeOne_::modeUpdate()
 {
     DB(F("ModeOne::modeUpdate() Millis=0x"));
     DBLN(Millis(), HEX);
-}
-
-bool ModeOne_::isFinished()
-{
-    return ButtonA.tapped();
+    if (ButtonA.tapped()) {
+        _state = Finished;
+    }
 }
 

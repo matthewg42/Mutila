@@ -38,9 +38,18 @@
  */
 class Mode {
 public:
+    enum RunState {
+        NotStarted,
+        Started,
+        Running,
+        Finished,
+        Stopped
+    };
+
+public:
     /*! Constructor.
      */
-    Mode() : _lastUpdateMs(0), _updatePeriodMs(0) {;}
+    Mode() : _state(NotStarted), _lastUpdateMs(0), _updatePeriodMs(0) {;}
 
     /*! Initialization.
      *
@@ -52,15 +61,15 @@ public:
      *
      *  Provide a mechanism for modes to tell the main loop they're finished - over-ride if desired.
      */
-    virtual bool isFinished() { return false; }
+    virtual bool isFinished() { return _state == Finished; }
 
     /*! To be called when switching to this mode
      */
-    void start() { _lastUpdateMs = 0; modeStart(); }
+    void start() { _state = Started; _lastUpdateMs = 0; modeStart(); }
 
     /*! To be called when switching to another mode
      */
-    void stop() { modeStop(); }
+    void stop() { modeStop(); _state = Stopped; }
 
     /*! Allocate timeslice.
      *
@@ -74,12 +83,15 @@ public:
      *
      */
     virtual void update() { 
-        unsigned long now = Millis();
         //TODO remove
         //if (now >= _lastUpdateMs + _updatePeriodMs || _lastUpdateMs==0) {
-        if (MillisSince(_lastUpdateMs, now) >= _updatePeriodMs || _lastUpdateMs==0) {
+        uint32_t now = Millis();
+        if (MillisSince(_lastUpdateMs, now) > _updatePeriodMs || _state == Started) {
             modeUpdate();
             _lastUpdateMs = now;
+            if (_state == Started) {
+                _state = Running;
+            }
         }
     }
 
@@ -110,6 +122,8 @@ protected:
      */
     virtual void modeUpdate() = 0;
 
+protected:
+    RunState _state;
     unsigned long _lastUpdateMs;
     uint16_t _updatePeriodMs;
 
