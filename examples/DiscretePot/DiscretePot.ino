@@ -1,30 +1,30 @@
 #include <Arduino.h>
-#include <DiscretePot.h>
-#include <Millis.h>
 #include <MutilaDebug.h>
+#include <Millis.h>
+#include <DiscretePot.h>
 
-#define ANALOG_PIN  A0
-#define OUTPUT_MS   50
+const uint8_t AnalogPin = A7;
+const uint16_t OutputMs = 50;
 
-DiscretePot dPot(ANALOG_PIN);
+DiscretePot Pot(AnalogPin);
 
-unsigned long next = OUTPUT_MS;
+uint32_t LastDb = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    dPot.begin(0, 11, true);
+    Pot.begin(0, 11, true);
     delay(300);
     DBLN("setup() complete");
 }
 
 void loop()
 {
-    dPot.update();
-    if (Millis() > next) {
-        next = Millis() + OUTPUT_MS;
-        DB("dPot.value()=");
-        DBLN(dPot.value());
+    Pot.update();
+    if (MillisSince(LastDb) > OutputMs) {
+        LastDb = Millis();
+        DB("Pot.value()=");
+        DBLN(Pot.value());
     }
 }
 

@@ -3,7 +3,7 @@
 #include "Mutila.h"
 #include "Millis.h"
 
-DiscretePot::DiscretePot(uint8_t pin) :
+DiscretePot::DiscretePot(const uint8_t pin) :
     _pin(pin)
 {
 }
