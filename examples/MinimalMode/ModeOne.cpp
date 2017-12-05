@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <MutilaDebug.h>
+#include <Millis.h>
 #include "ModeOne.h"
 
 ModeOne::ModeOne() 
@@ -14,6 +15,7 @@ ModeOne::ModeOne()
 
 void ModeOne::modeUpdate()
 {
-    DBLN(F("ModeOne::modeUpdate() doing a thing..."));
+    DB(F("ModeOne::modeUpdate() Millis=0x"));
+    DBLN(Millis(), HEX);
 }
 
