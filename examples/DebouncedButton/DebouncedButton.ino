@@ -3,7 +3,7 @@
 #include <DebouncedButton.h>
 #include <Millis.h>
 
-const uint8_t ButtonPin = 3;
+const uint8_t ButtonPin = 6;
 const uint16_t OutputMs = 150;
 
 DebouncedButton MyButton(ButtonPin);

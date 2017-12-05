@@ -14,6 +14,13 @@
  */
 class DebouncedButton : public RawButton {
 public:
+    static const uint8_t DefaultThreshold = 5;
+    static const uint8_t DefaultButtonDelay = 5;
+    static const uint16_t DefaultHeldMs = 800;
+    static const uint16_t DefaultButtonRepeatInitialMs = 700;
+    static const uint16_t DefaultButtonRepeatMs = 350;
+
+public:
     /*! Constructor
      *
      * \param pin the pin used for this button
@@ -31,7 +38,7 @@ public:
      * minimum time it takes for button presses / released to register
      * is threshold * delay.
      */
-    void begin(uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(uint8_t threshold=DefaultThreshold, uint8_t delay=DefaultButtonDelay);
 
     /*! Allocate Timeslice
      *
@@ -72,7 +79,7 @@ public:
      *         than specified time.
      *
      */
-    bool held(uint16_t ms=DEBOUNCED_BUTTON_HELD_MS);
+    bool held(uint16_t ms=DefaultHeldMs);
 
     /*! Get periodic press results when button is held.
      *
@@ -80,7 +87,7 @@ public:
      * \param repeatMs time between subsequent releats
      * \return true when pushed every so often...
      */
-    bool repeat(uint16_t initialMs=DEBOUNCED_BUTTON_RPT_INITIAL_MS, uint16_t repeatMs=DEBOUNCED_BUTTON_RPT_MS);
+    bool repeat(uint16_t initialMs=DefaultButtonRepeatInitialMs, uint16_t repeatMs=DefaultButtonRepeatMs);
 
     /*! Explicitly set the state of the button.
      *
