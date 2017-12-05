@@ -1,8 +1,9 @@
 Some of the examples require extra hardware.  Here is the test setup which was used when these examples were developed:
 
 - Arduino Nano 328P
+    - Push to make button GND -> Button -> pin D6 (primary button used when only one button is used)
+    - Push to make button GND -> Button -> pin D5 (secondary button)
     - 10 KOhm linear potential divider with centre pin -> A0, outer pins GND & 5V
-    - Push to make button GND -> Button -> pin D6
     - DFPlayer Mini:
         - DFPlayer Mini pin RX -> 1 KOhm resistor -> Arduino D8
         - DFPlayer Mini pin TX -> 1 KOhm resistor -> Arduino D9
