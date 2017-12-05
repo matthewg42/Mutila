@@ -1,5 +1,6 @@
 In deal-with-millis-wrap branch
 
 - Test SonicRanger with Millis wrap and hardware
+- Test Mode - that updates happen at correct time over Millis wrap
 - remove this file
 

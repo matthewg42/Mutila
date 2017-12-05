@@ -72,7 +72,9 @@ public:
      */
     virtual void update() { 
         unsigned long now = Millis();
-        if (now >= _lastUpdateMs + _updatePeriodMs || _lastUpdateMs==0) {
+        //TODO remove
+        //if (now >= _lastUpdateMs + _updatePeriodMs || _lastUpdateMs==0) {
+        if (MillisSince(_lastUpdateMs, now) >= _updatePeriodMs || _lastUpdateMs==0) {
             modeUpdate();
             _lastUpdateMs = now;
         }
