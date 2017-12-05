@@ -4,13 +4,16 @@ Fix millis wrap issues:
 - Find other classes to fix
 - make sure all unsigned long for time and uint32_t
 - Test SonicRanger with Millis wrap and hardware
+- Test EMASonicRanger with Millis wrap and hardware
 - Test Mode - that updates happen at correct time over Millis wrap
 
 General cleanup / consistency making:
+- make sure all pins are const in member and constructor params
 - convert all int to int16_t and similar
 - some attention to Doxygen brief / param tags
 - use consts instead of #defines when possible
 - use CamelCase global names and for consts
+- Consolidate DebounedButton and DebouncedAnalogButton using inheritance
 
 
 
