@@ -3,25 +3,27 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-#define BUT1_PIN 2
-#define BUT2_PIN 3
-#define OUTPUT_MS 50
+const uint8_t Button1Pin = 6;
+const uint8_t Button2Pin = 5;
+const uint8_t OutputMs = 50;
+uint32_t LastDb = 0;
 
 // One button with LOW == pushed
-DebouncedButton Button1(BUT1_PIN);
+DebouncedButton Button1(Button1Pin);
 
 // And another button with HIGH == pushed
-DebouncedButton Button2(BUT2_PIN, false);
+DebouncedButton Button2(Button2Pin);
 
 // If either is pushed, the DualButton will register a press
 DualButton MyButton(&Button1, &Button2);
 
-unsigned long next = OUTPUT_MS;
 
 void setup()
 {
     Serial.begin(115200);
     MyButton.begin();
+    // Show we can handle Millis wrap
+    addMillisOffset(0xFFFFF000);
     delay(300);
     DBLN("setup() complete");
 }
@@ -29,9 +31,10 @@ void setup()
 void loop()
 {
     MyButton.update();
-    if (Millis() > next) {
-        next = Millis() + OUTPUT_MS;
-        DB("DualButton: pushed=");
+    if (DoEvery(OutputMs, LastDb)) {
+        DB("Millis=0x");
+        DB(Millis());
+        DB(" DualButton: pushed=");
         DB(MyButton.pushed());
         DB(" tapped=");
         DB(MyButton.tapped());
