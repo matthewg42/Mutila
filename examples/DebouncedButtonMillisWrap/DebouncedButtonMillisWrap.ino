@@ -14,7 +14,7 @@
 #define OUTPUT_MS 100
 
 DebouncedButton MyButton(BUT_PIN);
-unsigned long prev = 0;
+uint32_t prev = 0;
 
 void setup()
 {

@@ -3,11 +3,11 @@
 
 float _MillisOffsetMs = 0.;
 
-unsigned long Millis() {
-    return millis() + (unsigned long)_MillisOffsetMs;
+uint32_t Millis() {
+    return millis() + (uint32_t)_MillisOffsetMs;
 }
 
-unsigned long MillisSince(unsigned long previousMs, unsigned long now)
+uint32_t MillisSince(uint32_t previousMs, uint32_t now)
 {
     now = now == 0 ? Millis() : now;
     return now > previousMs ? now - previousMs : 0xFFFFFFFF - previousMs + now;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 /*! \brief millis replacement
  *
  * The Arduino millis() function can have it's return value
@@ -23,15 +25,15 @@
 extern float _MillisOffsetMs;
 
 //! Replacement for millis() which uses millis offset as am adjustable correction.
-unsigned long Millis(); 
+uint32_t Millis(); 
 
 //! Calculate millis since a timestamp, coping gracefully with wrapping around
-//! the end of the millis() unsigned long range.
+//! the end of the millis() uint32_t range.
 //!
 //! \param previousMs the timestamp to calculate how long ago it was.
 //! \param value of time to do calculation from. If 0, use Millis().
 //
-unsigned long MillisSince(unsigned long previousMs, unsigned long now=0);
+uint32_t MillisSince(uint32_t previousMs, uint32_t now=0);
 
 //! Add offset
 void addMillisOffset(float ms);

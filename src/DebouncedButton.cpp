@@ -49,9 +49,9 @@ bool DebouncedButton::pushed()
     return r;
 }
 
-unsigned long DebouncedButton::tapped()
+uint32_t DebouncedButton::tapped()
 {
-    unsigned long r = _lastOnDuration;
+    uint32_t r = _lastOnDuration;
     _lastOnDuration = 0;
     return r;
 }
@@ -95,7 +95,7 @@ bool DebouncedButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 
 void DebouncedButton::setState(bool newState)
 {
-    unsigned long now = Millis();
+    uint32_t now = Millis();
     if (newState) { 
         _pushed = true;
         _repeatCount = 0;
