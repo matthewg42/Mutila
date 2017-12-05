@@ -2,14 +2,14 @@
 #include <SoftwareSerial.h>
 #include <MutilaDebug.h>
 
-// DFP_TX_PIN describes the pin on the Arduino which has a connection
+// TxPin describes the pin on the Arduino which has a connection
 // to the TX pin on the DFPlayer Mini, and so on.
-#define DFP_TX_PIN          8
-#define DFP_RX_PIN          9
-#define DFP_BUSY_PIN        10
+const uint8_t TxPin = 8;
+const uint8_t RxPin = 9;
+const uint8_t BusyPin = 10;
 
-SoftwareSerial SerialMP3(DFP_TX_PIN, DFP_RX_PIN);
-DFPReader reader(SerialMP3, DFPlayerMini::PlayTf, DFP_BUSY_PIN);
+SoftwareSerial SerialMP3(TxPin, RxPin);
+DFPReader reader(SerialMP3, DFPlayerMini::PlayTf, BusyPin);
 
 void setup()
 {
