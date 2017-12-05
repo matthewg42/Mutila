@@ -97,7 +97,7 @@ private:
     unsigned long _lastStateChange;
     bool _pushed;
     uint16_t _repeatCount;
-    unsigned long _nextRepeatTime;
+    unsigned long _lastRepeat;
     unsigned long _lastOnDuration;
 
 };

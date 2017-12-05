@@ -19,11 +19,19 @@
  *
  */
 
-//! Global Millis offset value
+//! Global Millis offset value.
 extern float _MillisOffsetMs;
 
-//! Replacement for millis()
+//! Replacement for millis() which uses millis offset as am adjustable correction.
 unsigned long Millis(); 
+
+//! Calculate millis since a timestamp, coping gracefully with wrapping around
+//! the end of the millis() unsigned long range.
+//!
+//! \param previousMs the timestamp to calculate how long ago it was.
+//! \param value of time to do calculation from. If 0, use Millis().
+//
+unsigned long MillisSince(unsigned long previousMs, unsigned long now=0);
 
 //! Add offset
 void addMillisOffset(float ms);

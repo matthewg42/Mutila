@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "DebouncedButton.h"
+#include "MutilaDebug.h"
 #include "Millis.h"
 
 DebouncedButton::DebouncedButton(uint8_t pin, bool pullup) :
@@ -13,13 +14,17 @@ void DebouncedButton::begin(uint8_t threshold, uint8_t delay)
     _threshold = threshold;
     _delay = delay;
     _lastUpdate = 0;
+    _lastRepeat = 0;
     setState(false);
     _lastOnDuration = 0;
 }
 
 void DebouncedButton::update()
 {
-    if (Millis() > _lastUpdate + _delay) {
+    //TODO: remove
+    //if (Millis() > _lastUpdate + _delay) {
+    if (MillisSince(_lastUpdate) > _delay) {
+        _lastUpdate = Millis();
         if (RawButton::on() != _state) {
             _counter++;
             if (_counter > _threshold) {
@@ -28,7 +33,6 @@ void DebouncedButton::update()
         } else if (_counter > 0) {
             _counter = 0;
         }
-        _lastUpdate = Millis();
     }
 }
 
@@ -54,20 +58,39 @@ unsigned long DebouncedButton::tapped()
 
 bool DebouncedButton::held(uint16_t ms)
 {
-    return (on() && Millis() > _lastStateChange + ms);
+    //TODO: remove
+    //return (on() && Millis() > _lastStateChange + ms);
+    return (on() && MillisSince(_lastStateChange) > ms);
 }
 
 bool DebouncedButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 {
-    bool r = on() && Millis() > _nextRepeatTime;
-    if (r) {
-        if (_repeatCount++ == 0) {
-            _nextRepeatTime += initialMs;
-        } else {
-            _nextRepeatTime += repeatMs;
-        }
+    //TODO: remove
+    //bool r = on() && Millis() > _nextRepeatTime;
+    //if (r) {
+    //    if (_repeatCount++ == 0) {
+    //        _nextRepeatTime += initialMs;
+    //    } else {
+    //        _nextRepeatTime += repeatMs;
+    //    }
+    //}
+    uint32_t now = Millis();
+    //uint32_t since = MillisSince(_lastRepeat, now);
+    //DB("now=");
+    //DB(now);
+    //DB(" since=");
+    //DB(since);
+    //DB(" initialMs=");
+    //DB(initialMs);
+    //DB(" repeatMs=");
+    //DBLN(repeatMs);
+    if (on() && MillisSince(_lastRepeat, now) > (_repeatCount == 0 ? initialMs : repeatMs)) {
+        _lastRepeat = now;
+        _repeatCount++;
+        return true;
+    } else {
+        return false;
     }
-    return r;
 }
 
 void DebouncedButton::setState(bool newState)
@@ -76,9 +99,13 @@ void DebouncedButton::setState(bool newState)
     if (newState) { 
         _pushed = true;
         _repeatCount = 0;
-        _nextRepeatTime = now;
+        // TODO remove 
+        // _nextRepeatTime = now;
+        _lastRepeat = now;
     } else {
-        _lastOnDuration = now - _lastStateChange;
+        //TODO remove 
+        //_lastOnDuration = now - _lastStateChange;
+        _lastOnDuration = MillisSince(_lastStateChange, now);
     }
     if (_state!=newState) {
         _lastStateChange = now;
