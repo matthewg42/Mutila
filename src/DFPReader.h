@@ -3,43 +3,6 @@
 #include <stdint.h>
 #include <DFPlayerMini.h>
 
-#define DFPR_PLAYBACK_START_MS      120
-
-#define MP3_TRACK_ZERO              200
-#define MP3_TRACK_TEN               210
-#define MP3_TRACK_TWENTY            220
-#define MP3_TRACK_THIRTY            221
-#define MP3_TRACK_FOURTY            222
-#define MP3_TRACK_FIFTY             223
-#define MP3_TRACK_SIXTY             224
-#define MP3_TRACK_SEVENTY           225
-#define MP3_TRACK_EIGHTY            226
-#define MP3_TRACK_NINETY            227
-#define MP3_TRACK_HUNDRED           228
-#define MP3_TRACK_THOUSAND          229
-#define MP3_TRACK_MILLION           230
-#define MP3_TRACK_BILLION           231
-#define MP3_TRACK_TRILLION          232
-#define MP3_TRACK_POINT             233
-#define MP3_TRACK_MINUS             234
-#define MP3_TRACK_YEAR              235
-#define MP3_TRACK_YEARS             236
-#define MP3_TRACK_MONTH             237
-#define MP3_TRACK_MONTHS            238
-#define MP3_TRACK_WEEK              239
-#define MP3_TRACK_WEEKS             240
-#define MP3_TRACK_DAY               241
-#define MP3_TRACK_DAYS              242
-#define MP3_TRACK_HOUR              243
-#define MP3_TRACK_HOURS             244
-#define MP3_TRACK_MINUTE            245
-#define MP3_TRACK_MINUTES           246
-#define MP3_TRACK_SECOND            247
-#define MP3_TRACK_SECONDS           248
-#define MP3_TRACK_MILLISECOND       249
-#define MP3_TRACK_MILLISECONDS      250
-#define MP3_TRACK_AND               251
-
 /*! \brief DFPlayerMini controller with numeric readout functions
  *
  * This class is intended for use with the samples in the audio/ directory of
@@ -47,6 +10,45 @@
  * called "mp3". 
  */
 class DFPReader : public DFPlayerMini {
+public:
+    static const uint8_t PlaybackStartMs =   120;
+
+    // Track file numbers
+    static const uint8_t Mp3TrackZero =           200;
+    static const uint8_t Mp3TrackTen =            210;
+    static const uint8_t Mp3TrackTwenty =         220;
+    static const uint8_t Mp3TrackThirty =         221;
+    static const uint8_t Mp3TrackFourty =         222;
+    static const uint8_t Mp3TrackFifty =          223;
+    static const uint8_t Mp3TrackSixty =          224;
+    static const uint8_t Mp3TrackSeventy =        225;
+    static const uint8_t Mp3TrackEighty =         226;
+    static const uint8_t Mp3TrackNinety =         227;
+    static const uint8_t Mp3TrackHundred =        228;
+    static const uint8_t Mp3TrackThousand =       229;
+    static const uint8_t Mp3TrackMillion =        230;
+    static const uint8_t Mp3TrackBillion =        231;
+    static const uint8_t Mp3TrackTrillion =       232;
+    static const uint8_t Mp3TrackPoint =          233;
+    static const uint8_t Mp3TrackMinus =          234;
+    static const uint8_t Mp3TrackYear =           235;
+    static const uint8_t Mp3TrackYears =          236;
+    static const uint8_t Mp3TrackMonth =          237;
+    static const uint8_t Mp3TrackMonths =         238;
+    static const uint8_t Mp3TrackWeek =           239;
+    static const uint8_t Mp3TrackWeeks =          240;
+    static const uint8_t Mp3TrackDay =            241;
+    static const uint8_t Mp3TrackDays =           242;
+    static const uint8_t Mp3TrackHour =           243;
+    static const uint8_t Mp3TrackHours =          244;
+    static const uint8_t Mp3TrackMinute =         245;
+    static const uint8_t Mp3TrackMinutes =        246;
+    static const uint8_t Mp3TrackSecond =         247;
+    static const uint8_t Mp3TrackSeconds =        248;
+    static const uint8_t Mp3TrackMillisecond =    249;
+    static const uint8_t Mp3TrackMilliseconds =   250;
+    static const uint8_t Mp3TrackAnd =            251;
+
 public:
     enum PlaybackState {
         Idle,
