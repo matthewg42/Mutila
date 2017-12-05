@@ -1,14 +1,8 @@
 Work to do in deal-with-millis-wrap branch b4 merge
 
 Fix millis wrap issues:
-- Find other classes to fix
-- make sure all unsigned long for time and uint32_t
-- Test SonicRanger with Millis wrap and hardware
 - Test EMASonicRanger with Millis wrap and hardware
 - Test Mode - that updates happen at correct time over Millis wrap
-- Test DFPlayerMini with hardware
-- Test DFPReader mini with hardware
-
 
 General cleanup / consistency making:
 - make sure all pins are const in member and constructor params

@@ -3,10 +3,11 @@
 #include <SonicRanger.h>
 #include <Millis.h>
 
-#define TRIG_PIN        6
-#define ECHO_PIN        5
+const uint8_t TriggerPin = 3;
+const uint8_t EchoPin = 4;
+uint32_t LastDb = 0;
 
-SonicRanger ranger(TRIG_PIN, ECHO_PIN);
+SonicRanger ranger(TriggerPin, EchoPin);
 
 void setup()
 {
@@ -24,7 +25,7 @@ void loop()
     DB("range = ");
     DB(cm);
     DB(" cm, took ");
-    DB(after - before);
+    DB(MillisSince(before, after));
     DBLN("ms");
     delay(500);
 }
