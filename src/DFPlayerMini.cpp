@@ -19,7 +19,7 @@ void DFPlayerMini::begin()
 void DFPlayerMini::resetSendBuf()
 {
     // Set up the send buffer with sentinels and such
-    memset(&_sendBuf, 0, sizeof(uint8_t) * DFP_BUFLEN);
+    memset(&_sendBuf, 0, sizeof(uint8_t) * BufferLength);
     _sendBuf[0] = 0x7E;  // I assume these are like magic bytes to 
     _sendBuf[1] = 0xFF;  // idenfity this as a valid buffer?
     _sendBuf[2] = 0x06;  // payload length?
@@ -28,8 +28,8 @@ void DFPlayerMini::resetSendBuf()
 
 void DFPlayerMini::sendCmd(DFPlayerMini::Cmd cmd, uint16_t arg)
 {
-    _sendBuf[DFP_OFFSET_CMD] = (uint8_t)cmd;
-    copyBigend(_sendBuf+DFP_OFFSET_ARG, arg);
+    _sendBuf[PacketOffsetCmd] = (uint8_t)cmd;
+    copyBigend(_sendBuf+PacketOffsetArg, arg);
     fillChecksum();
     _serial.flush();
     serialCmd();
@@ -39,7 +39,7 @@ void DFPlayerMini::sendCmd(DFPlayerMini::Cmd cmd, uint16_t arg)
 // receive buffer, and is only used when DEBUG is set
 void dumpBuf(uint8_t* buf, uint8_t ptr, bool ln=true)
 {
-    for (uint8_t i=0; i<DFP_BUFLEN; i++) {
+    for (uint8_t i=0; i<DFPlayerMini::BufferLength; i++) {
         _DB(F(" 0x"));
         _DB(buf[i], HEX);
     }
@@ -77,8 +77,8 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     DFPResponse response;
 
     // A buffer for the reply data
-    uint8_t buf[DFP_BUFLEN];
-    memset(buf, 0, DFP_BUFLEN*sizeof(uint8_t));
+    uint8_t buf[BufferLength];
+    memset(buf, 0, BufferLength*sizeof(uint8_t));
 
     // A pointer into the buffer where we will write incoming bytes
     uint8_t ptr = 0;
@@ -92,13 +92,13 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
         // Handle timeouts
         //TODO remove
         //if (Millis() > startRecv + DFP_RESP_TIMEOUT_MS) {
-        if (MillisSince(startRecv) > DFP_RESP_TIMEOUT_MS) {
+        if (MillisSince(startRecv) > ResponseTimeoutMs) {
             response.status = DFPResponse::Timeout;
             break;
         }
 
         // Add bytes to buffer
-        while (_serial.available() > 0 && ptr < DFP_BUFLEN) {
+        while (_serial.available() > 0 && ptr < BufferLength) {
             int c = _serial.read();
             if (c<0) {
                 response.status = DFPResponse::SerialError;
@@ -119,7 +119,7 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
 
         // We have a full buffer with the proper header - continue
         // to the next step: validation of the message
-        if (ptr == DFP_BUFLEN) {
+        if (ptr == BufferLength) {
             break;
         }
     }
@@ -140,10 +140,10 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     _serial.flush();
 
     // put results into response object
-    response.messageType = buf[DFP_OFFSET_CMD];
+    response.messageType = buf[PacketOffsetCmd];
     uint8_t* aptr = (uint8_t*)(&(response.arg));
-    aptr[0] = buf[DFP_OFFSET_ARG+1];
-    aptr[1] = buf[DFP_OFFSET_ARG];
+    aptr[0] = buf[PacketOffsetArg+1];
+    aptr[1] = buf[PacketOffsetArg];
 
     // Validate the packet
     uint16_t cksum = calculateChecksum(buf);
@@ -151,7 +151,7 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     if (buf[0] != 0x7E || buf[1] != 0xFF || buf[9] != 0xEF) {
         _DBLN(F("ERR: head/term"));
         response.status = DFPResponse::Invalid;
-    } else if (*((uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM+1] || *(1+(uint8_t*)&cksum) != buf[DFP_OFFSET_CKSUM]) {
+    } else if (*((uint8_t*)&cksum) != buf[PacketOffsetCkSum+1] || *(1+(uint8_t*)&cksum) != buf[PacketOffsetCkSum]) {
         response.status = DFPResponse::Invalid;
         _DBLN(F("ERR: cksum"));
     } else {
@@ -183,12 +183,12 @@ void DFPlayerMini::copyBigend(uint8_t *dst, uint16_t value)
 void DFPlayerMini::fillChecksum()
 {
     uint16_t checksum = calculateChecksum(_sendBuf);
-    copyBigend(_sendBuf+DFP_OFFSET_CKSUM, checksum); 
+    copyBigend(_sendBuf+PacketOffsetCkSum, checksum); 
 }
 
 uint16_t DFPlayerMini::calculateChecksum(uint8_t *thebuf) {
     uint16_t sum = 0;
-    for (uint8_t i=1; i<DFP_OFFSET_CKSUM; i++) {
+    for (uint8_t i=1; i<PacketOffsetCkSum; i++) {
         sum += thebuf[i];
     }
     return -sum;
@@ -200,17 +200,17 @@ void DFPlayerMini::serialCmd()
     // so the DFPlayer Mini has had a chance to process it...
     //TODO remove
     //while (Millis() < _lastCmdSent + DFP_MIN_TIME_MS) {
-    while (MillisSince(_lastCmdSent) < DFP_MIN_TIME_MS) {
+    while (MillisSince(_lastCmdSent) < MinimumTimeMs) {
         delay(1);
     }
     _DB(F("DF TX:"));
-    for (uint8_t i=0; i<DFP_BUFLEN; i++) {
+    for (uint8_t i=0; i<BufferLength; i++) {
         _DB(F(" 0x"));
         _DB(_sendBuf[i],HEX);
     }
     _DBLN(' ');
     _lastCmdSent = Millis();
-    for (uint8_t i=0; i<DFP_BUFLEN; i++) {
+    for (uint8_t i=0; i<BufferLength; i++) {
         _serial.write(_sendBuf[i]);
     }
 }

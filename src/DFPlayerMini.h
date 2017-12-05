@@ -1,43 +1,9 @@
 #pragma once
 
-#define DFP_BUFLEN                  10
-#define DFP_MIN_TIME_MS             20
-#define DFP_RESP_TIMEOUT_MS         20
-
-// Structure of the command packet
-#define DFP_OFFSET_CMD              3
-#define DFP_OFFSET_ARG              5
-#define DFP_OFFSET_CKSUM            7
-
 #include <Arduino.h>
 #include <stdint.h>
 
-/*! A response to a query set to a DFPlayerMini object.
- *
- *  This object is returned when a query is sent to a DFPlayerMini object
- *  It indicates the success of the query using the .status member, and
- *  also contains the message type (which presumably should the same as
- *  the command used in the query), and the argument (result) value, which
- *  is always a uint16_t.
- */
-struct DFPResponse {
-    enum Status {
-        Incomplete=0,     //!< Set when we start receiving, should not remain at end
-        Ok=1,             //!< Messaged received and is valid
-        Timeout=2,        //!< Message timed out (DFP_RESP_TIMEOUT_MS ms passed)
-        SerialError=3,    //!< Indicates broken serial comms
-        Invalid=4         //!< Response was not validated (bad cksum, header etc)
-    };
-
-    /*! Default constructor - packet starts in Incomplete state.
-     */  
-    DFPResponse() : status(Incomplete), messageType(0), arg(0) {;}
-
-    // Data members.
-    Status status;
-    uint8_t messageType;
-    uint16_t arg;
-};
+struct DFPResponse; // defined below
 
 /*! Easy-to-use controller class for DFPlayer Mini devices.
  *
@@ -53,6 +19,16 @@ struct DFPResponse {
  *  file.
  */
 class DFPlayerMini {
+public:
+    static const uint8_t BufferLength = 10;
+    static const uint8_t MinimumTimeMs = 20;
+    static const uint8_t ResponseTimeoutMs = 20;
+
+    // Structure of the command packet
+    static const uint8_t PacketOffsetCmd = 3;
+    static const uint8_t PacketOffsetArg = 5;
+    static const uint8_t PacketOffsetCkSum = 7;
+
 public:
 
     /*! Command codes.
@@ -151,8 +127,35 @@ private:
 private:
     Stream& _serial;
     const uint8_t _busyPin;
-    uint8_t _sendBuf[DFP_BUFLEN];
+    uint8_t _sendBuf[BufferLength];
     uint32_t _lastCmdSent;
 
+};
+
+/*! A response to a query set to a DFPlayerMini object.
+ *
+ *  This object is returned when a query is sent to a DFPlayerMini object
+ *  It indicates the success of the query using the .status member, and
+ *  also contains the message type (which presumably should the same as
+ *  the command used in the query), and the argument (result) value, which
+ *  is always a uint16_t.
+ */
+struct DFPResponse {
+    enum Status {
+        Incomplete=0,     //!< Set when we start receiving, should not remain at end
+        Ok=1,             //!< Messaged received and is valid
+        Timeout=2,        //!< Message timed out (DFPlayerMini::ResponseTimeoutMs ms passed)
+        SerialError=3,    //!< Indicates broken serial comms
+        Invalid=4         //!< Response was not validated (bad cksum, header etc)
+    };
+
+    /*! Default constructor - packet starts in Incomplete state.
+     */  
+    DFPResponse() : status(Incomplete), messageType(0), arg(0) {;}
+
+    // Data members.
+    Status status;
+    uint8_t messageType;
+    uint16_t arg;
 };
 
