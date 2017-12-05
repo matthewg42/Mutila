@@ -2,12 +2,12 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-BufferedSampler sampler(A7, 100, 10);
+BufferedSampler Sampler(A7, 100, 10);
 
 void setup()
 {
     Serial.begin(115200);
-    sampler.begin();
+    Sampler.begin();
 
     // Show that things work over Millis wrap
     addMillisOffset(0xFFFFF000);
@@ -19,19 +19,19 @@ void setup()
 
 void loop()
 {
-    sampler.update();
+    Sampler.update();
     DB("Millis=0x");
     DB(Millis(), HEX);
     DB(" count=");
-    DB(sampler.count());
+    DB(Sampler.count());
     DB(" last=");
-    DB(sampler.last());
+    DB(Sampler.last());
     DB(" minimum=");
-    DB(sampler.minimum());
+    DB(Sampler.minimum());
     DB(" maximum=");
-    DB(sampler.maximum());
+    DB(Sampler.maximum());
     DB(" average=");
-    DBLN(sampler.average());
+    DBLN(Sampler.average());
     delay(30);
 }
 
