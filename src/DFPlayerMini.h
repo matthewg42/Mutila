@@ -17,6 +17,10 @@ struct DFPResponse; // defined below
  *  the BUSY line.  Serial comms are at 9600 baud.  The BUSY line is
  *  pulled to ground when the DFPlayerMini device is playing an mp3
  *  file.
+ *
+ *  See also:
+ *   - <a href="https://www.dfrobot.com/wiki/images/thumb/a/ab/Miniplayer_pin_map.png/550px-Miniplayer_pin_map.png">Pinout diagram</a>
+ *   - <a href="https://www.dfrobot.com/wiki/images/a/a7/Pin_map_desc_en.png">Pin descriptions</a>
  */
 class DFPlayerMini {
 public:
