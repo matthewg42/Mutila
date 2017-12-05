@@ -1,12 +1,21 @@
 #include <EMASampler.h>
+#include <Millis.h>
 #include <MutilaDebug.h>
 
-EMASampler sampler(A0, 50, 0.2);
+EMASampler SlowSampler(A7, 100, 0.02);
+EMASampler FastSampler(A7, 100, 0.95);
+
+uint32_t LastMessage = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    sampler.begin();
+    SlowSampler.begin();
+    FastSampler.begin();
+
+    // Show we can handle Millis wrap
+    addMillisOffset(0xFFFFF000);
+
     // Settle down
     delay(300);
     DBLN("setup() complete");
@@ -14,11 +23,21 @@ void setup()
 
 void loop()
 {
-    sampler.update();
-    DB(" last=");
-    DB(sampler.last());
-    DB(" average=");
-    DBLN(sampler.average());
-    delay(20);
+    SlowSampler.update();
+    FastSampler.update();
+
+    if (MillisSince(LastMessage) > 50) {
+        LastMessage = Millis();
+        DB("Millis=0x");
+        DB(Millis(), HEX);
+        DB(" Slow last=");
+        DB(SlowSampler.last());
+        DB(" average=");
+        DB(SlowSampler.average());
+        DB("  Fast last=");
+        DB(FastSampler.last());
+        DB(" average=");
+        DBLN(FastSampler.average());
+    }
 }
 
