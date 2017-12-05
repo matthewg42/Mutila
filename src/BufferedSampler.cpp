@@ -40,7 +40,9 @@ void BufferedSampler::begin()
 
 void BufferedSampler::update() 
 {
-    if (_periodMs == 0 || Millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
+    //TODO:remove
+    //if (_periodMs == 0 || Millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
+    if (_periodMs == 0 || MillisSince(_lastUpdated) >= _periodMs || _count == 0) {
         _sampleData[_idx] = analogRead(_pin);
         _DB(F("BufferedSampler::update sample="));
         _DBLN(_sampleData[_idx]);
