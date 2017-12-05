@@ -4,9 +4,17 @@ General cleanup / consistency making:
 - make sure all pins are const in member and constructor params
 - convert all int to int16_t and similar
 - some attention to Doxygen brief / param tags
+
+In examples:
 - use consts instead of #defines when possible
 - use CamelCase global names and for consts
-- Consolidate DebounedButton and DebouncedAnalogButton using inheritance
+
+Moar work:
+- Use DoEvery throughout Mutila
+- Consolidate DebounedButton and DebouncedAnalogButton using inheritance (and other buttons)
+- Compare memory / flash use for new buttons
+
+
 
 
 
