@@ -3,26 +3,28 @@
 #include <DebouncedButton.h>
 #include <Millis.h>
 
-#define BUT_PIN 2
-#define OUTPUT_MS 50
+const uint8_t ButtonPin = 3;
+const uint16_t OutputMs = 150;
 
-DebouncedButton MyButton(BUT_PIN);
-unsigned long next = OUTPUT_MS;
+DebouncedButton MyButton(ButtonPin);
+uint32_t LastDb = 0;
 
 void setup()
 {
     Serial.begin(115200);
     MyButton.begin();
     delay(300);
+    addMillisOffset(0xFFFFF000);
     DBLN("setup() complete");
 }
 
 void loop()
 {
     MyButton.update();
-    if (Millis() > next) {
-        next = Millis() + OUTPUT_MS;
-        DB("DebouncedButton: on=");
+    if (DoEvery(OutputMs, LastDb)) {
+        DB("Millis=0x");
+        DB(Millis(), HEX);
+        DB(" DebouncedButton: on=");
         DB(MyButton.on());
         DB(" pushed=");
         DB(MyButton.pushed());

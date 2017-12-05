@@ -17,6 +17,20 @@ uint32_t MillisSince(uint32_t previousMs, uint32_t now)
     return now >= previousMs ? (now - previousMs) : (0xFFFFFFFF - previousMs + now);
 }
 
+bool DoEvery(uint32_t periodMs, uint32_t& previousMs, uint32_t now)
+{
+    if (now == 0) {
+        now = Millis();
+    }
+
+    if (MillisSince(previousMs, now) > periodMs) {
+        previousMs = now;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void addMillisOffset(float ms)
 {
     _MillisOffsetMs += ms;

@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "RawButton.h"
 
-RawButton::RawButton(uint8_t pin, bool pullup) : 
+RawButton::RawButton(const uint8_t pin, const bool pullup) : 
     _pin(pin),
     _pullup(pullup)
 {
@@ -24,5 +24,4 @@ bool RawButton::on()
         return digitalRead(_pin);
     }
 }
-
 
