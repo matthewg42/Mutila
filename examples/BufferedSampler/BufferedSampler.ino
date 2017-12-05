@@ -2,7 +2,7 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-BufferedSampler Sampler(A7, 100, 10);
+BufferedSampler Sampler(A0, 100, 10);
 
 void setup()
 {
