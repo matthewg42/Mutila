@@ -2,10 +2,11 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-EMASampler SlowSampler(A7, 100, 0.02);
-EMASampler FastSampler(A7, 100, 0.95);
+EMASampler SlowSampler(A0, 100, 0.02);
+EMASampler FastSampler(A0, 100, 0.95);
 
-uint32_t LastMessage = 0;
+const uint32_t DebugDelay = 100;
+uint32_t LastDb = 0;
 
 void setup()
 {
@@ -26,17 +27,16 @@ void loop()
     SlowSampler.update();
     FastSampler.update();
 
-    if (MillisSince(LastMessage) > 50) {
-        LastMessage = Millis();
+    if (DoEvery(DebugDelay, LastDb)) {
         DB("Millis=0x");
         DB(Millis(), HEX);
         DB(" Slow last=");
         DB(SlowSampler.last());
-        DB(" average=");
+        DB(" moving average=");
         DB(SlowSampler.average());
         DB("  Fast last=");
         DB(FastSampler.last());
-        DB(" average=");
+        DB(" moving average=");
         DBLN(FastSampler.average());
     }
 }
