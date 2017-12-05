@@ -93,7 +93,7 @@ public:
      *        the DFPlayerMini. See the busy() documentation for more 
      *        details.
      */
-    DFPlayerMini(Stream& serial, uint8_t busyPin=0);
+    DFPlayerMini(Stream& serial, const uint8_t busyPin=0);
 
     /*! Initialization
      * Sets up pin modes and resets state - typically called from begin()
@@ -150,7 +150,7 @@ private:
 
 private:
     Stream& _serial;
-    uint8_t _busyPin;
+    const uint8_t _busyPin;
     uint8_t _sendBuf[DFP_BUFLEN];
     uint32_t _lastCmdSent;
 

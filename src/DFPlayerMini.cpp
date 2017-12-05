@@ -3,7 +3,7 @@
 #include <MutilaDebug.h>
 #include "Millis.h"
 
-DFPlayerMini::DFPlayerMini(Stream& serial, uint8_t busyPin) :
+DFPlayerMini::DFPlayerMini(Stream& serial, const uint8_t busyPin) :
     _serial(serial),
     _busyPin(busyPin),
     _lastCmdSent(0)

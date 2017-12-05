@@ -3,17 +3,17 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-#define DFTX_PIN        8 
-#define DFRX_PIN        9 
-#define BUSY_PIN        10
-#define BETWEEN_MS      200
+const uint8_t TxPin =       8;
+const uint8_t RxPin =       9;
+const uint8_t BusyPin =     10;
+const uint16_t BetweenMs =  200;
 
-SoftwareSerial SerialMP3(DFTX_PIN, DFRX_PIN);
-DFPlayerMini mp3(SerialMP3, BUSY_PIN);
+SoftwareSerial SerialMP3(TxPin, RxPin);
+DFPlayerMini mp3(SerialMP3, BusyPin);
 uint32_t lastStop = 0;
 bool playing = false;
-int count = 0;
-int track = 0;
+int16_t count = 0;
+int16_t track = 0;
 
 void query() {
     DFPResponse r;
@@ -79,7 +79,7 @@ void playNext()
 }
 
 void loop() {
-    unsigned long now = Millis();
+    uint32_t now = Millis();
     bool busy = mp3.busy();
     DB("busy: ");
     DBLN(busy);
@@ -90,7 +90,7 @@ void loop() {
             playing = false;
         } 
 
-        if (MillisSince(lastStop, now) > BETWEEN_MS) {
+        if (MillisSince(lastStop, now) > BetweenMs) {
             playNext();
         }
     } 
