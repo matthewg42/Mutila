@@ -5,9 +5,9 @@
 
 const uint8_t ButtonPin = 6;
 const uint16_t OutputMs = 150;
+uint32_t LastDb = 0;
 
 DebouncedButton MyButton(ButtonPin);
-uint32_t LastDb = 0;
 
 void setup()
 {
