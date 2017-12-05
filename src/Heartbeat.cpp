@@ -3,14 +3,14 @@
 #include "Heartbeat.h"
 #include "Millis.h"
 
-Heartbeat::Heartbeat(uint8_t pin, bool invertedLogic) :
+Heartbeat::Heartbeat(const uint8_t pin, const bool invertedLogic) :
     _mode(Heartbeat::Normal),
 	_pin(pin),
+    _invertedLogic(invertedLogic),
     _pinState(true),
     _lastStateFlip(0),
     _onTime(0),
     _offTime(0),
-    _invertedLogic(invertedLogic),
     _enabled(true)
 {
 	setMode(_mode);
