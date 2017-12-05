@@ -9,7 +9,7 @@
  * \param vRef voltage reference - typically Arduino Vdd
  * \return voltage accross the whole voltage divider in volts
  */
-float vDivVolts(const int value, const uint16_t r1KOhm, const uint16_t r2KOhm, const float vRef=5.0);
+float vDivVolts(const int16_t value, const uint16_t r1KOhm, const uint16_t r2KOhm, const float vRef=5.0);
 
 /*! \brief Allegro ACS756SCB-050B-PFF-T Bi-directional 50A hall effect sensor current calculation
  * \param value result of an analogRead in range 0 - 1023
@@ -18,5 +18,5 @@ float vDivVolts(const int value, const uint16_t r1KOhm, const uint16_t r2KOhm, c
  * \param iOffset current offset 
  * \return current in amps
  */
-float currentConversion(const int value, const float vSupply, const float vRef=5.0, const float iOffset=0.028);
+float currentConversion(const int16_t value, const float vSupply, const float vRef=5.0, const float iOffset=0.028);
 
