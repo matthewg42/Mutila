@@ -3,12 +3,11 @@
 #include <Millis.h>
 #include <DiscretePot.h>
 
-const uint8_t AnalogPin = A7;
-const uint16_t OutputMs = 50;
-
-DiscretePot Pot(AnalogPin);
+const uint8_t AnalogPin = A0;
+const uint16_t OutputMs = 100;
 
 uint32_t LastDb = 0;
+DiscretePot Pot(AnalogPin);
 
 void setup()
 {
@@ -21,8 +20,7 @@ void setup()
 void loop()
 {
     Pot.update();
-    if (MillisSince(LastDb) > OutputMs) {
-        LastDb = Millis();
+    if (DoEvery(OutputMs, LastDb)) {
         DB("Pot.value()=");
         DBLN(Pot.value());
     }
