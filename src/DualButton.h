@@ -2,14 +2,19 @@
 
 #include "DebouncedButton.h"
 
-/*! \brief Single button object responding to two inputs
+/*! Single button object responding to two inputs
  *
- * DualButton acts like a single button, but will respond to input
- * from one of two separate DebouncedButtons on different pins and
- * potentially with different pin logic. This makes it easy to have
- * a second input (e.g. wired button and FM button) whilst 
- * maintaining the clean syntax of a single button object in your
- * sketch.
+ *  \deprecated This class is now deprecated and will be removed from
+ *  Mutile in the near future. Please consider using DualInputButton 
+ *  for instantaneous buttons, and DebouncedDualButton for a version
+ *  with tapped() and other debounced features.
+ *
+ *  DualButton acts like a single button, but will respond to input
+ *  from one of two separate DebouncedButtons on different pins and
+ *  potentially with different pin logic. This makes it easy to have
+ *  a second input (e.g. wired button and FM button) whilst 
+ *  maintaining the clean syntax of a single button object in your
+ *  sketch.
  *
  */
 class DualButton {
