@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include "AnalogButton.h"
 
-AnalogButton::AnalogButton(const uint8_t pin, const uint16_t analogThreshold, const bool invert) : 
+AnalogButton::AnalogButton(const uint8_t pin, const bool pullup, const uint16_t analogThreshold) : 
     _pin(pin),
-    _analogThreshold(analogThreshold),
-    _invert(invert)
+    _pullup(pullup),
+    _analogThreshold(analogThreshold)
 {
 }
 
@@ -15,7 +15,7 @@ void AnalogButton::begin()
 
 bool AnalogButton::on()
 {
-    if (_invert) {
+    if (_pullup) {
         return (uint16_t)analogRead(_pin) <= _analogThreshold;
     } else {
         return (uint16_t)analogRead(_pin) > _analogThreshold;

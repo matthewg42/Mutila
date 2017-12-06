@@ -19,10 +19,10 @@ public:
     /*! Constructor.
      *
      * \param pin the pin used for this button.
+     * \param pullup if true pin==LOW means on, else pin==HIGH is on.
      * \param analogThreshold the value mid way between the on and off states as reported by analogRead.
-     * \param invert if true, the logic of he button in inverted
      */
-    DebouncedAnalogButton(const uint8_t pin, const uint16_t analogThreshold=512, const bool invert=false);
+    DebouncedAnalogButton(const uint8_t pin, const bool pullup=true, const uint16_t analogThreshold=512);
 
     /*! Initialization
      *

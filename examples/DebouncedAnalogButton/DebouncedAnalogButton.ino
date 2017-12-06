@@ -23,7 +23,7 @@ void loop()
         DB(Millis(), HEX);
         DB(" analog value=");
         DB(analogRead(A0));
-        DB(" Button on=");
+        DB(" logical button value=");
         DB(Button.on());
         DB(" tapped=");
         DB(Button.tapped());

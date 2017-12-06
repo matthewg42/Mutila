@@ -6,6 +6,7 @@
 const uint8_t ButtonPin = A0;
 const uint8_t LedPin = 13;
 bool previousValue = false;
+uint32_t LastDb = 0;
 
 AnalogButton Button(ButtonPin);
 
@@ -37,12 +38,12 @@ void loop()
 void checkButton()
 {
     bool newValue = Button.on();
-    if (newValue != previousValue) {
+    if (newValue != previousValue || DoEvery(200, LastDb)) {
         DB("Millis=0x");
         DB(Millis(), HEX);
         DB(" analog value=");
         DB(analogRead(ButtonPin));
-        DB(" button changed to: ");
+        DB(" logical button value=");
         DBLN(newValue);
         previousValue = newValue;
         digitalWrite(LedPin, newValue);

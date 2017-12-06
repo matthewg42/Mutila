@@ -21,11 +21,18 @@ public:
     /*! Constructor.
      *
      *  \param pin the pin which he button is connected to.
+     *  \param pullup if true pin==LOW means on, else pin==HIGH is on.
      *  \param analogThreshold the value above which the button 
      *         is considered to be on.
-     *  \param invert when true, inverts the value
+     *
+     *  Note: it is typical for digital buttons to be held high by a 
+     *  pullup resistor (either internal or external) pullup, and 
+     *  activated by pulling the pin to ground. This "inverted logic" 
+     *  is replicated here with the default value of pullup. However, 
+     *  there is no internal pullup resistor some analog pins, so an 
+     *  external pullup should be used where necessary.
      */
-    AnalogButton(const uint8_t pin, const uint16_t analogThreshold=512, const bool invert=false);
+    AnalogButton(const uint8_t pin, const bool pullup=true, const uint16_t analogThreshold=512);
 
     /*! Initialization.
      *
@@ -44,8 +51,8 @@ public:
 
 protected:
     const uint8_t _pin;
+    const bool _pullup;
     const uint16_t _analogThreshold;
-    const bool _invert;
 
 };
 
