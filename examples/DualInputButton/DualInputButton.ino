@@ -13,7 +13,9 @@ uint32_t LastDb = 0;
 
 DigitalInputButton Button1(DigitalInputButtonPin);
 AnalogInputButton Button2(AnalogInputButtonPin);
-DualInputButton CombinedButton(Button1, Button2);
+DualInputButton CombinedButtonOr(Button1, Button2); // default is Or mode
+DualInputButton CombinedButtonXor(Button1, Button2, DualInputButton::Xor);
+DualInputButton CombinedButtonAnd(Button1, Button2, DualInputButton::And);
 
 void setup()
 {
@@ -21,7 +23,9 @@ void setup()
 
     // We don't need to call begin() for Button1 and Button2
     // because CombinedButton.begin() will do it for us.
-    CombinedButton.begin();
+    CombinedButtonOr.begin();
+    CombinedButtonXor.begin(false);
+    CombinedButtonAnd.begin(false);
 
     pinMode(LedPin, OUTPUT);
 
@@ -44,8 +48,12 @@ void loop()
         DB(Button1.on());
         DB(" Button2 on=");
         DB(Button2.on());
-        DB(" CombinedButton on=");
-        DBLN(CombinedButton.on());
+        DB(" CombinedButtonOr on=");
+        DB(CombinedButtonOr.on());
+        DB(" CombinedButtonXor on=");
+        DB(CombinedButtonXor.on());
+        DB(" CombinedButtonAnd on=");
+        DBLN(CombinedButtonAnd.on());
     }
 }
 

@@ -17,12 +17,19 @@
  */
 class DualInputButton : public AbstractButton {
 public:
+    enum MixMode {
+        Or,
+        Xor,
+        And
+    };
+public:
     /*! Constructor.
      *
      *  \param button1 a reference to the first button object.
      *  \param button2 a reference to the second button object.
+     *  \param mix how to combine the two inputs.
      */
-    DualInputButton(AbstractButton& button1, AbstractButton& button2);
+    DualInputButton(AbstractButton& button1, AbstractButton& button2, const MixMode mix=Or);
 
     /*! Initialization.
      *
@@ -42,6 +49,7 @@ public:
 protected:
     AbstractButton& _button1;
     AbstractButton& _button2;
+    const MixMode _mix;
 
 };
 
