@@ -11,6 +11,18 @@
  */
 class Heartbeat {
 public:
+    static const uint16_t NormalOnMs =      50;
+    static const uint16_t NormalOffMs =     450;
+    static const uint16_t QuickOnMs =       25;
+    static const uint16_t QuickOffMs =      125;
+    static const uint16_t QuickerOnMs =     25;
+    static const uint16_t QuickerOffMs =    25;
+    static const uint16_t SlowOnMs =        50;
+    static const uint16_t SlowOffMs =       950;
+    static const uint16_t SlowerOnMs =      50;
+    static const uint16_t SlowerOffMs =     1950;
+
+public:
     /*! Flashing mode */
 	enum Mode {
 		Normal=0, //!< blinks every 500ms

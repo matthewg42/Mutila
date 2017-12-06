@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "Mutila.h"
+#include "MutilaDebug.h"
 #include "Heartbeat.h"
 #include "Millis.h"
 
@@ -35,24 +35,24 @@ void Heartbeat::setMode(Mode mode)
 	_mode = mode;
 	switch (_mode) {
 	case Normal:
-        _onTime = HEARTBEAT_NORMAL_ON_MS;
-        _offTime = HEARTBEAT_NORMAL_OFF_MS;
+        _onTime = NormalOnMs;
+        _offTime = NormalOffMs;
 		break;
 	case Quick:
-        _onTime = HEARTBEAT_QUICK_ON_MS;
-        _offTime = HEARTBEAT_QUICK_OFF_MS;
+        _onTime = QuickOnMs;
+        _offTime = QuickOffMs;
 		break;
 	case Quicker:
-        _onTime = HEARTBEAT_QUICKER_ON_MS;
-        _offTime = HEARTBEAT_QUICKER_OFF_MS;
+        _onTime = QuickerOnMs;
+        _offTime = QuickerOffMs;
 		break;
 	case Slow:
-        _onTime = HEARTBEAT_SLOW_ON_MS;
-        _offTime = HEARTBEAT_SLOW_OFF_MS;
+        _onTime = SlowOnMs;
+        _offTime = SlowOffMs;
 		break;
 	case Slower:
-        _onTime = HEARTBEAT_SLOWER_ON_MS;
-        _offTime = HEARTBEAT_SLOWER_OFF_MS;
+        _onTime = SlowerOnMs;
+        _offTime = SlowerOffMs;
 		break;
     case Off:
         _onTime = 0;
@@ -89,10 +89,16 @@ void Heartbeat::update()
         return;
     }
     uint32_t wait = _pinState ? _onTime : _offTime;
-    if (_onTime == 0 && _pinState) {
-        updatePin(0);
-    } else if (_offTime == 0 && !_pinState) {
-        updatePin(1);
+    if (_onTime == 0) {
+        if (_pinState) {
+            updatePin(0);
+        }
+        return;
+    } else if (_offTime == 0) {
+        if (!_pinState) {
+            updatePin(1);
+        }
+        return;
     } else if (MillisSince(_lastStateFlip) >= wait) {
         updatePin(!_pinState);
     }
@@ -100,6 +106,8 @@ void Heartbeat::update()
 
 void Heartbeat::updatePin(bool state)
 {
+    DB("updating pin to ");
+    DBLN(state);
     _pinState = state;
     digitalWrite(_pin, _invertedLogic ? !_pinState : _pinState);
     _lastStateFlip = Millis();

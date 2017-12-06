@@ -1,8 +1,0 @@
-Work to do in deal-with-millis-wrap branch b4 merge
-
-General cleanup / consistency making:
-- some attention to Doxygen brief / param tags
-
-Moar work:
-- See if we can efficiently work Toggle Button into new button framework
-- After button hierarchy work, remove DEBOUNDED... defines from Mutila.h

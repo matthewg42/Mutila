@@ -4,7 +4,7 @@
 #include <Heartbeat.h>
 #include <Millis.h>
 
-const uint8_t ButPin = 3;
+const uint8_t ButPin = 6;
 const uint8_t LedPin = 13;
 uint32_t LastMessage = 0;
 
@@ -30,7 +30,7 @@ void loop()
     button.update();
 
     // Show that we're working over Millis() wrap around
-    if (MillisSince(LastMessage) >= 100) {
+    if (DoEvery(100, LastMessage)) {
         DB("Millis=0x");
         DBLN(Millis(), HEX);
     }
