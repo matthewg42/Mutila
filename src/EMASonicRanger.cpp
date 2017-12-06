@@ -20,8 +20,6 @@ void EMASonicRanger::begin()
 
 void EMASonicRanger::update()
 {
-    //TODO remove
-    //if (_periodMs == 0 || Millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
     if (_periodMs == 0 || MillisSince(_lastUpdated) >= _periodMs) {
         uint16_t sample = SonicRanger::getRange();
         if (sample >= _minimumRange) {

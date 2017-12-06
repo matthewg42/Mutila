@@ -23,8 +23,6 @@ void EMASampler::begin()
 
 void EMASampler::update() 
 {
-    // TODO: remove
-    //if (_periodMs == 0 || Millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
     if (_periodMs == 0 || MillisSince(_lastUpdated) >= _periodMs) {
         _lastSample = analogRead(_pin);
         _DB(F("EMASampler::update sample="));

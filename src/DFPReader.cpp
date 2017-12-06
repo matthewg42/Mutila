@@ -40,8 +40,6 @@ void DFPReader::begin()
 void DFPReader::update()
 {
     if (playbackState == Pending) {
-        //TODO remove
-        //if (Millis() - lastPlayStart >= PlaybackStartMs) {
         if (MillisSince(lastPlayStart) >= PlaybackStartMs) {
             _DBLN(F("playbackState Pending -> Playing"));
             playbackState = Playing;

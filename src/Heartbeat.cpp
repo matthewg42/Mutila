@@ -93,8 +93,6 @@ void Heartbeat::update()
         updatePin(0);
     } else if (_offTime == 0 && !_pinState) {
         updatePin(1);
-    //TODO remove
-    //} else if (Millis() - _lastStateFlip >= wait) {
     } else if (MillisSince(_lastStateFlip) >= wait) {
         updatePin(!_pinState);
     }

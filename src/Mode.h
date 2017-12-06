@@ -83,8 +83,6 @@ public:
      *
      */
     virtual void update() { 
-        //TODO remove
-        //if (now >= _lastUpdateMs + _updatePeriodMs || _lastUpdateMs==0) {
         uint32_t now = Millis();
         if (MillisSince(_lastUpdateMs, now) > _updatePeriodMs || _state == Started) {
             modeUpdate();

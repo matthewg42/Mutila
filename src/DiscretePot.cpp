@@ -20,8 +20,6 @@ void DiscretePot::begin(int8_t min, int8_t max, bool reversed, uint8_t threshold
 
 void DiscretePot::update()
 {
-    //TODO remove
-    //if (Millis() > _lastUpdate + _delay) {
     if (DoEvery(_delay, _lastUpdate)) {
         int8_t valueNow = _value();
         if (valueNow != _state) {

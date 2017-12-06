@@ -90,8 +90,6 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     // Populate buffer with response.
     while(true) {
         // Handle timeouts
-        //TODO remove
-        //if (Millis() > startRecv + DFP_RESP_TIMEOUT_MS) {
         if (MillisSince(startRecv) > ResponseTimeoutMs) {
             response.status = DFPResponse::Timeout;
             break;
@@ -124,8 +122,6 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
         }
     }
     // calculate how long comms took
-    // TODO remove
-    // uint32_t durationRecv = Millis() - startRecv;
     uint32_t durationRecv = MillisSince(startRecv);
 
     _DB(F("DF RX:"));
@@ -198,8 +194,6 @@ void DFPlayerMini::serialCmd()
 {
     // wait until some short time has passed since the last command
     // so the DFPlayer Mini has had a chance to process it...
-    //TODO remove
-    //while (Millis() < _lastCmdSent + DFP_MIN_TIME_MS) {
     while (MillisSince(_lastCmdSent) < MinimumTimeMs) {
         delay(1);
     }
