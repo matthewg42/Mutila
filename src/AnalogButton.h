@@ -11,7 +11,7 @@
  *  logic from the user of the class (choose logic params in 
  *  constructor).
  *
- *  Usually, a digital RawButton will be better, but a few pins on
+ *  Usually, a digital DigitalButton will be better, but a few pins on
  *  some microcontrollers (A6, A7 on the Nano, for example), cannot
  *  read in digitial mode, so this lets those pins be used as
  *  buttons.

@@ -4,20 +4,20 @@
 #include "Millis.h"
 
 DebouncedButton::DebouncedButton(uint8_t pin, bool pullup) :
-    RawButton(pin, pullup)
+    DigitalButton(pin, pullup)
 {
 }
 
 void DebouncedButton::begin(uint8_t threshold, uint8_t delay)
 {
     AbstractDebouncedButton::begin(threshold, delay);
-    RawButton::begin();
+    DigitalButton::begin();
 }
 
 void DebouncedButton::update()
 {
     if (DoEvery(_delay, _lastUpdate)) {
-        if (RawButton::on() != _state) {
+        if (DigitalButton::on() != _state) {
             _counter++;
             if (_counter > _threshold) {
                 setState(!_state);

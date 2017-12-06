@@ -27,7 +27,7 @@ void DebouncedAnalogButton::update()
     }
 }
 
-// over-rides RawButton::on
+// over-rides DigitalButton::on
 bool DebouncedAnalogButton::on()
 {
     return _state;

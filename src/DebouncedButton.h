@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "Mutila.h"
 #include "AbstractDebouncedButton.h"
-#include "RawButton.h"
+#include "DigitalButton.h"
 
 /*! Timeslice-based button with debouncing
  *
@@ -13,7 +13,7 @@
  *  The update() method must be called frequently (usually from 
  *  loop()) to work properly.
  */
-class DebouncedButton : public AbstractDebouncedButton, public RawButton {
+class DebouncedButton : public AbstractDebouncedButton, public DigitalButton {
 public:
     /*! Constructor.
      *

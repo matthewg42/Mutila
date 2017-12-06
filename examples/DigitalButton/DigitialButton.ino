@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <RawButton.h>
+#include <DigitalButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
 
@@ -7,7 +7,7 @@ const uint8_t ButtonPin = 6;
 const uint8_t LedPin = 13;
 bool previousValue = false;
 
-RawButton MyButton(ButtonPin);
+DigitalButton MyButton(ButtonPin);
 
 // Function prototypes. Not necessary for the IDE, but when building with
 // make, we need them if we're to put setup and loop at the top of this
