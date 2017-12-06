@@ -79,6 +79,12 @@ Doxygen-generated documentation can be found here: https://matthewg42.github.io/
 
 Similar to the ones implemented in EspApConfigurator (by the same Author), but that works with both ESP and Arduino hardware (the use of the EEPROM library for ESP devices is incompatible with regular Arduino EEPROM usage).
 
+This should include the same first-byte-of-eeprom-is-fingerprint thing, which lets is auto-revert to defaults if the settings fingerprint doesn't match what's in EEPROM (e.g. first time we burn the firmware to a device).
+
+### Auto version message
+
+It would be really nice to have some mechanism to write the current project version, and library versions into flash automatically.  By version I guess I mean git short hash of library version from library.properties.
+
 ### StickyButton
 
 * When pushed, stays on for some period of time and then switches off.
