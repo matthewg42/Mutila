@@ -1,9 +1,8 @@
 #include <Arduino.h>
 #include "DiscretePot.h"
-#include "Mutila.h"
 #include "Millis.h"
 
-DiscretePot::DiscretePot(uint8_t pin) :
+DiscretePot::DiscretePot(const uint8_t pin) :
     _pin(pin)
 {
 }
@@ -20,7 +19,7 @@ void DiscretePot::begin(int8_t min, int8_t max, bool reversed, uint8_t threshold
 
 void DiscretePot::update()
 {
-    if (Millis() > _lastUpdate + _delay) {
+    if (DoEvery(_delay, _lastUpdate)) {
         int8_t valueNow = _value();
         if (valueNow != _state) {
             _counter++;
@@ -30,7 +29,6 @@ void DiscretePot::update()
         } else if (_counter > 0) {
             _counter = 0;
         }
-        _lastUpdate = Millis();
     }
 }
 
@@ -57,6 +55,4 @@ void DiscretePot::setState(int8_t newState)
     _state = newState;
     _counter = 0;
 }
-
-
 

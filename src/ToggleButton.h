@@ -2,13 +2,13 @@
 
 #include "DebouncedButton.h"
 
-/*! \brief PushButton which toggles state
+/*! PushButton which toggles state.
  *
- * Push once - on.  Push again - off.
+ *  Push once - on.  Push again - off.
  */
 class ToggleButton {
 public:
-    /*! Constructor
+    /*! Constructor.
      *
      * \param pin the pin which he button is connected to.
      * \param pullup sets the logic type for the button.
@@ -23,26 +23,26 @@ public:
      */
     ToggleButton(uint8_t pin, bool pullup=true);
 
-    /*! Initialization
+    /*! Initialization.
      *
-     * \param startState which state (on or off) the toggle starts in
-     * \param threshold how many tests of the pin must match for a press detection
-     * \param delay number of ms between tests of press detection
+     * \param startState which state (on or off) the toggle starts in.
+     * \param threshold how many tests of the pin must match for a press detection.
+     * \param delay number of ms between tests of press detection.
      *
      * Should be called from setup(), or at any rate, before
      * other members are called. This will set the pinMode. The
      * minimum time it takes for button presses / released to register
      * is threshold * delay.
      */
-    void begin(bool startState=false, uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(bool startState=false, uint8_t threshold=AbstractDebouncedButton::DefaultThreshold, uint8_t delay=AbstractDebouncedButton::DefaultButtonDelay);
 
-    /*! Allocate Timeslice
+    /*! Allocate Timeslice.
      *
-     * This method must be called frequently - usually from loop()
+     * This method must be called frequently - usually from loop().
      */
     void update();
 
-    /*! Test toggle state
+    /*! Test toggle state.
      *
      * \return true if the toggle is on, else false.
      *
@@ -54,3 +54,4 @@ private:
     bool _toggled;
 
 };
+

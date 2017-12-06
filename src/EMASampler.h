@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <AbstractSampler.h>
 
-/*! \brief Exponential Moving Average (EMA) analog pin sampler
+/*! \brief Exponential Moving Average (EMA) analog pin sampler.
  *
  * This sampler is used to calculate the exponential moving average for the
  * analog values read from a pin. This method can be used to smooth a value over
@@ -27,26 +27,30 @@
  */
 class EMASampler : public AbstractSampler {
 public:
-    /*! Constructor
-     * \param pin the analog pin to read samples from
-     * \param periodMs the minimum gap between taking samples
+    /*! Constructor.
+     *
+     * \param pin the analog pin to read samples from.
+     * \param periodMs the minimum gap between taking samples.
      * \param alpha for determining number of samples to smooth over 
      *        (between 0 and 1 - a higher alpha discounts older samples 
      *        faster).
      */
     EMASampler(const uint8_t pin, const uint16_t periodMs=10, const float alpha=0.5);
 
-    //! Destructor
+    /*! Destructor.
+     */  
     ~EMASampler() {;}
 
-    /*! Initialization
+    /*! Initialization.
+     *
      * Should be called before use, and may also be called at any time to clear the
      * moving average value. Note the moving average will be set to 0 when begin()
      * in called.
      */
     virtual void begin();
 
-    /*! Time slice allocation
+    /*! Time slice allocation.
+     *
      * This method should be called every time a sample is to be taken. 
      * If the object was constucted with periodMs > 0, this method will
      * only take into account a new sample if at least periodMs milliseconds
@@ -54,17 +58,19 @@ public:
      */
     virtual void update();
 
-    //! The mean value in the sample set
+    /*! The mean value in the sample set.
+     */
     virtual float average() { return _movingAverage; }
 
-    //! Get the most recent sample
-    virtual int last() { return _lastSample; }
+    /*! Get the most recent sample.
+     */  
+    virtual int16_t last() { return _lastSample; }
 
 protected:
     float _alpha;               //!< alpha value used in EMA calculation
-    unsigned long _lastUpdated; //!< when last sample taken
+    uint32_t _lastUpdated;      //!< when last sample taken
     float _movingAverage;       //!< most recently calculated mean value
-    int _lastSample;            //!< keep the most recent sample
+    int16_t _lastSample;        //!< keep the most recent sample
 
 };
 

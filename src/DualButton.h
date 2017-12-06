@@ -2,14 +2,19 @@
 
 #include "DebouncedButton.h"
 
-/*! \brief Single button object responding to two inputs
+/*! Single button object responding to two inputs
  *
- * DualButton acts like a single button, but will respond to input
- * from one of two separate DebouncedButtons on different pins and
- * potentially with different pin logic. This makes it easy to have
- * a second input (e.g. wired button and FM button) whilst 
- * maintaining the clean syntax of a single button object in your
- * sketch.
+ *  \deprecated This class is now deprecated and will be removed from
+ *  Mutile in the near future. Please consider using DualInputButton 
+ *  for instantaneous buttons, and DebouncedDualButton for a version
+ *  with tapped() and other debounced features.
+ *
+ *  DualButton acts like a single button, but will respond to input
+ *  from one of two separate DebouncedButtons on different pins and
+ *  potentially with different pin logic. This makes it easy to have
+ *  a second input (e.g. wired button and FM button) whilst 
+ *  maintaining the clean syntax of a single button object in your
+ *  sketch.
  *
  */
 class DualButton {
@@ -29,7 +34,7 @@ public:
      * other members are called. This will call the begin() method
      * in both of the linked DebouncedButtons.
      */
-    void begin(uint8_t threshold=DEBOUNCED_BUTTON_THRESHOLD, uint8_t delay=DEBOUNCED_BUTTON_DELAY);
+    void begin(uint8_t threshold=AbstractDebouncedButton::DefaultThreshold, uint8_t delay=AbstractDebouncedButton::DefaultButtonDelay);
 
     /*! Allocate Timeslice
      *
@@ -67,7 +72,7 @@ public:
      *         than specified time.
      *
      */
-    bool held(uint16_t ms=DEBOUNCED_BUTTON_HELD_MS);
+    bool held(uint16_t ms=AbstractDebouncedButton::DefaultHeldMs);
 
     /*! Get periodic press results when either button is held.
      *
@@ -75,7 +80,7 @@ public:
      * \param repeatMs time between subsequent releats
      * \return true when either button is pushed, but only every so often...
      */
-    bool repeat(uint16_t initialMs=DEBOUNCED_BUTTON_RPT_INITIAL_MS, uint16_t repeatMs=DEBOUNCED_BUTTON_RPT_MS);
+    bool repeat(uint16_t initialMs=AbstractDebouncedButton::DefaultButtonRepeatInitialMs, uint16_t repeatMs=AbstractDebouncedButton::DefaultButtonRepeatMs);
 
 private:
     DebouncedButton* _b1;

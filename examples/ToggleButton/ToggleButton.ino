@@ -3,31 +3,33 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-#define BUT_PIN 2
-#define LED_PIN 13
-#define OUTPUT_MS 50
+const uint8_t ButtonPin = 6;
+const uint8_t LedPin = 13;
+const uint8_t OutputMs = 50;
+uint32_t LastDb = 0;
 
-ToggleButton MyButton(BUT_PIN);
-unsigned long next = OUTPUT_MS;
+ToggleButton MyButton(ButtonPin);
 
 void setup()
 {
     Serial.begin(115200);
     MyButton.begin();
-    pinMode(LED_PIN, OUTPUT);
-    delay(300);
+    pinMode(LedPin, OUTPUT);
+    // Show that code works over Millis wrap
+    addMillisOffset(0xFFFFF000);
     DBLN("setup() complete");
 }
 
 void loop()
 {
     MyButton.update();
-    if (Millis() > next) {
-        next = Millis() + OUTPUT_MS;
+    if (DoEvery(OutputMs, LastDb)) {
         bool o = MyButton.on();
-        DB("ToggleButton.on()=");
+        DB("Millis=0x");
+        DB(Millis(), HEX);
+        DB(" ToggleButton.on()=");
         DBLN(o);
-        digitalWrite(LED_PIN, o);
+        digitalWrite(LedPin, o);
     }
 }
 

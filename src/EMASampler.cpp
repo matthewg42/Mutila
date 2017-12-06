@@ -16,14 +16,14 @@ void EMASampler::begin()
 {
     _DBLN(F("EMASampler::begin"));
     // Note: no need to set pinMode for analog inputs
-    _lastUpdated = Millis();
     _movingAverage = analogRead(_pin);
     _lastSample = _movingAverage;
+    _lastUpdated = Millis();
 }
 
 void EMASampler::update() 
 {
-    if (_periodMs == 0 || Millis() >= _lastUpdated + _periodMs || _lastUpdated == 0) {
+    if (_periodMs == 0 || MillisSince(_lastUpdated) >= _periodMs) {
         _lastSample = analogRead(_pin);
         _DB(F("EMASampler::update sample="));
         _DBLN(_lastSample);

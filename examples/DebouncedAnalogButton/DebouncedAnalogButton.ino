@@ -3,35 +3,34 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-DebouncedAnalogButton b1(A6);
-DebouncedAnalogButton b2(A7);
+DebouncedAnalogButton Button(A0);
 
-unsigned long last = 0;
+uint32_t LastDb = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    b1.begin();
-    b2.begin();
+    Button.begin();
+    addMillisOffset(0xFFFFF000);
     DBLN("setup() complete");
 }
 
 void loop() 
 {
-    b1.update();
-    b2.update();
-    if (Millis() > last + 50) {
-        DB("b1 on=");
-        DB(b1.on());
+    Button.update();
+    if (DoEvery(100, LastDb)) {
+        DB("Millis=0x");
+        DB(Millis(), HEX);
+        DB(" analog value=");
+        DB(analogRead(A0));
+        DB(" logical button value=");
+        DB(Button.on());
         DB(" tapped=");
-        DB(b1.tapped());
+        DB(Button.tapped());
+        DB(" repeat=");
+        DB(Button.repeat());
         DB(" held=");
-        DB(b1.held());
-        DB("  b2 on=");
-        DB(b2.on());
-        DB(" tapped=");
-        DB(b2.tapped());
-        DB(" held=");
-        DBLN(b2.held());
+        DBLN(Button.held());
     }
 }
+

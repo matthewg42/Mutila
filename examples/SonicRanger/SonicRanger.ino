@@ -3,15 +3,17 @@
 #include <SonicRanger.h>
 #include <Millis.h>
 
-#define TRIG_PIN        6
-#define ECHO_PIN        5
+const uint8_t TriggerPin = 3;
+const uint8_t EchoPin = 4;
 
-SonicRanger ranger(TRIG_PIN, ECHO_PIN);
+SonicRanger Ranger(TriggerPin, EchoPin);
 
 void setup()
 {
     Serial.begin(115200);
-    ranger.begin();
+    Ranger.begin();
+    // Show we can handle Millis wrap
+    addMillisOffset(0xFFFFF000);
     delay(300);
     DBLN("setup() complete");
 }
@@ -19,13 +21,17 @@ void setup()
 void loop()
 {
     unsigned long before = Millis();
-    uint16_t cm = ranger.getRange();
+    uint16_t cm = Ranger.getRange();
     unsigned long after = Millis();
-    DB("range = ");
+
+    DB("Millis=0x");
+    DB(Millis(), HEX);
+    DB(" range = ");
     DB(cm);
     DB(" cm, took ");
-    DB(after - before);
+    DB(MillisSince(before, after));
     DBLN("ms");
-    delay(500);
+
+    delay(50);
 }
 

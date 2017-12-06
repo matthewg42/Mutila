@@ -2,16 +2,13 @@
 
 #include <stdint.h>
 
-/*! \brief HC-SR04 Ultrasonic ranger device
+/*! HC-SR04 Ultrasonic ranger device
  *
- * SonicRanger provides a simple wrapper around the calculation 
- * necessary to determine the range of an object using a HC-SR04
- * ultrasonic range finder.
+ *  SonicRanger provides a simple wrapper around the calculation 
+ *  necessary to determine the range of an object using a HC-SR04
+ *  ultrasonic range finder.
  *
  */
-
-#define SONIC_RANGE_DEFAULT_MAX_CM      200
-#define SONIC_RANGE_DEFAULT_TIMEOUT_MS  15UL
 
 #ifdef ARDUINO_AVR_DIGISPARK
 unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
@@ -19,58 +16,60 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
 
 class SonicRanger {
 public:
-    /*! Constructor 
+    static const uint16_t DefaultMaxRangeCm = 200;
+    static const uint8_t DefaultTimeoutMs = 15;
+
+public:
+    /*! Constructor.
      *
-     * \param trigPin the arduino pin conneced to the TRIG pin of the HC-SR04 device
-     * \param echoPin the arduino pin conneced to the ECHO pin of the HC-SR04 device
+     *  \param trigPin the arduino pin conneced to the TRIG pin of the HC-SR04 device.
+     *  \param echoPin the arduino pin conneced to the ECHO pin of the HC-SR04 device.
      */
     SonicRanger(const uint8_t trigPin, const uint8_t echoPin);
-    /*! Initialization
+    /*! Initialization.
      *
-     * Typically called from setup() 
+     *  Typically called from setup().
      */
     void begin();
-    /*! Get range in cm 
+    /*! Get range in cm.
      *
-     * Return the range of the nearest object to the HC-SR04
-     * device in cm (approximate)
+     *  \return the range of the nearest object to the HC-SR04
+     *          device in cm (approximate). If no object is in range, 
+     *          some the maximum range (200 cm) will be returned.
      *
-     * If no object is in range, some the maximum range (200 cm)
-     * will be returned.
+     *  NOTE: execution time depends on the range to an object.
+     *  Of no object is in range, the ranging will time out after
+     *  15ms. The maximum range and timeout values can be set
+     *  using setMaxRange() and setTimeoutMs().
      *
-     * NOTE: execution time depends on the range to an object.
-     * Of no object is in range, the ranging will time out after
-     * 15ms. The maximum range and timeout values can be set
-     * using setMaxRange() and setTimeoutMs().
-     *
-     * Range=10cm, execution time ~1 ms
-     * Range=50cm, execution time ~4 ms
-     * Range=100cm, execution time ~7 ms
-     * Range=150cm, execution time ~10 ms
-     * Range=>200cm, execution time ~15 ms
+     *  Range=10cm, execution time ~1 ms
+     *  Range=50cm, execution time ~4 ms
+     *  Range=100cm, execution time ~7 ms
+     *  Range=150cm, execution time ~10 ms
+     *  Range=>200cm, execution time ~15 ms
      */
     uint16_t getRange();
 
     /*! Set maximum range
      *
-     * \param cm the new maximum range in cm.
+     *  \param cm the new maximum range in cm.
      */
     void setMaxRange(uint16_t cm) { _maxCm = cm; }
 
-    /*! Set timeout in ms
+    /*! Set timeout in ms.
      *
-     * \param ms the new timeout in milliseconds.
+     *  \param ms the new timeout in milliseconds.
      *
-     * Note that you need to allow about 7 ms for every 100
-     * cm of range you wish to be able to measure. Typically
-     * HC-SR04 units can only reliably measure ranges of up
-     * a couple of meters. 
+     *  Note that you need to allow about 7 ms for every 100
+     *  cm of range you wish to be able to measure. Typically
+     *  HC-SR04 units can only reliably measure ranges of up
+     *  a couple of meters. 
      */
     void setTimeoutMs(uint16_t ms) { _timeoutMs = ms; }
 
 private:
-    uint8_t _trigPin;
-    uint8_t _echoPin;
+    const uint8_t _trigPin;
+    const uint8_t _echoPin;
     uint16_t _maxCm;
     uint16_t _timeoutMs;
 

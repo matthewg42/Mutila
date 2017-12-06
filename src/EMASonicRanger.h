@@ -12,7 +12,7 @@
  */
 class EMASonicRanger : public SonicRanger {
 public:
-    /*! Constructor 
+    /*! Constructor.
      *
      * \param trigPin the arduino pin conneced to the TRIG pin of the HC-SR04 device
      * \param echoPin the arduino pin conneced to the ECHO pin of the HC-SR04 device
@@ -47,7 +47,7 @@ public:
 private:
     uint16_t _periodMs;         //!< how often we will fetch from hw
     float _alpha;               //!< alpha value used in EMA calculation
-    unsigned long _lastUpdated; //!< when last sample taken
+    uint32_t _lastUpdated;      //!< when last sample taken
     float _movingAverage;       //!< most recently calculated mean value
     uint16_t _lastSample;       //!< keep the most recent sample
     uint16_t _minimumRange;     //!< set to non-0 to discard samples below minimum

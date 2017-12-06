@@ -3,17 +3,17 @@
 #include "Millis.h"
 
 const uint8_t DFPReader::SMALL_NUMBERS[] = {
-        MP3_TRACK_ZERO, MP3_TRACK_ZERO+1, MP3_TRACK_ZERO+2, MP3_TRACK_ZERO+3, 
-        MP3_TRACK_ZERO+4, MP3_TRACK_ZERO+5, MP3_TRACK_ZERO+6, MP3_TRACK_ZERO+7, 
-        MP3_TRACK_ZERO+8, MP3_TRACK_ZERO+9, MP3_TRACK_ZERO+10, MP3_TRACK_ZERO+11, 
-        MP3_TRACK_ZERO+12, MP3_TRACK_ZERO+13, MP3_TRACK_ZERO+14, MP3_TRACK_ZERO+15,
-        MP3_TRACK_ZERO+16, MP3_TRACK_ZERO+17, MP3_TRACK_ZERO+18, MP3_TRACK_ZERO+19
+        Mp3TrackZero, Mp3TrackZero+1, Mp3TrackZero+2, Mp3TrackZero+3, 
+        Mp3TrackZero+4, Mp3TrackZero+5, Mp3TrackZero+6, Mp3TrackZero+7, 
+        Mp3TrackZero+8, Mp3TrackZero+9, Mp3TrackZero+10, Mp3TrackZero+11, 
+        Mp3TrackZero+12, Mp3TrackZero+13, Mp3TrackZero+14, Mp3TrackZero+15,
+        Mp3TrackZero+16, Mp3TrackZero+17, Mp3TrackZero+18, Mp3TrackZero+19
 };
 
 const uint8_t DFPReader::TENS[] = {
-        0, 0, MP3_TRACK_TWENTY, MP3_TRACK_THIRTY, MP3_TRACK_FOURTY,
-        MP3_TRACK_FIFTY, MP3_TRACK_SIXTY, MP3_TRACK_SEVENTY, 
-        MP3_TRACK_EIGHTY, MP3_TRACK_NINETY
+        0, 0, Mp3TrackTwenty, Mp3TrackThirty, Mp3TrackFourty,
+        Mp3TrackFifty, Mp3TrackSixty, Mp3TrackSeventy, 
+        Mp3TrackEighty, Mp3TrackNinety
 };
 
 DFPReader::DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd, uint8_t busyPin, uint8_t readerBufferSize) :
@@ -40,7 +40,7 @@ void DFPReader::begin()
 void DFPReader::update()
 {
     if (playbackState == Pending) {
-        if (Millis() - lastPlayStart >= DFPR_PLAYBACK_START_MS) {
+        if (MillisSince(lastPlayStart) >= PlaybackStartMs) {
             _DBLN(F("playbackState Pending -> Playing"));
             playbackState = Playing;
         }
@@ -85,25 +85,25 @@ void DFPReader::readNumber(double number, uint8_t dp)
     _DBLN(fractionalPart, 10);
 
     if (integerPart < 0.0) {
-        appendElement(MP3_TRACK_MINUS);
+        appendElement(Mp3TrackMinus);
         integerPart = fabs(integerPart);
     }
 
     if (integerPart < 0.1) {
-        appendElement(MP3_TRACK_ZERO);
+        appendElement(Mp3TrackZero);
     } else {
-        appendMagnitude(&integerPart, 1000000000000.0, MP3_TRACK_TRILLION);
-        appendMagnitude(&integerPart, 1000000000.0, MP3_TRACK_BILLION);
-        appendMagnitude(&integerPart, 1000000, MP3_TRACK_MILLION);
-        appendMagnitude(&integerPart, 1000, MP3_TRACK_THOUSAND);
+        appendMagnitude(&integerPart, 1000000000000.0, Mp3TrackTrillion);
+        appendMagnitude(&integerPart, 1000000000.0, Mp3TrackBillion);
+        appendMagnitude(&integerPart, 1000000, Mp3TrackMillion);
+        appendMagnitude(&integerPart, 1000, Mp3TrackThousand);
         appendSubThousand((long)integerPart);
     }
 
     if (dp > 0) {
-        appendElement(MP3_TRACK_POINT);
+        appendElement(Mp3TrackPoint);
         for (uint8_t i=1; i<dp+1; i++) {
-            uint8_t digit = (unsigned long)(fractionalPart*pow(10, i))%10;
-            appendElement(MP3_TRACK_ZERO+digit);
+            uint8_t digit = (uint32_t)(fractionalPart*pow(10, i))%10;
+            appendElement(Mp3TrackZero+digit);
         }
     }
 }
@@ -158,7 +158,7 @@ void DFPReader::appendSubThousand(int num)
 {
     if (num >= 100) {
         appendElement(SMALL_NUMBERS[num / 100]);
-        appendElement(MP3_TRACK_HUNDRED);
+        appendElement(Mp3TrackHundred);
         num %= 100;
     }
     if (num >= 20) {

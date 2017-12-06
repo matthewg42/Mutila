@@ -26,7 +26,8 @@ void ModeTwo_::modeStop()
 
 void ModeTwo_::modeUpdate()
 {
-    DBLN(F("ModeTwo::modeUpdate() doing a thing..."));
+    DB(F("ModeTwo::modeUpdate() Millis=0x"));
+    DBLN(Millis(), HEX);
 }
 
 bool ModeTwo_::isFinished()

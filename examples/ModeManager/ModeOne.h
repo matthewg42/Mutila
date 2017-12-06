@@ -10,7 +10,6 @@ public:
     void modeStart();
     void modeStop();
     void modeUpdate();
-    bool isFinished();
 
 };
 
