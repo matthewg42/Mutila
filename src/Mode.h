@@ -122,7 +122,7 @@ protected:
 
 protected:
     RunState _state;
-    unsigned long _lastUpdateMs;
+    uint32_t _lastUpdateMs;
     uint16_t _updatePeriodMs;
 
 };

@@ -15,7 +15,7 @@ BufferedSampler::BufferedSampler(const uint8_t pin, const uint16_t periodMs, con
     _mean(0)
 {
     // Allocate ring buffer for sample data
-    _sampleData = new int [samples];
+    _sampleData = new int16_t [samples];
 }
 
 BufferedSampler::~BufferedSampler()
@@ -51,7 +51,7 @@ void BufferedSampler::update()
     }
 }
 
-int BufferedSampler::last()
+int16_t BufferedSampler::last()
 {
     return _count == 0 ? 0 : _sampleData[_idx == 0 ? _samples-1 : _idx-1];
 }
@@ -59,7 +59,7 @@ int BufferedSampler::last()
 void BufferedSampler::calculate() 
 {
     if (_updated) {
-        long sum = _sampleData[0];
+        int32_t sum = _sampleData[0];
         _minimum = _sampleData[0];
         _maximum = _sampleData[0];
         for (uint8_t i=1; i<_count; i++) {

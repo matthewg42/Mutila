@@ -11,7 +11,7 @@
  */
 
 #ifdef ARDUINO_AVR_DIGISPARK
-unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
+uint32_t pulseInLong(uint8_t pin, uint8_t state, uint32_t timeout);
 #endif // ARDUINO_AVR_DIGISPARK
 
 class SonicRanger {

@@ -5,7 +5,7 @@
 #ifdef ARDUINO_AVR_DIGISPARK
 // Implementation missing when building for DigiSpark, so I copy-pasted it from:
 // https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/cores/arduino/wiring_pulse.c#L63
-unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout)
+uint32_t pulseInLong(uint8_t pin, uint8_t state, uint32_t timeout)
 {
 	// cache the port and bit of the pin in order to speed up the
 	// pulse width measuring loop and achieve finer resolution.  calling
@@ -14,7 +14,7 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout)
 	uint8_t port = digitalPinToPort(pin);
 	uint8_t stateMask = (state ? bit : 0);
 
-	unsigned long startMicros = micros();
+	uint32_t startMicros = micros();
 
 	// wait for any previous pulse to end
 	while ((*portInputRegister(port) & bit) == stateMask) {
@@ -28,7 +28,7 @@ unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout)
 			return 0;
 	}
 
-	unsigned long start = micros();
+	uint32_t start = micros();
 	// wait for the pulse to stop
 	while ((*portInputRegister(port) & bit) == stateMask) {
 		if (micros() - startMicros > timeout)

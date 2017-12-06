@@ -154,7 +154,7 @@ bool DFPReader::appendElement(uint8_t value)
     }
 }
 
-void DFPReader::appendSubThousand(int num)
+void DFPReader::appendSubThousand(int16_t num)
 {
     if (num >= 100) {
         appendElement(SMALL_NUMBERS[num / 100]);

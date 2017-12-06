@@ -37,7 +37,7 @@ public:
     virtual float average() = 0;
 
     //! Get the most recent sample - derived classes must implement
-    virtual int last() = 0;
+    virtual int16_t last() = 0;
 
 protected:
     const uint8_t _pin;             //!< pin to read data from
