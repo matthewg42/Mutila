@@ -41,20 +41,28 @@ public:
 
     /*! Test if the button has been pushed since the last time it was off.
      *
+     *  \deprecated Please use tapped instead. This member will be removed
+     *              in future releases of Mutila.
+     *
      *  The idea is that you can call pushed() lots of times in a tight loop
-     *  and only get one true return pre press of the button regardless of
+     *  and only get one true return per press of the button regardless of
      *  how many times you test.
+     *
+     *  \param peek if true, do not reset the pushed state.
+     *  \return true if the button has been pushed and released since the
+     *          last test.
      */
-    bool pushed();
+    bool pushed(bool peek=false);
 
     /*! Test if the button has been pushed and released.
      *
      *  After returning a non-zero value (i.e. a tap was registered), the
      *  state will be reset. Only the last tap duration will be returned.
      *
+     *  \param peek if true, do not reset the pushed state.
      *  \return length of last tap in ms if the button has been tapped, else 0.
      */
-    uint32_t tapped();
+    uint32_t tapped(bool peek=false);
 
     /*! Test if held on for extended period.
      *

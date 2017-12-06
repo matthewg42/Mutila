@@ -17,17 +17,17 @@ void AbstractDebouncedButton::begin(uint8_t threshold, uint8_t delay)
     _lastOnDuration = 0;
 }
 
-bool AbstractDebouncedButton::pushed()
+bool AbstractDebouncedButton::pushed(bool peek)
 {
     bool r = _pushed;
-    _pushed = false;
+    if (!peek) { _pushed = false; }
     return r;
 }
 
-uint32_t AbstractDebouncedButton::tapped()
+uint32_t AbstractDebouncedButton::tapped(bool peek)
 {
     uint32_t r = _lastOnDuration;
-    _lastOnDuration = 0;
+    if (!peek) { _lastOnDuration = 0; }
     return r;
 }
 
