@@ -1,25 +1,25 @@
 #include <MutilaDebug.h>
 #include "ModeManager.h"
 
-ModeManagerClass::ModeManagerClass() :
+ModeManager::ModeManager() :
     currentMode(NULL)
 {
 }
 
-void ModeManagerClass::begin(Mode* initialMode)
+void ModeManager::begin(Mode* initialMode)
 {
     DBLN(F("ModeManager::begin"));
     switchMode(initialMode);
 }
 
-void ModeManagerClass::update()
+void ModeManager::update()
 {
     if (currentMode != NULL) {
         currentMode->update();
     }
 }
 
-void ModeManagerClass::switchMode(Mode* newMode, bool force)
+void ModeManager::switchMode(Mode* newMode, bool force)
 {
     if ((newMode != currentMode) || force) {
         if (currentMode != NULL) {
@@ -30,7 +30,7 @@ void ModeManagerClass::switchMode(Mode* newMode, bool force)
     }
 }
 
-bool ModeManagerClass::modeFinished()
+bool ModeManager::modeFinished()
 {
     if (currentMode != NULL) {
         return currentMode->isFinished();

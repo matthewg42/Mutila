@@ -12,9 +12,9 @@ A collection of classes and functions for nice handling of basic inputs (buttons
 * *DigitalInputButton* - switch from a digital input pin(pullup).
 * *AnalogInputButton* - switch from an analog input pin.
 * *DualInputButton* - switch from combination of two other buttons.
-* *DebouncedButton* - timeslice-based debounced button class with input from an DigitalInputButton object.
+* *DebouncedButton* - timeslice-based debounced button class with input from a DigitalInputButton object.
 * *DebouncedAnalogButton* - timeslice-based debounced button class with input from an AnalogInputButton object.
-* *DualAnalogButton* - timeslice-based debounced button class with input from an AnalogInputButton object.
+* *DebouncedDualButton* - timeslice-based debounced button class with input from a DualInputButton object.
 * *DiscretePot* - use a potential divider attached to an analog input to return a discrete value within a specified range - includes smoothing.
 * *ToggleButton* - each press flips state from on to off.
 
@@ -30,16 +30,14 @@ Terms used for Mutila input classes:
 
 Samplers read from analog input pins and allow some operations to be performed on the data - typically calculating some sort of average value for the pin to help de-noise signals from sensors.
 
-* *BufferedSampler* - keeps a buffer of recent samples, providing ability to get average, minimum and maximum for values in the buffer
-* *EMASampler* - provides calculation of exponential moving average value for an analog input
+* *BufferedSampler* - keeps a buffer of recent samples, providing ability to get average, minimum and maximum for values in the buffer.
+* *EMASampler* - provides calculation of exponential moving average value for an analog input.
 
 Sampling voltage and current values may be performed using the following classes, which are good examples of how to derive custom samplers from BufferedSampler and EMASampler:
 
 * *BufferedVDivSampler* - measure voltage over a voltage divider using BufferedSampler.
 * *EMAVDivSampler* - measure voltage over a voltage divider using EMASampler.
 * *EMACurrentSampler* - measure current using an Allegro ACS756SCB-050B-PFF-T Bi-directional 50A hall effect sensor and EMASampler.
-
-Current measuement may be achieved using an Allegro ACS756SCB-050B-PFF-T Bi-directional 50A hall effect sensor and the class
 
 ### DFPlayer Mini MP3 audio module
 
@@ -58,7 +56,7 @@ Mutila's *Heartbeat* class can be used to blink and LED with variable patterns t
 
 ### Mode System
 
-A *Mode* is a kind of sub-program which has distinct startup, shutdown and update routines.  For example, your program might have a special setup mode which suspends normal operations while settings are altered. The *ModeManager* can be used to switch between such mutually exclusiive modes while keeping your main loop clean and simple. 
+A *Mode* is a kind of sub-program which has distinct startup, shutdown and update routines.  For example, your program might have a special setup mode which suspends normal operations while settings are altered. The *ModeManager* class can be used to switch between such mutually exclusive modes while keeping your main loop clean and simple. 
 
 Modes may be arranged in a hierarchical manner using the *ParentMode* class. This can be useful when building hierarchical menu systems which a couple of buttons.
 

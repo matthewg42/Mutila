@@ -4,9 +4,9 @@
 
 /*! ModeManager class for switching between mutually exclusive Modes.
  */
-class ModeManagerClass {
+class ModeManager {
 public:
-    ModeManagerClass();
+    ModeManager();
 
     /*! Initialization.
      *

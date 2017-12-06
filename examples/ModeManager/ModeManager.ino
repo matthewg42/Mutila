@@ -5,7 +5,7 @@
 #include "ModeTwo.h"
 #include "ButtonA.h"
 
-ModeManagerClass ModeManager;
+ModeManager Modes;
 
 void setup()
 {
@@ -19,7 +19,7 @@ void setup()
     ModeTwo.begin();
 
     // start the selected mode
-    ModeManager.begin(&ModeOne);
+    Modes.begin(&ModeOne);
 
     // test that everything works OK over Millis wrap
     addMillisOffset(0xFFFFF000);
@@ -31,14 +31,14 @@ void loop()
 {
     // update inputs
     ButtonA.update();
-    ModeManager.update();
+    Modes.update();
 
-    if (ModeManager.modeFinished()) {
+    if (Modes.modeFinished()) {
         DBLN("Mode says it is done...");
-        if (ModeManager.currentMode == &ModeOne) {
-            ModeManager.switchMode(&ModeTwo);
+        if (Modes.currentMode == &ModeOne) {
+            Modes.switchMode(&ModeTwo);
         } else {
-            ModeManager.switchMode(&ModeOne);
+            Modes.switchMode(&ModeOne);
         }
     }
 }
