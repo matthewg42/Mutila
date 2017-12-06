@@ -9,9 +9,12 @@ Re-usable utility components for Arduino projects. All the stuff we all end up r
 
 A collection of classes and functions for nice handling of basic inputs (buttons and such). The classes are kept as simple as possible while having enough functionality to be useful. ''Timeslice-based'' classes should have their ''update()'' method called as frequently as possible, which will return rapidly. These classes are an alternative to interrupt driven IO for projects where interrupts can't be used - e.g. where *Mutila* inputs must not intefere with timing of other parts of your project which might use interrupts themselves (e.g. motor control)
 
-* *RawButton* - switch with optional logic inversion (pullup).
-* *DebouncedButton* - timeslice-based debounced push button class.
-* *DualButton* - works like a DebouncedButton which has two inputs (from separate DebouncedButtons). The purpose of this class is to enable easy addition of a second control (e.g. from radio remote control) to a system with an existing DebouncedButton, without having to change/clutter up your firmware logic.
+* *DigitalInputButton* - switch from a digital input pin(pullup).
+* *AnalogInputButton* - switch from an analog input pin.
+* *DualInputButton* - switch from combination of two other buttons.
+* *DebouncedButton* - timeslice-based debounced button class with input from an DigitalInputButton object.
+* *DebouncedAnalogButton* - timeslice-based debounced button class with input from an AnalogInputButton object.
+* *DualAnalogButton* - timeslice-based debounced button class with input from an AnalogInputButton object.
 * *DiscretePot* - use a potential divider attached to an analog input to return a discrete value within a specified range - includes smoothing.
 * *ToggleButton* - each press flips state from on to off.
 
@@ -40,7 +43,7 @@ Current measuement may be achieved using an Allegro ACS756SCB-050B-PFF-T Bi-dire
 
 ### DFPlayer Mini MP3 audio module
 
-DFPlayer Mini is a neat and affordable audio module which can play MP3 files from an SD card, with a serial interface for control. It can also drive a small speaker. Mutila provides the class *DFPlayerMini* for controlling such a device. *DFPReader* is a class which can be used to read out numbers and durations, using the samples in the *audio/* directory.
+DFPlayer Mini is a neat and affordable audio module which can play MP3 files from an SD card with a serial interface for control. It can also drive a small speaker. Mutila provides the class *DFPlayerMini* for controlling such a device. *DFPReader* is a class which can be used to read out numbers and durations, using the samples in the *audio/* directory.
 
 ### HC-SR04 Ultrasonic Ranger
 
@@ -48,6 +51,16 @@ HC-SR04 ultrasonic range finding modules are inexpensive and popular modules use
 
 * *SonicRanger* - a basic wrapper around the code necessary to calculate the range of an object, done in the same style as other Mutila classes (with pins passes in a constructor and initialized in a begin() member).
 * *EMASonicRanger* - periodic sampling of the range value, smoothed using the exponential moving average method.
+
+### Heartbeat
+
+Mutila's *Heartbeat* class can be used to blink and LED with variable patterns to give some diagnostic information about the state of the program without needed a more sophisticated display.
+
+### Mode System
+
+A *Mode* is a kind of sub-program which has distinct startup, shutdown and update routines.  For example, your program might have a special setup mode which suspends normal operations while settings are altered. The *ModeManager* can be used to switch between such mutually exclusiive modes while keeping your main loop clean and simple. 
+
+Modes may be arranged in a hierarchical manner using the *ParentMode* class. This can be useful when building hierarchical menu systems which a couple of buttons.
 
 ## Author & License
 
@@ -64,13 +77,13 @@ Doxygen-generated documentation can be found here: https://matthewg42.github.io/
 
 ## Ideas for future development
 
-### DebouncedButton
+### Templetsed PersistentSettings classes
 
-* DebouncedButton::wasPressed() should return number of presses if more than one since last test.
+Similar to the ones implemented in EspApConfigurator (by the same Author), but that works with both ESP and Arduino hardware (the use of the EEPROM library for ESP devices is incompatible with regular Arduino EEPROM usage).
 
 ### StickyButton
 
-* When pushed, stays on for some period of time and thn switches off.
+* When pushed, stays on for some period of time and then switches off.
 * Pushing when on restarts the on timer.
 
 ### n-state button
@@ -80,7 +93,6 @@ Doxygen-generated documentation can be found here: https://matthewg42.github.io/
 
 ### DFPlayerMini
 
-* add busy detection / wait function
 * doc ops which create reply
 * asynchronous commands (i.e. do not wait for serial, use update() to send bytes one at a time)
 

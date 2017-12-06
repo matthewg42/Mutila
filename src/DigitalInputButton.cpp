@@ -1,13 +1,13 @@
 #include <Arduino.h>
-#include "DigitalButton.h"
+#include "DigitalInputButton.h"
 
-DigitalButton::DigitalButton(const uint8_t pin, const bool pullup) : 
+DigitalInputButton::DigitalInputButton(const uint8_t pin, const bool pullup) : 
     _pin(pin),
     _pullup(pullup)
 {
 }
 
-void DigitalButton::begin()
+void DigitalInputButton::begin()
 {
     if (_pullup) {
         pinMode(_pin, INPUT_PULLUP);
@@ -16,7 +16,7 @@ void DigitalButton::begin()
     }
 }
 
-bool DigitalButton::on()
+bool DigitalInputButton::on()
 {
     if (_pullup) {
         return !digitalRead(_pin);

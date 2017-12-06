@@ -13,7 +13,7 @@
  *  Previous released of Mutila only allowed for DualButton to 
  *  be made from two RawInput (digital pin) buttons. With this
  *  new approach, a DualButton may be created by combining 
- *  DigitalButton and AnalogButton objects.
+ *  DigitalInputButton and AnalogInputButton objects.
  */
 class DualInputButton : public AbstractButton {
 public:

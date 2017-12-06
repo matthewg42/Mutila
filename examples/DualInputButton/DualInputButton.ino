@@ -1,18 +1,18 @@
 #include <Arduino.h>
-#include <DigitalButton.h>
-#include <AnalogButton.h>
+#include <DigitalInputButton.h>
+#include <AnalogInputButton.h>
 #include <DualInputButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-const uint8_t DigitalButtonPin = 6;
-const uint8_t AnalogButtonPin = A0;
+const uint8_t DigitalInputButtonPin = 6;
+const uint8_t AnalogInputButtonPin = A0;
 const uint8_t LedPin = 13;
 bool previousValue = false;
 uint32_t LastDb = 0;
 
-DigitalButton Button1(DigitalButtonPin);
-AnalogButton Button2(AnalogButtonPin);
+DigitalInputButton Button1(DigitalInputButtonPin);
+AnalogInputButton Button2(AnalogInputButtonPin);
 DualInputButton CombinedButton(Button1, Button2);
 
 void setup()

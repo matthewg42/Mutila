@@ -5,13 +5,13 @@
 
 /*! Basic instantaneous button from a digital input.
  *
- *  DigitalButton models a digital push button or switch attached 
+ *  DigitalInputButton models a digital push button or switch attached 
  *  to a digital input. The API gives the user a logical pushed
  *  state via the on method, which hides inverted level 
  *  logic from the user of the class (choose logic type in 
  *  constructor).
  */
-class DigitalButton : public AbstractButton {
+class DigitalInputButton : public AbstractButton {
 public:
     /*! Constructor.
      *
@@ -26,7 +26,7 @@ public:
      *  it is preferred as a floating pin will revert to off
      *  more readily than with non-pullup logic.
      */
-    DigitalButton(const uint8_t pin, const bool pullup=true);
+    DigitalInputButton(const uint8_t pin, const bool pullup=true);
 
     /*! Initialization.
      *

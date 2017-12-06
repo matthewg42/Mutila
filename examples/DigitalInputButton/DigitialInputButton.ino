@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <DigitalButton.h>
+#include <DigitalInputButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
 
@@ -7,7 +7,7 @@ const uint8_t ButtonPin = 6;
 const uint8_t LedPin = 13;
 uint32_t LastDb = 0;
 
-DigitalButton Button(ButtonPin);
+DigitalInputButton Button(ButtonPin);
 
 void setup()
 {

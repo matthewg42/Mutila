@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <AnalogButton.h>
+#include <AnalogInputButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
 
@@ -8,7 +8,7 @@ const uint8_t LedPin = 13;
 bool previousValue = false;
 uint32_t LastDb = 0;
 
-AnalogButton Button(ButtonPin);
+AnalogInputButton Button(ButtonPin);
 
 // Function prototypes. Not necessary for the IDE, but when building with
 // make, we need them if we're to put setup and loop at the top of this

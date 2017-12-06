@@ -5,18 +5,18 @@
 
 /*! Instantaneous button with a digital output, from an analog input.
  *
- *  AnalogButton models a digital push button or switch attached 
+ *  AnalogInputButton models a digital push button or switch attached 
  *  to an analog input. The API gives the user a logical pushed
  *  state via the on() method, which hides the analog to digital 
  *  logic from the user of the class (choose logic params in 
  *  constructor).
  *
- *  Usually, a digital DigitalButton will be better, but a few pins on
+ *  Usually, a digital DigitalInputButton will be better, but a few pins on
  *  some microcontrollers (A6, A7 on the Nano, for example), cannot
  *  read in digitial mode, so this lets those pins be used as
  *  buttons.
  */
-class AnalogButton : public AbstractButton {
+class AnalogInputButton : public AbstractButton {
 public:
     /*! Constructor.
      *
@@ -32,7 +32,7 @@ public:
      *  there is no internal pullup resistor some analog pins, so an 
      *  external pullup should be used where necessary.
      */
-    AnalogButton(const uint8_t pin, const bool pullup=true, const uint16_t analogThreshold=512);
+    AnalogInputButton(const uint8_t pin, const bool pullup=true, const uint16_t analogThreshold=512);
 
     /*! Initialization.
      *

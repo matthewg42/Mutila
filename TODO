@@ -2,9 +2,11 @@ Work to do in deal-with-millis-wrap branch b4 merge
 
 General cleanup / consistency making:
 - some attention to Doxygen brief / param tags
+- remove Millis commented out lines
 
 Moar work:
-- See if we can efficiently work Dual and Toggle Button into new button framework
+- See if we can efficiently work Toggle Button into new button framework
 - Compare memory / flash use for new buttons
 - After button hierarchy work, remove DEBOUNDED... defines from Mutila.h
+- XOR mode for DualInputButton
 

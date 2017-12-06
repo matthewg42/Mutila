@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "Mutila.h"
 #include "AbstractDebouncedButton.h"
-#include "AnalogButton.h"
+#include "AnalogInputButton.h"
 
 /*! \brief Timeslice-based button with debouncing using analogRead
  *
@@ -14,7 +14,7 @@
  * useful when special analog-only pins need to be used for button inputs
  * (e.g. pins A6 and A7 on the nano).
  */
-class DebouncedAnalogButton : public AbstractDebouncedButton, public AnalogButton {
+class DebouncedAnalogButton : public AbstractDebouncedButton, public AnalogInputButton {
 public:
     /*! Constructor.
      *

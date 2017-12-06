@@ -1,17 +1,17 @@
 #include <Arduino.h>
 #include <MutilaDebug.h>
-#include <DigitalButton.h>
-#include <AnalogButton.h>
+#include <DigitalInputButton.h>
+#include <AnalogInputButton.h>
 #include <DebouncedDualButton.h>
 #include <Millis.h>
 
-const uint8_t DigitalButtonPin = 6;
-const uint8_t AnalogButtonPin = A0;
+const uint8_t DigitalInputButtonPin = 6;
+const uint8_t AnalogInputButtonPin = A0;
 const uint16_t OutputMs = 150;
 uint32_t LastDb = 0;
 
-DigitalButton Button1(DigitalButtonPin);
-AnalogButton Button2(AnalogButtonPin);
+DigitalInputButton Button1(DigitalInputButtonPin);
+AnalogInputButton Button2(AnalogInputButtonPin);
 DebouncedDualButton CombinedButton(Button1, Button2);
 
 void setup()

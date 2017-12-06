@@ -3,20 +3,20 @@
 #include "Millis.h"
 
 DebouncedAnalogButton::DebouncedAnalogButton(const uint8_t pin, const bool pullup, const uint16_t analogThreshold) :
-    AnalogButton(pin, pullup, analogThreshold)
+    AnalogInputButton(pin, pullup, analogThreshold)
 {
 }
 
 void DebouncedAnalogButton::begin(uint8_t threshold, uint8_t delay)
 {
     AbstractDebouncedButton::begin(threshold, delay);
-    AnalogButton::begin();
+    AnalogInputButton::begin();
 }
 
 void DebouncedAnalogButton::update()
 {
     if (DoEvery(_delay, _lastUpdate)) {
-        if (AnalogButton::on() != _state) {
+        if (AnalogInputButton::on() != _state) {
             _counter++;
             if (_counter > _threshold) {
                 setState(!_state);
@@ -27,7 +27,7 @@ void DebouncedAnalogButton::update()
     }
 }
 
-// over-rides DigitalButton::on
+// over-rides DigitalInputButton::on
 bool DebouncedAnalogButton::on()
 {
     return _state;
