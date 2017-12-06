@@ -22,7 +22,7 @@ void DiscretePot::update()
 {
     //TODO remove
     //if (Millis() > _lastUpdate + _delay) {
-    if (MillisSince(_lastUpdate) > _delay) {
+    if (DoEvery(_delay, _lastUpdate)) {
         int8_t valueNow = _value();
         if (valueNow != _state) {
             _counter++;
@@ -32,7 +32,6 @@ void DiscretePot::update()
         } else if (_counter > 0) {
             _counter = 0;
         }
-        _lastUpdate = Millis();
     }
 }
 
