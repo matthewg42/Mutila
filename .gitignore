@@ -4,6 +4,7 @@ tmp
 rf
 doc/html
 mkdoc
+*.bak
 *~
 .*~
 .*swp
@@ -11,3 +12,4 @@ mkdoc
 **/*.pyc
 **/*.o
 **/__pycache__
+ReleaseChecklist.md
