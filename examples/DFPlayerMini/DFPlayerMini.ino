@@ -55,6 +55,7 @@ void query() {
 void setup()
 {
     Serial.begin(115200);
+    Serial.println(F("\n\nS:setup"));
     SerialMP3.begin(9600);
     mp3.begin();
 
@@ -67,6 +68,7 @@ void setup()
     // Talk to the DFPlayer Mini device.  
     // Also sets the number of tracks.
     query();  
+    Serial.println(F("E:setup"));
 }
 
 void playNext()
