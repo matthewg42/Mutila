@@ -3,8 +3,11 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
+// Turn on DB output.
+#define DEBUG true
+
 const uint8_t ButtonPin = A0;
-const uint8_t LedPin = 13;
+const uint8_t LedPin = LED_BUILTIN;
 bool previousValue = false;
 uint32_t LastDb = 0;
 

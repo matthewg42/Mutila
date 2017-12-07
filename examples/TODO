@@ -1,0 +1,26 @@
+Example				has #define	builds nano	builds NodeMCU	builds IDE
+-------------------------------	---------------	---------------	---------------	---------------
+AnalogInputButton/		*		*		*		*
+BrownoutMode/			
+BufferedSampler/		
+CorrectedMillis/		
+CurrentSampler/			
+DebouncedAnalogButton/		
+DebouncedButton/		
+DebouncedDualButton/		
+DFPlayerMini/			
+DFPReader/			
+DigitalInputButton/		
+DiscretePot/			
+DualButton/			
+DualInputButton/		
+EMASampler/			
+EMASonicRanger/			
+Heartbeat/			
+Makefile			
+MinimalMode/			
+ModeManager/			
+ParentMode/			
+SonicRanger/			
+ToggleButton/			
+VDivSampler/			
