@@ -41,12 +41,12 @@ public:
 
     /*! Test if the button has been pushed since the last time it was off.
      *
-     *  \deprecated Please use tapped instead. This member will be removed
-     *              in future releases of Mutila.
-     *
-     *  The idea is that you can call pushed() lots of times in a tight loop
-     *  and only get one true return per press of the button regardless of
-     *  how many times you test.
+     *  This function returns true once, as soon as the button is pushed - 
+     *  even if it has not been released yet. If the peek parameter is false
+     *  then subsequent calls to pushed will not return true until the button
+     *  has been released and pushed again. The idea is to allow frequent 
+     *  tests in a tight loop, and only get one positive result (unlike on(),
+     *  which returns true any time the button is depressed).
      *
      *  \param peek if true, do not reset the pushed state.
      *  \return true if the button has been pushed and released since the
