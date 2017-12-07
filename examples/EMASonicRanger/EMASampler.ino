@@ -18,7 +18,7 @@ void setup()
 
     // Settle down
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -26,10 +26,10 @@ void loop()
     Ranger.update();
 
     if (DoEvery(50, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" range=");
-        DBLN(Ranger.getRange());
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" range=");
+        Serial.println(Ranger.getRange());
     }
 }
 

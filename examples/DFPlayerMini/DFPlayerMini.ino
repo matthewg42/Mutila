@@ -20,35 +20,35 @@ int16_t Track = 0;
 void query() {
     DFPResponse r;
     r = mp3.query(DFPlayerMini::GetVolume);
-    DB("Volume=");
-    if (r.status == DFPResponse::Ok) { DB(r.arg); }
-    else { DB("ERR"); }
+    Serial.print("Volume=");
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetStatus);
-    DB(" Status=");
-    if (r.status == DFPResponse::Ok) { DB(r.arg); }
-    else { DB("ERR"); }
+    Serial.print(" Status=");
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUSum);
-    DB(" GetUSum=");
-    if (r.status == DFPResponse::Ok) { DB(r.arg); }
-    else { DB("ERR"); }
+    Serial.print(" GetUSum=");
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetTfSum);
-    DB(" GetTfSum=");
-    if (r.status == DFPResponse::Ok) { DB(r.arg); Count = r.arg; }
-    else { DB("ERR"); }
+    Serial.print(" GetTfSum=");
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg); Count = r.arg; }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
-    DB(" GetUCurrent="); if (r.status == DFPResponse::Ok) { DB(r.arg); }
-    else { DB("ERR"); }
+    Serial.print(" GetUCurrent="); if (r.status == DFPResponse::Ok) { Serial.print(r.arg); }
+    else { Serial.print("ERR"); }
 
     r = mp3.query(DFPlayerMini::GetUCurrent);
-    DB(" GetTfCurrent=");
-    if (r.status == DFPResponse::Ok) { DB(r.arg);  }
-    else { DB("ERR"); }
+    Serial.print(" GetTfCurrent=");
+    if (r.status == DFPResponse::Ok) { Serial.print(r.arg);  }
+    else { Serial.print("ERR"); }
 
-    DBLN(' ');
+    Serial.println(' ');
 
 }
 
@@ -71,8 +71,8 @@ void setup()
 
 void playNext()
 {
-    DB("Playing track ");
-    DBLN(Track);
+    Serial.print("Playing track ");
+    Serial.println(Track);
     Playing = true;
     mp3.sendCmd(DFPlayerMini::PlayTf, Track++);
     if (Track > Count) {
@@ -83,11 +83,11 @@ void playNext()
 void loop() {
     uint32_t now = Millis();
     bool busy = mp3.busy();
-    DB("busy: ");
-    DBLN(busy);
+    Serial.print("busy: ");
+    Serial.println(busy);
     if (!busy) {
         if (Playing) {
-            DBLN("stopped");
+            Serial.println("stopped");
             LastStop = now;
             Playing = false;
         } 

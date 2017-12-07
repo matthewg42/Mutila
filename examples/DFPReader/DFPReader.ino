@@ -28,7 +28,7 @@ void setup()
     reader.readNumber(3.1415926, 2);    // expect "three point one four"
     reader.readNumber(999.999, 2);      // expect "one thousand point zero zero"
 
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop() {

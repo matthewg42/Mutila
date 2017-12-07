@@ -12,25 +12,25 @@ void setup()
     Serial.begin(115200);
     Button.begin();
     addMillisOffset(0xFFFFF000);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop() 
 {
     Button.update();
     if (DoEvery(100, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" analog value=");
-        DB(analogRead(A0));
-        DB(" logical button value=");
-        DB(Button.on());
-        DB(" tapped=");
-        DB(Button.tapped());
-        DB(" repeat=");
-        DB(Button.repeat());
-        DB(" held=");
-        DBLN(Button.held());
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" analog value=");
+        Serial.print(analogRead(A0));
+        Serial.print(" logical button value=");
+        Serial.print(Button.on());
+        Serial.print(" tapped=");
+        Serial.print(Button.tapped());
+        Serial.print(" repeat=");
+        Serial.print(Button.repeat());
+        Serial.print(" held=");
+        Serial.println(Button.held());
     }
 }
 

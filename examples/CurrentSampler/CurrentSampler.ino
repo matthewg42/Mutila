@@ -13,19 +13,19 @@ void setup()
     addMillisOffset(0xFFFFF000);
     // Settle down
     delay(300);
-    DBLN("millis,raw,average");
+    Serial.println("millis,raw,average");
 }
 
 void loop()
 {
     sampler.update();
     if (DoEvery(100, LastDb)) {
-        DB("0x");
-        DB(Millis(), HEX);
-        DB(',');
-        DB(sampler.lastAmps());
-        DB(',');
-        DBLN(sampler.averageAmps());
+        Serial.print("0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(',');
+        Serial.print(sampler.lastAmps());
+        Serial.print(',');
+        Serial.println(sampler.averageAmps());
     }
 }
 

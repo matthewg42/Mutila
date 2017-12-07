@@ -17,21 +17,21 @@ void setup()
     addMillisOffset(0xFFFFF000);
     // Settle down
     delay(300);
-    DBLN("millis,raw,buffer,ema");
+    Serial.println("millis,raw,buffer,ema");
 }
 
 void loop()
 {
     bufSampler.update();
     emaSampler.update();
-    DB("0x");
-    DB(Millis(), HEX);
-    DB(',');
-    DB(emaSampler.lastVolts());
-    DB(',');
-    DB(bufSampler.averageVolts());
-    DB(',');
-    DBLN(emaSampler.averageVolts());
+    Serial.print("0x");
+    Serial.print(Millis(), HEX);
+    Serial.print(',');
+    Serial.print(emaSampler.lastVolts());
+    Serial.print(',');
+    Serial.print(bufSampler.averageVolts());
+    Serial.print(',');
+    Serial.println(emaSampler.averageVolts());
     delay(20);
 }
 

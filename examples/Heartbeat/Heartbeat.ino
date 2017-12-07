@@ -21,7 +21,7 @@ void setup()
     addMillisOffset(0xFFFFF000);
 
     delay(100);
-    DBLN("E:setup");
+    Serial.println("E:setup");
 }
 
 void loop()
@@ -31,42 +31,42 @@ void loop()
 
     // Show that we're working over Millis() wrap around
     if (DoEvery(100, LastMessage)) {
-        DB("Millis=0x");
-        DBLN(Millis(), HEX);
+        Serial.print("Millis=0x");
+        Serial.println(Millis(), HEX);
     }
 
     if (button.tapped()) {
         switch (heartbeat.mode()) {
         case Heartbeat::Normal:
-            DBLN("Quick");
+            Serial.println("Quick");
             heartbeat.setMode(Heartbeat::Quick);
             break;
         case Heartbeat::Quick:
-            DBLN("Quicker");
+            Serial.println("Quicker");
             heartbeat.setMode(Heartbeat::Quicker);
             break;
         case Heartbeat::Quicker:
-            DBLN("Slow");
+            Serial.println("Slow");
             heartbeat.setMode(Heartbeat::Slow);
             break;
         case Heartbeat::Slow:
-            DBLN("Slower");
+            Serial.println("Slower");
             heartbeat.setMode(Heartbeat::Slower);
             break;
         case Heartbeat::Slower:
-            DBLN("Off");
+            Serial.println("Off");
             heartbeat.setMode(Heartbeat::Off);
             break;
         case Heartbeat::Off:
-            DBLN("On");
+            Serial.println("On");
             heartbeat.setMode(Heartbeat::On);
             break;
         case Heartbeat::On:
-            DBLN("Custom");
+            Serial.println("Custom");
             heartbeat.setCustomMode(450, 50);
             break;
         case Heartbeat::Custom:
-            DBLN("Normal");
+            Serial.println("Normal");
             heartbeat.setMode(Heartbeat::Normal);
             break;
         }

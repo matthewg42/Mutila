@@ -16,7 +16,7 @@ void setup()
     Pot.begin(0, 10);
     PotReversed.begin(0, 10, true);
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -25,12 +25,12 @@ void loop()
     PotReversed.update();
 
     if (DoEvery(OutputMs, LastDb)) {
-        DB("analog value=");
-        DB(analogRead(AnalogPin));
-        DB(" Pot.value()=");
-        DB(Pot.value());
-        DB(" PotReversed.value()=");
-        DBLN(PotReversed.value());
+        Serial.print("analog value=");
+        Serial.print(analogRead(AnalogPin));
+        Serial.print(" Pot.value()=");
+        Serial.print(Pot.value());
+        Serial.print(" PotReversed.value()=");
+        Serial.println(PotReversed.value());
     }
 }
 

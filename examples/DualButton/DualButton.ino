@@ -25,23 +25,23 @@ void setup()
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
 {
     MyButton.update();
     if (DoEvery(OutputMs, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis());
-        DB(" DualButton: pushed=");
-        DB(MyButton.pushed());
-        DB(" tapped=");
-        DB(MyButton.tapped());
-        DB(" held=");
-        DB(MyButton.held());
-        DB(" repeat=");
-        DBLN(MyButton.repeat());
+        Serial.print("Millis=0x");
+        Serial.print(Millis());
+        Serial.print(" DualButton: pushed=");
+        Serial.print(MyButton.pushed());
+        Serial.print(" tapped=");
+        Serial.print(MyButton.tapped());
+        Serial.print(" held=");
+        Serial.print(MyButton.held());
+        Serial.print(" repeat=");
+        Serial.println(MyButton.repeat());
     }
 }
 

@@ -14,24 +14,24 @@ void setup()
 
     // Settle down
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
 {
     Sampler.update();
-    DB("Millis=0x");
-    DB(Millis(), HEX);
-    DB(" count=");
-    DB(Sampler.count());
-    DB(" last=");
-    DB(Sampler.last());
-    DB(" minimum=");
-    DB(Sampler.minimum());
-    DB(" maximum=");
-    DB(Sampler.maximum());
-    DB(" average=");
-    DBLN(Sampler.average());
+    Serial.print("Millis=0x");
+    Serial.print(Millis(), HEX);
+    Serial.print(" count=");
+    Serial.print(Sampler.count());
+    Serial.print(" last=");
+    Serial.print(Sampler.last());
+    Serial.print(" minimum=");
+    Serial.print(Sampler.minimum());
+    Serial.print(" maximum=");
+    Serial.print(Sampler.maximum());
+    Serial.print(" average=");
+    Serial.println(Sampler.average());
     delay(30);
 }
 

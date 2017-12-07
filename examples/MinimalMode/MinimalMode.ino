@@ -12,7 +12,7 @@ void setup()
     //addMillisOffset(0xFFFFF000);
     mode.begin();
     mode.start();
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()

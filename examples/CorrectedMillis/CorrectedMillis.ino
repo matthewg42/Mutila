@@ -10,17 +10,17 @@ void setup()
 {
     Serial.begin(115200);
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
 {
-    DB("millis()=");
-    DB(millis());
-    DB(" offset=");
-    DB(_MillisOffsetMs);
-    DB(" Millis()=");
-    DBLN(Millis());
+    Serial.print("millis()=");
+    Serial.print(millis());
+    Serial.print(" offset=");
+    Serial.print(_MillisOffsetMs);
+    Serial.print(" Millis()=");
+    Serial.println(Millis());
     delay(1000);
     addMillisOffset(0.3);
 }

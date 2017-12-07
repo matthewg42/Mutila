@@ -15,7 +15,7 @@ void setup()
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -24,13 +24,13 @@ void loop()
     uint16_t cm = Ranger.getRange();
     unsigned long after = Millis();
 
-    DB("Millis=0x");
-    DB(Millis(), HEX);
-    DB(" range = ");
-    DB(cm);
-    DB(" cm, took ");
-    DB(MillisSince(before, after));
-    DBLN("ms");
+    Serial.print("Millis=0x");
+    Serial.print(Millis(), HEX);
+    Serial.print(" range = ");
+    Serial.print(cm);
+    Serial.print(" cm, took ");
+    Serial.print(MillisSince(before, after));
+    Serial.println("ms");
 
     delay(50);
 }

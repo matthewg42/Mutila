@@ -18,7 +18,7 @@ void setup()
     addMillisOffset(0xFFFFF000);
     // Settle down
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -26,10 +26,10 @@ void loop()
     bool isOn = Button.on();
     digitalWrite(LedPin, isOn);
     if (DoEvery(200, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" button value=");
-        DBLN(isOn);
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" button value=");
+        Serial.println(isOn);
     }
 }
 

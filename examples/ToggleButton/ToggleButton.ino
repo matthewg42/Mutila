@@ -17,7 +17,7 @@ void setup()
     pinMode(LedPin, OUTPUT);
     // Show that code works over Millis wrap
     addMillisOffset(0xFFFFF000);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -25,10 +25,10 @@ void loop()
     MyButton.update();
     if (DoEvery(OutputMs, LastDb)) {
         bool o = MyButton.on();
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" ToggleButton.on()=");
-        DBLN(o);
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" ToggleButton.on()=");
+        Serial.println(o);
         digitalWrite(LedPin, o);
     }
 }

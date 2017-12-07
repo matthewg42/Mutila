@@ -36,24 +36,24 @@ void setup()
     // time after power-up)
     delay(300);
 
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
 {
     if (DoEvery(200, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" Button1 on=");
-        DB(Button1.on());
-        DB(" Button2 on=");
-        DB(Button2.on());
-        DB(" CombinedButtonOr on=");
-        DB(CombinedButtonOr.on());
-        DB(" CombinedButtonXor on=");
-        DB(CombinedButtonXor.on());
-        DB(" CombinedButtonAnd on=");
-        DBLN(CombinedButtonAnd.on());
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" Button1 on=");
+        Serial.print(Button1.on());
+        Serial.print(" Button2 on=");
+        Serial.print(Button2.on());
+        Serial.print(" CombinedButtonOr on=");
+        Serial.print(CombinedButtonOr.on());
+        Serial.print(" CombinedButtonXor on=");
+        Serial.print(CombinedButtonXor.on());
+        Serial.print(" CombinedButtonAnd on=");
+        Serial.println(CombinedButtonAnd.on());
     }
 }
 

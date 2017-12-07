@@ -19,7 +19,7 @@ void setup()
 
     // Settle down
     delay(300);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -28,16 +28,16 @@ void loop()
     FastSampler.update();
 
     if (DoEvery(DebugDelay, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" Slow last=");
-        DB(SlowSampler.last());
-        DB(" moving average=");
-        DB(SlowSampler.average());
-        DB("  Fast last=");
-        DB(FastSampler.last());
-        DB(" moving average=");
-        DBLN(FastSampler.average());
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" Slow last=");
+        Serial.print(SlowSampler.last());
+        Serial.print(" moving average=");
+        Serial.print(SlowSampler.average());
+        Serial.print("  Fast last=");
+        Serial.print(FastSampler.last());
+        Serial.print(" moving average=");
+        Serial.println(FastSampler.average());
     }
 }
 

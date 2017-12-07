@@ -16,18 +16,18 @@ ModeTwo_::ModeTwo_()
 
 void ModeTwo_::modeStart()
 {
-    DBLN(F("ModeTwo::modeStart()"));
+    Serial.println(F("ModeTwo::modeStart()"));
 }
 
 void ModeTwo_::modeStop()
 {
-    DBLN(F("ModeTwo::modeStop()"));
+    Serial.println(F("ModeTwo::modeStop()"));
 }
 
 void ModeTwo_::modeUpdate()
 {
-    DB(F("ModeTwo::modeUpdate() Millis=0x"));
-    DBLN(Millis(), HEX);
+    Serial.print(F("ModeTwo::modeUpdate() Millis=0x"));
+    Serial.println(Millis(), HEX);
 }
 
 bool ModeTwo_::isFinished()

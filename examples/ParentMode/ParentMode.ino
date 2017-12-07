@@ -68,7 +68,7 @@ void setup()
     // Arbitrarily decide we're in ModeA to start with
     switchMode(&ModeA);
 
-    DBLN(F("setup() complete"));
+    Serial.println(F("setup() complete"));
 }
 
 void loop()

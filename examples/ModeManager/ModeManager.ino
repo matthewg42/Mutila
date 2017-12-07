@@ -24,7 +24,7 @@ void setup()
     // test that everything works OK over Millis wrap
     addMillisOffset(0xFFFFF000);
 
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
@@ -34,7 +34,7 @@ void loop()
     Modes.update();
 
     if (Modes.modeFinished()) {
-        DBLN("Mode says it is done...");
+        Serial.println("Mode says it is done...");
         if (Modes.currentMode == &ModeOne) {
             Modes.switchMode(&ModeTwo);
         } else {

@@ -11,7 +11,7 @@ void setup()
     Serial.begin(115200);
     mode.begin();
     mode.start();
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()

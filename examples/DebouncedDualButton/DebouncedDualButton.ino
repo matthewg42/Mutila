@@ -20,25 +20,25 @@ void setup()
     CombinedButton.begin();
     delay(300);
     addMillisOffset(0xFFFFF000);
-    DBLN("setup() complete");
+    Serial.println("setup() complete");
 }
 
 void loop()
 {
     CombinedButton.update();
     if (DoEvery(OutputMs, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" CombinedButton on=");
-        DB(CombinedButton.on());
-        DB(" pushed=");
-        DB(CombinedButton.pushed());
-        DB(" held=");
-        DB(CombinedButton.held());
-        DB(" repeat=");
-        DB(CombinedButton.repeat());
-        DB(" tapped=");
-        DBLN(CombinedButton.tapped());
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" CombinedButton on=");
+        Serial.print(CombinedButton.on());
+        Serial.print(" pushed=");
+        Serial.print(CombinedButton.pushed());
+        Serial.print(" held=");
+        Serial.print(CombinedButton.held());
+        Serial.print(" repeat=");
+        Serial.print(CombinedButton.repeat());
+        Serial.print(" tapped=");
+        Serial.println(CombinedButton.tapped());
     }
 }
 
