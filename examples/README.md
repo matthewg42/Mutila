@@ -25,6 +25,10 @@ Some of the examples require extra hardware.  Here is the test setup which was u
         - HC-SR04 pin Echo -> Arduino D4
         - HC-SR04 pin Trig -> Arduino D3
 
+## Known Issues
+
+DFPlayerMini and DFPReader examples do not work on the ESP8266 at time of writing. Investigation on TODO list.
+
 ## Building
 
 All examples may be built with the Arduino IDE by opening the .ino file, selecting the appropriate target hardware and clicking the Verify toolbar button.
