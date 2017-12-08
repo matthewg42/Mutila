@@ -23,14 +23,19 @@ void checkButton();
 void setup()
 {
     Serial.begin(115200);
-    Button.begin();
-    pinMode(LedPin, OUTPUT);
+    Serial.println("\n\nsetup() start");
+
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);
-    // Settle down
+
+    // Initalize the button and LED pin
+    Button.begin();
+    pinMode(LedPin, OUTPUT);
+
+    // Let analog pins settle after powerup
     delay(300);
-    checkButton();
-    Serial.println("setup() complete");
+
+    Serial.println("setup() end");
 }
 
 void loop()

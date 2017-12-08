@@ -11,14 +11,14 @@ EMASampler SlowSampler(SamplerPin, SamplePeriodMs, 0.02);
 EMASampler FastSampler(SamplerPin, SamplePeriodMs, 0.95);
 
 // How often to print output
-const uint32_t DebugDelay = 100;
+const uint32_t OutputPeriodMs = 100;
 // Timer to keep track of when we last printed output
-uint32_t LastDb = 0;
+uint32_t LastOutputMs = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("setup() start");
+    Serial.println("\n\nsetup() start");
     
     // Show we can handle Millis overflow
     addMillisOffset(0xFFFFF000);
@@ -40,7 +40,7 @@ void loop()
     SlowSampler.update();
     FastSampler.update();
 
-    if (DoEvery(DebugDelay, LastDb)) {
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" Slow last=");

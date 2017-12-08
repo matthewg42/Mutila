@@ -8,7 +8,7 @@ ModeOne mode;
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("setup() end");
+    Serial.println("\n\nsetup() start");
 
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);

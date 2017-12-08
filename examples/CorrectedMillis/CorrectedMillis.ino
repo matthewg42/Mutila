@@ -9,8 +9,8 @@
 void setup()
 {
     Serial.begin(115200);
-    delay(300);
-    Serial.println("setup() complete");
+    Serial.println("\n\nsetup() start");
+    Serial.println("setup() end");
 }
 
 void loop()

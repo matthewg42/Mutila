@@ -11,8 +11,8 @@ const uint8_t Button1Pin = 6;
 const uint8_t Button2Pin = 5;
 #endif
 
-const uint8_t OutputMs = 100;
-uint32_t LastDb = 0;
+const uint8_t OutputPeriodMs = 100;
+uint32_t LastOutputMs = 0;
 
 // One button with LOW == pushed
 DebouncedButton Button1(Button1Pin);
@@ -27,17 +27,20 @@ void setup()
 {
     Serial.begin(115200);
     Serial.println("\n\nsetup() start");
-    MyButton.begin();
+
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);
-    delay(300);
+
+    // Initialize object
+    MyButton.begin();
+
     Serial.println("setup() end");
 }
 
 void loop()
 {
     MyButton.update();
-    if (DoEvery(OutputMs, LastDb)) {
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis());
         Serial.print(" DualButton: pushed=");

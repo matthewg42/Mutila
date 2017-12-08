@@ -10,7 +10,7 @@ const uint8_t ButtonPin = 6;
 #endif
 const uint8_t LedPin = LED_BUILTIN;
 
-const uint8_t OutputPeriodMs = 50;
+const uint8_t OutputPeriodMs = 200;
 uint32_t LastOutputMs = 0;
 
 ToggleButton MyButton(ButtonPin);
@@ -18,10 +18,15 @@ ToggleButton MyButton(ButtonPin);
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nsetup() start");
+
+    // Show that we can handle Millis overflow
+    addMillisOffset(0xFFFFF000);
+
+    // Initialize objects and pins
     MyButton.begin();
     pinMode(LedPin, OUTPUT);
-    // Show that code works over Millis wrap
-    addMillisOffset(0xFFFFF000);
+
     Serial.println("setup() complete");
 }
 

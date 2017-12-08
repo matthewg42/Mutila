@@ -10,28 +10,31 @@ const uint8_t ButtonPin = 6;
 #endif
 
 const uint8_t LedPin = LED_BUILTIN;
-uint32_t LastDb = 0;
+const uint16_t OutputPeriodMs = 200;
+uint32_t LastOutputMs = 0;
 
 DigitalInputButton Button(ButtonPin);
 
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("\n\nS:setup");
+    Serial.println("\n\nsetup() start");
+
+    // Show we can handle Millis overflow
+    addMillisOffset(0xFFFFF000);
+
+    // Initialize button object and LED pin
     Button.begin();
     pinMode(LedPin, OUTPUT);
-    // Show we can handle Millis wrap
-    addMillisOffset(0xFFFFF000);
-    // Settle down
-    delay(300);
-    Serial.println("E:setup");
+
+    Serial.println("setup() end");
 }
 
 void loop()
 {
     bool isOn = Button.on();
     digitalWrite(LedPin, isOn);
-    if (DoEvery(200, LastDb)) {
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" button value=");

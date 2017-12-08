@@ -9,24 +9,29 @@ const uint8_t ButtonPin = D1;
 const uint8_t ButtonPin = 6;
 #endif
 
-const uint16_t OutputMs = 150;
-uint32_t LastDb = 0;
+const uint16_t OutputPeriodMs = 150;
+uint32_t LastOutputMs = 0;
 
 DebouncedButton MyButton(ButtonPin);
 
 void setup()
 {
     Serial.begin(115200);
-    MyButton.begin();
-    delay(300);
+    Serial.println("\n\nsetup() start");
+
+    // Show we can handle Millis overflow
     addMillisOffset(0xFFFFF000);
-    Serial.println("setup() complete");
+
+    // Initialize button object
+    MyButton.begin();
+
+    Serial.println("setup() end");
 }
 
 void loop()
 {
     MyButton.update();
-    if (DoEvery(OutputMs, LastDb)) {
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" DebouncedButton: on=");

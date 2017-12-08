@@ -7,14 +7,18 @@ BufferedSampler Sampler(A0, 100, 10);
 void setup()
 {
     Serial.begin(115200);
-    Sampler.begin();
+    Serial.println("\n\nsetup() start");
 
-    // Show that things work over Millis wrap
+    // Show that we can handle Millis overflow
     addMillisOffset(0xFFFFF000);
 
-    // Settle down
+    // Initialize our sampler
+    Sampler.begin();
+
+    // Wait for analog pin to settle after powerup
     delay(300);
-    Serial.println("setup() complete");
+
+    Serial.println("setup() end");
 }
 
 void loop()

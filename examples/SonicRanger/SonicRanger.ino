@@ -16,7 +16,7 @@ SonicRanger Ranger(TriggerPin, EchoPin);
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("setup() start");
+    Serial.println("\n\nsetup() start");
 
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);

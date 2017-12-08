@@ -12,8 +12,8 @@ const uint8_t DigitalInputButtonPin = 6;
 #endif
 
 const uint8_t AnalogInputButtonPin = A0;
-const uint16_t OutputMs = 150;
-uint32_t LastDb = 0;
+const uint16_t OutputPeriodMs = 150;
+uint32_t LastOutputMs = 0;
 
 DigitalInputButton Button1(DigitalInputButtonPin);
 AnalogInputButton Button2(AnalogInputButtonPin);
@@ -22,16 +22,24 @@ DebouncedDualButton CombinedButton(Button1, Button2);
 void setup()
 {
     Serial.begin(115200);
-    CombinedButton.begin();
-    delay(300);
+    Serial.println("setup() start");
+
+    // Show we can handle Millis overflow
     addMillisOffset(0xFFFFF000);
-    Serial.println("setup() complete");
+
+    // Initialize button object
+    CombinedButton.begin();
+
+    // Allow analog pin to settle after poweron
+    delay(300);
+
+    Serial.println("setup() end");
 }
 
 void loop()
 {
     CombinedButton.update();
-    if (DoEvery(OutputMs, LastDb)) {
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" CombinedButton on=");
