@@ -16,7 +16,7 @@ EMASampler/			*		*
 EMASonicRanger/			*		*
 Heartbeat/			*		*
 MinimalMode/			*		*
-ModeManager/			
+ModeManager/			*		*
 ParentMode/			
 SonicRanger/			
 ToggleButton/			

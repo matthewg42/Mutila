@@ -3,16 +3,20 @@
 #include <ModeManager.h>
 #include "ModeOne.h"
 #include "ModeTwo.h"
-#include "ButtonA.h"
+#include "Button.h"
 
 ModeManager Modes;
 
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nsetup() start");
+
+    // show that we can handle Millis overflow
+    addMillisOffset(0xFFFFF000);
 
     // initialize inputs
-    ButtonA.begin();
+    Button.begin();
 
     // initialize modes
     ModeOne.begin();
@@ -21,16 +25,13 @@ void setup()
     // start the selected mode
     Modes.begin(&ModeOne);
 
-    // test that everything works OK over Millis wrap
-    addMillisOffset(0xFFFFF000);
-
-    Serial.println("setup() complete");
+    Serial.println("setup() end");
 }
 
 void loop()
 {
     // update inputs
-    ButtonA.update();
+    Button.update();
     Modes.update();
 
     if (Modes.modeFinished()) {

@@ -2,7 +2,7 @@
 #include <MutilaDebug.h>
 #include <Millis.h>
 #include "ModeOne.h"
-#include "ButtonA.h"
+#include "Button.h"
 
 // Our global instance of the mode...
 ModeOne_ ModeOne;
@@ -29,7 +29,7 @@ void ModeOne_::modeUpdate()
 {
     Serial.print(F("ModeOne::modeUpdate() Millis=0x"));
     Serial.println(Millis(), HEX);
-    if (ButtonA.tapped()) {
+    if (Button.tapped()) {
         _state = Finished;
     }
 }

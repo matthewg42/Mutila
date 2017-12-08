@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <MutilaDebug.h>
 #include "ModeTwo.h"
-#include "ButtonA.h"
+#include "Button.h"
 
 // Our global instance of the mode...
 ModeTwo_ ModeTwo;
@@ -32,6 +32,6 @@ void ModeTwo_::modeUpdate()
 
 bool ModeTwo_::isFinished()
 {
-    return ButtonA.tapped();
+    return Button.tapped();
 }
 
