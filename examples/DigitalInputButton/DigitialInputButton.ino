@@ -3,8 +3,13 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
+#if defined(ARDUINO_ESP8266_NODEMCU) 
+const uint8_t ButtonPin = D1;
+#else
 const uint8_t ButtonPin = 6;
-const uint8_t LedPin = 13;
+#endif
+
+const uint8_t LedPin = LED_BUILTIN;
 uint32_t LastDb = 0;
 
 DigitalInputButton Button(ButtonPin);
@@ -12,13 +17,14 @@ DigitalInputButton Button(ButtonPin);
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nS:setup");
     Button.begin();
     pinMode(LedPin, OUTPUT);
     // Show we can handle Millis wrap
     addMillisOffset(0xFFFFF000);
     // Settle down
     delay(300);
-    Serial.println("setup() complete");
+    Serial.println("E:setup");
 }
 
 void loop()
