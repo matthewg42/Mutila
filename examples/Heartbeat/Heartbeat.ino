@@ -4,72 +4,94 @@
 #include <Heartbeat.h>
 #include <Millis.h>
 
-const uint8_t ButPin = 6;
-const uint8_t LedPin = 13;
-uint32_t LastMessage = 0;
+const uint8_t LedPin = LED_BUILTIN;
 
-DebouncedButton button(ButPin);
-Heartbeat heartbeat(LedPin);
+#if defined(ARDUINO_ESP8266_NODEMCU) 
+const uint8_t ButtonPin = D1;
+// Second parameter is invertedLogic. We specify it here because
+// the NodeMCU's buildin LED is on when the pin is LOW.
+Heartbeat heartbeat(LedPin, true); 
+#else
+const uint8_t ButtonPin = 6;
+Heartbeat heartbeat(LedPin); 
+#endif
+
+DebouncedButton button(ButtonPin);
+
+// Function prototypes are useful when building with make, as they
+// enable us to order the functions in the file in the order we choose
+// instead of defining them before they are called.  This isn't needed
+// if building with the IDE, or you don't care about the order of the
+// functions in the file.
+void setup();
+void loop();
+void printWithMillis(const char* str);
 
 void setup()
 {
     Serial.begin(115200);
-    button.begin();
-    heartbeat.begin();
+    Serial.println("setup() end");
 
     // Show that we're working over Millis() wrap around
     addMillisOffset(0xFFFFF000);
 
-    delay(100);
-    Serial.println("E:setup");
+    // Initialize our objects
+    button.begin();
+    heartbeat.begin();
+
+    Serial.println("setup() end");
 }
 
 void loop()
 {
+    // Give a timeslice to our objects
     heartbeat.update();
     button.update();
 
-    // Show that we're working over Millis() wrap around
-    if (DoEvery(100, LastMessage)) {
-        Serial.print("Millis=0x");
-        Serial.println(Millis(), HEX);
-    }
-
-    if (button.tapped()) {
+    // When tr
+    if (button.pushed()) {
         switch (heartbeat.mode()) {
         case Heartbeat::Normal:
-            Serial.println("Quick");
+            printWithMillis("Quick");
             heartbeat.setMode(Heartbeat::Quick);
             break;
         case Heartbeat::Quick:
-            Serial.println("Quicker");
+            printWithMillis("Quicker");
             heartbeat.setMode(Heartbeat::Quicker);
             break;
         case Heartbeat::Quicker:
-            Serial.println("Slow");
+            printWithMillis("Slow");
             heartbeat.setMode(Heartbeat::Slow);
             break;
         case Heartbeat::Slow:
-            Serial.println("Slower");
+            printWithMillis("Slower");
             heartbeat.setMode(Heartbeat::Slower);
             break;
         case Heartbeat::Slower:
-            Serial.println("Off");
+            printWithMillis("Off");
             heartbeat.setMode(Heartbeat::Off);
             break;
         case Heartbeat::Off:
-            Serial.println("On");
+            printWithMillis("On");
             heartbeat.setMode(Heartbeat::On);
             break;
         case Heartbeat::On:
-            Serial.println("Custom");
+            printWithMillis("Custom");
             heartbeat.setCustomMode(450, 50);
             break;
         case Heartbeat::Custom:
-            Serial.println("Normal");
+            printWithMillis("Normal");
             heartbeat.setMode(Heartbeat::Normal);
             break;
         }
     }
+}
+
+void printWithMillis(const char* str)
+{
+    Serial.print("Millis=0x");
+    Serial.print(Millis(), HEX);
+    Serial.print(' ');
+    Serial.println(str);
 }
 
