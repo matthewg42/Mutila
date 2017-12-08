@@ -14,7 +14,7 @@ ModeA_::ModeA_()
 
 void ModeA_::begin()
 {
-    Serial.println(F("ModeA::begin"));
+    Serial.println("ModeA::begin");
     // Initalize child modes which are managed by this ParentMode
     ModeA1.begin();
     ModeA2.begin();
@@ -25,12 +25,12 @@ void ModeA_::begin()
 
 void ModeA_::modeStart()
 {
-    Serial.println(F("ModeA::modeStart"));
+    Serial.println("ModeA::modeStart");
 }
 
 void ModeA_::modeStop()
 {
-    Serial.println(F("ModeA::modeStop"));
+    Serial.println("ModeA::modeStop");
 }
 
 void ModeA_::modeUpdate()

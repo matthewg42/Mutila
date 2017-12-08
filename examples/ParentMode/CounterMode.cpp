@@ -12,25 +12,25 @@ CounterMode::CounterMode(String id) :
 
 void CounterMode::begin()
 {
-    Serial.println(F("CounterMode::begin"));
+    Serial.println("CounterMode::begin");
 }
 
 void CounterMode::modeStart()
 {
-    Serial.println(F("CounterMode::modeStart"));
+    Serial.println("CounterMode::modeStart");
 }
 
 void CounterMode::modeStop()
 {
-    Serial.println(F("CounterMode::modeStop"));
+    Serial.println("CounterMode::modeStop");
 }
 
 void CounterMode::modeUpdate()
 {
     // Do a thing
-    Serial.print(F("CounterMode id="));
+    Serial.print("CounterMode id=");
     Serial.print(_id);
-    Serial.print(F(", counter="));
+    Serial.print(", counter=");
     Serial.println(_counter++);
 }
 

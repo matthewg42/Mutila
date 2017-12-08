@@ -15,7 +15,7 @@ ModeOne::ModeOne()
 
 void ModeOne::modeUpdate()
 {
-    Serial.print(F("ModeOne::modeUpdate() Millis=0x"));
+    Serial.print("ModeOne::modeUpdate() Millis=0x");
     Serial.println(Millis(), HEX);
 }
 

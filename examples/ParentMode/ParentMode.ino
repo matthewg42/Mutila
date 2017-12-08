@@ -54,7 +54,7 @@ void switchMode(Mode* newMode)
 void setup()
 {
     Serial.begin(115200);
-    Serial.println(F("setup() start"));
+    Serial.println("setup() start");
 
     // Show that we can handle Millis overflow
     addMillisOffset(0xFFFFF000);
@@ -72,7 +72,7 @@ void setup()
     // Arbitrarily decide we're in ModeA to start with
     switchMode(&ModeA);
 
-    Serial.println(F("setup() end"));
+    Serial.println("setup() end");
 }
 
 void loop()

@@ -16,17 +16,17 @@ ModeTwo_::ModeTwo_()
 
 void ModeTwo_::modeStart()
 {
-    Serial.println(F("ModeTwo::modeStart()"));
+    Serial.println("ModeTwo::modeStart()");
 }
 
 void ModeTwo_::modeStop()
 {
-    Serial.println(F("ModeTwo::modeStop()"));
+    Serial.println("ModeTwo::modeStop()");
 }
 
 void ModeTwo_::modeUpdate()
 {
-    Serial.print(F("ModeTwo::modeUpdate() Millis=0x"));
+    Serial.print("ModeTwo::modeUpdate() Millis=0x");
     Serial.println(Millis(), HEX);
 }
 

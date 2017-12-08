@@ -17,17 +17,17 @@ ModeOne_::ModeOne_()
 
 void ModeOne_::modeStart()
 {
-    Serial.println(F("ModeOne::modeStart()"));
+    Serial.println("ModeOne::modeStart()");
 }
 
 void ModeOne_::modeStop()
 {
-    Serial.println(F("ModeOne::modeStop()"));
+    Serial.println("ModeOne::modeStop()");
 }
 
 void ModeOne_::modeUpdate()
 {
-    Serial.print(F("ModeOne::modeUpdate() Millis=0x"));
+    Serial.print("ModeOne::modeUpdate() Millis=0x");
     Serial.println(Millis(), HEX);
     if (Button.tapped()) {
         _state = Finished;
