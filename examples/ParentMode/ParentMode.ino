@@ -47,7 +47,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // Show that we can handle Millis overflow
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // Initialize top level modes. It is customary for top level 
     // ParentModes to call begin() for child modes which they 

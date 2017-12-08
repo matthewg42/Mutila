@@ -19,7 +19,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // Show that we can handle Millis overflow
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     mode.begin();
     mode.start();

@@ -31,7 +31,7 @@ bool DoEvery(uint32_t periodMs, uint32_t& previousMs, uint32_t now)
     }
 }
 
-void addMillisOffset(float ms)
+void AddMillisOffset(float ms)
 {
     _MillisOffsetMs += ms;
 }

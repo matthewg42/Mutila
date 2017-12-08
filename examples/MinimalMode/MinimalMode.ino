@@ -11,7 +11,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // Show we can handle Millis wrap
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // Initialize and start our mode
     mode.begin();

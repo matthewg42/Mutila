@@ -20,7 +20,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // Show we can handle Millis overflow
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // Initialize button object
     MyButton.begin();

@@ -37,7 +37,7 @@ void setup()
     pinMode(LedPin, OUTPUT);
 
     // Show we can handle Millis wrap
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // Settle down (analog inputs can be a bit weird for a short
     // time after power-up)

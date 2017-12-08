@@ -13,7 +13,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // show that we can handle Millis overflow
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // initialize inputs
     Button.begin();

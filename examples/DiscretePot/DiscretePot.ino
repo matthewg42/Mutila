@@ -16,7 +16,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // Show we can handle Millis wrap
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // Initialize objects
     Pot.begin(0, 10);

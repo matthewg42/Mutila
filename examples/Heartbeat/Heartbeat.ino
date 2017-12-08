@@ -33,7 +33,7 @@ void setup()
     Serial.println("\n\nsetup() start");
 
     // Show that we're working over Millis() wrap around
-    addMillisOffset(0xFFFFF000);
+    AddMillisOffset(0xFFFFF000);
 
     // Initialize our objects
     button.begin();
