@@ -10,10 +10,13 @@ DFPlayerMini::DFPlayerMini(Stream& serial, const uint8_t busyPin) :
 {
 }
 
-void DFPlayerMini::begin()
+void DFPlayerMini::begin(bool bootWait)
 {
     pinMode(_busyPin, INPUT_PULLUP);
     resetSendBuf();
+    if (bootWait) {
+        delay(600);
+    }
 }
 
 void DFPlayerMini::resetSendBuf()

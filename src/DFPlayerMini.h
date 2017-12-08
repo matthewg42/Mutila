@@ -37,9 +37,9 @@ public:
 
     /*! Command codes.
      *
-     * The DFPlayerMini's serial interface uses this set of command
-     * codes to instruct the device to perform some action or reply
-     * with some information. 
+     *  The DFPlayerMini's serial interface uses this set of command
+     *  codes to instruct the device to perform some action or reply
+     *  with some information. 
      */
     enum Cmd {                  
         Undefined       = 0x00, 
@@ -66,56 +66,63 @@ public:
         GetFlashCurrent = 0x4D  //!< Get file current Flash [No response]
     };
 
-    /*! Constructor
-     * \param serial a software serial object set at 9600 baud connected 
-     *        to the DFPlayerMini device
-     * \param busyPin the pin on the arduino connected to the BUSY pin of 
-     *        the DFPlayerMini. See the busy() documentation for more 
-     *        details.
+    /*! Constructor.
+     *
+     *  \param serial a software serial object set at 9600 baud connected 
+     *         to the DFPlayerMini device
+     *  \param busyPin the pin on the arduino connected to the BUSY pin of 
+     *         the DFPlayerMini. See the busy() documentation for more 
+     *         details.
      */
     DFPlayerMini(Stream& serial, const uint8_t busyPin=0);
 
-    /*! Initialization
-     * Sets up pin modes and resets state - typically called from begin()
+    /*! Initialization.
+     *
+     *  Sets up pin modes and resets state - typically called from begin().
+     *
+     *  \param bootWait if true, delay for about 600ms to allow the 
+     *         DFPlayer to boot. Failure to wait can cause the DFPlayer
+     *         to miss initial commands like volume setting.
      */
-    void begin();
+    void begin(bool bootWait=true);
 
-    /*! Send a command no response is expected
-     * \param cmd The command to send
-     * \param arg The argument to the command, if one is expected
+    /*! Send a command no response is expected.
+     *
+     *  \param cmd The command to send
+     *  \param arg The argument to the command, if one is expected
      */
     void sendCmd(Cmd cmd, uint16_t arg=0);
 
     /*! Send a command and wait for a response.
      *
-     * \param cmd The command to send.
-     * \param tries how many attempts will be made to get a valid result.
-     * \return a DFPResponse object with the results of the query. The .ok
-     *         member will be false if the query failed to get a valid
-     *         result (possible resons: timeout, bad serial comms etc.)
+     *  \param cmd The command to send.
+     *  \param tries how many attempts will be made to get a valid result.
+     *  \return a DFPResponse object with the results of the query. The .ok
+     *          member will be false if the query failed to get a valid
+     *          result (possible resons: timeout, bad serial comms etc.)
      */
     DFPResponse query(Cmd cmd, uint8_t tries=3);
 
     /*! Find out if a sound is playing.
      *
-     * If the BUSY pin has been connected to the arduino and properly
-     * set with the busyPin parameter to the DFPlayerMini constructor,
-     * the value will be determined by analysing this pin state.
+     *  If the BUSY pin has been connected to the arduino and properly
+     *  set with the busyPin parameter to the DFPlayerMini constructor,
+     *  the value will be determined by analysing this pin state.
      *
-     * If the busy pin was not passed when the DFPlayerMini was constructed,
-     * a GetStatus query will be sent to the player and the result
-     * analysed to determine the result. Note that the query method will
-     * cause jitter in the audio playback, and takes longer to execute, 
-     * so the BUSY pin method is recommended if there is a digital input
-     * available.
+     *  If the busy pin was not passed when the DFPlayerMini was constructed,
+     *  a GetStatus query will be sent to the player and the result
+     *  analysed to determine the result. Note that the query method will
+     *  cause jitter in the audio playback, and takes longer to execute, 
+     *  so the BUSY pin method is recommended if there is a digital input
+     *  available.
      *
-     * \return true if audio is currently playing, else false.
+     *  \return true if audio is currently playing, else false.
      */
     bool busy();
 
     /*! Find out if we can communicate with the device.
      *
-     * \return true if comms works, else false
+     *  \return true if comms works, else false
      */
     bool check();
 

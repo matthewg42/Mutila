@@ -54,9 +54,6 @@ void setup()
     // Initialize the mp3 player object
     mp3.begin();
 
-    // Let IO pins settle
-    delay(200);  
-
     // Set the volume
     mp3.sendCmd(DFPlayerMini::SetVolume, Volume);
 
