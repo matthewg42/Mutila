@@ -45,6 +45,9 @@ void setup()
     Serial.begin(115200);
     Serial.println("\n\nsetup() start");
 
+    // Show we can handle Millis overflow
+    addMillisOffset(0xFFFFF000);
+
     // Show that we can handle Millis overflow
     SerialMP3.begin(9600);
 
