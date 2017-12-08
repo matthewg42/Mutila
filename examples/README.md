@@ -4,7 +4,9 @@ There's an example for every class in the Mutila library. They all print output 
 
 ## Hardware
 
-Some of the examples require extra hardware.  Here is the test setup which was used when these examples were developed:
+Some of the examples require extra hardware with the following configurations (Mutila is tested with an Arduino Nano and a NodeMCU 0.9 (Amica form factor), as these boards are very often used in the author's projects).
+
+### Test rid for Arduino Nano
 
 - Arduino Nano 328P
     - Push to make button GND -> Button -> pin D6 (primary button used when only one button is used)
@@ -23,6 +25,27 @@ Some of the examples require extra hardware.  Here is the test setup which was u
         - HC-SR04 pin Gnd -> Arduino Gnd
         - HC-SR04 pin Vcc -> Arduino 5V
         - HC-SR04 pin Echo -> Arduino D4
+        - HC-SR04 pin Trig -> Arduino D3
+
+### Test rid for NodeMCU (ESP8266)
+
+- NodeMCU Amica (version 0.9, ESP-12 Module)
+    - Push to make button GND -> Button -> pin D1 (primary button used when only one button is used)
+    - Push to make button GND -> Button -> pin D2 (secondary button)
+    - 10 KOhm linear potential divider with centre pin -> A0, outer pins GND & 5V
+    - DFPlayer Mini:
+        - DFPlayer Mini pin RX -> Arduino D7
+        - DFPlayer Mini pin TX -> 1 KOhm resistor -> Arduino D6
+        - DFPlayer Mini pin BUSY -> Arduino D5
+        - DFPlayer Mini pin VCC -> Arduino 5V
+        - DFPlayer Mini pin GND -> Arduino Gnd
+        - DFPlayer Mini pin SPK_1 -> 8 Ohm, 0.2 Watt speaker
+        - DFPlayer Mini pin SPK_2 -> 8 Ohm, 0.2 Watt speaker
+        - Micro SD card formatted with VFAT, with files from Mutila's *audio* directory copied into the mp3 directory of the card
+    - HC-SR04 sonic ranger module:
+        - HC-SR04 pin Gnd -> Arduino Gnd
+        - HC-SR04 pin Vcc -> Arduino 5V
+        - HC-SR04 pin Echo -> Arduino D0
         - HC-SR04 pin Trig -> Arduino D3
 
 ## Known Issues

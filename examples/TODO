@@ -1,28 +1,28 @@
-Example				builds nano	builds NodeMCU	builds Nano IDE builds ESP IDE
--------------------------------	---------------	---------------	--------------- ---------------
-AnalogInputButton/		*		*		*
-BrownoutMode/			*		*		*		*
-BufferedSampler/		*		*
-CorrectedMillis/		*		*
-CurrentSampler/			*		*
-DebouncedAnalogButton/		*		*
-DebouncedButton/		*		*
-DebouncedDualButton/		*		*
-DigitalInputButton/		*		*
-DiscretePot/			*		*
-DualButton/			*		*
-DualInputButton/		*		*
-EMASampler/			*		*
-EMASonicRanger/			*		*
-Heartbeat/			*		*
-MinimalMode/			*		*
-ModeManager/			*		*
-ParentMode/			*		*
-SonicRanger/			*		*
-ToggleButton/			*		*
-VDivSampler/			*		*
-DFPlayerMini/			X		X
-DFPReader/			X		X
+Example				builds nano	builds NodeMCU	Tweaks
+-------------------------------	---------------	---------------	--------------
+AnalogInputButton/		*		*		
+BrownoutMode/			*		*		
+BufferedSampler/		*		*		
+CorrectedMillis/		*		*		
+CurrentSampler/			*		*		
+DebouncedAnalogButton/		*		*		
+DebouncedButton/		*		*		
+DebouncedDualButton/		*		*		
+DFPlayerMini/			*		*		
+DFPReader/			*		*		
+DigitalInputButton/		*		*		
+DiscretePot/			*		*		
+DualButton/			*		*		
+DualInputButton/		*		*		
+EMASampler/			*		*		
+EMASonicRanger/			*		*		
+Heartbeat/			*		*		
+MinimalMode/			*		*		
+ModeManager/			*		*		
+ParentMode/			*		*		
+SonicRanger/			*		*		
+ToggleButton/			*		*		
+VDivSampler/			*		*		
 
 Use "" not F("") in all examples
 Use "setup() start" and "setup() end"
