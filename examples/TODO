@@ -13,9 +13,8 @@ DiscretePot/			*		*
 DualButton/			*		*
 DualInputButton/		*		*
 EMASampler/			*		*
-EMASonicRanger/			
+EMASonicRanger/			*		*
 Heartbeat/			
-Makefile			
 MinimalMode/			
 ModeManager/			
 ParentMode/			
@@ -27,3 +26,4 @@ DFPReader/			X		X
 
 Use "" not F("") in all examples
 Use "setup() start" and "setup() end"
+Use standardized variable names: LastOutputMs & OutputPeriodMs
