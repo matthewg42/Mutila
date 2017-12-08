@@ -4,7 +4,7 @@
 
 #if defined(ARDUINO_ESP8266_NODEMCU) 
 const uint8_t TriggerPin = D3;
-const uint8_t EchoPin = D4;
+const uint8_t EchoPin = D0;
 #else
 const uint8_t TriggerPin = 3;
 const uint8_t EchoPin = 4;
