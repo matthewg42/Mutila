@@ -2,30 +2,42 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
+#if defined(ARDUINO_ESP8266_NODEMCU) 
+const uint8_t TriggerPin = D3;
+const uint8_t EchoPin = D4;
+#else
 const uint8_t TriggerPin = 3;
 const uint8_t EchoPin = 4;
+#endif
 
 EMASonicRanger Ranger(TriggerPin, EchoPin);
-uint32_t LastDb = 0;
+
+// How often to print output
+const uint16_t OutputPeriodMs = 100;
+// Keep track of the last time we printed output
+uint32_t LastOutputMs = 0;
 
 void setup()
 {
     Serial.begin(115200);
-    Ranger.begin();
+    Serial.println("\n\nsetup() start");
 
-    // Show we can handle Millis wrap
+    // Show we can handle Millis overflow
     addMillisOffset(0xFFFFF000);
 
-    // Settle down
-    delay(300);
-    Serial.println("setup() complete");
+    // Initialize our sonic ranger object
+    Ranger.begin();
+
+    Serial.println("setup() end");
 }
 
 void loop()
 {
+    // Give the ranger a timeslice to do sampling
     Ranger.update();
 
-    if (DoEvery(50, LastDb)) {
+    // Print output every so often
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" range=");
