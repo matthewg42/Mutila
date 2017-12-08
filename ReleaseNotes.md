@@ -1,17 +1,22 @@
 # Release Notes
 
-## Version NEXT
+## Version 1.1.1
 
-Hot on the heels of the 1.1.0 release, this release is mainly because I'd broken the build for ESP projects be leaving a few straggler int variables unconverted to int16\_t. 
+Bug fix release.
 
 ### Features:
-- Added peek parameter to DebouncedButton::tapped (and pushed).
-- Marked DebouncedButton::pushed as deprecated.
-- Started writing this ChangeLog file.
+- Added peek parameter to AbstractDebouncedButton::tapped and AbstractDebouncedButton::pushed. Default set for backwards compatibility.
+- Added bootWait parameter DFPlayerMini::begin() and DFPReader::begin(). Default set for backwards compatibility.
+- Added ESP Makefiles for all examples.
+- Added ESP build conditionals for all examples, and documented ESP-based test setup.
 
 ### Bug fixes:
 - Fixed broken ESP build caused by incomplete move to types from stdint.h.
+- Fix broken build of DFPReader on ESP8266 (work-around ESP8266 library fmod bug).
 
+### Other
+- Much cleanup and improvements in consistency of example code.
+- Arduino 1.5 library compatibility.
 
 ## Version 1.1.0
 

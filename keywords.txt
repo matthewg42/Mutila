@@ -1,0 +1,47 @@
+#######################################
+# Syntax Coloring Map For Mutila
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AbstractButton	KEYWORD1
+AbstractDebouncedButton	KEYWORD1
+AbstractSampler	KEYWORD1
+AnalogInputButton	KEYWORD1
+BrownoutMode	KEYWORD1
+BufferedSampler	KEYWORD1
+BufferedVDivSampler	KEYWORD1
+DebouncedAnalogButton	KEYWORD1
+DebouncedButton	KEYWORD1
+DebouncedDualButton	KEYWORD1
+DFPlayerMini	KEYWORD1
+DFPReader	KEYWORD1
+DigitalInputButton	KEYWORD1
+DiscretePot	KEYWORD1
+DualButton	KEYWORD1
+DualInputButton	KEYWORD1
+EMACurrentSampler	KEYWORD1
+EMASampler	KEYWORD1
+EMASonicRanger	KEYWORD1
+EMAVDivSampler	KEYWORD1
+Heartbeat	KEYWORD1
+Mode	KEYWORD1
+ModeManager	KEYWORD1
+MutilaDebug	KEYWORD1
+ParentMode	KEYWORD1
+SonicRanger	KEYWORD1
+ToggleButton	KEYWORD1
+VIPCalculation	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# FastLED methods
+Millis	KEYWORD2
+MillisSince	KEYWORD2
+DoEvery	KEYWORD2
+AddMillisOffset	KEYWORD2
+
