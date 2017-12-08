@@ -14,8 +14,8 @@ DualButton/			*		*
 DualInputButton/		*		*
 EMASampler/			*		*
 EMASonicRanger/			*		*
-Heartbeat/			
-MinimalMode/			
+Heartbeat/			*		*
+MinimalMode/			*		*
 ModeManager/			
 ParentMode/			
 SonicRanger/			
@@ -26,4 +26,4 @@ DFPReader/			X		X
 
 Use "" not F("") in all examples
 Use "setup() start" and "setup() end"
-Use standardized variable names: LastOutputMs & OutputPeriodMs
+Use standardized variable names: LastOutputMs & OutputPeriodMs, DigitalButtonPin, AnalogButtonPin
