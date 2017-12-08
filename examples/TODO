@@ -20,7 +20,7 @@ ModeManager/			*		*
 ParentMode/			*		*
 SonicRanger/			*		*
 ToggleButton/			*		*
-VDivSampler/			
+VDivSampler/			*		*
 DFPlayerMini/			X		X
 DFPReader/			X		X
 
