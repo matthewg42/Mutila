@@ -3,10 +3,15 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
+#if defined(ARDUINO_ESP8266_NODEMCU) 
+const uint8_t ButtonPin = D1;
+#else
 const uint8_t ButtonPin = 6;
-const uint8_t LedPin = 13;
-const uint8_t OutputMs = 50;
-uint32_t LastDb = 0;
+#endif
+const uint8_t LedPin = LED_BUILTIN;
+
+const uint8_t OutputPeriodMs = 50;
+uint32_t LastOutputMs = 0;
 
 ToggleButton MyButton(ButtonPin);
 
@@ -23,7 +28,7 @@ void setup()
 void loop()
 {
     MyButton.update();
-    if (DoEvery(OutputMs, LastDb)) {
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         bool o = MyButton.on();
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
