@@ -13,10 +13,15 @@ DiscretePot PotReversed(AnalogPin);
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nsetup() start");
+
+    // Show we can handle Millis wrap
+    addMillisOffset(0xFFFFF000);
+
     Pot.begin(0, 10);
     PotReversed.begin(0, 10, true);
     delay(300);
-    Serial.println("setup() complete");
+    Serial.println("setup() end");
 }
 
 void loop()
@@ -25,7 +30,9 @@ void loop()
     PotReversed.update();
 
     if (DoEvery(OutputMs, LastDb)) {
-        Serial.print("analog value=");
+        Serial.print("Millis=0x");
+        Serial.print(Millis());
+        Serial.print(" analog value=");
         Serial.print(analogRead(AnalogPin));
         Serial.print(" Pot.value()=");
         Serial.print(Pot.value());
