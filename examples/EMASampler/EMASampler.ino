@@ -2,28 +2,41 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-EMASampler SlowSampler(A0, 100, 0.02);
-EMASampler FastSampler(A0, 100, 0.95);
+const uint8_t SamplerPin = A0;
+const uint16_t SamplePeriodMs = 50;
 
+// We'll create two samplers with a different alpha value
+// which take input from the same pin so we can compare them
+EMASampler SlowSampler(SamplerPin, SamplePeriodMs, 0.02);
+EMASampler FastSampler(SamplerPin, SamplePeriodMs, 0.95);
+
+// How often to print output
 const uint32_t DebugDelay = 100;
+// Timer to keep track of when we last printed output
 uint32_t LastDb = 0;
 
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("setup() start");
+    
+    // Show we can handle Millis overflow
+    addMillisOffset(0xFFFFF000);
+
+    // Initialize the samplers
     SlowSampler.begin();
     FastSampler.begin();
 
-    // Show we can handle Millis wrap
-    addMillisOffset(0xFFFFF000);
-
-    // Settle down
+    // Let analog inputs settle after powerup
     delay(300);
-    Serial.println("setup() complete");
+
+    Serial.println("setup() end");
 }
 
 void loop()
 {
+    // Give out samplers a timeslice to do their sampling when
+    // it is time to do so.
     SlowSampler.update();
     FastSampler.update();
 
