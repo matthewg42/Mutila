@@ -1,4 +1,5 @@
-EXAMPLES = $(wildcard */)
+#EXCLUDED_EXAMPLES = 
+EXAMPLES = $(filter-out $(EXCLUDED_EXAMPLES),$(wildcard */))
 SUBDIRSCLEAN = $(addsuffix clean,$(EXAMPLES))
 SUBDIRSBUILD = $(addsuffix build,$(EXAMPLES))
 

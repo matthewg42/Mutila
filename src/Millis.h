@@ -55,7 +55,17 @@ uint32_t MillisSince(uint32_t previousMs, uint32_t now=0);
  */
 bool DoEvery(uint32_t periodMs, uint32_t& previousMs, uint32_t now=0);
 
-//! Add offset
-void addMillisOffset(float ms);
+/*! Add offset to Millis() results.
+ *
+ *  \param ms offset in milliseconds.
+ */
+void AddMillisOffset(float ms);
+
+/*! Add offset to Millis() results.
+ *
+ * \deprecated Please use AddMillisOffset for new code.
+ *  \param ms offset in milliseconds.
+ */
+#define addMillisOffset(ms) do { AddMillisOffset(ms); } while(0)
 
 

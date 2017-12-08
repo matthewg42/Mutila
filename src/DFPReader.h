@@ -3,11 +3,11 @@
 #include <stdint.h>
 #include <DFPlayerMini.h>
 
-/*! \brief DFPlayerMini controller with numeric readout functions
+/*! DFPlayerMini controller with numeric readout functions.
  *
- * This class is intended for use with the samples in the audio/ directory of
- * the main Mutila repository.  Copy these files to an SD card in a directory 
- * called "mp3". 
+ *  This class is intended for use with the samples in the audio/ directory of
+ *  the main Mutila repository.  Copy these files to an SD card in a directory 
+ *  called "mp3". 
  */
 class DFPReader : public DFPlayerMini {
 public:
@@ -50,36 +50,43 @@ public:
     static const uint8_t Mp3TrackAnd =            251;
 
 public:
+    /*! \enum PlaybackState.
+     */
     enum PlaybackState {
-        Idle,
-        Pending,
-        Playing
+        Idle,       //!< Reader is idle.
+        Pending,    //!< Reader is not playing, but is waiting for an audio file to play.
+        Playing     //!< Reader is playing an audio file.
     };
 
-    /*! Constructor
-     * \param serial a software serial object set at 9600 baud connected 
-     *        to the DFPlayerMini device
-     * \param busyPin the pin on the arduino connected to the BUSY pin of 
-     *        the DFPlayerMini. See the busy() documentation for more 
-     *        details.
+    /*! Constructor.
+     *
+     *  \param serial a software serial object set at 9600 baud connected 
+     *         to the DFPlayerMini device.
+     *  \param busyPin the pin on the arduino connected to the BUSY pin of 
+     *         the DFPlayerMini. See the busy() documentation for more 
+     *         details.
      */
     DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd=DFPlayerMini::PlayTf, uint8_t busyPin=0, uint8_t readerBufferSize=30);
 
-    /*! Destructor
+    /*! Destructor.
      */  
     ~DFPReader();
 
-    /* Initialize
-     * Typically called from setup()
+    /*! Initialize.
+     *
+     *  Typically called from setup().
+     *
+     *  \param bootWait if true, wait 600ms for the DFPlayer to boot.
      */
-    void begin();
+    void begin(bool bootWait=true);
 
-    /*! Allocate Timeslice
-     * Should be called frequently - typically from loop()
+    /*! Allocate Timeslice.
+     *
+     * Should be called frequently - typically from loop().
      */
     void update();
 
-    /*! Queue up digits of a number to read
+    /*! Queue up digits of a number to read.
      * 
      * When called, the ring buffer is populated with the IDs of
      * samples which are required to read the number.  For example
@@ -91,20 +98,22 @@ public:
      */
     void readNumber(double number, uint8_t dp=0);
 
-    /*! Find out if still reading
-     * \return true if a sound is being played, or if there are still
-     *         samples to play after the current sample (i.e. if we're
-     *         still reading out a number), else return false
+    /*! Find out if still reading.
+     *
+     *  \return true if a sound is being played, or if there are still
+     *          samples to play after the current sample (i.e. if we're
+     *          still reading out a number), else return false
      */
     bool reading();
 
-    /*! Stop playback and reset the run buffer to an empty state
+    /*! Stop playback and reset the run buffer to an empty state.
      */
     void resetReaderBuf();
 
-    /*! Append a sample to play
-     * Add a sample to the end of the run buffer to play
-     * as soon as other elements in the buffer have been played
+    /*! Append a sample to play.
+     *
+     *  Add a sample to the end of the run buffer to play
+     *  as soon as other elements in the buffer have been played.
      */
     bool appendElement(uint8_t value);
 
@@ -113,12 +122,20 @@ private:
 
     void startPlayback(uint16_t track);
 
-    //! Get next playable element from buffer
-    //! \return next element in buffer (FIFO style), or 
-    //!         0 if the buffer is empty.
+    /*! Get next playable element from buffer.
+     *
+     *  \return next element in buffer (FIFO style), or 0 if the buffer is empty.
+     */
     uint8_t popElement();
 
+    /*! Append a number to the queue, where the number is less than 1000.
+     *
+     *  \num an integer less than 1000
+     */
     void appendSubThousand(int16_t num);
+
+    /*! Append a magnitude to the queue.
+     */
     void appendMagnitude(double* number, double magnitude, uint8_t magnitudeElement);
 
     // Some data for figuring out this pesky human speech stuff

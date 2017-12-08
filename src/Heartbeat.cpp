@@ -106,8 +106,6 @@ void Heartbeat::update()
 
 void Heartbeat::updatePin(bool state)
 {
-    DB("updating pin to ");
-    DBLN(state);
     _pinState = state;
     digitalWrite(_pin, _invertedLogic ? !_pinState : _pinState);
     _lastStateFlip = Millis();

@@ -15,18 +15,18 @@ MyBrownoutMode::MyBrownoutMode(EMAVDivSampler& vSampler, const float vThreshLow,
 void MyBrownoutMode::enterBrownout()
 {
     // Typical use: save state to EEPROM etc...
-    DBLN(F("MyBrownoutMode::enterBrownout()"));
+    Serial.println("MyBrownoutMode::enterBrownout()");
 }
 
 void MyBrownoutMode::exitBrownout()
 {
     // Typical use: restore state from EEPROM
-    DBLN(F("MyBrownoutMode::exitBrownout()"));
+    Serial.println("MyBrownoutMode::exitBrownout()");
 }
 
 void MyBrownoutMode::modeUpdate()
 {
-    DB(F("MyBrownoutMode::modeUpdate() volts="));
-    DBLN(_vSampler.averageVolts());
+    Serial.print("MyBrownoutMode::modeUpdate() volts=");
+    Serial.println(_vSampler.averageVolts());
 }
 

@@ -3,7 +3,7 @@
 #include <Mode.h>
 
 // ModeOne_ prints a message to Serial every half a second
-// ModeOne_ terminated when ButtonA is pushed.
+// ModeOne_ terminated when Button is pushed.
 class ModeOne_ : public Mode {
 public:
     ModeOne_();

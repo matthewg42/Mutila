@@ -1,20 +1,24 @@
 
 # Mouse's Utilities for Arduino (Mutila)
 
-## Summary
+Re-usable utility components for Arduino projects. All the stuff we all end up re-implementing every project - buttons, averaging samplers, voltage and current measurements calculations and so on. The classes and functions in this library are intended to be flexible, efficient and stable, as well as following a style which is broadly similar to the core Arduino libraries.
 
-Re-usable utility components for Arduino projects. All the stuff we all end up re-implementing every project - buttons, averaging samplers, voltage and current measurements calculations and so on.
+## Author & License
+
+All code written by Matthew Gates (Mouse), and licensed under the GNU GPL version 3. See the LICENSE file for details.
+
+## Feature Summary
 
 ### Inputs
 
-A collection of classes and functions for nice handling of basic inputs (buttons and such). The classes are kept as simple as possible while having enough functionality to be useful. ''Timeslice-based'' classes should have their ''update()'' method called as frequently as possible, which will return rapidly. These classes are an alternative to interrupt driven IO for projects where interrupts can't be used - e.g. where *Mutila* inputs must not intefere with timing of other parts of your project which might use interrupts themselves (e.g. motor control)
+A collection of classes and functions for nice handling of basic inputs (buttons and such). The classes are kept as simple as possible while having enough functionality to be useful. ''Time slice-based'' classes should have their ''update()'' method called as frequently as possible, which will return rapidly. These classes are an alternative to interrupt driven IO for projects where interrupts can't be used - e.g. where *Mutila* inputs must not interfere with timing of other parts of your project which might use interrupts themselves (e.g. motor control)
 
-* *DigitalInputButton* - switch from a digital input pin(pullup).
+* *DigitalInputButton* - switch from a digital input pin.
 * *AnalogInputButton* - switch from an analog input pin.
 * *DualInputButton* - switch from combination of two other buttons.
-* *DebouncedButton* - timeslice-based debounced button class with input from a DigitalInputButton object.
-* *DebouncedAnalogButton* - timeslice-based debounced button class with input from an AnalogInputButton object.
-* *DebouncedDualButton* - timeslice-based debounced button class with input from a DualInputButton object.
+* *DebouncedButton* - time slice-based debounced button class with input from a DigitalInputButton object.
+* *DebouncedAnalogButton* - time slice-based debounced button class with input from an AnalogInputButton object.
+* *DebouncedDualButton* - time slice-based debounced button class with input from a DualInputButton object.
 * *DiscretePot* - use a potential divider attached to an analog input to return a discrete value within a specified range - includes smoothing.
 * *ToggleButton* - each press flips state from on to off.
 
@@ -60,10 +64,6 @@ A *Mode* is a kind of sub-program which has distinct startup, shutdown and updat
 
 Modes may be arranged in a hierarchical manner using the *ParentMode* class. This can be useful when building hierarchical menu systems which a couple of buttons.
 
-## Author & License
-
-All code written by Matthew Gates (Mouse), and licensed under the GNU GPL v3. See the LICENSE file for details.
-
 ## API Documentation
 
 Doxygen-generated documentation can be found here: https://matthewg42.github.io/Mutila/
@@ -75,7 +75,7 @@ Doxygen-generated documentation can be found here: https://matthewg42.github.io/
 
 ## Ideas for future development
 
-### Templetsed PersistentSettings classes
+### Templatised PersistentSetting classes
 
 Similar to the ones implemented in EspApConfigurator (by the same Author), but that works with both ESP and Arduino hardware (the use of the EEPROM library for ESP devices is incompatible with regular Arduino EEPROM usage).
 
@@ -99,4 +99,13 @@ It would be really nice to have some mechanism to write the current project vers
 
 * doc ops which create reply
 * asynchronous commands (i.e. do not wait for serial, use update() to send bytes one at a time)
+
+## Development Workflow
+
+At time of writing, Mutila is a one-Mouse project. versions up until v1.1.0 were not made into releases, and most work was done directly in master. However, enough projects now use Mutila that is makes sense to start being a bit more structured, so here's how it's going to work from now (until I need to change it again).
+
+* After v1.1.1, the *master* branch is just for releases, which (I hope) will be well-tested and stable.
+* Each release will be summarised in the ReleaseNotes.md file.
+* Minor new features, bug fixes and the like will go in the *dev* branch, which will periodically be merged with master to create a new release.
+* Major new features will be created in feature branches.
 

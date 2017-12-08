@@ -2,26 +2,26 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-/* Example showing how we can use Millis and addMillisOffset to adjust 
+/* Example showing how we can use Millis and AddMillisOffset to adjust 
  * for drift in millis() when interrupts are disabled 
  */
 
 void setup()
 {
     Serial.begin(115200);
-    delay(300);
-    DBLN("setup() complete");
+    Serial.println("\n\nsetup() start");
+    Serial.println("setup() end");
 }
 
 void loop()
 {
-    DB("millis()=");
-    DB(millis());
-    DB(" offset=");
-    DB(_MillisOffsetMs);
-    DB(" Millis()=");
-    DBLN(Millis());
+    Serial.print("millis()=");
+    Serial.print(millis());
+    Serial.print(" offset=");
+    Serial.print(_MillisOffsetMs);
+    Serial.print(" Millis()=");
+    Serial.println(Millis());
     delay(1000);
-    addMillisOffset(0.3);
+    AddMillisOffset(0.3);
 }
 

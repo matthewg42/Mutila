@@ -37,23 +37,17 @@
 // The top level mode (which ParentMode, ModeA or ModeB is active)
 Mode* TopMode = NULL;
 
-void switchMode(Mode* newMode)
-{
-    // only switch modes if the newMode is different from the
-    // current mode
-    if (TopMode != newMode) {
-        // only call stop() of we have an actual mode to stop
-        if (TopMode != NULL) {
-            TopMode->stop();
-        }
-        TopMode = newMode;
-        TopMode->start();
-    }
-}
+// Function prototype so we can build with make and choose any
+// ordering of functions in this file...
+void switchMode(Mode* newMode);
 
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nsetup() start");
+
+    // Show that we can handle Millis overflow
+    AddMillisOffset(0xFFFFF000);
 
     // Initialize top level modes. It is customary for top level 
     // ParentModes to call begin() for child modes which they 
@@ -68,7 +62,7 @@ void setup()
     // Arbitrarily decide we're in ModeA to start with
     switchMode(&ModeA);
 
-    DBLN(F("setup() complete"));
+    Serial.println("setup() end");
 }
 
 void loop()
@@ -85,6 +79,20 @@ void loop()
         } else {
             switchMode(&ModeA);
         }
+    }
+}
+
+void switchMode(Mode* newMode)
+{
+    // only switch modes if the newMode is different from the
+    // current mode
+    if (TopMode != newMode) {
+        // only call stop() of we have an actual mode to stop
+        if (TopMode != NULL) {
+            TopMode->stop();
+        }
+        TopMode = newMode;
+        TopMode->start();
     }
 }
 

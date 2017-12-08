@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <MutilaDebug.h>
 #include "ModeTwo.h"
-#include "ButtonA.h"
+#include "Button.h"
 
 // Our global instance of the mode...
 ModeTwo_ ModeTwo;
@@ -16,22 +16,22 @@ ModeTwo_::ModeTwo_()
 
 void ModeTwo_::modeStart()
 {
-    DBLN(F("ModeTwo::modeStart()"));
+    Serial.println("ModeTwo::modeStart()");
 }
 
 void ModeTwo_::modeStop()
 {
-    DBLN(F("ModeTwo::modeStop()"));
+    Serial.println("ModeTwo::modeStop()");
 }
 
 void ModeTwo_::modeUpdate()
 {
-    DB(F("ModeTwo::modeUpdate() Millis=0x"));
-    DBLN(Millis(), HEX);
+    Serial.print("ModeTwo::modeUpdate() Millis=0x");
+    Serial.println(Millis(), HEX);
 }
 
 bool ModeTwo_::isFinished()
 {
-    return ButtonA.tapped();
+    return Button.tapped();
 }
 

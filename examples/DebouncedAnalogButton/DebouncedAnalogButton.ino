@@ -5,32 +5,39 @@
 
 DebouncedAnalogButton Button(A0);
 
-uint32_t LastDb = 0;
+const uint16_t OutputPeriodMs = 100;
+uint32_t LastOutputMs = 0;
 
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nsetup() end");
+
+    // Show we can handle Millis overflow
+    AddMillisOffset(0xFFFFF000);
+
+    // Initialize button object
     Button.begin();
-    addMillisOffset(0xFFFFF000);
-    DBLN("setup() complete");
+
+    Serial.println("setup() end");
 }
 
 void loop() 
 {
     Button.update();
-    if (DoEvery(100, LastDb)) {
-        DB("Millis=0x");
-        DB(Millis(), HEX);
-        DB(" analog value=");
-        DB(analogRead(A0));
-        DB(" logical button value=");
-        DB(Button.on());
-        DB(" tapped=");
-        DB(Button.tapped());
-        DB(" repeat=");
-        DB(Button.repeat());
-        DB(" held=");
-        DBLN(Button.held());
+    if (DoEvery(OutputPeriodMs, LastOutputMs)) {
+        Serial.print("Millis=0x");
+        Serial.print(Millis(), HEX);
+        Serial.print(" analog value=");
+        Serial.print(analogRead(A0));
+        Serial.print(" logical button value=");
+        Serial.print(Button.on());
+        Serial.print(" tapped=");
+        Serial.print(Button.tapped());
+        Serial.print(" repeat=");
+        Serial.print(Button.repeat());
+        Serial.print(" held=");
+        Serial.println(Button.held());
     }
 }
 

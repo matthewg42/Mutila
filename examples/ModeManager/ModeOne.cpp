@@ -2,7 +2,7 @@
 #include <MutilaDebug.h>
 #include <Millis.h>
 #include "ModeOne.h"
-#include "ButtonA.h"
+#include "Button.h"
 
 // Our global instance of the mode...
 ModeOne_ ModeOne;
@@ -17,19 +17,19 @@ ModeOne_::ModeOne_()
 
 void ModeOne_::modeStart()
 {
-    DBLN(F("ModeOne::modeStart()"));
+    Serial.println("ModeOne::modeStart()");
 }
 
 void ModeOne_::modeStop()
 {
-    DBLN(F("ModeOne::modeStop()"));
+    Serial.println("ModeOne::modeStop()");
 }
 
 void ModeOne_::modeUpdate()
 {
-    DB(F("ModeOne::modeUpdate() Millis=0x"));
-    DBLN(Millis(), HEX);
-    if (ButtonA.tapped()) {
+    Serial.print("ModeOne::modeUpdate() Millis=0x");
+    Serial.println(Millis(), HEX);
+    if (Button.tapped()) {
         _state = Finished;
     }
 }
