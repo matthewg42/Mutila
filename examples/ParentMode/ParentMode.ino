@@ -54,6 +54,10 @@ void switchMode(Mode* newMode)
 void setup()
 {
     Serial.begin(115200);
+    Serial.println(F("setup() start"));
+
+    // Show that we can handle Millis overflow
+    addMillisOffset(0xFFFFF000);
 
     // Initialize top level modes. It is customary for top level 
     // ParentModes to call begin() for child modes which they 
@@ -68,7 +72,7 @@ void setup()
     // Arbitrarily decide we're in ModeA to start with
     switchMode(&ModeA);
 
-    Serial.println(F("setup() complete"));
+    Serial.println(F("setup() end"));
 }
 
 void loop()

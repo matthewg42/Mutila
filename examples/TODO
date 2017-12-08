@@ -17,7 +17,7 @@ EMASonicRanger/			*		*
 Heartbeat/			*		*
 MinimalMode/			*		*
 ModeManager/			*		*
-ParentMode/			
+ParentMode/			*		*
 SonicRanger/			
 ToggleButton/			
 VDivSampler/			
@@ -27,3 +27,4 @@ DFPReader/			X		X
 Use "" not F("") in all examples
 Use "setup() start" and "setup() end"
 Use standardized variable names: LastOutputMs & OutputPeriodMs, DigitalButtonPin, AnalogButtonPin
+Put notes about an example in a README.md file in the directory, not in comments
