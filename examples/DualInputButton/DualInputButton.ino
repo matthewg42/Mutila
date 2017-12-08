@@ -5,9 +5,14 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
+#if defined(ARDUINO_ESP8266_NODEMCU) 
+const uint8_t DigitalInputButtonPin = D1;
+#else
 const uint8_t DigitalInputButtonPin = 6;
+#endif
+
 const uint8_t AnalogInputButtonPin = A0;
-const uint8_t LedPin = 13;
+const uint8_t LedPin = LED_BUILTIN;
 bool previousValue = false;
 uint32_t LastDb = 0;
 
@@ -20,6 +25,7 @@ DualInputButton CombinedButtonAnd(Button1, Button2, DualInputButton::And);
 void setup()
 {
     Serial.begin(115200);
+    Serial.println("\n\nsetup() begin");
 
     // We don't need to call begin() for Button1 and Button2
     // because CombinedButton.begin() will do it for us.
@@ -36,7 +42,7 @@ void setup()
     // time after power-up)
     delay(300);
 
-    Serial.println("setup() complete");
+    Serial.println("setup() end");
 }
 
 void loop()
