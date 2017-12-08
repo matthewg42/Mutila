@@ -1,7 +1,4 @@
-# For now these examples are excluded as they are known not to
-# work with the ESP build...
-EXCLUDED_EXAMPLES = DFPlayerMini/ DFPReader/
-
+#EXCLUDED_EXAMPLES = 
 EXAMPLES = $(filter-out $(EXCLUDED_EXAMPLES),$(wildcard */))
 SUBDIRSCLEAN = $(addsuffix clean,$(EXAMPLES))
 SUBDIRSBUILD = $(addsuffix build,$(EXAMPLES))
