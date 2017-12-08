@@ -1,20 +1,18 @@
-Example				has #define	builds nano	builds NodeMCU	builds IDE
--------------------------------	---------------	---------------	---------------	---------------
-AnalogInputButton/		*		*		*		*
-BrownoutMode/			
-BufferedSampler/		
-CorrectedMillis/		
-CurrentSampler/			
-DebouncedAnalogButton/		
-DebouncedButton/		
-DebouncedDualButton/		
-DFPlayerMini/			
-DFPReader/			
-DigitalInputButton/		
-DiscretePot/			
-DualButton/			
-DualInputButton/		
-EMASampler/			
+Example				builds nano	builds NodeMCU	builds Nano IDE builds ESP IDE
+-------------------------------	---------------	---------------	--------------- ---------------
+AnalogInputButton/		*		*		*
+BrownoutMode/			*		*		*		*
+BufferedSampler/		*		*
+CorrectedMillis/		*		*
+CurrentSampler/			*		*
+DebouncedAnalogButton/		*		*
+DebouncedButton/		*		*
+DebouncedDualButton/		*		*
+DigitalInputButton/		*		*
+DiscretePot/			*		*
+DualButton/			*		*
+DualInputButton/		*		*
+EMASampler/			*		*
 EMASonicRanger/			
 Heartbeat/			
 Makefile			
@@ -24,3 +22,8 @@ ParentMode/
 SonicRanger/			
 ToggleButton/			
 VDivSampler/			
+DFPlayerMini/			X		X
+DFPReader/			X		X
+
+Use "" not F("") in all examples
+Use "setup() start" and "setup() end"
