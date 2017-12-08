@@ -2,6 +2,14 @@
 #include "DFPReader.h"
 #include "Millis.h"
 
+// This is a hack to get DFPReader building on ESP8266. At time of writing
+// there is a bug in the ESP libraries (v2.3.0 has a missing implementation 
+// of // __ieee754_remainder, causing linker to fail).
+double dmod(double a, double b)
+{
+    return (a - b * floor(a / b));
+}
+
 const uint8_t DFPReader::SMALL_NUMBERS[] = {
         Mp3TrackZero, Mp3TrackZero+1, Mp3TrackZero+2, Mp3TrackZero+3, 
         Mp3TrackZero+4, Mp3TrackZero+5, Mp3TrackZero+6, Mp3TrackZero+7, 
@@ -29,9 +37,9 @@ DFPReader::~DFPReader()
     delete readerBuf;
 }
 
-void DFPReader::begin()
+void DFPReader::begin(bool bootWait)
 {
-    DFPlayerMini::begin();
+    DFPlayerMini::begin(bootWait);
     resetReaderBuf();
     lastPlayStart = 0;
     playbackState = Playing; // we will let it reset itself, in case there is a track already playing...
@@ -178,7 +186,7 @@ void DFPReader::appendMagnitude(double* number, double magnitude, uint8_t magnit
 
     appendSubThousand((int)(*number / magnitude));
     appendElement(magnitudeElement);
-    *number = fmod(*number, magnitude);
+    *number = dmod(*number, magnitude);
 }
 
 
