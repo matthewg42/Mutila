@@ -28,6 +28,8 @@ bool DualInputButton::on()
     case And:
         return _button1.on() && _button2.on();
         break;
+    default:
+        return false;
     }
 }
 
