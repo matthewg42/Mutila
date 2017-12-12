@@ -6,7 +6,7 @@ There's an example for every class in the Mutila library. They all print output 
 
 Some of the examples require extra hardware with the following configurations (Mutila is tested with an Arduino Nano and a NodeMCU 0.9 (Amica form factor), as these boards are very often used in the author's projects).
 
-### Test rid for Arduino Nano
+### Test Rig for Arduino Nano
 
 - Arduino Nano 328P
     - Push to make button GND -> Button -> pin D6 (primary button used when only one button is used)
@@ -27,7 +27,7 @@ Some of the examples require extra hardware with the following configurations (M
         - HC-SR04 pin Echo -> Arduino D4
         - HC-SR04 pin Trig -> Arduino D3
 
-### Test rid for NodeMCU (ESP8266)
+### Test Rig for NodeMCU (ESP8266)
 
 - NodeMCU Amica (version 0.9, ESP-12 Module)
     - Push to make button GND -> Button -> pin D1 (primary button used when only one button is used)
