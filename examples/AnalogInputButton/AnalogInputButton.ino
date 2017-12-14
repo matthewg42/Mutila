@@ -8,8 +8,9 @@
 
 const uint8_t ButtonPin = A0;
 const uint8_t LedPin = LED_BUILTIN;
+const uint16_t OutputPeriodMs = 200;
+uint32_t LastOutputMs = 0;
 bool previousValue = false;
-uint32_t LastDb = 0;
 
 AnalogInputButton Button(ButtonPin);
 
@@ -46,7 +47,7 @@ void loop()
 void checkButton()
 {
     bool newValue = Button.on();
-    if (newValue != previousValue || DoEvery(200, LastDb)) {
+    if (newValue != previousValue || DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" analog value=");
@@ -57,4 +58,3 @@ void checkButton()
         digitalWrite(LedPin, newValue);
     }
 }
-
