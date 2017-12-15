@@ -1,5 +1,13 @@
 # Release Notes
 
+## Version 1.1.2
+
+### Features:
+- FreeRam() function provides platform-transparent interface to getting free memory.
+
+### Other:
+- Cosmetic and documentation improvements.
+
 ## Version 1.1.1
 
 Bug fix release.
