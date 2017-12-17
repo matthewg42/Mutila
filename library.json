@@ -1,19 +1,21 @@
 {
-"name": "Mutila",
-"frameworks": "Arduino",
-"keywords": "Utility, Mode, MP3, EMA, Sonic, Debug, Button, Debounce, Pot, Sampler",
-"description": "Mouse's Utilities for Arduino",
-"url": "https://github.com/matthewg42/Mutila/",
-"authors":
-[
-{
-        "name": "Matthew Gates (Mouse)"
-}
-],
-"repository":
-{
+  "name": "Mutila",
+  "version": "1.1.1",
+  "frameworks": "Arduino",
+  "platforms": "*",
+  "keywords": "Utility, Mode, MP3, EMA, Sonic, Debug, Button, Debounce, Pot, Sampler",
+  "description": "Mouse's Utilities for Arduino",
+  "url": "https://github.com/matthewg42/Mutila",
+  "authors": [
+    { 
+      "name": "Matthew Gates (Mouse)", 
+      "url": "https://github.com/matthewg42", 
+      "maintainer": true 
+    } 
+  ],
+  "repository": {
     "type": "git",
-    "url": "https://github.com/matthewg42/Mutila"
-}
+    "url": "https://github.com/matthewg42/Mutila.git"
+  }
 }
 

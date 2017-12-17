@@ -3,10 +3,11 @@
 ## Version 1.1.2
 
 ### Features:
-- FreeRam() function provides platform-transparent interface to getting free memory.
+- FreeRam() function provides platform-independent interface to getting free memory.
 
 ### Other:
 - Cosmetic and documentation improvements.
+- Better library.json for PlatformIO.
 
 ## Version 1.1.1
 
