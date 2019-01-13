@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.1.3
+
+### Features
+- PersistentSetting template class for EEPROM-backed settings for numeric and bool types.
+
 ## Version 1.1.2
 
 ### Features:
