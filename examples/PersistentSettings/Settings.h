@@ -12,5 +12,5 @@ extern PersistentSetting<float> FloatSetting;
 // is set to MagicNumber. If it is, we deduce that this device has already been
 // set up with these settings and does not need the defaults set.
 extern PersistentSetting<uint16_t> MagicSetting;
-const uint16_t MagicNumber = 0xABBA;  // do not set this to 0.
+const uint16_t MagicNumber = 0xADDA;  // do not set this to 0.
 
