@@ -7,7 +7,7 @@ ARDUINO_LIBS = Mutila
 
 # For a modern nano:
 BOARD_TAG = nano
-BOARD_SUB = atmega328
+BOARD_SUB = atmega328old
 
 # For a pro mini:
 #BOARD_TAG = pro5v328
