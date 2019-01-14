@@ -16,7 +16,7 @@
  */
 
 class CommandInterface {
-pUBlic:
+public:
     /*! Constructor
      *
      * \param maxCmdLen the maximum command length in bytes. Note: a
@@ -66,7 +66,7 @@ protected:
 
 protected:
     Stream* _stream;
-    uint8_t _max;
+    uint8_t _maxLen;
     uint8_t _idx;
     char* _buf;
 

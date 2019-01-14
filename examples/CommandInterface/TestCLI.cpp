@@ -18,7 +18,7 @@ void TestCLIClass::runCmd()
 {
     uint8_t i;
     String cmd;
-    for (i = 0; i < _max && _buf[i] != ' ' && _buf[i] != '\0'; i++) {
+    for (i = 0; i < _maxLen && _buf[i] != ' ' && _buf[i] != '\0'; i++) {
         cmd += _buf[i];
     }
     while (_buf[i] == ' ') { ++i; }

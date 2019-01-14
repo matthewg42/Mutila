@@ -4,11 +4,11 @@
 CommandInterface::CommandInterface(uint8_t maxCmdLen) :
     echo(true),
     _stream(NULL),
-    _max(maxCmdLen),
+    _maxLen(maxCmdLen),
     _idx(0),
     _buf(NULL)
 {
-    _buf = new char[_max];
+    _buf = new char[_maxLen];
 }
 
 CommandInterface::~CommandInterface()
@@ -29,7 +29,7 @@ void CommandInterface::begin(Stream& stream)
 void CommandInterface::clearBuf()
 {
     if (_buf == NULL) return;
-    memset(_buf, 0, sizeof(char) * _max);
+    memset(_buf, 0, sizeof(char) * _maxLen);
     _idx = 0;
 }
 
@@ -50,7 +50,7 @@ void CommandInterface::update()
             // backspace
             _stream->write("\b \b");
             _buf[--_idx] = '\0';
-        } else if (c >= ' ' && c <= '~' && _idx < _max) {
+        } else if (c >= ' ' && c <= '~' && _idx < _maxLen) {
             _buf[_idx++] = (char)c;
             if (echo) {
                 _stream->write((char)c);
