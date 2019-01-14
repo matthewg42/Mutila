@@ -4,6 +4,7 @@
 
 ### Features
 - PersistentSetting template class for EEPROM-backed settings for numeric and bool types.
+- CommandInterface base class for implementing simple CLIs.
 
 ## Version 1.1.2
 
