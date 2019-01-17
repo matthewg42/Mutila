@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include <MutilaDebug.h>
 #include <stdint.h>
 #include <EEPROM.h>
@@ -114,7 +115,7 @@ public:
      *  Note: this function does NOT save the new value to EEPROM. To do that, 
      *  save() must be called.
      */
-    bool set(T v) { if (isValid(v)) { _value = v; return true; } else { return false; } }
+    bool set(T v, bool saveIt=false) { if (isValid(v)) { _value = v; save(); return true; } else { return false; } }
 
     /*! Get the size in bytes of the setting in EEPROM.
      */
@@ -141,5 +142,29 @@ protected:
     T _minimum;
     T _maximum;
     T _defaultValue;
+};
+
+/* Sometimes it is nice to have a name attached to a PersistentSetting, but the String
+ * class is a little heavy for many sketches. NamedPersistentSetting adds a name for
+ * a PersistentSetting, with the accociated overhead, so only just this if the need the 
+ * name.
+ */
+template <class T>
+class NamedPersistentSetting : public PersistentSetting<T> {
+public:
+    NamedPersistentSetting(T minimum, T maximum, T defaultValue, const char* name, int32_t eepromOffset=-1) :
+        PersistentSetting<T>(minimum, maximum, defaultValue, eepromOffset),
+        _name(name) {
+    }
+
+    const String& getName() { return _name; }
+    void dump() {
+        DB(_name);
+        DB(": ");
+        PersistentSetting<T>::dump();
+    }
+
+private:
+    String _name;
 };
 
