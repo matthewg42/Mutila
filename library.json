@@ -1,6 +1,6 @@
 {
   "name": "Mutila",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "frameworks": "Arduino",
   "platforms": "*",
   "keywords": "Utility, Mode, MP3, EMA, Sonic, Debug, Button, Debounce, Pot, Sampler",

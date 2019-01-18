@@ -36,6 +36,7 @@ ToggleButton	KEYWORD1
 VIPCalculation	KEYWORD1
 CommandInterface	KEYWORD1
 PersistentSetting	KEYWORD1
+NamedPersistentSetting	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

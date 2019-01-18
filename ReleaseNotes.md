@@ -1,5 +1,14 @@
 # Release Notes
 
+## Version 1.1.4
+
+### Features
+- NamedPersistentSetting template class in case you wish to attach a string identifier to your PersistenSettings.
+- Accessor functions for PersistenSettings minimum, maximum and default values.
+
+### Bug fixes:
+- PersistentSettings.save saveIt parameter now functions we desired.
+
 ## Version 1.1.3
 
 ### Features
