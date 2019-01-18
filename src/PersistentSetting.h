@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include <MutilaDebug.h>
 #include <stdint.h>
 #include <EEPROM.h>
@@ -99,6 +100,18 @@ public:
      */
     T get() { return _value; }
 
+    /*! Get the minimum value of the setting
+     */
+    T getMinimum() { return _minimum; }
+
+    /*! Get the maximum value of the setting
+     */
+    T getMaximum() { return _maximum; }
+
+    /*! Get the default value of the setting
+     */
+    T getDefault() { return _defaultValue; }
+
     /*! Sets the in-RAM value of the setting.
      *  \param v the value to be set. If v is less than the minimum value or 
      *         greater than the maximum value, no change will be made.
@@ -114,7 +127,17 @@ public:
      *  Note: this function does NOT save the new value to EEPROM. To do that, 
      *  save() must be called.
      */
-    bool set(T v) { if (isValid(v)) { _value = v; return true; } else { return false; } }
+    bool set(T v, bool saveIt=false) { 
+        if (isValid(v)) { 
+            _value = v; 
+            if (saveIt) { 
+                save();
+            } 
+            return true; 
+        } else { 
+            return false; 
+        } 
+    }
 
     /*! Get the size in bytes of the setting in EEPROM.
      */
@@ -141,5 +164,29 @@ protected:
     T _minimum;
     T _maximum;
     T _defaultValue;
+};
+
+/* Sometimes it is nice to have a name attached to a PersistentSetting, but the String
+ * class is a little heavy for many sketches. NamedPersistentSetting adds a name for
+ * a PersistentSetting, with the accociated overhead, so only just this if the need the 
+ * name.
+ */
+template <class T>
+class NamedPersistentSetting : public PersistentSetting<T> {
+public:
+    NamedPersistentSetting(T minimum, T maximum, T defaultValue, const char* name, int32_t eepromOffset=-1) :
+        PersistentSetting<T>(minimum, maximum, defaultValue, eepromOffset),
+        _name(name) {
+    }
+
+    const String& getName() { return _name; }
+    void dump() {
+        DB(_name);
+        DB(": ");
+        PersistentSetting<T>::dump();
+    }
+
+private:
+    String _name;
 };
 
