@@ -64,6 +64,10 @@ A *Mode* is a kind of sub-program which has distinct startup, shutdown and updat
 
 Modes may be arranged in a hierarchical manner using the *ParentMode* class. This can be useful when building hierarchical menu systems which a couple of buttons.
 
+### EEPROM-backed Settings
+
+*PersistentSettings* provides an EEPROM-backed store for settings which you want to survive Arduino resets.
+
 ## API Documentation
 
 Doxygen-generated documentation can be found here: https://matthewg42.github.io/Mutila/
