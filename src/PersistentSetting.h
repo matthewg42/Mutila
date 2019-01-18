@@ -100,6 +100,18 @@ public:
      */
     T get() { return _value; }
 
+    /*! Get the minimum value of the setting
+     */
+    T getMinimum() { return _minimum; }
+
+    /*! Get the maximum value of the setting
+     */
+    T getMaximum() { return _maximum; }
+
+    /*! Get the default value of the setting
+     */
+    T getDefault() { return _defaultValue; }
+
     /*! Sets the in-RAM value of the setting.
      *  \param v the value to be set. If v is less than the minimum value or 
      *         greater than the maximum value, no change will be made.
@@ -115,7 +127,17 @@ public:
      *  Note: this function does NOT save the new value to EEPROM. To do that, 
      *  save() must be called.
      */
-    bool set(T v, bool saveIt=false) { if (isValid(v)) { _value = v; save(); return true; } else { return false; } }
+    bool set(T v, bool saveIt=false) { 
+        if (isValid(v)) { 
+            _value = v; 
+            if (saveIt) { 
+                save();
+            } 
+            return true; 
+        } else { 
+            return false; 
+        } 
+    }
 
     /*! Get the size in bytes of the setting in EEPROM.
      */
