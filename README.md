@@ -66,7 +66,7 @@ Modes may be arranged in a hierarchical manner using the *ParentMode* class. Thi
 
 ### EEPROM-backed Settings
 
-*PersistentSettings* provides an EEPROM-backed store for settings which you want to survive Arduino resets.
+*PersistentSetting* provides an EEPROM-backed store for settings which you want to survive Arduino resets.
 
 ## API Documentation
 
