@@ -20,6 +20,7 @@ DFPlayerMini	KEYWORD1
 DFPReader	KEYWORD1
 DigitalInputButton	KEYWORD1
 DiscretePot	KEYWORD1
+QuantizedPot	KEYWORD1
 DualButton	KEYWORD1
 DualInputButton	KEYWORD1
 EMACurrentSampler	KEYWORD1

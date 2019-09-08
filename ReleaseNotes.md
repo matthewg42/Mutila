@@ -1,5 +1,12 @@
 # Release Notes
 
+## Version 1.1.5
+
+### Features
+- QuantizedPot class added.
+
+### Bug fixes:
+
 ## Version 1.1.4
 
 ### Features

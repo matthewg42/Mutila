@@ -20,6 +20,7 @@ A collection of classes and functions for nice handling of basic inputs (buttons
 * *DebouncedAnalogButton* - time slice-based debounced button class with input from an AnalogInputButton object.
 * *DebouncedDualButton* - time slice-based debounced button class with input from a DualInputButton object.
 * *DiscretePot* - use a potential divider attached to an analog input to return a discrete value within a specified range - includes smoothing.
+* *QuantizedPot* - use a potential divider attached to an analog input to return a discrete value based on specific ranges of raw values - includes smoothing.
 * *ToggleButton* - each press flips state from on to off.
 
 Terms used for Mutila input classes:
