@@ -38,6 +38,7 @@ VIPCalculation	KEYWORD1
 CommandInterface	KEYWORD1
 PersistentSetting	KEYWORD1
 NamedPersistentSetting	KEYWORD1
+MultiThrowSwitch	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
