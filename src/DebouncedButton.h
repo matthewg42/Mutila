@@ -21,6 +21,12 @@ public:
      */
     DebouncedButton(uint8_t pin, bool pullup=true);
 
+	/*! Destructor
+	 * 	
+	 * 	Must have this to derive from DebouncedButton without warnings.
+	 */
+	virtual ~DebouncedButton() {;}
+
     /*! Initialization.
      *
      *  \param threshold how many tests of the pin must match for a state change.

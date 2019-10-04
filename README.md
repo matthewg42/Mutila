@@ -11,7 +11,7 @@ All code written by Matthew Gates (Mouse), and licensed under the GNU GPL versio
 
 ### Inputs
 
-A collection of classes and functions for nice handling of basic inputs (buttons and such). The classes are kept as simple as possible while having enough functionality to be useful. ''Time slice-based'' classes should have their ''update()'' method called as frequently as possible, which will return rapidly. These classes are an alternative to interrupt driven IO for projects where interrupts can't be used - e.g. where *Mutila* inputs must not interfere with timing of other parts of your project which might use interrupts themselves (e.g. motor control)
+A collection of classes and functions for nice handling of basic inputs (buttons and such). The classes are kept as simple as possible while having enough functionality to be useful. ''Time slice-based'' classes should have their ''update()'' method called as frequently as possible, which will return rapidly. These classes are an alternative to interrupt driven IO for projects where interrupts can't be used - e.g. where *Mutila* inputs must not interfere with timing of other parts of your project which might use interrupts themselves (e.g. motor control).
 
 * *DigitalInputButton* - switch from a digital input pin.
 * *AnalogInputButton* - switch from an analog input pin.
@@ -21,6 +21,7 @@ A collection of classes and functions for nice handling of basic inputs (buttons
 * *DebouncedDualButton* - time slice-based debounced button class with input from a DualInputButton object.
 * *DiscretePot* - use a potential divider attached to an analog input to return a discrete value within a specified range - includes smoothing.
 * *QuantizedPot* - use a potential divider attached to an analog input to return a discrete value based on specific ranges of raw values - includes smoothing.
+* *MultiThrowSwitch* - use for rotary switches with arbitrary number of throws.
 * *ToggleButton* - each press flips state from on to off.
 
 Terms used for Mutila input classes:
