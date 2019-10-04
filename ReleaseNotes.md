@@ -1,5 +1,12 @@
 # Release Notes
 
+## Version 1.1.6
+### Features
+- MultiThrowSwitch class added.
+
+### Bug fixes:
+- Add virtual destrubtor to DebounedButton to it may be derived from in user code.
+
 ## Version 1.1.5
 
 ### Features
