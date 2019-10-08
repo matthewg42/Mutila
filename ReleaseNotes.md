@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 1.1.7
+### Bug fixes:
+- Fix incorrect logic for sticky option of MultiThrowSwitch.
+
 ## Version 1.1.6
 ### Features
 - MultiThrowSwitch class added.
