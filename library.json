@@ -1,9 +1,9 @@
 {
   "name": "Mutila",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "frameworks": "Arduino",
   "platforms": "*",
-  "keywords": "Utility, Mode, MP3, EMA, Sonic, Debug, Button, Debounce, Pot, Sampler",
+  "keywords": "Utility, Mode, MP3, EMA, Sonic, Debug, Button, Debounce, Pot, Sampler, Wear-levelling, EEPROM",
   "description": "Mouse's Utilities for Arduino",
   "url": "https://github.com/matthewg42/Mutila",
   "authors": [
