@@ -58,7 +58,7 @@ HC-SR04 ultrasonic range finding modules are inexpensive and popular modules use
 
 ### Heartbeat
 
-Mutila's *Heartbeat* class can be used to blink and LED with variable patterns to give some diagnostic information about the state of the program without needed a more sophisticated display.
+Mutila's *Heartbeat* class can be used to blink an LED with various patterns to give some diagnostic information about the state of the program without needed a more sophisticated display.
 
 ### Mode System
 
@@ -97,8 +97,8 @@ It would be really nice to have some mechanism to write the current project vers
 
 ### DFPlayerMini
 
-* doc ops which create reply
-* asynchronous commands (i.e. do not wait for serial, use update() to send bytes one at a time)
+* Document those operations that ellicit a reply.
+* Asynchronous mode (i.e. do not wait for serial, use update() to send bytes one at a time).
 
 ## Development Workflow
 
