@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.2.0
+
+### Features
+- PersistentSetting class now supports a wear-levelling scheme.
+
 ## Version 1.1.6
 ### Features
 - MultiThrowSwitch class added.

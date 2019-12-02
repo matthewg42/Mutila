@@ -14,28 +14,27 @@ extern uint16_t PersistentSettingOffset;
  *  from and saved to EEPROM. PersistentSettings are constructed with minimum,
  *  maximum and default values. A number of redundant copies used for wear
  *  levelling may also specified, and optionally the address in EEPROM where
- *  the data should be stored. By defaul the address is cauclated as the byte
+ *  the data should be stored. By default the address is calculated as the byte
  *  following the previously-constructed PersistentSetting (or 0 when constructing
  *  the first object).
  *
  *  If the value loaded from EEPROM is invalid (outside the min-max range), the
  *  default value will be set.
  *
- *  After construction, the value of a PersistenSetting may be retrieved with the
+ *  After construction, the value of a PersistentSetting may be retrieved with the
  *  get() method, and the value set with the set() method. These operations return
  *  and set the volatile state of the setting. An explicit save() call must be made
- *  to write the setting to EEPROM (or use saveit=true when calling set()).
+ *  to write the setting to EEPROM (or use `saveit=true` when calling set()).
  *
  *  If the value in EEPROM is the same as the current value, nothing will be
- *  written to EEPROM, although a short delay me be experienced since EEPROM IO
- *  can be comparitively slow.
+ *  written to EEPROM. 
  *
  *  EEPROM has a limited number of write cycles (~100,000) before failure.
  *  To extend the life of projects which write to EEPROM frequently (e.g. device
- *  usage counters), PersistenSettings implements a simple wear levelling scheme.
+ *  usage counters), PersistentSettings implements a simple wear levelling scheme.
  *
  *  To enable wear levelling, specify copies > 1 when constructing a
- *  PersistenSetting. If copies == `n`, The amount of EEPROM space used will be
+ *  PersistentSetting. If copies == `n`, The amount of EEPROM space used will be
  *  `(sizeof(T) + 1) * n` where `T` is the type of the data being stored.
  *
  *  For example, a usage counter which we expect to reach 200,000 in the life of
@@ -44,7 +43,7 @@ extern uint16_t PersistentSettingOffset;
  *  `PersistentSetting<uint32_t> UsageCounter(0, UINT32_MAX, 0, 3);`
  *
  *  Three copies of data are used, so the writes are spread over those copies.
- *  if the device would be used 200,000 times, we would expect ~ 66,000 writes
+ *  if the device would be used 200,000 times, we would expect ~66,666 writes
  *  per instance of the data in the lifetime of the device - safely below the
  *  write limit.
  *
