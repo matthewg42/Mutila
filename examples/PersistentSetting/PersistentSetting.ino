@@ -25,6 +25,8 @@ void printSettings()
     Serial.print("Int16Setting       "); Int16Setting.dump();
     Serial.print("DoubleSetting      "); DoubleSetting.dump();
     Serial.print("FloatSetting       "); FloatSetting.dump();
+    Serial.print("NamedBoolSetting   "); NamedBoolSetting.dump();
+    Serial.print("NamedFloatSetting  "); NamedFloatSetting.dump();
 }
 
 void printSizes()
@@ -46,6 +48,8 @@ void loadSettings()
     Int16Setting.load();
     DoubleSetting.load();
     FloatSetting.load();
+    NamedBoolSetting.load();
+    NamedFloatSetting.load();
 }
 
 void saveSettings()
@@ -56,6 +60,8 @@ void saveSettings()
     Int16Setting.save();
     DoubleSetting.save();
     FloatSetting.save();
+    NamedBoolSetting.save();
+    NamedFloatSetting.save();
 }
 
 void resetSettings(bool save)
@@ -67,6 +73,8 @@ void resetSettings(bool save)
     Int16Setting.reset(save);
     DoubleSetting.reset(save);
     FloatSetting.reset(save);
+    NamedBoolSetting.reset(save);
+    NamedFloatSetting.reset(save);
 }
 
 // Read a character from serial (which is either printable, or newline)
@@ -177,6 +185,18 @@ void loop()
         Serial.print(success ? "Success - " : "Failure - ");
         Serial.print("Value now: ");
         Serial.println(FloatSetting.get());
+        break;
+    case '6':
+        success = NamedBoolSetting.set(readInteger());
+        Serial.print(success ? "Success - " : "Failure - ");
+        Serial.print("Value now: ");
+        Serial.println(NamedBoolSetting.get());
+        break;
+    case '7':
+        success = NamedFloatSetting.set(readFloat());
+        Serial.print(success ? "Success - " : "Failure - ");
+        Serial.print("Value now: ");
+        Serial.println(NamedFloatSetting.get());
         break;
     case 'p':
         printSettings();

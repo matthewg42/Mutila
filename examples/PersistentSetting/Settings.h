@@ -8,6 +8,9 @@ extern PersistentSetting<int16_t> Int16Setting;
 extern PersistentSetting<double> DoubleSetting;
 extern PersistentSetting<float> FloatSetting;
 
+extern NamedPersistentSetting<bool> NamedBoolSetting;
+extern NamedPersistentSetting<float> NamedFloatSetting;
+
 // The first time the device is booted with this firmware, we see if MagicSetting
 // is set to MagicNumber. If it is, we deduce that this device has already been
 // set up with these settings and does not need the defaults set.
