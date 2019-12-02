@@ -95,6 +95,10 @@ It would be really nice to have some mechanism to write the current project vers
 * state=0 --> state=1 ... --> state=n-1 --> state=0.
 * This makes ToggleButton just an n-state where n=2.
 
+### Double-clicking support
+
+* Add to AbstractDebouncedButton: `doubleTapped(uint16_t maxMs)`,
+
 ### DFPlayerMini
 
 * Document those operations that ellicit a reply.
