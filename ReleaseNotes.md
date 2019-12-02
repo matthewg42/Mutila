@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 1.2.1
+
+### Removed
+- Long-derecated DualButton class
+
 ## Version 1.2.0
 
 ### Features

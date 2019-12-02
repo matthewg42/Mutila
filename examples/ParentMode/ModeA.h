@@ -2,9 +2,9 @@
 
 #include <ParentMode.h>
 
-class ModeA_ : public ParentMode {
+class ModeAClass : public ParentMode {
 public:
-    ModeA_();
+    ModeAClass();
     void begin();
     void modeStart();
     void modeStop();
@@ -13,5 +13,5 @@ public:
 };
 
 // A global object for this class, in the same style as the Arduino Serial object
-extern ModeA_ ModeA;
+extern ModeAClass ModeA;
 

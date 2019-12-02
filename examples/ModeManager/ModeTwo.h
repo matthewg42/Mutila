@@ -2,11 +2,11 @@
 
 #include <Mode.h>
 
-// ModeTwo_ prints a message to Serial every half a second
-// ModeTwo_ terminated when Button is pushed.
-class ModeTwo_ : public Mode {
+// ModeTwoClass prints a message to Serial every half a second
+// ModeTwoClass terminated when Button is pushed.
+class ModeTwoClass : public Mode {
 public:
-    ModeTwo_();
+    ModeTwoClass();
     void modeStart();
     void modeStop();
     void modeUpdate();
@@ -15,5 +15,5 @@ public:
 };
 
 // A global object for this class, in the same style as the Arduino Serial object
-extern ModeTwo_ ModeTwo;
+extern ModeTwoClass ModeTwo;
 

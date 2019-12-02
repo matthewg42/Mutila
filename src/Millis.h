@@ -12,7 +12,7 @@
  * Sketches which make heavy use of NeoPixels will encouter 
  * millis drift, where time is slowed down.
  *
- * Mutils provides Millis() as a replacement for the stock millis()
+ * Mutila provides Millis() as a replacement for the stock millis()
  * function, and a addMillisOffset() which can then be used to
  * compensate drift in the internal clock.  In the case of NeoPixel
  * show() calls, the drift is approximately proportional to the

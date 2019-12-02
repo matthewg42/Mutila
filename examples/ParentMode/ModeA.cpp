@@ -6,13 +6,13 @@
 #include "ButtonB.h"
 
 // Our global instance of the mode...
-ModeA_ ModeA;
+ModeAClass ModeA;
 
-ModeA_::ModeA_()
+ModeAClass::ModeAClass()
 {
 }
 
-void ModeA_::begin()
+void ModeAClass::begin()
 {
     Serial.println("ModeA::begin");
     // Initalize child modes which are managed by this ParentMode
@@ -23,17 +23,17 @@ void ModeA_::begin()
     switchMode(&ModeA1);
 }
 
-void ModeA_::modeStart()
+void ModeAClass::modeStart()
 {
     Serial.println("ModeA::modeStart");
 }
 
-void ModeA_::modeStop()
+void ModeAClass::modeStop()
 {
     Serial.println("ModeA::modeStop");
 }
 
-void ModeA_::modeUpdate()
+void ModeAClass::modeUpdate()
 {
     // Update the currently active child mode
     if (pMode) { pMode->update(); }
