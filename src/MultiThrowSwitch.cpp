@@ -2,9 +2,9 @@
 #include <MutilaDebug.h>
 #include "MultiThrowSwitch.h"
 
-MultiThrowSwitch::MultiThrowSwitch(uint8_t throws, const uint8_t pins[], bool useOff, bool pullup) : 
+MultiThrowSwitch::MultiThrowSwitch(uint8_t throws, const uint8_t pins[], bool sticky, bool pullup) : 
 	_throws(throws),
-	_useOff(useOff),
+	_sticky(sticky),
 	_pos(0)
 {
 	// First allocate space for pointers to button objects
@@ -67,7 +67,7 @@ void MultiThrowSwitch::update()
 				return;
 			}
 		}
-		if (_useOff) {
+		if (!_sticky) {
 			_pos = 0;
 		}
 	}

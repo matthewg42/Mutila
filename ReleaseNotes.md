@@ -6,9 +6,12 @@
 - Long-derecated DualButton class
 
 ## Version 1.2.0
-
 ### Features
 - PersistentSetting class now supports a wear-levelling scheme.
+
+## Version 1.1.7
+### Bug fixes:
+- Fix incorrect logic for sticky option of MultiThrowSwitch.
 
 ## Version 1.1.6
 ### Features

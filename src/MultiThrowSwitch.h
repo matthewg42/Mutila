@@ -68,7 +68,7 @@ public:
 
 private:
 	uint8_t _throws;
-	bool _useOff;
+	bool _sticky;
     DebouncedButton** _buttons;
 	uint8_t _pos;
 
