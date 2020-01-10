@@ -6,6 +6,6 @@
 #if defined(ARDUINO_ESP8266_NODEMCU) 
 const uint8_t ButtonPin = D1;
 #else
-const uint8_t ButtonPin = 6;
+const uint8_t ButtonPin = 3;
 #endif
 

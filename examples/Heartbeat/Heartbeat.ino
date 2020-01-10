@@ -12,7 +12,7 @@ const uint8_t ButtonPin = D1;
 // the NodeMCU's buildin LED is on when the pin is LOW.
 Heartbeat heartbeat(LedPin, true); 
 #else
-const uint8_t ButtonPin = 6;
+const uint8_t ButtonPin = 3;
 Heartbeat heartbeat(LedPin); 
 #endif
 
@@ -39,6 +39,7 @@ void setup()
     button.begin();
     heartbeat.begin();
 
+    Serial.println("Press primary button to modify heartbeat pattern");
     Serial.println("setup() end");
 }
 

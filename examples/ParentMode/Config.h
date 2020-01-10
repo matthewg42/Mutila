@@ -7,7 +7,7 @@
 const uint8_t ButtonAPin = D1;
 const uint8_t ButtonBPin = D2;
 #else
-const uint8_t ButtonAPin = 6;
-const uint8_t ButtonBPin = 5;
+const uint8_t ButtonAPin = 3;
+const uint8_t ButtonBPin = 2;
 #endif
 

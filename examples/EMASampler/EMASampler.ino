@@ -2,7 +2,7 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-const uint8_t SamplerPin = A0;
+const uint8_t SamplerPin = A5;
 const uint16_t SamplePeriodMs = 50;
 
 // We'll create two samplers with a different alpha value

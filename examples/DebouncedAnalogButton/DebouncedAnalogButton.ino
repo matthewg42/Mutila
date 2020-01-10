@@ -3,7 +3,8 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-DebouncedAnalogButton Button(A0);
+const uint8_t ButtonPin = A5;
+DebouncedAnalogButton Button(ButtonPin);
 
 const uint16_t OutputPeriodMs = 100;
 uint32_t LastOutputMs = 0;
@@ -29,7 +30,7 @@ void loop()
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" analog value=");
-        Serial.print(analogRead(A0));
+        Serial.print(analogRead(ButtonPin));
         Serial.print(" logical button value=");
         Serial.print(Button.on());
         Serial.print(" tapped=");

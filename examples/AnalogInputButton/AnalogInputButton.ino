@@ -3,7 +3,7 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-const uint8_t ButtonPin = A0;
+const uint8_t ButtonPin = A5;
 const uint8_t LedPin = LED_BUILTIN;
 const uint16_t OutputPeriodMs = 200;
 uint32_t LastOutputMs = 0;

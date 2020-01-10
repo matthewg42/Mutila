@@ -25,5 +25,7 @@ void loop()
     Serial.print(FreeRam());
     Serial.print(" Allocated address=0x");
     Serial.println((uint32_t)i, HEX);
+
+    delay(30);
 }
 

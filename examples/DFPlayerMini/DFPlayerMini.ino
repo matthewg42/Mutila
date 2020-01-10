@@ -8,9 +8,9 @@ const uint8_t TxPin =       D6;
 const uint8_t RxPin =       D7;
 const uint8_t BusyPin =     D5;
 #else
-const uint8_t TxPin =       8;
-const uint8_t RxPin =       9;
-const uint8_t BusyPin =     10;
+const uint8_t TxPin =       6;
+const uint8_t RxPin =       7;
+const uint8_t BusyPin =     5;
 #endif
 
 // How long to wait between playing samples

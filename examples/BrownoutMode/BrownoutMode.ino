@@ -3,7 +3,7 @@
 #include <MutilaDebug.h>
 #include "MyBrownoutMode.h"
 
-const uint8_t VoltagePin = A0;
+const uint8_t VoltagePin = A5;
 const uint16_t R1KOhm = 10;
 const uint16_t R2KOhm = 100;
 const float VRef = 5.0;

@@ -3,7 +3,7 @@
 #include <Millis.h>
 #include <DiscretePot.h>
 
-const uint8_t AnalogPin = A0;
+const uint8_t AnalogPin = A5;
 const uint16_t OutputPeriodMs = 200;
 
 uint32_t LastOutputMs = 0;

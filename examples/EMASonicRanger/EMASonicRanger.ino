@@ -6,8 +6,8 @@
 const uint8_t TriggerPin = D3;
 const uint8_t EchoPin = D0;
 #else
-const uint8_t TriggerPin = 3;
-const uint8_t EchoPin = 4;
+const uint8_t TriggerPin = 9;
+const uint8_t EchoPin = 8;
 #endif
 
 EMASonicRanger Ranger(TriggerPin, EchoPin);

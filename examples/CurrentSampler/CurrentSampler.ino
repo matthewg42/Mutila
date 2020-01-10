@@ -2,7 +2,7 @@
 #include <Millis.h>
 #include <MutilaDebug.h>
 
-const uint8_t CurrentSamplePin = A0;
+const uint8_t CurrentSamplePin = A5;
 const float VSupply = 20.0;
 const float VRef = 5.0;
 const float IOffset = 0.2;

@@ -8,10 +8,10 @@
 #if defined(ARDUINO_ESP8266_NODEMCU) 
 const uint8_t DigitalInputButtonPin = D1;
 #else
-const uint8_t DigitalInputButtonPin = 6;
+const uint8_t DigitalInputButtonPin = 9;
 #endif
 
-const uint8_t AnalogInputButtonPin = A0;
+const uint8_t AnalogInputButtonPin = A5;
 const uint16_t OutputPeriodMs = 150;
 uint32_t LastOutputMs = 0;
 

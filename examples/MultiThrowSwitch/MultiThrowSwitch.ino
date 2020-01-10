@@ -6,7 +6,7 @@
 #if defined(ARDUINO_ESP8266_NODEMCU) 
 const uint8_t SwitchPins[] = {D1, D2, D3, D4};
 #else
-const uint8_t SwitchPins[] = {4, 5, 6, 7};
+const uint8_t SwitchPins[] = {2, 3, 4, 10};
 #endif
 
 const uint16_t OutputPeriodMs = 150;

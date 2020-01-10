@@ -31,13 +31,15 @@ void printSettings()
 
 void printSizes()
 {
-    Serial.print("\nsizeof char:       ");  Serial.println(sizeof(char));
-    Serial.print("sizeof short:      ");  Serial.println(sizeof(short));
-    Serial.print("sizeof int:        ");  Serial.println(sizeof(int));
-    Serial.print("sizeof long:       ");  Serial.println(sizeof(long));
-    Serial.print("sizeof long long:  ");  Serial.println(sizeof(long long));
-    Serial.print("sizeof float:      ");  Serial.println(sizeof(float));
-    Serial.print("sizeof double:     ");  Serial.println(sizeof(double));
+    Serial.println();
+    Serial.print("sizeof char:          ");  Serial.println(sizeof(char));
+    Serial.print("sizeof short:         ");  Serial.println(sizeof(short));
+    Serial.print("sizeof int:           ");  Serial.println(sizeof(int));
+    Serial.print("sizeof long:          ");  Serial.println(sizeof(long));
+    Serial.print("sizeof unsigned long: ");  Serial.println(sizeof(long));
+    Serial.print("sizeof long long:     ");  Serial.println(sizeof(long long));
+    Serial.print("sizeof float:         ");  Serial.println(sizeof(float));
+    Serial.print("sizeof double:        ");  Serial.println(sizeof(double));
 }
 
 void loadSettings()

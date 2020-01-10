@@ -49,8 +49,9 @@ public:
         SetVolume       = 0x06, //!< Set volume to arg (0-30)
         SetEqalizer     = 0x07, //!< Set EQ, arg 0-5 (normal=0, pop, rock, jazz, classical, bass) 
         SetDevice       = 0x09, //!< Set device, arg 1-5 (U, SD, AUX, SLEEP, FLASH)
-        Sleep           = 0x0A, //!< Enter low power sleep mode
-        Reset           = 0x0C, //!< Exit sleep mode
+        Sleep           = 0x0A, //!< Enter low-power sleep mode
+        Wake            = 0x0B, //!< Wake up from sleep mode (also called "Normal" in docs)
+        Reset           = 0x0C, //!< Exit sleep mode (takes 5-8 seconds accord to docs)
         Play            = 0x0D, //!< Play track arg
         Pause           = 0x0E, //!< Pause playback
         PlayTf          = 0x12, //!< Play track arg from (SD card)

@@ -3,7 +3,7 @@
 #include <Millis.h>
 #include <QuantizedPot.h>
 
-const uint8_t AnalogPin = A0;
+const uint8_t AnalogPin = A5;
 const uint16_t OutputPeriodMs = 100;
 
 uint32_t LastOutputMs = 0;
