@@ -2,6 +2,9 @@
 
 ## Version 1.2.1
 
+### Changed
+- Pins for examples have changed on the Arduino Nano build (buttons now on pins 2 & 3 for future features with interrupts). See `examples/README.md` for new pin layout.
+
 ### Removed
 - Remove long-deprecated DualButton class.
 
@@ -56,6 +59,7 @@
 ### Other:
 - Cosmetic and documentation improvements.
 - Better library.json for PlatformIO.
+- New example `DFPCommander`: command line control and testing of DF Player Mini module.
 
 ## Version 1.1.1
 
