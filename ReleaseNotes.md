@@ -5,6 +5,7 @@
 ### Changed
 - Pins for examples have changed on the Arduino Nano build (buttons now on pins 2 & 3 for future features with interrupts). See `examples/README.md` for new pin layout.
 - All places where millis are used have now been converted to typedef `millis_t`, defined in `Millis.h`. `micros_t` typedef also added.
+- Sampler classes take a millis_t sample period instead of uint16_t as preventative for [unlikely] integer overflow. Uses slightly more RAM.
 
 ### Removed
 - Remove long-deprecated DualButton class.
