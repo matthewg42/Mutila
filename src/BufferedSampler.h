@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <AbstractSampler.h>
+#include "Millis.h"
+#include "AbstractSampler.h"
 
 /*! \brief Ringbuffer-based sampler for analog values
  *

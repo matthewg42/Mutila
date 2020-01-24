@@ -1,4 +1,4 @@
-#include <FreeRam.h>
+#include "FreeRam.h"
 
 #if defined(ARDUINO_ARCH_AVR)
 
@@ -27,7 +27,7 @@ struct __freelist
 /* The head of the free list structure */
 extern struct __freelist *__flp;
 
-#include <FreeRam.h>
+#include "FreeRam.h"
 
 /* Calculates the size of the free list */
 int _freeListSize()

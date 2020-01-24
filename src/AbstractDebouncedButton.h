@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <AbstractButton.h>
+#include "Millis.h"
+#include "AbstractButton.h"
 
 /*! Timeslice-based button with debouncing.
  *

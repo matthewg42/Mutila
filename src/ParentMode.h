@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Mode.h>
+#include "Mode.h"
 
 /*! A Mode With Modes of it's own
  *

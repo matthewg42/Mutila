@@ -1,5 +1,5 @@
-#include <MutilaDebug.h>
-#include <ModeManager.h>
+#include "MutilaDebug.h"
+#include "ModeManager.h"
 
 ModeManager::ModeManager() :
     currentMode(NULL)

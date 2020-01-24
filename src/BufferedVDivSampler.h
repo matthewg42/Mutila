@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <BufferedSampler.h>
+#include "Millis.h"
+#include "BufferedSampler.h"
 
 /*! \brief Buffered voltage divider based voltage sampler
  *

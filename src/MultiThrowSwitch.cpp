@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <MutilaDebug.h>
-#include <MultiThrowSwitch.h>
+#include "MutilaDebug.h"
+#include "MultiThrowSwitch.h"
 
 MultiThrowSwitch::MultiThrowSwitch(uint8_t throws, const uint8_t pins[], bool sticky, bool pullup) : 
 	_throws(throws),

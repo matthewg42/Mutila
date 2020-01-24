@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <AbstractDebouncedButton.h>
+#include "Millis.h"
+#include "AbstractDebouncedButton.h"
 
 /*! Discrete values from a potential divider.
  *

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <AnalogInputButton.h>
+#include "AnalogInputButton.h"
 
 AnalogInputButton::AnalogInputButton(const uint8_t pin, const bool pullup, const uint16_t analogThreshold) : 
     _pin(pin),

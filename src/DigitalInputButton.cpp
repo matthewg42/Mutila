@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <DigitalInputButton.h>
+#include "DigitalInputButton.h"
 
 DigitalInputButton::DigitalInputButton(const uint8_t pin, const bool pullup) : 
     _pin(pin),

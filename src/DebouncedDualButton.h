@@ -1,9 +1,9 @@
 #pragma once
 
 #include <stdint.h>
-#include <AbstractDebouncedButton.h>
-#include <DualInputButton.h>
-#include <AbstractButton.h>
+#include "AbstractDebouncedButton.h"
+#include "DualInputButton.h"
+#include "AbstractButton.h"
 
 /*! Timeslice-based dual input button with debouncing
  *

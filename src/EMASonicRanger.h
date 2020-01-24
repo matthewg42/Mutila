@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <SonicRanger.h>
+#include "Millis.h"
+#include "SonicRanger.h"
 
 /*! \brief SonicRanger with EMA-smoothed values
  *

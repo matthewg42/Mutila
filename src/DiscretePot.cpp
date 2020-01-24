@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <DiscretePot.h>
-#include <Millis.h>
+#include "DiscretePot.h"
+#include "Millis.h"
 
 DiscretePot::DiscretePot(const uint8_t pin) :
     _pin(pin)

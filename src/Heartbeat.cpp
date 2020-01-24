@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include <MutilaDebug.h>
-#include <Heartbeat.h>
-#include <Millis.h>
+#include "MutilaDebug.h"
+#include "Heartbeat.h"
+#include "Millis.h"
 
 Heartbeat::Heartbeat(const uint8_t pin, const bool invertedLogic) :
     _mode(Heartbeat::Normal),

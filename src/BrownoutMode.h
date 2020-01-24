@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Mode.h>
-#include <EMAVDivSampler.h>
+#include "Mode.h"
+#include "EMAVDivSampler.h"
 
 /*! \brief Mode class with brownout detection
  *

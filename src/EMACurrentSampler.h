@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <EMASampler.h>
+#include "Millis.h"
+#include "EMASampler.h"
 
 /*! \brief Exponential Moving Average current sampler
  *

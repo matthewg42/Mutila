@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include <Millis.h>
-#include <SonicRanger.h>
+#include "Millis.h"
+#include "SonicRanger.h"
 
 #ifdef ARDUINO_AVR_DIGISPARK
 // Implementation missing when building for DigiSpark, so I copy-pasted it from:

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
+#include "Millis.h"
 
 
 /*! \brief Base class for analog pin sampling classes

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
-#include <AbstractSampler.h>
+#include "Millis.h"
+#include "AbstractSampler.h"
 
 /*! \brief Exponential Moving Average (EMA) analog pin sampler.
  *

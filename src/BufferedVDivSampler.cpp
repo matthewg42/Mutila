@@ -1,5 +1,5 @@
-#include <BufferedVDivSampler.h>
-#include <VIPCalculation.h>
+#include "BufferedVDivSampler.h"
+#include "VIPCalculation.h"
 
 BufferedVDivSampler::BufferedVDivSampler(const uint8_t pin, 
                                          const uint16_t r1KOhm, 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
+#include "Millis.h"
 
 /*! LED flashing status indicator.
  *

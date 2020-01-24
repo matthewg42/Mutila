@@ -2,8 +2,8 @@
 
 #include <Arduino.h>
 #include <stdint.h>
-#include <MutilaDebug.h>
-#include <Millis.h>
+#include "MutilaDebug.h"
+#include "Millis.h"
 
 /*! Mode base class
  *

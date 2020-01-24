@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <Millis.h>
+#include "Millis.h"
 
 /*! HC-SR04 Ultrasonic ranger device
  *

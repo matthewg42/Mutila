@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <AbstractButton.h>
+#include "AbstractButton.h"
 
 /*! Instantaneous button with a digital output, from an analog input.
  *
