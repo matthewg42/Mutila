@@ -2,6 +2,8 @@
 #include "DFPReader.h"
 #include "Millis.h"
 
+uint8_t DFPReader::PlaybackStartMs = 120;
+
 // This is a hack to get DFPReader building on ESP8266. At time of writing
 // there is a bug in the ESP libraries (v2.3.0 has a missing implementation 
 // of // __ieee754_remainder, causing linker to fail).
@@ -10,7 +12,7 @@ double dmod(double a, double b)
     return (a - b * floor(a / b));
 }
 
-const uint8_t DFPReader::SMALL_NUMBERS[] = {
+const DFPlayerMini::tracknum_t DFPReader::SMALL_NUMBERS[] = {
         Mp3TrackZero, Mp3TrackZero+1, Mp3TrackZero+2, Mp3TrackZero+3, 
         Mp3TrackZero+4, Mp3TrackZero+5, Mp3TrackZero+6, Mp3TrackZero+7, 
         Mp3TrackZero+8, Mp3TrackZero+9, Mp3TrackZero+10, Mp3TrackZero+11, 
@@ -18,7 +20,7 @@ const uint8_t DFPReader::SMALL_NUMBERS[] = {
         Mp3TrackZero+16, Mp3TrackZero+17, Mp3TrackZero+18, Mp3TrackZero+19
 };
 
-const uint8_t DFPReader::TENS[] = {
+const DFPlayerMini::tracknum_t DFPReader::TENS[] = {
         0, 0, Mp3TrackTwenty, Mp3TrackThirty, Mp3TrackFourty,
         Mp3TrackFifty, Mp3TrackSixty, Mp3TrackSeventy, 
         Mp3TrackEighty, Mp3TrackNinety
@@ -29,7 +31,7 @@ DFPReader::DFPReader(Stream& serial, DFPlayerMini::Cmd playCmd, uint8_t busyPin,
     _playCmd(playCmd),
     readerBufSize(readerBufferSize)
 {
-    readerBuf = new uint8_t[readerBufSize];
+    readerBuf = new DFPlayerMini::tracknum_t[readerBufSize];
 }
 
 DFPReader::~DFPReader()
@@ -66,7 +68,7 @@ void DFPReader::update()
     }
 }
 
-void DFPReader::startPlayback(uint16_t track)
+void DFPReader::startPlayback(DFPlayerMini::tracknum_t track)
 {
     _DB(F("DFPReader::startPlayback "));
     _DBLN(track);
@@ -136,19 +138,19 @@ void DFPReader::resetReaderBuf()
     }
 }
 
-uint8_t DFPReader::popElement()
+DFPlayerMini::tracknum_t DFPReader::popElement()
 {
     if (unplayedElements==0) {
         return 0;
     } else {
-        uint8_t e = readerBuf[tailPtr];
+        DFPlayerMini::tracknum_t e = readerBuf[tailPtr];
         tailPtr = (tailPtr+1) % readerBufSize;
         unplayedElements--;
         return e;
     }   
 }
 
-bool DFPReader::appendElement(uint8_t value)
+bool DFPReader::appendElement(DFPlayerMini::tracknum_t value)
 {
     DB(F("DFPReader::appendElement "));
     DBLN(value);
@@ -178,7 +180,7 @@ void DFPReader::appendSubThousand(int16_t num)
     }
 }
 
-void DFPReader::appendMagnitude(double* number, double magnitude, uint8_t magnitudeElement)
+void DFPReader::appendMagnitude(double* number, double magnitude, DFPlayerMini::tracknum_t magnitudeElement)
 {
     if (*number < magnitude) {
         return;

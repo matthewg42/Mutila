@@ -25,11 +25,18 @@ struct DFPResponse; // defined below
  */
 class DFPlayerMini {
 public:
-    static const uint8_t BufferLength = 10;
-    static const uint8_t MinimumTimeMs = 20;
-    static const uint8_t ResponseTimeoutMs = 20;
+    typedef uint16_t tracknum_t;
+
+    //! These could potentially be over-ridden if you find them not to work.
+    //!
+    //! \note defined in DFPlayerMini.cpp because ISO C++ prohibits defining 
+    //!       non-const static members here.
+    static uint8_t MinimumTimeMs;
+    static uint8_t ResponseTimeoutMs;
+
 
     // Structure of the command packet
+    static const uint8_t BufferLength = 10;
     static const uint8_t PacketOffsetCmd = 3;
     static const uint8_t PacketOffsetArg = 5;
     static const uint8_t PacketOffsetCkSum = 7;
@@ -117,6 +124,9 @@ public:
      *  cause jitter in the audio playback, and takes longer to execute, 
      *  so the BUSY pin method is recommended if there is a digital input
      *  available.
+     *
+     *  \note: There may be a short delay between the request to play a track
+     *         and the busy pin changing state.
      *
      *  \return true if audio is currently playing, else false.
      */
