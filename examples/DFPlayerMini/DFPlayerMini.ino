@@ -11,7 +11,7 @@ const uint16_t BetweenMs =  1500;
 const uint16_t Volume =     15;
 
 // This is based on the four example files from the audio directory
-const int16_t TrackCount = 3;
+const int16_t TrackCount = 4;
 
 // How often to print general status information
 const uint16_t OutputPeriodMs = 1000;
