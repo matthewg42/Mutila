@@ -6,7 +6,7 @@
 const uint8_t AnalogPin = A5;
 const uint16_t OutputPeriodMs = 200;
 
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 DiscretePot Pot(AnalogPin);
 DiscretePot PotReversed(AnalogPin);
 

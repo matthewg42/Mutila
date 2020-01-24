@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Mode.h"
+#include <Mode.h>
 
 /*! ModeManager class for switching between mutually exclusive Modes.
  */

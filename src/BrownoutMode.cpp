@@ -1,4 +1,4 @@
-#include "BrownoutMode.h"
+#include <BrownoutMode.h>
 
 BrownoutMode::BrownoutMode(EMAVDivSampler& vSampler, const float vThreshLow, const float vThreshHigh) :
     _vSampler(vSampler),

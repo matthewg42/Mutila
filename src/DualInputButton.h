@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "AbstractButton.h"
+#include <AbstractButton.h>
 
 /*! Basic instantaneous button from two separate inputs.
  *

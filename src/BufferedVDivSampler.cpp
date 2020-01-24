@@ -1,11 +1,11 @@
-#include "BufferedVDivSampler.h"
-#include "VIPCalculation.h"
+#include <BufferedVDivSampler.h>
+#include <VIPCalculation.h>
 
 BufferedVDivSampler::BufferedVDivSampler(const uint8_t pin, 
                                          const uint16_t r1KOhm, 
                                          const uint16_t r2KOhm, 
                                          const float vRef, 
-                                         const uint16_t periodMs, 
+                                         const millis_t periodMs, 
                                          const uint8_t samples) :
     BufferedSampler(pin, periodMs, samples),
     _r1KOhm(r1KOhm),

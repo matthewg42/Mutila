@@ -2,8 +2,8 @@
 
 #include <Arduino.h>
 #include <stdint.h>
-#include "MutilaDebug.h"
-#include "Millis.h"
+#include <MutilaDebug.h>
+#include <Millis.h>
 
 /*! Mode base class
  *
@@ -83,7 +83,7 @@ public:
      *
      */
     virtual void update() { 
-        uint32_t now = Millis();
+        millis_t now = Millis();
         if (MillisSince(_lastUpdateMs, now) > _updatePeriodMs || _state == Started) {
             modeUpdate();
             _lastUpdateMs = now;
@@ -122,7 +122,7 @@ protected:
 
 protected:
     RunState _state;
-    uint32_t _lastUpdateMs;
+    millis_t _lastUpdateMs;
     uint16_t _updatePeriodMs;
 
 };

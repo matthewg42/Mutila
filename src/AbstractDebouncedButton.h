@@ -1,7 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "AbstractButton.h"
+#include <Millis.h>
+#include <AbstractButton.h>
 
 /*! Timeslice-based button with debouncing.
  *
@@ -62,7 +63,7 @@ public:
      *  \param peek if true, do not reset the pushed state.
      *  \return length of last tap in ms if the button has been tapped, else 0.
      */
-    uint32_t tapped(bool peek=false);
+    millis_t tapped(bool peek=false);
 
     /*! Test if held on for extended period.
      *
@@ -90,14 +91,14 @@ public:
 protected:
     uint8_t _threshold;
     uint8_t _delay;
-    uint32_t _lastUpdate;
+    millis_t _lastUpdate;
     uint8_t _counter;
     bool _state;
-    uint32_t _lastStateChange;
+    millis_t _lastStateChange;
     bool _pushed;
     uint16_t _repeatCount;
-    uint32_t _lastRepeat;
-    uint32_t _lastOnDuration;
+    millis_t _lastRepeat;
+    millis_t _lastOnDuration;
 
 };
 

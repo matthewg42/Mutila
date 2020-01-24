@@ -26,10 +26,10 @@ const int16_t TrackCount = 3;
 const uint16_t OutputPeriodMs = 1000;
 
 // Global objects and variables
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 SoftwareSerial SerialMP3(TxPin, RxPin);
 DFPlayerMini mp3(SerialMP3, BusyPin);
-uint32_t LastStop = 0;
+millis_t LastStop = 0;
 bool Playing = false;
 int16_t Track = 0;
 
@@ -66,7 +66,7 @@ void setup()
 
 void loop() {
     bool busy = mp3.busy();
-    uint32_t now = Millis();
+    millis_t now = Millis();
 
     if (DoEvery(OutputPeriodMs, LastOutputMs)) {
         Serial.print("Millis=0x");

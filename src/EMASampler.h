@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 #include <AbstractSampler.h>
 
 /*! \brief Exponential Moving Average (EMA) analog pin sampler.
@@ -35,7 +36,7 @@ public:
      *        (between 0 and 1 - a higher alpha discounts older samples 
      *        faster).
      */
-    EMASampler(const uint8_t pin, const uint16_t periodMs=10, const float alpha=0.5);
+    EMASampler(const uint8_t pin, const millis_t periodMs=10, const float alpha=0.5);
 
     /*! Destructor.
      */  
@@ -68,7 +69,7 @@ public:
 
 protected:
     float _alpha;               //!< alpha value used in EMA calculation
-    uint32_t _lastUpdated;      //!< when last sample taken
+    millis_t _lastUpdated;      //!< when last sample taken
     float _movingAverage;       //!< most recently calculated mean value
     int16_t _lastSample;        //!< keep the most recent sample
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 #include <BufferedSampler.h>
 
 /*! \brief Buffered voltage divider based voltage sampler
@@ -22,7 +23,7 @@ public:
                         const uint16_t r1KOhm, 
                         const uint16_t r2KOhm, 
                         const float vRef=5.0,
-                        const uint16_t periodMs=10, 
+                        const millis_t periodMs=10, 
                         const uint8_t samples=10);
 
     //! Get the mean value in the sample set

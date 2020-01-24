@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "DebouncedAnalogButton.h"
-#include "Millis.h"
+#include <DebouncedAnalogButton.h>
+#include <Millis.h>
 
 DebouncedAnalogButton::DebouncedAnalogButton(const uint8_t pin, const bool pullup, const uint16_t analogThreshold) :
     AnalogInputButton(pin, pullup, analogThreshold)

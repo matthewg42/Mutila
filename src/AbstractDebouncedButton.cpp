@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "AbstractDebouncedButton.h"
-#include "MutilaDebug.h"
-#include "Millis.h"
+#include <AbstractDebouncedButton.h>
+#include <MutilaDebug.h>
+#include <Millis.h>
 
 AbstractDebouncedButton::AbstractDebouncedButton() 
 {
@@ -24,9 +24,9 @@ bool AbstractDebouncedButton::pushed(bool peek)
     return r;
 }
 
-uint32_t AbstractDebouncedButton::tapped(bool peek)
+millis_t AbstractDebouncedButton::tapped(bool peek)
 {
-    uint32_t r = _lastOnDuration;
+    millis_t r = _lastOnDuration;
     if (!peek) { _lastOnDuration = 0; }
     return r;
 }
@@ -38,7 +38,7 @@ bool AbstractDebouncedButton::held(uint16_t ms)
 
 bool AbstractDebouncedButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 {
-    uint32_t now = Millis();
+    millis_t now = Millis();
     bool out = false;
 
     if (on() && _repeatCount == 0) {
@@ -57,7 +57,7 @@ bool AbstractDebouncedButton::repeat(uint16_t initialMs, uint16_t repeatMs)
 
 void AbstractDebouncedButton::setState(bool newState)
 {
-    uint32_t now = Millis();
+    millis_t now = Millis();
     if (newState) { 
         _pushed = true;
         _repeatCount = 0;

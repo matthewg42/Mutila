@@ -1,7 +1,8 @@
 #pragma once
 
-#include <Arduino.h>
 #include <stdint.h>
+#include <Arduino.h>
+#include <Millis.h>
 
 struct DFPResponse; // defined below
 
@@ -140,7 +141,7 @@ private:
     Stream& _serial;
     const uint8_t _busyPin;
     uint8_t _sendBuf[BufferLength];
-    uint32_t _lastCmdSent;
+    millis_t _lastCmdSent;
 
 };
 

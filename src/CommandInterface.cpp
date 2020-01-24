@@ -1,5 +1,5 @@
 #include <MutilaDebug.h>
-#include "CommandInterface.h"
+#include <CommandInterface.h>
 
 CommandInterface::CommandInterface(uint8_t maxCmdLen) :
     echo(true),

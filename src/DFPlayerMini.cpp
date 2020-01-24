@@ -1,7 +1,7 @@
 #include <string.h>
 #include <DFPlayerMini.h>
 #include <MutilaDebug.h>
-#include "Millis.h"
+#include <Millis.h>
 
 DFPlayerMini::DFPlayerMini(Stream& serial, const uint8_t busyPin) :
     _serial(serial),
@@ -86,9 +86,9 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
     // A pointer into the buffer where we will write incoming bytes
     uint8_t ptr = 0;
 
-    uint32_t startSend = Millis();
+    millis_t startSend = Millis();
     sendCmd(cmd); 
-    uint32_t startRecv = Millis();
+    millis_t startRecv = Millis();
 
     // Populate buffer with response.
     while(true) {
@@ -125,7 +125,7 @@ DFPResponse DFPlayerMini::_query(DFPlayerMini::Cmd cmd)
         }
     }
     // calculate how long comms took
-    uint32_t durationRecv = MillisSince(startRecv);
+    millis_t durationRecv = MillisSince(startRecv);
 
     _DB(F("DF RX:"));
     dumpBuf(buf, ptr, false);

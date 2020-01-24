@@ -15,7 +15,7 @@ EMASonicRanger Ranger(TriggerPin, EchoPin);
 // How often to print output
 const uint16_t OutputPeriodMs = 100;
 // Keep track of the last time we printed output
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 void setup()
 {

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "DualInputButton.h"
+#include <DualInputButton.h>
 
 DualInputButton::DualInputButton(AbstractButton& button1, AbstractButton& button2, const MixMode mix) :
     _button1(button1),

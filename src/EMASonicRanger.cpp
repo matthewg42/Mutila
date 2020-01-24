@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <Millis.h>
-#include "EMASonicRanger.h"
+#include <EMASonicRanger.h>
 
-EMASonicRanger::EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const uint16_t periodMs, const float alpha, uint16_t minimumRange) :
+EMASonicRanger::EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const millis_t periodMs, const float alpha, uint16_t minimumRange) :
     SonicRanger(trigPin, echoPin),
     _periodMs(periodMs),
     _alpha(alpha),

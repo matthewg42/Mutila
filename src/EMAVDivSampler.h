@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 #include <EMASampler.h>
 
 /*! \brief Exponential Moving Average Voltage Divider based voltage sampler
@@ -22,7 +23,7 @@ public:
                    const uint16_t r1KOhm, 
                    const uint16_t r2KOhm, 
                    const float vRef,
-                   const uint16_t periodMs,
+                   const millis_t periodMs,
                    const float alpha);
 
     //! Get the mean value in the sample set

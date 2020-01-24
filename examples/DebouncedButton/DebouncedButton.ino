@@ -10,7 +10,7 @@ const uint8_t ButtonPin = 3;
 #endif
 
 const uint16_t OutputPeriodMs = 150;
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 DebouncedButton MyButton(ButtonPin);
 

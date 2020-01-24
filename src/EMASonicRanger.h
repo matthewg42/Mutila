@@ -1,7 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "SonicRanger.h"
+#include <Millis.h>
+#include <SonicRanger.h>
 
 /*! \brief SonicRanger with EMA-smoothed values
  *
@@ -23,7 +24,7 @@ public:
      * The reason for the mimimum range is that some units exhibit a problem where they randomly 
      * report skewing results.
      */
-    EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const uint16_t periodMs=10, const float alpha=0.5, const uint16_t minimumRange=3);
+    EMASonicRanger(const uint8_t trigPin, const uint8_t echoPin, const millis_t periodMs=10, const float alpha=0.5, const uint16_t minimumRange=3);
 
     /*! Initialization 
      * 
@@ -45,9 +46,9 @@ public:
     uint16_t getRange();
 
 private:
-    uint16_t _periodMs;         //!< how often we will fetch from hw
+    millis_t _periodMs;         //!< how often we will fetch from hw
     float _alpha;               //!< alpha value used in EMA calculation
-    uint32_t _lastUpdated;      //!< when last sample taken
+    millis_t _lastUpdated;      //!< when last sample taken
     float _movingAverage;       //!< most recently calculated mean value
     uint16_t _lastSample;       //!< keep the most recent sample
     uint16_t _minimumRange;     //!< set to non-0 to discard samples below minimum

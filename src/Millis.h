@@ -21,6 +21,17 @@
  *
  */
 
+/*! The type that should be used whenever Millis is used, and should match
+ *  what the Arduino-provided millis() function returns.
+ *  To the author's knowlegde, this is unsigned long, but it could
+ *  conceivably be something different on some boards. If so then this typedef
+ *  will have to vary according to board #defines
+ */
+typedef unsigned long millis_t;
+
+/*! The type that is returned by micros() */
+typedef unsigned long micros_t;
+
 /*! Global Millis offset value.
  */
 extern float _MillisOffsetMs;
@@ -30,7 +41,7 @@ extern float _MillisOffsetMs;
  *  \return number of milliseconds since the sketch started running, plus
  *          the offset as modified by addMillisOffset.
  */
-uint32_t Millis(); 
+millis_t Millis(); 
 
 /*! Calculate millis since a timestamp.
  *
@@ -41,7 +52,7 @@ uint32_t Millis();
  *  \param value of time to do calculation from. If 0, use Millis().
  *  \return the number of milliseconds since the last time Millis() was previousMs.
  */
-uint32_t MillisSince(uint32_t previousMs, uint32_t now=0);
+millis_t MillisSince(millis_t previousMs, millis_t now=0);
 
 /*! Trigger events based on previous occurance and an interval.
  *
@@ -53,7 +64,7 @@ uint32_t MillisSince(uint32_t previousMs, uint32_t now=0);
  *  \param now a value to use instead of calling Millis().
  *  \return true if periodMs has elapsed since previousMs, else false.
  */
-bool DoEvery(uint32_t periodMs, uint32_t& previousMs, uint32_t now=0);
+bool DoEvery(millis_t periodMs, millis_t& previousMs, millis_t now=0);
 
 /*! Add offset to Millis() results.
  *

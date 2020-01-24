@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 #include <AbstractSampler.h>
 
 /*! \brief Ringbuffer-based sampler for analog values
@@ -27,7 +28,7 @@ public:
      *
      * Note: this class dynamically allocated memory for the ring buffer.
      */
-    BufferedSampler(const uint8_t pin, const uint16_t periodMs=10, const uint8_t samples=10);
+    BufferedSampler(const uint8_t pin, const millis_t periodMs=10, const uint8_t samples=10);
 
     /*! Destructor
      *
@@ -78,7 +79,7 @@ protected:
     uint8_t _samples;           //!< max number of samples to keep in buffer
     uint8_t _idx;               //!< index ptr (ring buffer)
     uint8_t _count;             //!< number of samples in buffer
-    uint32_t _lastUpdated;      //!< when last sample taken
+    millis_t _lastUpdated;      //!< when last sample taken
     bool _updated;              //!< flag to re-calulate avg or not
     int16_t * _sampleData;      //!< ring buffer for data
     int16_t _minimum;           //!< most recently calculated minimum value

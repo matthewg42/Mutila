@@ -1,14 +1,14 @@
 #include <Arduino.h>
-#include "MutilaDebug.h"
-#include "Millis.h"
+#include <MutilaDebug.h>
+#include <Millis.h>
 
 float _MillisOffsetMs = 0.;
 
-uint32_t Millis() {
-    return millis() + (uint32_t)_MillisOffsetMs;
+millis_t Millis() {
+    return millis() + (millis_t)_MillisOffsetMs;
 }
 
-uint32_t MillisSince(uint32_t previousMs, uint32_t now)
+millis_t MillisSince(millis_t previousMs, millis_t now)
 {
     if (now == 0) {
         now = Millis();
@@ -17,7 +17,7 @@ uint32_t MillisSince(uint32_t previousMs, uint32_t now)
     return now >= previousMs ? (now - previousMs) : (0xFFFFFFFF - previousMs + now);
 }
 
-bool DoEvery(uint32_t periodMs, uint32_t& previousMs, uint32_t now)
+bool DoEvery(millis_t periodMs, millis_t& previousMs, millis_t now)
 {
     if (now == 0) {
         now = Millis();

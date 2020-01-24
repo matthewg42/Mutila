@@ -76,7 +76,6 @@ char readChar()
 {
     while (true) {
         int c = Serial.read();
-        bool ret = false;
         if (c == '\r') {
             c = '\n';
         }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 #include <DFPlayerMini.h>
 
 /*! DFPlayerMini controller with numeric readout functions.
@@ -148,7 +149,7 @@ private:
     uint8_t tailPtr;
     uint8_t unplayedElements;
 
-    uint32_t lastPlayStart;
+    millis_t lastPlayStart;
     PlaybackState playbackState;
 
 };

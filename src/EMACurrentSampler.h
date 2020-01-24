@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 #include <EMASampler.h>
 
 /*! \brief Exponential Moving Average current sampler
@@ -22,7 +23,7 @@ public:
                       const float vSupply, 
                       const float vRef,
                       const float iOffset, 
-                      const uint16_t periodMs,
+                      const millis_t periodMs,
                       const float alpha);
 
     //! Get the mean value in the sample set

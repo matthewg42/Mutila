@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "DebouncedButton.h"
+#include <DebouncedButton.h>
 
 /*! MultiThrowSwitch
  *

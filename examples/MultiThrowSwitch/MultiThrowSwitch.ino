@@ -10,7 +10,7 @@ const uint8_t SwitchPins[] = {2, 3, 4, 10};
 #endif
 
 const uint16_t OutputPeriodMs = 150;
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 MultiThrowSwitch MySwitchWithOff(sizeof(SwitchPins), SwitchPins, true);
 MultiThrowSwitch MySwitchNoOff(sizeof(SwitchPins), SwitchPins, false);

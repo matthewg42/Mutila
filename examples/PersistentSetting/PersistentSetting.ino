@@ -36,7 +36,7 @@ void printSizes()
     Serial.print("sizeof short:         ");  Serial.println(sizeof(short));
     Serial.print("sizeof int:           ");  Serial.println(sizeof(int));
     Serial.print("sizeof long:          ");  Serial.println(sizeof(long));
-    Serial.print("sizeof unsigned long: ");  Serial.println(sizeof(long));
+    Serial.print("sizeof unsigned long: ");  Serial.println(sizeof(unsigned long));
     Serial.print("sizeof long long:     ");  Serial.println(sizeof(long long));
     Serial.print("sizeof float:         ");  Serial.println(sizeof(float));
     Serial.print("sizeof double:        ");  Serial.println(sizeof(double));
@@ -84,7 +84,6 @@ char readChar()
 {
     while (true) {
         int c = Serial.read();
-        bool ret = false;
         if (c == '\r') {
             c = '\n';
         }

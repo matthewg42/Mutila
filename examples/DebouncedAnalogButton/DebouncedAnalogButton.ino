@@ -7,7 +7,7 @@ const uint8_t ButtonPin = A5;
 DebouncedAnalogButton Button(ButtonPin);
 
 const uint16_t OutputPeriodMs = 100;
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 void setup()
 {

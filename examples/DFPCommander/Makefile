@@ -1,4 +1,4 @@
-CPPFLAGS += -Wno-unused-variable -Wno-deprecated-declarations -Wno-cpp -Wno-write-strings
+CPPFLAGS += -Wno-deprecated-declarations
 #CPPFLAGS += -DDEBUG
 ARDUINO_LIBS = Mutila SoftwareSerial
 

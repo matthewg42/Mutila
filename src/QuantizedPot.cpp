@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <Arduino.h>
 #include <Millis.h>
-
-#include "QuantizedPot.h"
+#include <QuantizedPot.h>
 
 QuantizedPot::QuantizedPot(const uint8_t pin, int8_t maxRanges) :
     _pin(pin),

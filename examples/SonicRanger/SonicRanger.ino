@@ -31,9 +31,9 @@ void loop()
 {
     // Get the range, and record time before and after to 
     // work out how long the getRange() call takes
-    uint32_t before = Millis();
+    millis_t before = Millis();
     uint16_t cm = Ranger.getRange();
-    uint32_t after = Millis();
+    millis_t after = Millis();
 
     Serial.print("Millis=0x");
     Serial.print(Millis(), HEX);

@@ -17,7 +17,7 @@ EMAVDivSampler      SamplerUsingEMA   (VoltPin, R1KOhms, R2KOhms, ReferenceVolts
 
 // Globals use to rate-limit the output
 const uint16_t OutputPeriodMs = 100;
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 void setup()
 {

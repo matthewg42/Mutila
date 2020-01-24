@@ -1,7 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "AbstractDebouncedButton.h"
+#include <Millis.h>
+#include <AbstractDebouncedButton.h>
 
 /*! Discrete values from a potential divider.
  *
@@ -46,10 +47,10 @@ private:
     bool _reversed;
     uint8_t _threshold;
     uint8_t _delay;
-    uint32_t _lastUpdate;
+    millis_t _lastUpdate;
     uint8_t _counter;
     int8_t _state;
-    uint32_t _lastStateChange;
+    millis_t _lastStateChange;
 
     /*! Instantaneous value.
      *

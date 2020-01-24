@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 
 /*! HC-SR04 Ultrasonic ranger device
  *
@@ -11,7 +12,7 @@
  */
 
 #ifdef ARDUINO_AVR_DIGISPARK
-uint32_t pulseInLong(uint8_t pin, uint8_t state, uint32_t timeout);
+micros_t pulseInLong(uint8_t pin, uint8_t state, micros_t timeout);
 #endif // ARDUINO_AVR_DIGISPARK
 
 class SonicRanger {

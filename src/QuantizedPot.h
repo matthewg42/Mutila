@@ -1,8 +1,9 @@
 #pragma once 
 
 #include <stdint.h>
+#include <Millis.h>
 #include <AbstractDebouncedButton.h>
-#include "NumericRange.h"
+#include <NumericRange.h>
 
 /*! Use potential divider to select values based on specified ranges.
  *
@@ -65,10 +66,10 @@ protected:
 	NumericRange<int>** _ranges;
     uint8_t _threshold;
     uint8_t _delay;
-    uint32_t _lastUpdate;
+    millis_t _lastUpdate;
     uint8_t _counter;
     int8_t _state;
-    uint32_t _lastStateChange;
+    millis_t _lastStateChange;
 	int _lastRaw;
 	int _velocity;
 

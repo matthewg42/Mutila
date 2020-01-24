@@ -11,7 +11,7 @@ const float Alpha = 0.5;
 const uint16_t OutputPeriodMs = 100;
 
 EMACurrentSampler Sampler(CurrentSamplePin, VSupply, VRef, IOffset, SamplePeriodMs, Alpha);
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 void setup()
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 
 /*! LED flashing status indicator.
  *
@@ -109,7 +110,7 @@ private:
 	const uint8_t _pin;
     const bool _invertedLogic;
 	bool _pinState;
-	uint32_t _lastStateFlip;
+	millis_t _lastStateFlip;
 	uint16_t _onTime;
 	uint16_t _offTime;
     bool _enabled;

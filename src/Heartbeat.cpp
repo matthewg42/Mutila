@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "MutilaDebug.h"
-#include "Heartbeat.h"
-#include "Millis.h"
+#include <MutilaDebug.h>
+#include <Heartbeat.h>
+#include <Millis.h>
 
 Heartbeat::Heartbeat(const uint8_t pin, const bool invertedLogic) :
     _mode(Heartbeat::Normal),
@@ -88,7 +88,7 @@ void Heartbeat::update()
     if (!_enabled) {
         return;
     }
-    uint32_t wait = _pinState ? _onTime : _offTime;
+    millis_t wait = _pinState ? _onTime : _offTime;
     if (_onTime == 0) {
         if (_pinState) {
             updatePin(0);

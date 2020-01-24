@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <Millis.h>
 
 
 /*! \brief Base class for analog pin sampling classes
@@ -16,7 +17,7 @@ public:
      * \param pin the analog reading pin to read data from
      * \param periodMs time between samples (set to 0 to sample ever time update() is called)
      */
-    AbstractSampler(const uint8_t pin, const uint16_t periodMs) : 
+    AbstractSampler(const uint8_t pin, const millis_t periodMs) : 
         _pin(pin), 
         _periodMs(periodMs) {;}
 
@@ -41,7 +42,7 @@ public:
 
 protected:
     const uint8_t _pin;             //!< pin to read data from
-    const uint16_t _periodMs;       //!< minimum ms
+    const millis_t _periodMs;       //!< minimum ms
 
 };
 

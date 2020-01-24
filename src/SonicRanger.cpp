@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include <Millis.h>
-#include "SonicRanger.h"
+#include <SonicRanger.h>
 
 #ifdef ARDUINO_AVR_DIGISPARK
 // Implementation missing when building for DigiSpark, so I copy-pasted it from:
 // https://github.com/arduino/Arduino/blob/master/hardware/arduino/avr/cores/arduino/wiring_pulse.c#L63
-uint32_t pulseInLong(uint8_t pin, uint8_t state, uint32_t timeout)
+micros_t pulseInLong(uint8_t pin, uint8_t state, micros_t timeout)
 {
 	// cache the port and bit of the pin in order to speed up the
 	// pulse width measuring loop and achieve finer resolution.  calling
@@ -14,7 +14,7 @@ uint32_t pulseInLong(uint8_t pin, uint8_t state, uint32_t timeout)
 	uint8_t port = digitalPinToPort(pin);
 	uint8_t stateMask = (state ? bit : 0);
 
-	uint32_t startMicros = micros();
+	micros_t startMicros = micros();
 
 	// wait for any previous pulse to end
 	while ((*portInputRegister(port) & bit) == stateMask) {
@@ -28,7 +28,7 @@ uint32_t pulseInLong(uint8_t pin, uint8_t state, uint32_t timeout)
 			return 0;
 	}
 
-	uint32_t start = micros();
+	micros_t start = micros();
 	// wait for the pulse to stop
 	while ((*portInputRegister(port) & bit) == stateMask) {
 		if (micros() - startMicros > timeout)
@@ -58,11 +58,10 @@ uint16_t SonicRanger::getRange()
     delayMicroseconds(2);
     digitalWrite(_trigPin, HIGH);
     delayMicroseconds(10);
-    uint32_t b4 = Millis();
+    millis_t b4 = Millis();
     digitalWrite(_trigPin, LOW);
-    uint32_t time = pulseInLong(_echoPin, HIGH, _timeoutMs*1000UL);
-    uint32_t after = Millis();
-    //if (after - b4 >= _timeoutMs) {
+    micros_t time = pulseInLong(_echoPin, HIGH, _timeoutMs*1000UL);
+    millis_t after = Millis();
     if (MillisSince(b4, after) >= _timeoutMs) {
         return _maxCm;
     } else {

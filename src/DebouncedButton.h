@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "AbstractDebouncedButton.h"
-#include "DigitalInputButton.h"
+#include <AbstractDebouncedButton.h>
+#include <DigitalInputButton.h>
 
 /*! Timeslice-based button with debouncing
  *

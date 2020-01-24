@@ -1,11 +1,12 @@
-#include "EMACurrentSampler.h"
-#include "VIPCalculation.h"
+#include <Millis.h>
+#include <EMACurrentSampler.h>
+#include <VIPCalculation.h>
 
 EMACurrentSampler::EMACurrentSampler(const uint8_t pin, 
                                      const float vSupply, 
                                      const float vRef,
                                      const float iOffset, 
-                                     const uint16_t periodMs,
+                                     const millis_t periodMs,
                                      const float alpha) :
     EMASampler(pin, periodMs, alpha),
     _vSupply(vSupply),

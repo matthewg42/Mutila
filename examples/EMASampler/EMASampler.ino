@@ -11,9 +11,9 @@ EMASampler SlowSampler(SamplerPin, SamplePeriodMs, 0.02);
 EMASampler FastSampler(SamplerPin, SamplePeriodMs, 0.95);
 
 // How often to print output
-const uint32_t OutputPeriodMs = 100;
+const millis_t OutputPeriodMs = 100;
 // Timer to keep track of when we last printed output
-uint32_t LastOutputMs = 0;
+millis_t LastOutputMs = 0;
 
 void setup()
 {
