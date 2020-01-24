@@ -2,24 +2,13 @@
 #include <DFPReader.h>
 #include <MutilaDebug.h>
 #include <Millis.h>
-
-// TxPin describes the pin on the Arduino which has a connection
-// to the TX pin on the DFPlayer Mini, and so on.
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t TxPin =       D6;
-const uint8_t RxPin =       D7;
-const uint8_t BusyPin =     D5;
-#else
-const uint8_t TxPin = 6;
-const uint8_t RxPin = 7;
-const uint8_t BusyPin = 5;
-#endif
+#include "TestBoardPins.h"
 
 // Volume from 1-30 (30 is loudest)
-const uint16_t Volume =     15;
+const uint16_t Volume = 15;
 
-SoftwareSerial SerialMP3(TxPin, RxPin);
-DFPReader reader(SerialMP3, DFPlayerMini::PlayTf, BusyPin);
+SoftwareSerial SerialMP3(DfpmTxPin, DfpmRxPin);
+DFPReader reader(SerialMP3, DFPlayerMini::PlayTf, DfpmBusyPin);
 
 void setup()
 {

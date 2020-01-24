@@ -2,16 +2,7 @@
 #include <SoftwareSerial.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
-
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t TxPin =       D6;
-const uint8_t RxPin =       D7;
-const uint8_t BusyPin =     D5;
-#else
-const uint8_t TxPin =       6;
-const uint8_t RxPin =       7;
-const uint8_t BusyPin =     5;
-#endif
+#include "TestBoardPins.h"
 
 // How long to wait between playing samples
 const uint16_t BetweenMs =  1500;
@@ -19,7 +10,7 @@ const uint16_t BetweenMs =  1500;
 // Volume from 1-30 (30 is loudest)
 const uint16_t Volume =     15;
 
-// This is based on the three example files from the audio directory
+// This is based on the four example files from the audio directory
 const int16_t TrackCount = 3;
 
 // How often to print general status information
@@ -27,8 +18,8 @@ const uint16_t OutputPeriodMs = 1000;
 
 // Global objects and variables
 millis_t LastOutputMs = 0;
-SoftwareSerial SerialMP3(TxPin, RxPin);
-DFPlayerMini mp3(SerialMP3, BusyPin);
+SoftwareSerial SerialMP3(DfpmTxPin, DfpmRxPin);
+DFPlayerMini mp3(SerialMP3, DfpmBusyPin);
 millis_t LastStop = 0;
 bool Playing = false;
 int16_t Track = 0;
