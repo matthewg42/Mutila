@@ -4,7 +4,17 @@
 #include <Millis.h>
 #include "TestBoardPins.h"
 
-const uint8_t SwitchPins[] = {Button1Pin, Button2Pin, Button3Pin};
+const uint8_t SwitchPins[] = {
+#if defined(ARDUINO_ESP8266_NODEMCU) 
+    // The NodeMCU just doesn't have enough pins!
+    Button1Pin, 
+    Button2Pin 
+#else 
+    Button1Pin, 
+    Button2Pin, 
+    Button3Pin
+#endif
+};
 
 const uint16_t OutputPeriodMs = 150;
 millis_t LastOutputMs = 0;
