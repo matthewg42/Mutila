@@ -27,14 +27,6 @@ class DFPlayerMini {
 public:
     typedef uint16_t tracknum_t;
 
-    //! These could potentially be over-ridden if you find them not to work.
-    //!
-    //! \note defined in DFPlayerMini.cpp because ISO C++ prohibits defining 
-    //!       non-const static members here.
-    static uint8_t MinimumTimeMs;
-    static uint8_t ResponseTimeoutMs;
-
-
     // Structure of the command packet
     static const uint8_t BufferLength = 10;
     static const uint8_t PacketOffsetCmd = 3;
@@ -42,6 +34,9 @@ public:
     static const uint8_t PacketOffsetCkSum = 7;
 
 public:
+    //! These could potentially be over-ridden if you find them not to work.
+    uint8_t MinimumTimeMs = 20;
+    uint8_t ResponseTimeoutMs = 20;
 
     /*! Command codes.
      *

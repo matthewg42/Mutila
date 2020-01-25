@@ -152,10 +152,10 @@ DFPlayerMini::tracknum_t DFPReader::popElement()
 
 bool DFPReader::appendElement(DFPlayerMini::tracknum_t value)
 {
-    DB(F("DFPReader::appendElement "));
-    DBLN(value);
+    _DB(F("DFPReader::appendElement "));
+    _DBLN(value);
     if (unplayedElements >= readerBufSize) {   
-        DBLN(F("DFPReader::appendElement ERROR: buffer full"));
+        DBLN(F("DFPReader ERROR: buffer full"));
         return false;
     } else {
         readerBuf[(tailPtr+unplayedElements)%readerBufSize] = value;

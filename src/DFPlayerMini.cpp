@@ -3,9 +3,6 @@
 #include "MutilaDebug.h"
 #include "Millis.h"
 
-uint8_t DFPlayerMini::MinimumTimeMs = 20;
-uint8_t DFPlayerMini::ResponseTimeoutMs = 20;
-
 DFPlayerMini::DFPlayerMini(Stream& serial, const uint8_t busyPin) :
     _serial(serial),
     _busyPin(busyPin),
