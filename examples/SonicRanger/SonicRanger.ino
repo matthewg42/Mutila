@@ -2,16 +2,9 @@
 #include <MutilaDebug.h>
 #include <SonicRanger.h>
 #include <Millis.h>
+#include "TestBoardPins.h"
 
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t TriggerPin = D3;
-const uint8_t EchoPin = D0;
-#else
-const uint8_t EchoPin = 8;
-const uint8_t TriggerPin = 9;
-#endif
-
-SonicRanger Ranger(TriggerPin, EchoPin);
+SonicRanger Ranger(HCSR01TriggerPin, HCSR01EchoPin);
 
 void setup()
 {

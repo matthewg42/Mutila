@@ -2,14 +2,13 @@
 #include <AnalogInputButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-const uint8_t ButtonPin = A5;
-const uint8_t LedPin = LED_BUILTIN;
 const uint16_t OutputPeriodMs = 200;
 millis_t LastOutputMs = 0;
 bool previousValue = false;
 
-AnalogInputButton Button(ButtonPin);
+AnalogInputButton Button(AnalogButtonPin);
 
 // Function prototypes. Not necessary for the IDE, but when building with
 // make, we need them if we're to put setup and loop at the top of this
@@ -48,7 +47,7 @@ void checkButton()
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" analog value=");
-        Serial.print(analogRead(ButtonPin));
+        Serial.print(analogRead(AnalogButtonPin));
         Serial.print(" logical button value=");
         Serial.println(newValue);
         previousValue = newValue;

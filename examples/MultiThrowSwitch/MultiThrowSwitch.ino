@@ -2,12 +2,9 @@
 #include <MutilaDebug.h>
 #include <MultiThrowSwitch.h>
 #include <Millis.h>
+#include "TestBoardPins.h"
 
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t SwitchPins[] = {D1, D2, D3, D4};
-#else
-const uint8_t SwitchPins[] = {2, 3, 4, 10};
-#endif
+const uint8_t SwitchPins[] = {Button1Pin, Button2Pin, Button3Pin};
 
 const uint16_t OutputPeriodMs = 150;
 millis_t LastOutputMs = 0;

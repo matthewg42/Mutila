@@ -1,5 +1,5 @@
 #include <DebouncedButton.h>
 #include "TestBoardPins.h"
 
-DebouncedButton Button(Button1Pin);
+DebouncedButton Button2(Button2Pin);
 

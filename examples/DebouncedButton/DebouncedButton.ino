@@ -2,17 +2,12 @@
 #include <MutilaDebug.h>
 #include <DebouncedButton.h>
 #include <Millis.h>
-
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t ButtonPin = D1;
-#else
-const uint8_t ButtonPin = 3;
-#endif
+#include "TestBoardPins.h"
 
 const uint16_t OutputPeriodMs = 150;
 millis_t LastOutputMs = 0;
 
-DebouncedButton MyButton(ButtonPin);
+DebouncedButton MyButton(Button1Pin);
 
 void setup()
 {

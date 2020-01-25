@@ -1,16 +1,9 @@
 #include <EMASonicRanger.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t TriggerPin = D3;
-const uint8_t EchoPin = D0;
-#else
-const uint8_t TriggerPin = 9;
-const uint8_t EchoPin = 8;
-#endif
-
-EMASonicRanger Ranger(TriggerPin, EchoPin);
+EMASonicRanger Ranger(HCSR01TriggerPin, HCSR01EchoPin);
 
 // How often to print output
 const uint16_t OutputPeriodMs = 100;

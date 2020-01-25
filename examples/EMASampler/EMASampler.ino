@@ -1,14 +1,14 @@
 #include <EMASampler.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-const uint8_t SamplerPin = A5;
 const uint16_t SamplePeriodMs = 50;
 
 // We'll create two samplers with a different alpha value
 // which take input from the same pin so we can compare them
-EMASampler SlowSampler(SamplerPin, SamplePeriodMs, 0.02);
-EMASampler FastSampler(SamplerPin, SamplePeriodMs, 0.95);
+EMASampler SlowSampler(VoltagePin, SamplePeriodMs, 0.02);
+EMASampler FastSampler(VoltagePin, SamplePeriodMs, 0.95);
 
 // How often to print output
 const millis_t OutputPeriodMs = 100;

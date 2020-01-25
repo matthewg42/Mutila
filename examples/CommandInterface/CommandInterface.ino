@@ -2,8 +2,7 @@
 #include <MutilaDebug.h>
 #include "TestCLI.h"
 #include "HeartBeat.h"
-
-const uint8_t LedPin = LED_BUILTIN;
+#include "TestBoardPins.h"
 
 #if defined(ARDUINO_ESP8266_NODEMCU) 
 Heartbeat heartbeat(LedPin, true); 

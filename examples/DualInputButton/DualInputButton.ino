@@ -4,21 +4,14 @@
 #include <DualInputButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t DigitalInputButtonPin = D1;
-#else
-const uint8_t DigitalInputButtonPin = 9;
-#endif
-
-const uint8_t AnalogInputButtonPin = A5;
-const uint8_t LedPin = LED_BUILTIN;
 const uint16_t OutputPeriodMs = 200;
 millis_t LastOutputMs = 0;
 bool previousValue = false;
 
-DigitalInputButton Button1(DigitalInputButtonPin);
-AnalogInputButton Button2(AnalogInputButtonPin);
+DigitalInputButton Button1(Button1Pin);
+AnalogInputButton Button2(AnalogButtonPin);
 DualInputButton CombinedButtonOr(Button1, Button2); // default is Or mode
 DualInputButton CombinedButtonXor(Button1, Button2, DualInputButton::Xor);
 DualInputButton CombinedButtonAnd(Button1, Button2, DualInputButton::And);

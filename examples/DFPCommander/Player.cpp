@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 #include <DFPlayerMini.h>
-#include "Config.h"
+#include "TestBoardPins.h"
 
-SoftwareSerial PlayerSerial(TxPin, RxPin);
-DFPlayerMini Player(PlayerSerial, BusyPin);
+SoftwareSerial PlayerSerial(DfpmTxPin, DfpmRxPin);
+DFPlayerMini Player(PlayerSerial, DfpmBusyPin);
 

@@ -2,18 +2,12 @@
 #include <DigitalInputButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t ButtonPin = D1;
-#else
-const uint8_t ButtonPin = 3;
-#endif
-
-const uint8_t LedPin = LED_BUILTIN;
 const uint16_t OutputPeriodMs = 200;
 millis_t LastOutputMs = 0;
 
-DigitalInputButton Button(ButtonPin);
+DigitalInputButton Button(Button1Pin);
 
 void setup()
 {

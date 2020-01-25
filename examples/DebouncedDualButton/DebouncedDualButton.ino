@@ -4,19 +4,13 @@
 #include <AnalogInputButton.h>
 #include <DebouncedDualButton.h>
 #include <Millis.h>
+#include "TestBoardPins.h"
 
-#if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t DigitalInputButtonPin = D1;
-#else
-const uint8_t DigitalInputButtonPin = 9;
-#endif
-
-const uint8_t AnalogInputButtonPin = A5;
 const uint16_t OutputPeriodMs = 150;
 uint32_t LastOutputMs = 0;
 
-DigitalInputButton Button1(DigitalInputButtonPin);
-AnalogInputButton Button2(AnalogInputButtonPin);
+DigitalInputButton Button1(Button1Pin);
+AnalogInputButton Button2(AnalogButtonPin);
 DebouncedDualButton CombinedButton(Button1, Button2);
 
 void setup()

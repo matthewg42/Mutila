@@ -1,13 +1,14 @@
 #include <Arduino.h>
+#include <Millis.h>
 #include <EMAVDivSampler.h>
 #include <MutilaDebug.h>
 #include "MyBrownoutMode.h"
+#include "TestBoardPins.h"
 
-const uint8_t VoltagePin = A5;
 const uint16_t R1KOhm = 10;
 const uint16_t R2KOhm = 100;
 const float VRef = 5.0;
-const uint16_t SamplePeriodMs = 5;
+const millis_t SamplePeriodMs = 5;
 const float Alpha = 0.5;
 
 EMAVDivSampler vIn(VoltagePin, R1KOhm, R2KOhm, VRef, SamplePeriodMs, Alpha);

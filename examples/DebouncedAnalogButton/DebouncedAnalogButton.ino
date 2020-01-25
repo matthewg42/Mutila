@@ -2,9 +2,9 @@
 #include <DebouncedAnalogButton.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-const uint8_t ButtonPin = A5;
-DebouncedAnalogButton Button(ButtonPin);
+DebouncedAnalogButton Button(AnalogButtonPin);
 
 const uint16_t OutputPeriodMs = 100;
 millis_t LastOutputMs = 0;
@@ -30,7 +30,7 @@ void loop()
         Serial.print("Millis=0x");
         Serial.print(Millis(), HEX);
         Serial.print(" analog value=");
-        Serial.print(analogRead(ButtonPin));
+        Serial.print(analogRead(AnalogButtonPin));
         Serial.print(" logical button value=");
         Serial.print(Button.on());
         Serial.print(" tapped=");

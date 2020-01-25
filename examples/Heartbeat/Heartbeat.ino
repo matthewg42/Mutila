@@ -3,20 +3,16 @@
 #include <DebouncedButton.h>
 #include <Heartbeat.h>
 #include <Millis.h>
-
-const uint8_t LedPin = LED_BUILTIN;
+#include "TestBoardPins.h"
 
 #if defined(ARDUINO_ESP8266_NODEMCU) 
-const uint8_t ButtonPin = D1;
-// Second parameter is invertedLogic. We specify it here because
-// the NodeMCU's buildin LED is on when the pin is LOW.
+// The builtin LED in the NODEMCU has inverted logic
 Heartbeat heartbeat(LedPin, true); 
 #else
-const uint8_t ButtonPin = 3;
 Heartbeat heartbeat(LedPin); 
 #endif
 
-DebouncedButton button(ButtonPin);
+DebouncedButton button(Button1Pin);
 
 // Function prototypes are useful when building with make, as they
 // enable us to order the functions in the file in the order we choose

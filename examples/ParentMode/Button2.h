@@ -2,5 +2,5 @@
 
 #include <DebouncedButton.h>
 
-extern DebouncedButton ButtonB;
+extern DebouncedButton Button2;
 

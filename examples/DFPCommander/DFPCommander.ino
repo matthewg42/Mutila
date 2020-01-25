@@ -3,9 +3,9 @@
 #include <MutilaDebug.h>
 #include <DFPlayerMini.h>
 #include <Millis.h>
-#include "Config.h"
 #include "DFPlayerCLI.h"
 #include "Player.h"
+#include "TestBoardPins.h"
 
 void setup()
 {
@@ -15,7 +15,7 @@ void setup()
     DFPlayerCLI.begin(Serial);
     PlayerSerial.begin(9600);
     Player.begin();
-    Player.sendCmd(DFPlayerMini::SetVolume, InitialVolume);
+    Player.sendCmd(DFPlayerMini::SetVolume, 15);
 }
 
 void loop()

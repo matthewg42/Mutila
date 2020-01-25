@@ -2,13 +2,12 @@
 #include <MutilaDebug.h>
 #include <Millis.h>
 #include <DiscretePot.h>
+#include "TestBoardPins.h"
 
-const uint8_t AnalogPin = A5;
 const uint16_t OutputPeriodMs = 200;
-
 millis_t LastOutputMs = 0;
-DiscretePot Pot(AnalogPin);
-DiscretePot PotReversed(AnalogPin);
+DiscretePot Pot(AnalogButtonPin);
+DiscretePot PotReversed(AnalogButtonPin);
 
 void setup()
 {
@@ -36,7 +35,7 @@ void loop()
         Serial.print("Millis=0x");
         Serial.print(Millis());
         Serial.print(" analog value=");
-        Serial.print(analogRead(AnalogPin));
+        Serial.print(analogRead(AnalogButtonPin));
         Serial.print(" Pot.value()=");
         Serial.print(Pot.value());
         Serial.print(" PotReversed.value()=");

@@ -1,8 +1,9 @@
 #include <BufferedSampler.h>
 #include <Millis.h>
 #include <MutilaDebug.h>
+#include "TestBoardPins.h"
 
-BufferedSampler Sampler(A5, 100, 10);
+BufferedSampler Sampler(VoltagePin, 100, 10);
 
 void setup()
 {

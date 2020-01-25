@@ -3,15 +3,15 @@
 #include "Mode.h"
 #include "ModeA.h"
 #include "ModeB.h"
-#include "ButtonA.h"
-#include "ButtonB.h"
+#include "Button1.h"
+#include "Button2.h"
 
 /*
  * ParentMode example
  * ==================
  *
- * Here we have two top-level modes which are controlled by ButtonA
- * (see Config.h for button pins). The two modes are:
+ * Here we have two top-level modes which are controlled by Button1.
+ * The two modes are:
  * 
  * ModeA - a ParentMode with two child modes ModeA1 and ModeA2
  * ModeB - a regular Mode, ModeB
@@ -20,7 +20,7 @@
  * counter and increment it every 500ms or so, printing a message to
  * describe their current state.
  *
- * ModeA is the focus of this example - it monitors ButtonB and 
+ * ModeA is the focus of this example - it monitors Button2 and 
  * switches it's active child Mode between ModeA1 and ModeA2 when it
  * sees that the button has been pressed.
  *
@@ -56,8 +56,8 @@ void setup()
     ModeB.begin();
 
     // Initialize buttons
-    ButtonA.begin();
-    ButtonB.begin();
+    Button1.begin();
+    Button2.begin();
 
     // Arbitrarily decide we're in ModeA to start with
     switchMode(&ModeA);
@@ -68,12 +68,12 @@ void setup()
 void loop()
 {
     // Give a timeslice to out various components
-    ButtonA.update();
-    ButtonB.update();
+    Button1.update();
+    Button2.update();
     TopMode->update();
 
-    // Which top level mode is active depents on the state of ButtonA
-    if (ButtonA.tapped()) {
+    // Which top level mode is active depents on the state of Button1
+    if (Button1.tapped()) {
         if (TopMode == &ModeA) {
             switchMode(&ModeB);
         } else {

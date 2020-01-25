@@ -3,7 +3,7 @@
 #include "ModeA.h"
 #include "ModeA1.h"
 #include "ModeA2.h"
-#include "ButtonB.h"
+#include "Button2.h"
 
 // Our global instance of the mode...
 ModeAClass ModeA;
@@ -40,8 +40,8 @@ void ModeAClass::modeUpdate()
 
     // And the rest of what this mode does is to decide when to switch
     // between the two child modes... which we'll do by looking at the
-    // state of ButtonB - when it is tapped, switch child mode.
-    if (ButtonB.tapped()) {
+    // state of Button2 - when it is tapped, switch child mode.
+    if (Button2.tapped()) {
         if (pMode == &ModeA1) {
             switchMode(&ModeA2);
         } else {

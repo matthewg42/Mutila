@@ -5,14 +5,16 @@
 ### Changed
 - Pins for examples have changed on the Arduino Nano build (buttons now on pins 2 & 3 for future features with interrupts). See `examples/README.md` for new pin layout.
 - All places where millis are used have now been converted to typedef `millis_t`, defined in `Millis.h`. `micros_t` typedef also added.
-- Sampler classes take a millis_t sample period instead of uint16_t as preventative for [unlikely] integer overflow. Uses slightly more RAM.
+- Sampler classes take a `millis_t` sample period instead of `uint16_t` as preventative for [unlikely] integer overflow. Uses slightly more RAM.
 
 ### Removed
-- Remove long-deprecated DualButton class.
+- Remove long-deprecated `DualButton` class.
 
 ### Other
 - Tweak docs & examples to remove typos / inconsistencies.
-- Makefile build of examples no longer suppresses some warnings it used to (no longer a problem)
+- `Makefile` build of examples no longer suppresses some warnings it used to (no longer a problem).
+- Add stereo MP3 example for `DFPlayerMini` example, which shows the device does not do stereo!
+- Moved pins for Mutila test rig to shared include file `examples/TestBoardPins.h` (symlinks in example sub-directories).
 
 ## Version 1.2.0
 
