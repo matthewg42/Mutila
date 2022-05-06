@@ -10,6 +10,9 @@ void printHelp()
     Serial.println("3) Set Int16Setting");
     Serial.println("4) Set DoubleSetting");
     Serial.println("5) Set FloatSetting");
+    Serial.println("6) Set StringSetting");
+    Serial.println("7) Set NamedBoolSetting");
+    Serial.println("8) Set NamedFloatSetting");
     Serial.println("p) Print current setting values");
     Serial.println("l) Load settings from EEPROM");
     Serial.println("s) Save settings to EEPROM");
@@ -25,6 +28,7 @@ void printSettings()
     Serial.print("Int16Setting       "); Int16Setting.dump();
     Serial.print("DoubleSetting      "); DoubleSetting.dump();
     Serial.print("FloatSetting       "); FloatSetting.dump();
+    Serial.print("StringSetting      "); StringSetting.dump();
     Serial.print("NamedBoolSetting   "); NamedBoolSetting.dump();
     Serial.print("NamedFloatSetting  "); NamedFloatSetting.dump();
 }
@@ -50,6 +54,7 @@ void loadSettings()
     Int16Setting.load();
     DoubleSetting.load();
     FloatSetting.load();
+    StringSetting.load();
     NamedBoolSetting.load();
     NamedFloatSetting.load();
 }
@@ -62,6 +67,7 @@ void saveSettings()
     Int16Setting.save();
     DoubleSetting.save();
     FloatSetting.save();
+    StringSetting.save();
     NamedBoolSetting.save();
     NamedFloatSetting.save();
 }
@@ -75,6 +81,7 @@ void resetSettings(bool save)
     Int16Setting.reset(save);
     DoubleSetting.reset(save);
     FloatSetting.reset(save);
+    StringSetting.reset(save);
     NamedBoolSetting.reset(save);
     NamedFloatSetting.reset(save);
 }
@@ -108,6 +115,16 @@ String readLine()
             s += c;
         }
     }
+}
+
+// Read a line and return the value converted to a long
+String readString()
+{
+    Serial.print("\nEnter string> ");
+    String s = readLine();
+    DB("read string: ");
+    DBLN(s);
+    return s;
 }
 
 // Read a line and return the value converted to a long
@@ -188,12 +205,18 @@ void loop()
         Serial.println(FloatSetting.get());
         break;
     case '6':
+        success = StringSetting.set(readString());
+        Serial.print(success ? "Success - " : "Failure - ");
+        Serial.print("Value now: ");
+        Serial.println(StringSetting.get());
+        break;
+    case '7':
         success = NamedBoolSetting.set(readInteger());
         Serial.print(success ? "Success - " : "Failure - ");
         Serial.print("Value now: ");
         Serial.println(NamedBoolSetting.get());
         break;
-    case '7':
+    case '9':
         success = NamedFloatSetting.set(readFloat());
         Serial.print(success ? "Success - " : "Failure - ");
         Serial.print("Value now: ");

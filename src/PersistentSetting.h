@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <EEPROM.h>
 
+#ifndef PERSISTENTSETTINGCPP
 extern uint16_t PersistentSettingOffset;
 
 /*! \class PersistentSetting
@@ -141,15 +142,15 @@ public:
      * \param address the address of the first byte of the value.
      */
     T getValueAt(uint16_t address) {
+        T value;
 #if defined(ESP8266) or defined(ESP32)
 #warning ESP EEPROM functionality not yet implemented
 #else
-        T value;
         for (uint8_t i=0; i<sizeof(T); i++) {
             *((uint8_t*)&value+i) = EEPROM.read(address+i);
         }
-        return value;
 #endif
+        return value;
     }
 
     /*! Get the address of the counter for specified wear-level index.
@@ -178,8 +179,8 @@ public:
             }
             thisCount = nextCount;
         }
-        return 0;
 #endif
+        return 0;
     }
 
     /*! Load value from EEPROM, and return it. If the value in EEPROM is not valid, use the default value.
@@ -201,8 +202,7 @@ public:
      *  written if the value is different from the value currently in EEPROM. 
      *  This measure is an attempt to reduce wear on the EEPROM
      */
-    void save()
-    {
+    void save() {
 #if defined(ESP8266) or defined(ESP32)
 #warning ESP EEPROM functionality not yet implemented
 #else
@@ -336,5 +336,101 @@ public:
 private:
     String _name;
 };
+#endif
 
+/*! \class PersistentString
+ *  \brief EEPROM-backed string values.
+ *
+ *  PersistentString is a class that models a string value which may be loaded
+ *  from and saved to EEPROM. PersistentStrings are constructed with a default 
+ *  value, and a maximum length. Optionally, the address in EEPROM where the data 
+ *  should be stored may also be specified. By default the address is calculated 
+ *  as the byte following the previously-constructed PersistentSetting or 
+ *  PersistentString (or 0 when constructing the first object).
+ *
+ *  After construction, the value of a PersistentString may be retrieved with the
+ *  get() method, and the value set with the set() method. These operations return
+ *  and set the volatile state of the string. An explicit save() call must be made
+ *  to write the setting to EEPROM (or use `saveit=true` when calling set()).
+ *
+ *  If the value in EEPROM is the same as the current value, nothing will be
+ *  written to EEPROM. 
+ */
+
+class PersistentString {
+public:
+    /*! Constructor
+     * \param defaultValue the default value for this string, which will be used if
+     *        the value in EEPROM is empty.
+     * \param eepromOffset if -1, place this setting at the EEPROM address immediately 
+     *        after the previous setting (or 0 if this invocation is the first). If
+     *        zero or more, use the eepromOffset as the address. When choosing the
+     *        offset menually, care must be taken to ensure settings to not overlap.
+     */
+    PersistentString(uint8_t maxLength, String defaultValue="", int32_t eepromOffset=-1);
+
+    /*! Reset the setting to its default value.
+     *
+     * \param saveIt if true, also save the setting to EEPROM.
+     */
+    void reset(bool saveIt=false);
+
+    /*! Read the value from EEPROM - don't store it in the _value
+     */
+    String savedValue();
+
+    /*! Load value from EEPROM, and return it. If the value in EEPROM is not valid, use the default value.
+     *
+     * \return the loaded value.
+     */
+    String load();
+
+    /*! Save the value to EEPROM
+     *  Note: we're using the EEPROM.update() call, so EEPROM is only actually
+     *  written if the value is different from the value currently in EEPROM. 
+     *  This measure is an attempt to reduce wear on the EEPROM
+     */
+    void save();
+
+    /*! Get the current value of the setting
+     */
+    String get();
+
+    /*! Get the default value of the setting
+     */
+    String getDefault();
+
+    /*! Sets the in-RAM value of the setting.
+     *  \param v the value to be set. If v is less than the minimum value or 
+     *         greater than the maximum value, no change will be made.
+     *  Note: this function does NOT save the new value to EEPROM. To do that, 
+     *  save() must be called.
+     */
+    String operator=(String v);
+
+    /*! Sets the in-RAM value of the setting.
+     *  \param v the value to be set. If v is less than the minimum value or 
+     *         greater than the maximum value, no change will be made.
+     *  \return true if the value was set successfully, false otherwise (invalid v)
+     *  Note: this function does NOT save the new value to EEPROM. To do that, 
+     *  save() must be called.
+     */
+    bool set(String v, bool saveIt=false);
+
+    /*! Get the size in bytes of the setting in EEPROM.
+     */
+    uint16_t size();
+
+    /*! Print values for this setting to serial (if DEBUG is enabled)
+     */
+    void dump();
+
+private:
+    uint8_t _maxLength;
+    uint16_t _eepromOffset;
+
+protected:
+    String _value;
+    String _defaultValue;
+};
 

@@ -7,6 +7,7 @@ extern PersistentSetting<uint32_t> UInt32Setting;
 extern PersistentSetting<int16_t> Int16Setting;
 extern PersistentSetting<double> DoubleSetting;
 extern PersistentSetting<float> FloatSetting;
+extern PersistentString StringSetting;
 
 extern NamedPersistentSetting<bool> NamedBoolSetting;
 extern NamedPersistentSetting<float> NamedFloatSetting;

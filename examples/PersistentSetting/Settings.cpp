@@ -20,6 +20,10 @@ PersistentSetting<int16_t> Int16Setting         (   50,     1000,       777     
 PersistentSetting<double> DoubleSetting         (   -10e4,  10e4,       3.14159265359   );
 PersistentSetting<float> FloatSetting           (   -1,     1,          0.66666666666   );
 
+//                                                  Max     Default
+//                                                  length  value
+PersistentString StringSetting(                     15,     "So it goes");
+
 // Named settings                                   Min     Max         Default         Name                Wear
 //                                                  value   value       value                               Level
 NamedPersistentSetting<bool> NamedBoolSetting   (   false,  true,       false,          "Truth is True"      );
